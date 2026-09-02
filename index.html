@@ -38,4 +38,172 @@
         .panel {
             margin-top: 40px;
             background: rgba(0, 0, 0, 0.92);
-            border: 4px solid
+            border: 4px solid #fff;
+            padding: 32px;
+            box-shadow: 14px 14px 0 var(--r);
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            line-height: .85;
+            font-style: italic;
+            text-shadow: 5px 5px 0 var(--r);
+        }
+
+        .course,
+        .email,
+        .title {
+            font-family: Arial, sans-serif;
+        }
+
+        .email {
+            color: #ff96ad;
+            text-decoration: none;
+        }
+
+        .title {
+            margin-top: 30px;
+            letter-spacing: .25em;
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 15px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: #111;
+            color: #fff;
+            text-decoration: none;
+            padding: 16px;
+            border-left: 8px solid var(--r);
+            transition: .2s;
+        }
+
+        .item:hover {
+            background: var(--r);
+            transform: translateX(14px);
+        }
+
+        .arrow {
+            opacity: 0;
+            transition: .2s;
+        }
+
+        .item:hover .arrow {
+            opacity: 1;
+        }
+
+        .num {
+            font-size: 3rem;
+            line-height: 1;
+            min-width: 80px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, .2);
+            padding-top: 12px;
+            color: #ccc;
+            font-family: Arial, sans-serif;
+        }
+
+        @media (max-width: 700px) {
+            .num {
+                font-size: 2rem;
+                min-width: 55px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <div class="panel">
+
+            <h1>
+                A.I. FOR DESIGNERS
+                <br>
+                — Abigail M. Lumintang
+            </h1>
+
+            <p class="course">
+                ART 3041 · Fall 2026
+            </p>
+
+            <p>
+                <a class="email"
+                    href="mailto:ABIGAIL.LUMINTANG45@stu-mail.baruch.cuny.edu">
+                    ABIGAIL.LUMINTANG45@stu-mail.baruch.cuny.edu
+                </a>
+            </p>
+
+            <div class="title">
+                WORK
+            </div>
+
+            <div class="list">
+
+                #
+                    <span class="arrow">▶</span>
+                    <span class="num">01</span>
+                    <span>CUSTOM INSTRUCTIONS</span>
+                </a>
+
+                #
+                    <span class="arrow">▶</span>
+                    <span class="num">02</span>
+                    <span>A STYLE GUIDE FOR YOUR AI</span>
+                </a>
+
+                <a class="item" href="design-a.html">
+    <span class="arrow">▶</span>
+    <span class="num">03</span>
+    <span>DESIGN A ___</span>
+</a>
+                </a>
+
+                #
+                    <span class="arrow">▶</span>
+                    <span class="num">04</span>
+                    <span>COMMUTE STORY</span>
+                </a>
+
+                #
+                    <span class="arrow">▶</span>
+                    <span class="num">05</span>
+                    <span>BECOME A CREA(I)TIVE DIRECTOR</span>
+                </a>
+
+                #
+                    <span class="arrow">▶</span>
+                    <span class="num">06</span>
+                    <span>EXPERIMENTAL AI INTERFACE</span>
+                </a>
+
+                #
+                    <span class="arrow">▶</span>
+                    <span class="num">07</span>
+                    <span>OPEN</span>
+                </a>
+
+            </div>
+
+            <div class="footer">
+                A.I. FOR DESIGNERS • ART 3041 • FALL 2026
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
