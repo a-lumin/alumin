@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Moon Clock V2 - Realistic Moon</title>
+<style>
+body{margin:0;height:100vh;overflow:hidden;background:radial-gradient(circle at top,#5b3bb8,#24104f 45%,#0f0828);font-family:Georgia,Times New Roman,serif;display:flex;justify-content:center;align-items:center;color:#fff}
+.sky{position:fixed;inset:0}.star{position:absolute;color:#fff;opacity:.25;filter:drop-shadow(0 0 4px #fff);animation:twinkle var(--t) ease-in-out infinite}.star:nth-child(3n){color:#d9c8ff}.star:nth-child(4n){color:#aee1ff}@keyframes twinkle{0%,85%,100%{opacity:.2}90%{opacity:1}}
+.shooting{position:absolute;width:220px;height:3px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(190,220,255,.4),#fff);border-radius:999px;box-shadow:0 0 10px #fff,0 0 25px #90d4ff;transform:rotate(-25deg);opacity:0}.s1{animation:shoot 18s linear infinite}.s2{animation:shoot 23s linear infinite 7s}.s3{animation:shoot 30s linear infinite 14s}@keyframes shoot{0%,82%{opacity:0;left:110%;top:5%}84%{opacity:1}100%{opacity:0;left:-25%;top:55%}}
+.scene{position:relative}.moon{position:absolute;top:-95px;right:-105px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#ffffff,#f1efff 35%,#ddd8ef 70%,#bdb7d1 100%);box-shadow:0 0 40px rgba(255,255,255,.8),0 0 100px rgba(200,200,255,.35)}
+.moon:before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 40px 45px,rgba(120,120,140,.15) 0 12px,transparent 13px),radial-gradient(circle at 95px 60px,rgba(120,120,140,.12) 0 8px,transparent 9px),radial-gradient(circle at 115px 95px,rgba(120,120,140,.14) 0 10px,transparent 11px),radial-gradient(circle at 70px 115px,rgba(120,120,140,.15) 0 15px,transparent 16px),radial-gradient(circle at 120px 35px,rgba(120,120,140,.1) 0 6px,transparent 7px)}
+.crystal{width:460px;height:460px;position:relative;clip-path:polygon(50% 0%,84% 14%,100% 55%,80% 100%,20% 100%,0 55%,16% 14%);background:linear-gradient(145deg,rgba(208,228,255,.35),rgba(158,100,255,.2) 35%,rgba(77,39,190,.55));box-shadow:inset -25px -25px 40px rgba(0,0,0,.35),inset 25px 25px 40px rgba(255,255,255,.15),0 0 60px rgba(180,120,255,.8);display:flex;align-items:center;justify-content:center}.facet{position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.18) 40%,transparent 50%,rgba(255,255,255,.12) 70%,transparent)}
+.clock{width:290px;height:290px;border-radius:50%;background:radial-gradient(circle,#fff,#d8c8ff);position:relative;box-shadow:0 0 18px rgba(210,190,255,.45)}
+.num{position:absolute;width:34px;height:34px;transform:translate(-50%,-50%);display:flex;justify-content:center;align-items:center;font-weight:bold;color:#fff;background:linear-gradient(145deg,#b994ff,#6c8dff);clip-path:polygon(50% 0,90% 25%,100% 70%,50% 100%,0 70%,10% 25%);box-shadow:0 0 10px rgba(170,140,255,.8);font-size:14px}.hand{position:absolute;left:50%;bottom:50%;transform-origin:bottom center}.hour{width:8px;height:70px;background:#56369e}.minute{width:5px;height:100px;background:#7755d5}.second{width:2px;height:120px;background:#ff8cff}.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;background:#56369e;border-radius:50%}.digital{text-align:center;margin-top:18px;font-size:2rem;text-shadow:0 0 10px white}
+</style>
+</head><body>
+<div class="sky" id="sky"></div><div class="shooting s1"></div><div class="shooting s2"></div><div class="shooting s3"></div>
+<div class="scene"><div class="moon"></div><div class="crystal"><div class="facet"></div><div class="clock" id="clock"><div id="h" class="hand hour"></div><div id="m" class="hand minute"></div><div id="s" class="hand second"></div><div class="center"></div></div></div><div id="digital" class="digital"></div></div>
+<script>
+for(let i=0;i<420;i++){let e=document.createElement('div');e.className='star';e.textContent=Math.random()>.5?'✦':'✧';e.style.left=Math.random()*100+'%';e.style.top=Math.random()*100+'%';e.style.fontSize=(4+Math.random()*8)+'px';e.style.setProperty('--t',(4+Math.random()*10)+'s');document.getElementById('sky').appendChild(e);}
+const clock=document.getElementById('clock');for(let n=1;n<=12;n++){let d=document.createElement('div');d.className='num';let a=(n-3)*Math.PI/6;d.style.left=(150+115*Math.cos(a))+'px';d.style.top=(150+115*Math.sin(a))+'px';d.textContent=n;clock.appendChild(d);}function tick(){const now=new Date();const hr=now.getHours()%12,min=now.getMinutes(),sec=now.getSeconds()+now.getMilliseconds()/1000;h.style.transform=`translateX(-50%) rotate(${hr*30+min*.5}deg)`;m.style.transform=`translateX(-50%) rotate(${min*6}deg)`;s.style.transform=`translateX(-50%) rotate(${sec*6}deg)`;digital.textContent=now.toLocaleTimeString();requestAnimationFrame(tick)}tick();
+</script>
+</body></html>
