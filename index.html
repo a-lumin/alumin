@@ -61,6 +61,30 @@
             animation: fade .7s ease;
         }
 
+        /* Hero Image Styles */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            margin: 24px 0 32px 0;
+            overflow: hidden;
+            border: 2px solid var(--red);
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(6, 6, 6, 0.2) 0%, rgba(6, 6, 6, 0.7) 100%);
+            pointer-events: none;
+        }
+
         .tag {
             display: inline-block;
             background: #fff;
@@ -163,6 +187,7 @@
 
             to {
                 opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -184,6 +209,13 @@
             <div class="tag">A.I. FOR DESIGNERS</div>
 
             <h1>A.I. FOR DESIGNERS<br>— Abigail M. Lumintang</h1>
+
+            <!-- Hero Section Start -->
+            <div class="hero">
+                <img src="hero.jpg" alt="Hero Image">
+                <div class="hero-overlay"></div>
+            </div>
+            <!-- Hero Section End -->
 
             <p class="course">ART 3041 · Fall 2026</p>
 
