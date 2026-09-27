@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generation Sequence</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        .header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+        }
+
+        .header h1 {
+            font-size: 2.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .image-container {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .content {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .tag {
+            align-self: flex-start;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .prompt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Image Generation Showcase</h1>
+        <p>A sequence of generated images showcasing variations and prompts.</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="image-container"><img src="chair1.jpg" alt="Generated Image 1"></div>
+            <div class="content"><span class="tag">Generation 01</span><p class="prompt">City crosswalk scene with birds flying overhead and animals roaming the street.</p></div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="chair2.jpg" alt="Generated Image 2"></div>
+            <div class="content"><span class="tag">Generation 02</span><p class="prompt">Hand holding a plastic drink cup containing a miniature aquatic terrarium ecosystem with small fish.</p></div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="chair3.jpg" alt="Generated Image 3"></div>
+            <div class="content"><span class="tag">Generation 03</span><p class="prompt">Urban street surrounded by vine-covered buildings with a herd of animals walking down the road.</p></div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="chair4.jpg" alt="Generated Image 4"></div>
+            <div class="content"><span class="tag">Generation 04</span><p class="prompt">Glass subway entrance with lush flower planters and butterflies and bees floating around it.</p></div>
+        </div>
+    </div>
+
+</body>
+</html>
