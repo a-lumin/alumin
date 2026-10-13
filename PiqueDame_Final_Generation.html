@@ -1,1 +1,635 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PiqueDame Final Generation</title><style>body{margin:0;display:flex;height:100vh;background:#0f1014;font-family:Inter,Arial,sans-serif}#ui{width:340px;background:#1b1c22;padding:16px;overflow:auto}button,input{width:100%;height:48px;margin:6px 0;border:1px solid #3f414d;background:#ececec;color:#111;font-size:15px}#stage{flex:1;display:flex;align-items:center;justify-content:center}#poster{width:700px;height:1000px;position:relative;overflow:hidden;background:#f4f0e8;box-shadow:0 20px 60px rgba(0,0,0,.5)}#pillar,#portrait,#title,.meta{position:absolute}#portrait{overflow:hidden;z-index:2}#portrait img{width:100%;height:100%;object-fit:cover;transform-origin:center center}#title{left:40px;top:250px;width:620px;height:340px;overflow:hidden;font-weight:900;line-height:.9;z-index:4;-webkit-text-stroke:1px rgba(0,0,0,.2)}.meta{z-index:5;padding:6px 10px;max-width:210px}.badge{background:#fff;color:#ff3366!important}</style></head><body><div id="ui"><button id="gen">Generate Poster</button><button id="morph">Morph Portrait</button><button id="colors">New Colors</button><button id="font">New Font</button><button id="shape">New Shape</button><button id="layout">New Layout</button><button id="titleBtn">New Title</button><input id="url" placeholder="Paste image URL"><button id="load">Load URL Image</button><input id="upload" type="file" accept="image/*"><input id="camera" type="file" accept="image/*" capture="user"><button id="zoomIn">Zoom In</button><button id="zoomOut">Zoom Out</button></div><div id="stage"><div id="poster"><div id="pillar"></div><div id="portrait"><img id="img"></div><div id="title"></div><div id="credits" class="meta"></div><div id="venue" class="meta"></div><div id="schedule" class="meta"></div></div></div><script>const $=i=>document.getElementById(i),title=$("title"),portrait=$("portrait"),img=$("img"),pillar=$("pillar"),poster=$("poster");let zoom=1;const metas=[$('credits'),$('venue'),$('schedule')];const zones=[{x:40,y:120,w:220},{x:470,y:120,w:180},{x:40,y:760,w:220},{x:420,y:780,w:220},{x:500,y:620,w:160},{x:40,y:620,w:180}];const fonts=['Impact','Arial Black','Georgia','Verdana','Trebuchet MS','Courier New','Times New Roman'];const a=['PIQUE','NEON','CRIMSON','MIDNIGHT','MEMORY','ELECTRIC','PHANTOM','SILENT','HOUSE','CITY'];const b=['DAME','ARCHIVE','REQUIEM','MACHINE','SIGNAL','OPERA','WINDOW','STAIRCASE','CATALOG','SHADOWS'];const info1=['PROGRAM NO. XII','ARCHIVE SERIES','SPECIAL SCREENING','OPENING NIGHT'];const info2=['PHOEBUSPALAST','MUSEUM WEST','CITY HALL','GRAND THEATRE'];const info3=['4:00 • 6:15 • 8:30','OPEN 19:00','8:00 • 9:30 • 11:00'];const palettes=[['#f4f0e8','#111','#c1121f'],['#111','#fff','#00d4ff'],['#faf3dd','#111','#f77f00'],['#264653','#fff','#e76f51']];function r(n){return Math.floor(Math.random()*n)}function fit(){let s=150;title.style.fontSize=s+'px';while((title.scrollHeight>340||title.scrollWidth>620)&&s>34){s-=2;title.style.fontSize=s+'px';}}function newTitle(){title.innerHTML=a[r(a.length)]+'<br>'+b[r(b.length)];fit()}function newFont(){title.style.fontFamily=fonts[r(fonts.length)]}function newColors(){let p=palettes[r(palettes.length)];poster.style.background=p[0];title.style.color=p[1];pillar.style.background=p[2]}function newShape(){portrait.style.clipPath='none';portrait.style.borderRadius=['50%','30%','58% 42% 65% 35% / 40% 60% 40% 60%'][r(3)]}function placeMeta(){const used=[0,1,2,3,4,5].sort(()=>Math.random()-.5);const txt=[info1[r(info1.length)],info2[r(info2.length)],info3[r(info3.length)]];metas.forEach((m,i)=>{const z=zones[used[i]];m.className='meta';m.textContent=txt[i];m.style.left=z.x+'px';m.style.top=z.y+'px';m.style.width=z.w+'px';m.style.fontFamily=fonts[r(fonts.length)];m.style.fontSize=(14+r(8))+'px';m.style.color=['#111','#fff','#c1121f','#00d4ff'][r(4)];if(Math.abs(z.y-250)<180)m.classList.add('badge');});}function newLayout(){const p=[[60,50],[180,80],[90,120],[220,60]][r(4)];portrait.style.left=p[0]+'px';portrait.style.top=p[1]+'px';portrait.style.width=(280+r(80))+'px';portrait.style.height=(280+r(120))+'px';pillar.style.left=(60+r(440))+'px';pillar.style.top='-100px';pillar.style.width='90px';pillar.style.height='1300px';pillar.style.transform='rotate('+(r(60)-30)+'deg)';placeMeta()}function morph(){zoom=.9+Math.random()*.5;img.style.filter='hue-rotate('+r(360)+'deg) saturate('+(100+r(160))+'%) contrast('+(100+r(120))+'%)';img.style.transform='scale('+zoom+') rotate('+(r(24)-12)+'deg)';newShape()}function generate(){newColors();newFont();newTitle();newLayout();morph()}function loadFile(f){const fr=new FileReader();fr.onload=e=>img.src=e.target.result;fr.readAsDataURL(f)}$('gen').onclick=generate;$('morph').onclick=morph;$('colors').onclick=newColors;$('font').onclick=newFont;$('shape').onclick=newShape;$('layout').onclick=newLayout;$('titleBtn').onclick=newTitle;$('load').onclick=()=>{if($('url').value)img.src=$('url').value};$('upload').onchange=e=>e.target.files[0]&&loadFile(e.target.files[0]);$('camera').onchange=e=>e.target.files[0]&&loadFile(e.target.files[0]);$('zoomIn').onclick=()=>{zoom=Math.min(1.8,zoom+.1);img.style.transform='scale('+zoom+')'};$('zoomOut').onclick=()=>{zoom=Math.max(.7,zoom-.1);img.style.transform='scale('+zoom+')'};img.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300"%3E%3Crect width="100%25" height="100%25" fill="%23ccc"/%3E%3C/svg%3E';generate();</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pique Dame Poster Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #1a1110;
+      --bg-panel: #140d0c;
+      --text-primary: #860111;
+      --text-muted: #5e080f;
+      --accent-base: #480607;
+      --accent-active: #5f0809;
+      --border-color: #32080a;
+      --font-stack: "Asap", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important; /* Strict square-corner design system */
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-stack);
+      overflow: hidden;
+      position: relative;
+    }
+
+    #shooting-star-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Stripe/Linear Sidebar Panel */
+    #ui {
+      width: 380px;
+      min-width: 380px;
+      height: 100%;
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .hero-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+    }
+
+    .hero-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent-base);
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* 64px Square Controls */
+    button, input[type="text"], .file-btn {
+      width: 100%;
+      height: 64px;
+      background: var(--accent-base);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-family: var(--font-stack);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      cursor: pointer;
+      outline: none;
+      transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+
+    input[type="text"] {
+      background: #0f0a09;
+      cursor: text;
+      text-transform: none;
+      font-weight: 400;
+      font-size: 13px;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--text-primary);
+      color: #fff;
+    }
+
+    button:hover, .file-btn:hover {
+      background: var(--accent-active);
+      border-color: var(--text-primary);
+      color: #b71328;
+    }
+
+    button:active, .file-btn:active {
+      background: #300304;
+    }
+
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    /* Poster Stage */
+    #stage {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      padding: 40px;
+      overflow: auto;
+    }
+
+    .stage-frame {
+      padding: 12px;
+      background: #0c0807;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #poster {
+      width: 700px;
+      height: 1000px;
+      min-width: 700px;
+      min-height: 1000px;
+      position: relative;
+      overflow: hidden;
+      background: #f4f0e8;
+    }
+
+    #pillar, #portrait, #title, .meta {
+      position: absolute;
+    }
+
+    /* Portrait Safe System */
+    #portrait {
+      overflow: hidden;
+      z-index: 2;
+      transition: transform 200ms ease;
+    }
+
+    #portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%; /* Prioritize upper-third facial framing */
+      transform-origin: center center;
+    }
+
+    /* Typography & Hierarchy Bounds */
+    #title {
+      left: 40px;
+      top: 240px;
+      width: 620px;
+      max-height: 380px;
+      font-family: var(--font-stack);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      z-index: 4;
+      text-transform: uppercase;
+      word-break: break-word;
+      pointer-events: none;
+    }
+
+    .meta {
+      z-index: 5;
+      padding: 6px 10px;
+      max-width: 220px;
+      font-family: var(--font-stack);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      pointer-events: none;
+      line-height: 1.2;
+    }
+
+    .badge {
+      background: var(--bg-canvas) !important;
+      color: var(--text-primary) !important;
+      border: 1px solid var(--accent-base);
+    }
+
+    /* Responsive Breakpoints matching Hand-off */
+    @media (max-width: 1180px) {
+      body {
+        flex-direction: column-reverse;
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+      }
+      #ui {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        border-right: none;
+        border-top: 1px solid var(--border-color);
+        padding: 24px 16px;
+      }
+      #stage {
+        padding: 24px;
+        height: auto;
+      }
+      .stage-frame {
+        transform: scale(0.85);
+        transform-origin: center center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stage-frame {
+        transform: scale(0.55);
+      }
+      .btn-row, .btn-row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="shooting-star-canvas"></canvas>
+
+  <aside id="ui">
+    <div class="hero-header">
+      <span class="hero-badge">System Core</span>
+      <h1 class="hero-title">PIQUE DAME</h1>
+    </div>
+
+    <div>
+      <div class="section-label">Generator Actions</div>
+      <div class="control-group">
+        <button id="gen">Generate All</button>
+        <div class="btn-row">
+          <button id="layout">New Layout</button>
+          <button id="morph">Morph Art</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Curated Presets</div>
+      <div class="btn-row-3">
+        <button id="presetMinimal">Clean</button>
+        <button id="presetBrutal">Block</button>
+        <button id="presetEditorial">Serif</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Typography & Tone</div>
+      <div class="btn-row">
+        <button id="titleBtn">Title Text</button>
+        <button id="font">Font Family</button>
+      </div>
+      <div style="margin-top: 8px;">
+        <button id="colors">Cycle Palettes</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Subject & Framing</div>
+      <div class="control-group">
+        <input id="url" type="text" placeholder="Paste remote image URL">
+        <button id="load">Load Image URL</button>
+        <div class="btn-row">
+          <label class="file-btn" for="upload">Upload</label>
+          <input id="upload" type="file" accept="image/*">
+          <label class="file-btn" for="camera">Camera</label>
+          <input id="camera" type="file" accept="image/*" capture="user">
+        </div>
+        <div class="btn-row">
+          <button id="zoomIn">Zoom In (+)</button>
+          <button id="zoomOut">Zoom Out (-)</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main id="stage">
+    <div class="stage-frame">
+      <div id="poster">
+        <div id="pillar"></div>
+        <div id="portrait"><img id="img" alt="Subject art"></div>
+        <div id="title"></div>
+        <div id="credits" class="meta"></div>
+        <div id="venue" class="meta"></div>
+        <div id="schedule" class="meta"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // --- Shooting Star Background Canvas ---
+    const starCanvas = document.getElementById('shooting-star-canvas');
+    const ctx = starCanvas.getContext('2d');
+    let stars = [];
+    let shootingStars = [];
+
+    function resizeCanvas() {
+      starCanvas.width = window.innerWidth;
+      starCanvas.height = window.innerHeight;
+      initStars();
+    }
+
+    function initStars() {
+      stars = [];
+      const count = Math.floor((starCanvas.width * starCanvas.height) / 7000);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * starCanvas.height,
+          radius: Math.random() * 1.2,
+          alpha: 0.15 + Math.random() * 0.4
+        });
+      }
+    }
+
+    function spawnShootingStar() {
+      if (shootingStars.length < 3 && Math.random() < 0.02) {
+        shootingStars.push({
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * (starCanvas.height * 0.5),
+          length: 60 + Math.random() * 90,
+          speed: 8 + Math.random() * 7,
+          angle: (Math.PI / 4) + (Math.random() * 0.2 - 0.1),
+          alpha: 1
+        });
+      }
+    }
+
+    function renderStarfield() {
+      ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+      
+      // Static ambient stars
+      ctx.fillStyle = '#480607';
+      stars.forEach(s => {
+        ctx.globalAlpha = s.alpha;
+        ctx.fillRect(s.x, s.y, s.radius * 2, s.radius * 2);
+      });
+
+      // Shooting stars
+      spawnShootingStar();
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const s = shootingStars[i];
+        const tailX = s.x - Math.cos(s.angle) * s.length;
+        const tailY = s.y - Math.sin(s.angle) * s.length;
+
+        const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
+        grad.addColorStop(0, 'rgba(72, 6, 7, 0)');
+        grad.addColorStop(1, 'rgba(134, 1, 17, ' + s.alpha + ')');
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(s.x, s.y);
+        ctx.stroke();
+
+        s.x += Math.cos(s.angle) * s.speed;
+        s.y += Math.sin(s.angle) * s.speed;
+        s.alpha -= 0.012;
+
+        if (s.alpha <= 0 || s.x > starCanvas.width || s.y > starCanvas.height) {
+          shootingStars.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(renderStarfield);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    renderStarfield();
+
+    // --- Poster Generator Engine ---
+    const $ = id => document.getElementById(id);
+    const title = $('title');
+    const portrait = $('portrait');
+    const img = $('img');
+    const pillar = $('pillar');
+    const poster = $('poster');
+    const metas = [$('credits'), $('venue'),$('schedule')];
+
+    let zoom = 1;
+    const zones = [
+      { x: 40, y: 100, w: 220 },
+      { x: 460, y: 100, w: 200 },
+      { x: 40, y: 780, w: 220 },
+      { x: 440, y: 780, w: 220 },
+      { x: 480, y: 640, w: 180 },
+      { x: 40, y: 640, w: 180 }
+    ];
+
+    const fonts = ['Asap', 'Impact', 'Georgia', 'Courier New', 'Arial Black'];
+    const a = ['PIQUE', 'NEON', 'CRIMSON', 'MIDNIGHT', 'MEMORY', 'ELECTRIC', 'PHANTOM', 'SILENT', 'HOUSE', 'CITY'];
+    const b = ['DAME', 'ARCHIVE', 'REQUIEM', 'MACHINE', 'SIGNAL', 'OPERA', 'WINDOW', 'STAIRCASE', 'CATALOG', 'SHADOWS'];
+    const info1 = ['PROGRAM NO. XII', 'ARCHIVE SERIES', 'SPECIAL SCREENING', 'OPENING NIGHT'];
+    const info2 = ['PHOEBUSPALAST', 'MUSEUM WEST', 'CITY HALL', 'GRAND THEATRE'];
+    const info3 = ['4:00 • 6:15 • 8:30', 'DOORS OPEN 19:00', '8:00 • 9:30 • 11:00'];
+
+    const palettes = [
+      ['#1a1110', '#860111', '#480607'],
+      ['#f4f0e8', '#140d0c', '#860111'],
+      ['#0f1014', '#ffffff', '#480607'],
+      ['#faf3dd', '#860111', '#140d0c'],
+      ['#140d0c', '#f4f0e8', '#860111']
+    ];
+
+    function r(n) { return Math.floor(Math.random() * n); }
+
+    // Safe Title Fitting Algorithm: prevents word overflows and clipping
+    function fit() {
+      let s = 140;
+      title.style.fontSize = s + 'px';
+      while ((title.scrollHeight > 360 || title.scrollWidth > 620) && s > 28) {
+        s -= 2;
+        title.style.fontSize = s + 'px';
+      }
+    }
+
+    function newTitle(primary = null, secondary = null) {
+      const topWord = primary || a[r(a.length)];
+      const botWord = secondary || b[r(b.length)];
+      title.innerHTML = `${topWord}<br>${botWord}`;
+      fit();
+    }
+
+    function newFont(f = null) {
+      title.style.fontFamily = f || fonts[r(fonts.length)];
+      fit();
+    }
+
+    function newColors(p = null) {
+      const palette = p || palettes[r(palettes.length)];
+      poster.style.background = palette[0];
+      title.style.color = palette[1];
+      pillar.style.background = palette[2];
+    }
+
+    function newShape() {
+      portrait.style.clipPath = 'none';
+      portrait.style.borderRadius = '0px'; // Enforce square-corner system
+    }
+
+    function placeMeta() {
+      const used = [0, 1, 2, 3, 4, 5].sort(() => Math.random() - 0.5);
+      const txt = [info1[r(info1.length)], info2[r(info2.length)], info3[r(info3.length)]];
+      metas.forEach((m, i) => {
+        const z = zones[used[i]];
+        m.className = 'meta';
+        m.textContent = txt[i];
+        m.style.left = z.x + 'px';
+        m.style.top = z.y + 'px';
+        m.style.width = z.w + 'px';
+        m.style.fontSize = (12 + r(4)) + 'px';
+        m.style.color = '#860111';
+        if (Math.abs(z.y - 240) < 160) m.classList.add('badge');
+      });
+    }
+
+    // Portrait-Safe Image Positioning: Constrained coordinates and proportions
+    function newLayout() {
+      const safeAnchors = [
+        { x: 50, y: 60, w: 320, h: 420 },
+        { x: 220, y: 70, w: 340, h: 440 },
+        { x: 90, y: 110, w: 300, h: 400 },
+        { x: 180, y: 60, w: 360, h: 460 }
+      ];
+      const p = safeAnchors[r(safeAnchors.length)];
+      portrait.style.left = p.x + 'px';
+      portrait.style.top = p.y + 'px';
+      portrait.style.width = p.w + 'px';
+      portrait.style.height = p.h + 'px';
+
+      pillar.style.left = (60 + r(400)) + 'px';
+      pillar.style.top = '-100px';
+      pillar.style.width = '100px';
+      pillar.style.height = '1300px';
+      pillar.style.transform = 'rotate(' + (r(40) - 20) + 'deg)';
+      newShape();
+      placeMeta();
+    }
+
+    function morph() {
+      zoom = 0.95 + Math.random() * 0.3;
+      img.style.filter = 'hue-rotate(' + r(360) + 'deg) saturate(' + (80 + r(80)) + '%) contrast(' + (110 + r(60)) + '%)';
+      img.style.transform = 'scale(' + zoom + ')';
+    }
+
+    function generate() {
+      newColors();
+      newFont();
+      newTitle();
+      newLayout();
+      morph();
+    }
+
+    // Layout Presets Panel Handlers
+    $('presetMinimal').onclick = () => {
+      newColors(palettes[1]);
+      newFont('Asap');
+      portrait.style.left = '60px';
+      portrait.style.top = '60px';
+      portrait.style.width = '340px';
+      portrait.style.height = '460px';
+      pillar.style.width = '24px';
+      pillar.style.left = '480px';
+      pillar.style.transform = 'none';
+      newShape();
+      newTitle('PIQUE', 'DAME');
+    };
+
+    $('presetBrutal').onclick = () => {
+      newColors(palettes[0]);
+      newFont('Impact');
+      portrait.style.left = '160px';
+      portrait.style.top = '40px';
+      portrait.style.width = '420px';
+      portrait.style.height = '480px';
+      pillar.style.width = '180px';
+      pillar.style.left = '100px';
+      pillar.style.transform = 'rotate(12deg)';
+      newShape();
+      newTitle('SIGNAL', 'ARCHIVE');
+    };
+
+    $('presetEditorial').onclick = () => {
+      newColors(palettes[3]);
+      newFont('Georgia');
+      portrait.style.left = '100px';
+      portrait.style.top = '90px';
+      portrait.style.width = '300px';
+      portrait.style.height = '420px';
+      pillar.style.width = '8px';
+      pillar.style.left = '60px';
+      pillar.style.transform = 'none';
+      newShape();
+      newTitle('REQUIEM', 'OPERA');
+    };
+
+    function loadFile(f) {
+      const fr = new FileReader();
+      fr.onload = e => { img.src = e.target.result; };
+      fr.readAsDataURL(f);
+    }
+
+    $('gen').onclick = generate;
+    $('morph').onclick = morph;
+    $('colors').onclick = () => newColors();
+    $('font').onclick = () => newFont();$('layout').onclick = newLayout;
+    $('titleBtn').onclick = () => newTitle();$('load').onclick = () => { if ($('url').value) img.src =$('url').value; };
+    $('upload').onchange = e => e.target.files[0] && loadFile(e.target.files[0]);$('camera').onchange = e => e.target.files[0] && loadFile(e.target.files[0]);
+    
+    $('zoomIn').onclick = () => { zoom = Math.min(2.0, zoom + 0.1); img.style.transform = 'scale(' + zoom + ')'; };$('zoomOut').onclick = () => {
+      zoom = Math.max(0.6, zoom - 0.1);
+      img.style.transform = 'scale(' + zoom + ')';
+    };
+
+    // Initial SVG Placeholder & Engine Boot
+    img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="800"%3E%3Crect width="100%25" height="100%25" fill="%23260709"/%3E%3Ccircle cx="300" cy="300" r="140" fill="%23480607"/%3E%3Cpath d="M160 650 C160 480, 440 480, 440 650 Z" fill="%23860111"/%3E%3C/svg%3E';
+    generate();
+  </script>
+</body>
+</html>
