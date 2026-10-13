@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Pique Dame Poster Engine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Asap:ital,wght@0,400;0,700;0,900;1,700&family=Bebas+Neue&family=Cinzel:wght@700;900&family=Courier+Prime:wght@700&family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Major+Mono+Display&family=Monoton&family=Orbitron:wght@700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Rubik+Glitch&family=Space+Grotesk:wght@700&family=Syne:wght@700;800&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-canvas: #1a1110;
@@ -23,7 +23,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      border-radius: 0 !important; /* Strict square-corner design system */
+      border-radius: 0 !important;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -48,18 +48,17 @@
       z-index: 1;
     }
 
-    /* Stripe/Linear Sidebar Panel */
     #ui {
-      width: 380px;
-      min-width: 380px;
+      width: 400px;
+      min-width: 400px;
       height: 100%;
       background: var(--bg-panel);
       border-right: 1px solid var(--border-color);
       overflow-y: auto;
-      padding: 32px 24px;
+      padding: 28px 22px;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 22px;
       z-index: 10;
       position: relative;
     }
@@ -67,9 +66,9 @@
     .hero-header {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       border-bottom: 1px solid var(--border-color);
-      padding-bottom: 20px;
+      padding-bottom: 14px;
     }
 
     .hero-badge {
@@ -94,10 +93,22 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--text-muted);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+    }
+
+    .status-indicator {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #b71328;
+      margin-top: 4px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .control-group {
@@ -106,25 +117,38 @@
       gap: 8px;
     }
 
-    /* 64px Square Controls */
-    button, input[type="text"], .file-btn {
+    button, input[type="text"], .file-btn, select {
       width: 100%;
       height: 64px;
       background: var(--accent-base);
       border: 1px solid var(--border-color);
       color: var(--text-primary);
       font-family: var(--font-stack);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0 18px;
+      padding: 0 16px;
       cursor: pointer;
       outline: none;
       transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%23860111" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      cursor: pointer;
+    }
+
+    select option {
+      background: #140d0c;
+      color: #f4f0e8;
     }
 
     input[type="text"] {
@@ -135,12 +159,12 @@
       font-size: 13px;
     }
 
-    input[type="text"]:focus {
+    input[type="text"]:focus, button:focus-visible, .file-btn:focus-visible, select:focus {
       border-color: var(--text-primary);
       color: #fff;
     }
 
-    button:hover, .file-btn:hover {
+    button:hover, .file-btn:hover, select:hover {
       background: var(--accent-active);
       border-color: var(--text-primary);
       color: #b71328;
@@ -162,11 +186,58 @@
       gap: 8px;
     }
 
+    .btn-row-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .btn-row-4 button {
+      height: 48px;
+      font-size: 11px;
+      padding: 0;
+    }
+
+    .color-swatch-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .color-picker-box {
+      height: 64px;
+      background: #0f0a09;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .color-picker-box span {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .color-picker-box input[type="color"] {
+      border: 0;
+      padding: 0;
+      width: 32px;
+      height: 24px;
+      cursor: pointer;
+      background: transparent;
+    }
+
     input[type="file"] {
       display: none;
     }
 
-    /* Poster Stage */
     #stage {
       flex: 1;
       height: 100%;
@@ -187,6 +258,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transform-origin: center center;
+      transition: transform 200ms ease;
     }
 
     #poster {
@@ -197,33 +270,33 @@
       position: relative;
       overflow: hidden;
       background: #f4f0e8;
+      transition: background 250ms ease;
     }
 
     #pillar, #portrait, #title, .meta {
       position: absolute;
     }
 
-    /* Portrait Safe System */
     #portrait {
       overflow: hidden;
       z-index: 2;
-      transition: transform 200ms ease;
+      transition: all 280ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     #portrait img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%; /* Prioritize upper-third facial framing */
+      object-position: center 20%;
       transform-origin: center center;
+      transition: transform 200ms ease, filter 200ms ease;
     }
 
-    /* Typography & Hierarchy Bounds */
+    #pillar {
+      transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
     #title {
-      left: 40px;
-      top: 240px;
-      width: 620px;
-      max-height: 380px;
       font-family: var(--font-stack);
       font-weight: 900;
       line-height: 0.88;
@@ -231,29 +304,44 @@
       z-index: 4;
       text-transform: uppercase;
       word-break: break-word;
-      pointer-events: none;
+      cursor: grab;
+      user-select: none;
+      transform-origin: center center;
+      transition: color 250ms ease, transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #title:active {
+      cursor: grabbing;
     }
 
     .meta {
       z-index: 5;
       padding: 6px 10px;
-      max-width: 220px;
+      max-width: 240px;
       font-family: var(--font-stack);
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       pointer-events: none;
       line-height: 1.2;
+      transition: color 250ms ease, background 250ms ease;
     }
 
-    .badge {
-      background: var(--bg-canvas) !important;
-      color: var(--text-primary) !important;
-      border: 1px solid var(--accent-base);
+    .svg-shapes-def {
+      position: absolute;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      opacity: 0;
     }
 
-    /* Responsive Breakpoints matching Hand-off */
-    @media (max-width: 1180px) {
+    @media (max-width: 1280px) {
+      .stage-frame {
+        transform: scale(0.8);
+      }
+    }
+
+    @media (max-width: 1080px) {
       body {
         flex-direction: column-reverse;
         height: auto;
@@ -270,20 +358,25 @@
       }
       #stage {
         padding: 24px;
-        height: auto;
+        height: 760px;
       }
       .stage-frame {
-        transform: scale(0.85);
-        transform-origin: center center;
+        transform: scale(0.68);
       }
     }
 
     @media (max-width: 768px) {
-      .stage-frame {
-        transform: scale(0.55);
+      #stage {
+        height: 580px;
       }
-      .btn-row, .btn-row-3 {
+      .stage-frame {
+        transform: scale(0.5);
+      }
+      .btn-row, .btn-row-3, .color-swatch-row {
         grid-template-columns: 1fr;
+      }
+      .btn-row-4 {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -291,14 +384,40 @@
 <body>
   <canvas id="shooting-star-canvas"></canvas>
 
+  <svg class="svg-shapes-def" viewBox="0 0 100 100">
+    <defs>
+      <clipPath id="clip-heart" clipPathUnits="objectBoundingBox">
+        <path d="M0.5,0.85 C0.1,0.55 0,0.35 0,0.22 C0,0.08 0.12,0 0.27,0 C0.37,0 0.45,0.06 0.5,0.15 C0.55,0.06 0.63,0 0.73,0 C0.88,0 1,0.08 1,0.22 C1,0.35 0.9,0.55 0.5,0.85 Z" />
+      </clipPath>
+      <clipPath id="clip-clover" clipPathUnits="objectBoundingBox">
+        <path d="M 0.5,0.48 C 0.4,0.32 0.22,0.32 0.22,0.5 C 0.22,0.68 0.4,0.68 0.5,0.52 C 0.4,0.68 0.4,0.86 0.58,0.86 C 0.76,0.86 0.76,0.68 0.6,0.52 C 0.76,0.68 0.94,0.68 0.94,0.5 C 0.94,0.32 0.76,0.32 0.6,0.48 C 0.76,0.32 0.76,0.14 0.58,0.14 C 0.4,0.14 0.4,0.32 0.5,0.48 Z" />
+      </clipPath>
+      <clipPath id="clip-star" clipPathUnits="objectBoundingBox">
+        <polygon points="0.5,0 0.63,0.35 1,0.36 0.71,0.58 0.81,0.95 0.5,0.72 0.19,0.95 0.29,0.58 0,0.36 0.37,0.35" />
+      </clipPath>
+      <clipPath id="clip-sparkle" clipPathUnits="objectBoundingBox">
+        <path d="M 0.5,0 C 0.5,0.35 0.65,0.5 1,0.5 C 0.65,0.5 0.5,0.65 0.5,1 C 0.5,0.65 0.35,0.5 0,0.5 C 0.35,0.5 0.5,0.35 0.5,0 Z" />
+      </clipPath>
+      <clipPath id="clip-diamond" clipPathUnits="objectBoundingBox">
+        <polygon points="0.5,0 1,0.5 0.5,1 0,0.5" />
+      </clipPath>
+      <clipPath id="clip-shield" clipPathUnits="objectBoundingBox">
+        <path d="M 0,0 L 1,0 L 1,0.55 C 1,0.85 0.5,1 0.5,1 C 0.5,1 0,0.85 0,0.55 Z" />
+      </clipPath>
+      <clipPath id="clip-arch" clipPathUnits="objectBoundingBox">
+        <path d="M 0,1 L 0,0.45 C 0,0.15 0.22,0 0.5,0 C 0.78,0 1,0.15 1,0.45 L 1,1 Z" />
+      </clipPath>
+    </defs>
+  </svg>
+
   <aside id="ui">
     <div class="hero-header">
-      <span class="hero-badge">System Core</span>
+      <span class="hero-badge">System Core // V3.2</span>
       <h1 class="hero-title">PIQUE DAME</h1>
     </div>
 
     <div>
-      <div class="section-label">Generator Actions</div>
+      <div class="section-label">Generator Core</div>
       <div class="control-group">
         <button id="gen">Generate All</button>
         <div class="btn-row">
@@ -309,7 +428,77 @@
     </div>
 
     <div>
-      <div class="section-label">Curated Presets</div>
+      <div class="section-label">
+        <span>Dynamic Title & Spatial Engine</span>
+      </div>
+      <div class="control-group">
+        <select id="fontSelect">
+          <option value="" disabled selected>Select Curated Font...</option>
+        </select>
+        <div class="btn-row">
+          <button id="titleBtn">New Phrase</button>
+          <button id="fontBtn">Cycle Font</button>
+        </div>
+        <div class="btn-row">
+          <button id="posTitleBtn">Reposition Title</button>
+          <button id="rotTitleBtn">Angle Shift</button>
+        </div>
+        <div class="btn-row-4">
+          <button id="alignLeft">Left</button>
+          <button id="alignCenter">Center</button>
+          <button id="alignRight">Right</button>
+          <button id="layerTitleBtn">Toggle Layer</button>
+        </div>
+        <div class="status-indicator" id="fontStatus">Font: Asap Sharp Bold • Pos: Mid-Hero (0°)</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">
+        <span>Portrait Geometry & Crop</span>
+      </div>
+      <div class="control-group">
+        <select id="shapeSelect">
+          <option value="" disabled selected>Select Shape...</option>
+        </select>
+        <div class="btn-row">
+          <button id="shapeBtn">Cycle Shape</button>
+          <button id="shapeRandBtn">Random Shape</button>
+        </div>
+        <div class="status-indicator" id="shapeStatus">Shape: Full Rectangle</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Poster Color & Palettes</div>
+      <div class="control-group">
+        <select id="paletteSelect">
+          <option value="" disabled selected>Select Curated Theme...</option>
+        </select>
+        <div class="btn-row">
+          <button id="colors">Cycle Curated</button>
+          <button id="randomPaletteBtn">Gen Harmonic</button>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-picker-box">
+            <span>Canvas</span>
+            <input type="color" id="bgPicker">
+          </div>
+          <div class="color-picker-box">
+            <span>Title</span>
+            <input type="color" id="titlePicker">
+          </div>
+          <div class="color-picker-box">
+            <span>Accent</span>
+            <input type="color" id="accentPicker">
+          </div>
+        </div>
+        <div class="status-indicator" id="paletteName">Active: Pique Crimson</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Curated Layout Presets</div>
       <div class="btn-row-3">
         <button id="presetMinimal">Clean</button>
         <button id="presetBrutal">Block</button>
@@ -318,23 +507,12 @@
     </div>
 
     <div>
-      <div class="section-label">Typography & Tone</div>
-      <div class="btn-row">
-        <button id="titleBtn">Title Text</button>
-        <button id="font">Font Family</button>
-      </div>
-      <div style="margin-top: 8px;">
-        <button id="colors">Cycle Palettes</button>
-      </div>
-    </div>
-
-    <div>
       <div class="section-label">Subject & Framing</div>
       <div class="control-group">
-        <input id="url" type="text" placeholder="Paste remote image URL">
+        <input id="url" type="text" placeholder="Paste remote image URL...">
         <button id="load">Load Image URL</button>
         <div class="btn-row">
-          <label class="file-btn" for="upload">Upload</label>
+          <label class="file-btn" for="upload">Upload File</label>
           <input id="upload" type="file" accept="image/*">
           <label class="file-btn" for="camera">Camera</label>
           <input id="camera" type="file" accept="image/*" capture="user">
@@ -351,7 +529,7 @@
     <div class="stage-frame">
       <div id="poster">
         <div id="pillar"></div>
-        <div id="portrait"><img id="img" alt="Subject art"></div>
+        <div id="portrait"><img id="img" alt="Poster Subject"></div>
         <div id="title"></div>
         <div id="credits" class="meta"></div>
         <div id="venue" class="meta"></div>
@@ -361,7 +539,6 @@
   </main>
 
   <script>
-    // --- Shooting Star Background Canvas ---
     const starCanvas = document.getElementById('shooting-star-canvas');
     const ctx = starCanvas.getContext('2d');
     let stars = [];
@@ -375,25 +552,25 @@
 
     function initStars() {
       stars = [];
-      const count = Math.floor((starCanvas.width * starCanvas.height) / 7000);
+      const count = Math.floor((starCanvas.width * starCanvas.height) / 6500);
       for (let i = 0; i < count; i++) {
         stars.push({
           x: Math.random() * starCanvas.width,
           y: Math.random() * starCanvas.height,
-          radius: Math.random() * 1.2,
-          alpha: 0.15 + Math.random() * 0.4
+          radius: 0.6 + Math.random() * 1.2,
+          alpha: 0.15 + Math.random() * 0.45
         });
       }
     }
 
     function spawnShootingStar() {
-      if (shootingStars.length < 3 && Math.random() < 0.02) {
+      if (shootingStars.length < 3 && Math.random() < 0.025) {
         shootingStars.push({
-          x: Math.random() * starCanvas.width,
-          y: Math.random() * (starCanvas.height * 0.5),
-          length: 60 + Math.random() * 90,
-          speed: 8 + Math.random() * 7,
-          angle: (Math.PI / 4) + (Math.random() * 0.2 - 0.1),
+          x: Math.random() * starCanvas.width * 0.8,
+          y: Math.random() * (starCanvas.height * 0.4),
+          length: 70 + Math.random() * 90,
+          speed: 9 + Math.random() * 7,
+          angle: (Math.PI / 4) + (Math.random() * 0.16 - 0.08),
           alpha: 1
         });
       }
@@ -401,15 +578,12 @@
 
     function renderStarfield() {
       ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
-      
-      // Static ambient stars
       ctx.fillStyle = '#480607';
       stars.forEach(s => {
         ctx.globalAlpha = s.alpha;
         ctx.fillRect(s.x, s.y, s.radius * 2, s.radius * 2);
       });
 
-      // Shooting stars
       spawnShootingStar();
       for (let i = shootingStars.length - 1; i >= 0; i--) {
         const s = shootingStars[i];
@@ -421,7 +595,7 @@
         grad.addColorStop(1, 'rgba(134, 1, 17, ' + s.alpha + ')');
 
         ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(tailX, tailY);
         ctx.lineTo(s.x, s.y);
@@ -429,13 +603,12 @@
 
         s.x += Math.cos(s.angle) * s.speed;
         s.y += Math.sin(s.angle) * s.speed;
-        s.alpha -= 0.012;
+        s.alpha -= 0.014;
 
         if (s.alpha <= 0 || s.x > starCanvas.width || s.y > starCanvas.height) {
           shootingStars.splice(i, 1);
         }
       }
-
       requestAnimationFrame(renderStarfield);
     }
 
@@ -443,79 +616,367 @@
     resizeCanvas();
     renderStarfield();
 
-    // --- Poster Generator Engine ---
     const $ = id => document.getElementById(id);
     const title = $('title');
     const portrait = $('portrait');
     const img = $('img');
     const pillar = $('pillar');
     const poster = $('poster');
-    const metas = [$('credits'), $('venue'),$('schedule')];
+    const metas = [$('credits'), $('venue'), $('schedule')];
+    const paletteName = $('paletteName');
+    const paletteSelect = $('paletteSelect');
+    const bgPicker = $('bgPicker');
+    const titlePicker = $('titlePicker');
+    const accentPicker = $('accentPicker');
+    const fontSelect = $('fontSelect');
+    const fontStatus = $('fontStatus');
+    const shapeSelect = $('shapeSelect');
+    const shapeStatus = $('shapeStatus');
 
     let zoom = 1;
+    let currentPaletteIndex = 0;
+    let currentFontIndex = 0;
+    let currentShapeIndex = 0;
+
+    // Dynamic Title State
+    let titleRotation = 0;
+    let currentTitlePresetIndex = 0;
+    let isTitleFront = true;
+
     const zones = [
-      { x: 40, y: 100, w: 220 },
-      { x: 460, y: 100, w: 200 },
-      { x: 40, y: 780, w: 220 },
-      { x: 440, y: 780, w: 220 },
-      { x: 480, y: 640, w: 180 },
-      { x: 40, y: 640, w: 180 }
+      { x: 40, y: 80, w: 220 },
+      { x: 460, y: 80, w: 200 },
+      { x: 40, y: 840, w: 220 },
+      { x: 440, y: 840, w: 220 },
+      { x: 480, y: 680, w: 180 },
+      { x: 40, y: 680, w: 180 }
     ];
 
-    const fonts = ['Asap', 'Impact', 'Georgia', 'Courier New', 'Arial Black'];
-    const a = ['PIQUE', 'NEON', 'CRIMSON', 'MIDNIGHT', 'MEMORY', 'ELECTRIC', 'PHANTOM', 'SILENT', 'HOUSE', 'CITY'];
-    const b = ['DAME', 'ARCHIVE', 'REQUIEM', 'MACHINE', 'SIGNAL', 'OPERA', 'WINDOW', 'STAIRCASE', 'CATALOG', 'SHADOWS'];
-    const info1 = ['PROGRAM NO. XII', 'ARCHIVE SERIES', 'SPECIAL SCREENING', 'OPENING NIGHT'];
-    const info2 = ['PHOEBUSPALAST', 'MUSEUM WEST', 'CITY HALL', 'GRAND THEATRE'];
-    const info3 = ['4:00 • 6:15 • 8:30', 'DOORS OPEN 19:00', '8:00 • 9:30 • 11:00'];
+    const titleAnchorZones = [
+      { name: "Top Header", left: 40, top: 70, width: 620, align: 'left', rot: 0 },
+      { name: "Mid-Hero", left: 40, top: 250, width: 620, align: 'left', rot: 0 },
+      { name: "Lower Deck", left: 40, top: 560, width: 620, align: 'left', rot: 0 },
+      { name: "Bottom Base", left: 40, top: 680, width: 620, align: 'left', rot: 0 },
+      { name: "Right Flush", left: 160, top: 240, width: 500, align: 'right', rot: 0 },
+      { name: "Center Hero", left: 40, top: 230, width: 620, align: 'center', rot: 0 },
+      { name: "Angled Slash", left: 40, top: 280, width: 620, align: 'left', rot: -5 },
+      { name: "Ascending Cant", left: 50, top: 320, width: 600, align: 'center', rot: 4 }
+    ];
+
+    const fonts = [
+      { name: 'Asap Sharp Bold', family: '"Asap", sans-serif' },
+      { name: 'Fraunces Heavy Serif', family: '"Fraunces", serif' },
+      { name: 'Cinzel Classical Roman', family: '"Cinzel", serif' },
+      { name: 'Space Grotesk Modern', family: '"Space Grotesk", sans-serif' },
+      { name: 'Syne Avant-Garde', family: '"Syne", sans-serif' },
+      { name: 'Bebas Neue Display', family: '"Bebas Neue", sans-serif' },
+      { name: 'Anton Swiss Impact', family: '"Anton", sans-serif' },
+      { name: 'Playfair Editorial', family: '"Playfair Display", serif' },
+      { name: 'Courier Prime Typewriter', family: '"Courier Prime", monospace' },
+      { name: 'Orbitron Cyberpunk', family: '"Orbitron", sans-serif' },
+      { name: 'Unifraktur Blackletter', family: '"UnifrakturMaguntia", cursive' },
+      { name: 'Major Mono Monospace', family: '"Major Mono Display", monospace' },
+      { name: 'Rubik Glitch Distorted', family: '"Rubik Glitch", cursive' },
+      { name: 'Monoton Disco Linear', family: '"Monoton", cursive' }
+    ];
+
+    fonts.forEach((f, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = f.name;
+      fontSelect.appendChild(opt);
+    });
+
+    const curatedPhrases = [
+      ['PIQUE', 'DAME'],
+      ['QUEEN OF', 'SPADES'],
+      ['SECRET', 'CARDS'],
+      ['SEVEN THREE', 'ACE'],
+      ['MIDNIGHT', 'REQUIEM'],
+      ['CRIMSON', 'GHOST'],
+      ['PHANTOM', 'OPERA'],
+      ['ELECTRIC', 'MEMORY'],
+      ['SILENT', 'PROTOCOL'],
+      ['VELVET', 'SHADOWS'],
+      ['FATAL', 'CHANCE'],
+      ['SOLAR', 'SYNTHESIS'],
+      ['NEON', 'CATHEDRAL'],
+      ['ANALOG', 'DREAMS'],
+      ['ABSOLUTE', 'ZERO'],
+      ['HAUNTED', 'FREQUENCY'],
+      ['CYBER', 'MONASTERY'],
+      ['OBSOLETE', 'SYSTEM'],
+      ['LOST IN', 'TRANSIT'],
+      ['RADIO', 'ECHOES'],
+      ['INFINITE', 'HORIZON'],
+      ['SACRED', 'GEOMETRY'],
+      ['DARK', 'MATTER'],
+      ['BLIND', 'FORTUNE'],
+      ['FINAL', 'THRESHOLD'],
+      ['TEMPORAL', 'DRIFT'],
+      ['CHROMA', 'FEVER'],
+      ['MIRROR', 'MAZE'],
+      ['COLD', 'PARADISE'],
+      ['BURNING', 'MIRAGE']
+    ];
+
+    const wordBankA = ['PIQUE', 'NEON', 'CRIMSON', 'MIDNIGHT', 'MEMORY', 'ELECTRIC', 'PHANTOM', 'SILENT', 'HOUSE', 'CITY', 'SOLAR', 'CYBER', 'VELVET', 'GOTHIC', 'BRUTAL', 'ATOMIC', 'KINETIC', 'LIQUID', 'VAPOR', 'HYPER', 'COSMIC', 'RADIO', 'OPTIC', 'CHRONO'];
+    const wordBankB = ['DAME', 'ARCHIVE', 'REQUIEM', 'MACHINE', 'SIGNAL', 'OPERA', 'WINDOW', 'STAIRCASE', 'CATALOG', 'SHADOWS', 'DRIFT', 'VECTOR', 'ECHO', 'CHAMBER', 'PORTAL', 'CIRCUIT', 'VORTEX', 'MONOLITH', 'HORIZON', 'FREQUENCY', 'TERROR', 'STATIC', 'SYNDICATE', 'MIRROR'];
+
+    const metaLine1 = [
+      'PROGRAM NO. XII // PIQUE DAME', 'ARCHIVE REISSUE • EDITION 04', 'SYMPHONIC SYNTHESIS SERIES',
+      'SPECIAL MIDNIGHT PRESENTATION', 'INTERNATIONAL DESIGN WORKSHOP', 'AVANT-GARDE CHRONICLES',
+      'THE QUEEN OF SPADES / 1890', 'EXPERIMENTAL SOUND & STAGE'
+    ];
+    const metaLine2 = [
+      'PHOEBUSPALAST • DRESDEN', 'METROPOL THEATRE • BERLIN', 'MUSEUM OF MODERN ARCHIVE',
+      'KRAFTWERK HALLE / WEST WING', 'CENTRAL CONCERT PAVILION', 'SALON METROPOLITAN NYC',
+      'HERMITAGE THEATRE • PETERSBURG', 'CIVIC OPERA COMPLEX 01'
+    ];
+    const metaLine3 = [
+      '4:00 • 6:15 • 8:30 PM', 'DOORS OPEN 19:00 SHARP', 'THREE CARDS: 7 • 3 • ACE',
+      'ADMISSION FREE // RSVP REQ', 'OCTOBER 14-28 • AUTUMN RUN', 'ORIGINAL LIBRETTO & SCORE',
+      'ALL AGES WELCOME', 'LIMITED 500 COPIES PRINTED'
+    ];
+
+    const shapes = [
+      { name: 'Full Rectangle', clip: 'none' },
+      { name: 'Heart Shape', clip: 'url(#clip-heart)' },
+      { name: '4-Leaf Clover', clip: 'url(#clip-clover)' },
+      { name: '5-Point Star', clip: 'url(#clip-star)' },
+      { name: 'Sparkle / Diamond Star', clip: 'url(#clip-sparkle)' },
+      { name: 'Playing Diamond', clip: 'url(#clip-diamond)' },
+      { name: 'Cathedral Arch', clip: 'url(#clip-arch)' },
+      { name: 'Medieval Shield', clip: 'url(#clip-shield)' },
+      { name: 'Circle / Oval', clip: 'circle(48% at 50% 50%)' },
+      { name: 'Hexagon', clip: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' },
+      { name: 'Octagon', clip: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)' },
+      { name: 'Triangle Up', clip: 'polygon(50% 0%, 0% 100%, 100% 100%)' },
+      { name: 'Triangle Down', clip: 'polygon(0% 0%, 100% 0%, 50% 100%)' },
+      { name: 'Chamfered Ticket', clip: 'polygon(15% 0, 85% 0, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0 85%, 0 15%)' },
+      { name: 'Diagonal Banner', clip: 'polygon(0 0, 100% 0, 100% 75%, 0 100%)' },
+      { name: 'Chevron Flag', clip: 'polygon(100% 0, 100% 100%, 50% 82%, 0 100%, 0 0)' }
+    ];
+
+    shapes.forEach((s, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = s.name;
+      shapeSelect.appendChild(opt);
+    });
 
     const palettes = [
-      ['#1a1110', '#860111', '#480607'],
-      ['#f4f0e8', '#140d0c', '#860111'],
-      ['#0f1014', '#ffffff', '#480607'],
-      ['#faf3dd', '#860111', '#140d0c'],
-      ['#140d0c', '#f4f0e8', '#860111']
+      { name: "Pique Crimson", colors: ['#1a1110', '#860111', '#480607'] },
+      { name: "Bone & Wine", colors: ['#f4f0e8', '#140d0c', '#860111'] },
+      { name: "Electric Cyan", colors: ['#0b1219', '#00f0ff', '#005f73'] },
+      { name: "Toxic Bauhaus", colors: ['#111111', '#e8ff00', '#2a2a2a'] },
+      { name: "Swiss International", colors: ['#ffffff', '#ff2200', '#111111'] },
+      { name: "Oatmeal Noir", colors: ['#faf3dd', '#860111', '#1a1110'] },
+      { name: "Acid Tangerine", colors: ['#161311', '#ff5500', '#3b2518'] },
+      { name: "Cobalt Modern", colors: ['#0d1322', '#3b82f6', '#1d2c4e'] },
+      { name: "Matcha Concrete", colors: ['#282c26', '#b7d5a5', '#495244'] },
+      { name: "Monochrome Strict", colors: ['#000000', '#ffffff', '#2b2b2b'] },
+      { name: "Paper Inverted", colors: ['#f5f4ef', '#080808', '#bbbbbb'] },
+      { name: "Solar Flare", colors: ['#230d07', '#ffb703', '#9e2a2b'] },
+      { name: "Cyber Plum", colors: ['#180f1d', '#e056fd', '#481d59'] },
+      { name: "Emerald Signal", colors: ['#0d1c16', '#2ec4b6', '#0f4c3a'] },
+      { name: "Sand & Terracotta", colors: ['#ede0d4', '#b33927', '#7f5539'] },
+      { name: "Deep Amethyst", colors: ['#120c1a', '#b388ff', '#32194d'] },
+      { name: "Retro Mustard", colors: ['#2b2d42', '#ffd166', '#d90429'] },
+      { name: "Industrial Steel", colors: ['#1e2229', '#a8dadc', '#457b9d'] }
     ];
+
+    palettes.forEach((p, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = p.name;
+      paletteSelect.appendChild(opt);
+    });
 
     function r(n) { return Math.floor(Math.random() * n); }
 
-    // Safe Title Fitting Algorithm: prevents word overflows and clipping
+    function hslToHex(h, s, l) {
+      l /= 100;
+      const a = s * Math.min(l, 1 - l) / 100;
+      const f = n => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color).toString(16).padStart(2, '0');
+      };
+      return `#${f(0)}${f(8)}${f(4)}`;
+    }
+
     function fit() {
       let s = 140;
       title.style.fontSize = s + 'px';
-      while ((title.scrollHeight > 360 || title.scrollWidth > 620) && s > 28) {
+      const maxW = parseInt(title.style.width, 10) || 620;
+      while ((title.scrollHeight > 380 || title.scrollWidth > maxW) && s > 26) {
         s -= 2;
         title.style.fontSize = s + 'px';
       }
     }
 
-    function newTitle(primary = null, secondary = null) {
-      const topWord = primary || a[r(a.length)];
-      const botWord = secondary || b[r(b.length)];
-      title.innerHTML = `${topWord}<br>${botWord}`;
+    function updateTitleTransform() {
+      title.style.transform = `rotate(${titleRotation}deg)`;
+      const currentPresetName = titleAnchorZones[currentTitlePresetIndex]?.name || 'Custom';
+      fontStatus.textContent = `Font: ${fonts[currentFontIndex].name} • Pos: ${currentPresetName} (${titleRotation}°) [Layer: ${isTitleFront ? 'Front' : 'Behind'}]`;
+    }
+
+    function applyTitlePlacement(zone) {
+      title.style.left = zone.left + 'px';
+      title.style.top = zone.top + 'px';
+      title.style.width = zone.width + 'px';
+      title.style.textAlign = zone.align || 'left';
+      titleRotation = zone.rot || 0;
+      updateTitleTransform();
       fit();
     }
 
-    function newFont(f = null) {
-      title.style.fontFamily = f || fonts[r(fonts.length)];
+    function cycleTitlePlacement(idx = null) {
+      if (idx !== null) {
+        currentTitlePresetIndex = idx;
+      } else {
+        currentTitlePresetIndex = (currentTitlePresetIndex + 1) % titleAnchorZones.length;
+      }
+      applyTitlePlacement(titleAnchorZones[currentTitlePresetIndex]);
+    }
+
+    function cycleTitleRotation() {
+      const angles = [0, -6, 6, -12, 12, -90, 90];
+      const nextAngle = angles[(angles.indexOf(titleRotation) + 1) % angles.length];
+      titleRotation = nextAngle !== undefined ? nextAngle : 0;
+      updateTitleTransform();
+    }
+
+    function toggleTitleLayering() {
+      isTitleFront = !isTitleFront;
+      title.style.zIndex = isTitleFront ? 4 : 1;
+      updateTitleTransform();
+    }
+
+    // Interactive Dragging on Title
+    let isDragging = false;
+    let dragStartX, dragStartY, initialLeft, initialTop;
+
+    title.addEventListener('mousedown', e => {
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      initialLeft = parseInt(title.style.left, 10) || 40;
+      initialTop = parseInt(title.style.top, 10) || 240;
+      title.style.transition = 'none';
+      e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const scale = poster.getBoundingClientRect().width / 700;
+      const dx = (e.clientX - dragStartX) / scale;
+      const dy = (e.clientY - dragStartY) / scale;
+      const newL = Math.max(-100, Math.min(500, initialLeft + dx));
+      const newT = Math.max(-50, Math.min(850, initialTop + dy));
+      title.style.left = newL + 'px';
+      title.style.top = newT + 'px';
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        title.style.transition = 'color 250ms ease, transform 240ms cubic-bezier(0.16, 1, 0.3, 1)';
+        currentTitlePresetIndex = -1;
+        updateTitleTransform();
+      }
+    });
+
+    function newTitle(top = null, bot = null) {
+      if (top && bot) {
+        title.innerHTML = `${top}<br>${bot}`;
+      } else if (Math.random() > 0.45) {
+        const pair = curatedPhrases[r(curatedPhrases.length)];
+        title.innerHTML = `${pair[0]}<br>${pair[1]}`;
+      } else {
+        const wordA = wordBankA[r(wordBankA.length)];
+        const wordB = wordBankB[r(wordBankB.length)];
+        title.innerHTML = `${wordA}<br>${wordB}`;
+      }
       fit();
     }
 
-    function newColors(p = null) {
-      const palette = p || palettes[r(palettes.length)];
-      poster.style.background = palette[0];
-      title.style.color = palette[1];
-      pillar.style.background = palette[2];
+    function setFont(idx) {
+      currentFontIndex = (idx + fonts.length) % fonts.length;
+      const f = fonts[currentFontIndex];
+      title.style.fontFamily = f.family;
+      fontSelect.value = currentFontIndex;
+      updateTitleTransform();
+      fit();
     }
 
-    function newShape() {
-      portrait.style.clipPath = 'none';
-      portrait.style.borderRadius = '0px'; // Enforce square-corner system
+    function setShape(idx) {
+      currentShapeIndex = (idx + shapes.length) % shapes.length;
+      const s = shapes[currentShapeIndex];
+      portrait.style.clipPath = s.clip;
+      shapeStatus.textContent = 'Shape: ' + s.name;
+      shapeSelect.value = currentShapeIndex;
+    }
+
+    function applyPalette(bgColor, titleColor, accentColor, label = 'Custom Palette') {
+      poster.style.background = bgColor;
+      title.style.color = titleColor;
+      pillar.style.background = accentColor;
+      
+      bgPicker.value = bgColor.length === 7 ? bgColor : '#1a1110';
+      titlePicker.value = titleColor.length === 7 ? titleColor : '#860111';
+      accentPicker.value = accentColor.length === 7 ? accentColor : '#480607';
+
+      metas.forEach(m => {
+        m.style.color = titleColor;
+        m.style.background = 'transparent';
+        m.style.border = 'none';
+      });
+
+      paletteName.textContent = 'Active: ' + label;
+    }
+
+    function setCuratedPalette(index) {
+      currentPaletteIndex = (index + palettes.length) % palettes.length;
+      const p = palettes[currentPaletteIndex];
+      applyPalette(p.colors[0], p.colors[1], p.colors[2], p.name);
+      paletteSelect.value = currentPaletteIndex;
+    }
+
+    function generateHarmonicPalette() {
+      const baseHue = r(360);
+      const mode = r(4);
+      let bg, tc, ac, modeName;
+
+      if (mode === 0) {
+        bg = hslToHex(baseHue, 20, 8);
+        tc = hslToHex((baseHue + 180) % 360, 95, 60);
+        ac = hslToHex(baseHue, 40, 22);
+        modeName = 'Harmonic Contrast';
+      } else if (mode === 1) {
+        bg = hslToHex(baseHue, 25, 94);
+        tc = hslToHex((baseHue + 30) % 360, 85, 25);
+        ac = hslToHex((baseHue + 180) % 360, 70, 45);
+        modeName = 'Light Editorial';
+      } else if (mode === 2) {
+        bg = hslToHex(baseHue, 35, 12);
+        tc = hslToHex((baseHue + 60) % 360, 100, 65);
+        ac = hslToHex((baseHue + 210) % 360, 80, 40);
+        modeName = 'Neon Clash';
+      } else {
+        bg = hslToHex(baseHue, 15, 10);
+        tc = hslToHex((baseHue + 25) % 360, 90, 55);
+        ac = hslToHex((baseHue - 25 + 360) % 360, 50, 28);
+        modeName = 'Analogous Shift';
+      }
+
+      applyPalette(bg, tc, ac, modeName + ` (${baseHue}°)`);
     }
 
     function placeMeta() {
       const used = [0, 1, 2, 3, 4, 5].sort(() => Math.random() - 0.5);
-      const txt = [info1[r(info1.length)], info2[r(info2.length)], info3[r(info3.length)]];
+      const txt = [metaLine1[r(metaLine1.length)], metaLine2[r(metaLine2.length)], metaLine3[r(metaLine3.length)]];
       metas.forEach((m, i) => {
         const z = zones[used[i]];
         m.className = 'meta';
@@ -524,18 +985,18 @@
         m.style.top = z.y + 'px';
         m.style.width = z.w + 'px';
         m.style.fontSize = (12 + r(4)) + 'px';
-        m.style.color = '#860111';
-        if (Math.abs(z.y - 240) < 160) m.classList.add('badge');
+        m.style.color = title.style.color || '#860111';
       });
     }
 
-    // Portrait-Safe Image Positioning: Constrained coordinates and proportions
     function newLayout() {
       const safeAnchors = [
-        { x: 50, y: 60, w: 320, h: 420 },
-        { x: 220, y: 70, w: 340, h: 440 },
-        { x: 90, y: 110, w: 300, h: 400 },
-        { x: 180, y: 60, w: 360, h: 460 }
+        { x: 50, y: 60, w: 330, h: 430 },
+        { x: 230, y: 70, w: 340, h: 450 },
+        { x: 90, y: 110, w: 310, h: 410 },
+        { x: 180, y: 60, w: 360, h: 460 },
+        { x: 140, y: 70, w: 420, h: 460 },
+        { x: 70, y: 40, w: 560, h: 360 }
       ];
       const p = safeAnchors[r(safeAnchors.length)];
       portrait.style.left = p.x + 'px';
@@ -545,68 +1006,79 @@
 
       pillar.style.left = (60 + r(400)) + 'px';
       pillar.style.top = '-100px';
-      pillar.style.width = '100px';
+      pillar.style.width = (40 + r(140)) + 'px';
       pillar.style.height = '1300px';
       pillar.style.transform = 'rotate(' + (r(40) - 20) + 'deg)';
-      newShape();
+      
+      cycleTitlePlacement(r(titleAnchorZones.length));
       placeMeta();
     }
 
     function morph() {
-      zoom = 0.95 + Math.random() * 0.3;
-      img.style.filter = 'hue-rotate(' + r(360) + 'deg) saturate(' + (80 + r(80)) + '%) contrast(' + (110 + r(60)) + '%)';
+      zoom = 0.95 + Math.random() * 0.35;
+      img.style.filter = 'hue-rotate(' + r(360) + 'deg) saturate(' + (85 + r(90)) + '%) contrast(' + (105 + r(55)) + '%)';
       img.style.transform = 'scale(' + zoom + ')';
     }
 
     function generate() {
-      newColors();
-      newFont();
+      if (Math.random() > 0.4) {
+        setCuratedPalette(r(palettes.length));
+      } else {
+        generateHarmonicPalette();
+      }
+      setFont(r(fonts.length));
+      setShape(r(shapes.length));
       newTitle();
       newLayout();
       morph();
     }
 
-    // Layout Presets Panel Handlers
     $('presetMinimal').onclick = () => {
-      newColors(palettes[1]);
-      newFont('Asap');
+      setCuratedPalette(1);
+      setFont(0);
+      setShape(0);
       portrait.style.left = '60px';
       portrait.style.top = '60px';
       portrait.style.width = '340px';
       portrait.style.height = '460px';
       pillar.style.width = '24px';
-      pillar.style.left = '480px';
+      pillar.style.left = '520px';
       pillar.style.transform = 'none';
-      newShape();
+      applyTitlePlacement(titleAnchorZones[0]);
       newTitle('PIQUE', 'DAME');
+      placeMeta();
     };
 
     $('presetBrutal').onclick = () => {
-      newColors(palettes[0]);
-      newFont('Impact');
-      portrait.style.left = '160px';
-      portrait.style.top = '40px';
+      setCuratedPalette(3);
+      setFont(6);
+      setShape(9);
+      portrait.style.left = '140px';
+      portrait.style.top = '50px';
       portrait.style.width = '420px';
-      portrait.style.height = '480px';
+      portrait.style.height = '460px';
       pillar.style.width = '180px';
-      pillar.style.left = '100px';
-      pillar.style.transform = 'rotate(12deg)';
-      newShape();
-      newTitle('SIGNAL', 'ARCHIVE');
+      pillar.style.left = '90px';
+      pillar.style.transform = 'rotate(14deg)';
+      applyTitlePlacement(titleAnchorZones[6]);
+      newTitle('ATOMIC', 'MONOLITH');
+      placeMeta();
     };
 
     $('presetEditorial').onclick = () => {
-      newColors(palettes[3]);
-      newFont('Georgia');
+      setCuratedPalette(5);
+      setFont(1);
+      setShape(6);
       portrait.style.left = '100px';
       portrait.style.top = '90px';
-      portrait.style.width = '300px';
-      portrait.style.height = '420px';
-      pillar.style.width = '8px';
+      portrait.style.width = '320px';
+      portrait.style.height = '440px';
+      pillar.style.width = '14px';
       pillar.style.left = '60px';
       pillar.style.transform = 'none';
-      newShape();
-      newTitle('REQUIEM', 'OPERA');
+      applyTitlePlacement(titleAnchorZones[2]);
+      newTitle('VELVET', 'SHADOWS');
+      placeMeta();
     };
 
     function loadFile(f) {
@@ -617,19 +1089,70 @@
 
     $('gen').onclick = generate;
     $('morph').onclick = morph;
-    $('colors').onclick = () => newColors();
-    $('font').onclick = () => newFont();$('layout').onclick = newLayout;
-    $('titleBtn').onclick = () => newTitle();$('load').onclick = () => { if ($('url').value) img.src =$('url').value; };
-    $('upload').onchange = e => e.target.files[0] && loadFile(e.target.files[0]);$('camera').onchange = e => e.target.files[0] && loadFile(e.target.files[0]);
+    $('layout').onclick = newLayout;
+    $('titleBtn').onclick = () => newTitle();
     
-    $('zoomIn').onclick = () => { zoom = Math.min(2.0, zoom + 0.1); img.style.transform = 'scale(' + zoom + ')'; };$('zoomOut').onclick = () => {
-      zoom = Math.max(0.6, zoom - 0.1);
+    // Dynamic Typography & Spatial Controls
+    $('fontBtn').onclick = () => setFont(currentFontIndex + 1);
+    fontSelect.onchange = e => {
+      if (e.target.value !== "") setFont(parseInt(e.target.value, 10));
+    };
+    $('posTitleBtn').onclick = () => cycleTitlePlacement();
+    $('rotTitleBtn').onclick = cycleTitleRotation;
+    $('alignLeft').onclick = () => { title.style.textAlign = 'left'; };
+    $('alignCenter').onclick = () => { title.style.textAlign = 'center'; };
+    $('alignRight').onclick = () => { title.style.textAlign = 'right'; };
+    $('layerTitleBtn').onclick = toggleTitleLayering;
+
+    // Shape controls
+    $('shapeBtn').onclick = () => setShape(currentShapeIndex + 1);
+    $('shapeRandBtn').onclick = () => setShape(r(shapes.length));
+    shapeSelect.onchange = e => {
+      if (e.target.value !== "") setShape(parseInt(e.target.value, 10));
+    };
+
+    // Palette controls
+    $('colors').onclick = () => setCuratedPalette(currentPaletteIndex + 1);
+    $('randomPaletteBtn').onclick = generateHarmonicPalette;
+    paletteSelect.onchange = e => {
+      if (e.target.value !== "") setCuratedPalette(parseInt(e.target.value, 10));
+    };
+
+    bgPicker.oninput = e => {
+      poster.style.background = e.target.value;
+      paletteName.textContent = 'Active: Custom Picker';
+    };
+    titlePicker.oninput = e => {
+      title.style.color = e.target.value;
+      metas.forEach(m => m.style.color = e.target.value);
+      paletteName.textContent = 'Active: Custom Picker';
+    };
+    accentPicker.oninput = e => {
+      pillar.style.background = e.target.value;
+      paletteName.textContent = 'Active: Custom Picker';
+    };
+
+    $('load').onclick = () => { if ($('url').value) img.src = $('url').value; };
+    $('upload').onchange = e => e.target.files[0] && loadFile(e.target.files[0]);
+    $('camera').onchange = e => e.target.files[0] && loadFile(e.target.files[0]);
+    
+    $('zoomIn').onclick = () => {
+      zoom = Math.min(2.2, zoom + 0.12);
+      img.style.transform = 'scale(' + zoom + ')';
+    };
+    $('zoomOut').onclick = () => {
+      zoom = Math.max(0.6, zoom - 0.12);
       img.style.transform = 'scale(' + zoom + ')';
     };
 
-    // Initial SVG Placeholder & Engine Boot
-    img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="800"%3E%3Crect width="100%25" height="100%25" fill="%23260709"/%3E%3Ccircle cx="300" cy="300" r="140" fill="%23480607"/%3E%3Cpath d="M160 650 C160 480, 440 480, 440 650 Z" fill="%23860111"/%3E%3C/svg%3E';
-    generate();
+    img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="800"%3E%3Crect width="100%25" height="100%25" fill="%23240709"/%3E%3Crect x="60" y="60" width="480" height="680" fill="none" stroke="%23480607" stroke-width="4"/%3E%3Ccircle cx="300" cy="290" r="130" fill="%23480607"/%3E%3Cpath d="M140 680 C140 480, 460 480, 460 680 Z" fill="%23860111"/%3E%3C/svg%3E';
+    
+    setCuratedPalette(0);
+    setFont(0);
+    setShape(0);
+    applyTitlePlacement(titleAnchorZones[1]);
+    newLayout();
+    newTitle('PIQUE', 'DAME');
   </script>
 </body>
 </html>
