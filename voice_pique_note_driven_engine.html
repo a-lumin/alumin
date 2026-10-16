@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Voice Pique - Note-Driven Typographic Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Asap:ital,wght@0,100..900;1,100..900&family=Bebas+Neue&family=Cinzel:wght@700;900&family=Courier+Prime:wght@700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Major+Mono+Display&family=Monoton&family=Orbitron:wght@700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..1000,0..1,0..1,0..1&family=Rubik+Glitch&family=Space+Grotesk:wght@700&family=Syne:wght@700;800&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #1a1110;
+      --bg-panel: #140d0c;
+      --text-primary: #860111;
+      --text-muted: #5e080f;
+      --accent-base: #480607;
+      --accent-active: #5f0809;
+      --border-color: #32080a;
+      --font-stack: "Recursive", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+      /* Variable Font Defaults */
+      --font-axis-primary: 0.0;
+      --font-axis-secondary: 0.0;
+      --font-axis-weight: 400;
+      --font-axis-opsz: 72;
+      --font-axis-slnt: 0;
+      --font-tracking: -0.02em;
+
+      /* Note-Driven Geometric Offsets */
+      --note-slant-deg: 0deg;
+      --note-portrait-scale: 1;
+      --note-line-width: 40px;
+      --note-meta-spacing: 0.05em;
+      --vocal-dx: 0px;
+      --vocal-dy: 0px;
+      --base-pillar-rot: 0deg;
+
+      /* Target Lock Glow & Echo State */
+      --target-glow: none;
+      --echo-opacity: 0;
+      --echo-offset-1: 0px;
+      --echo-offset-2: 0px;
+      --sibilance-scatter: 0px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-stack);
+      overflow: hidden;
+      position: relative;
+    }
+
+    #shooting-star-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #ui {
+      width: 420px;
+      min-width: 420px;
+      height: 100%;
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .hero-header {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .hero-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #00e5ff;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .status-indicator {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #b71328;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hud-card {
+      background: #0d0808;
+      border: 1px solid var(--border-color);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .hud-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pitch-meter-container {
+      width: 100%;
+      height: 6px;
+      background: #240709;
+      position: relative;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .pitch-meter-fill {
+      height: 100%;
+      width: 0%;
+      background: #00e5ff;
+      transition: width 0.06s ease-out, background 0.15s ease;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    button, input[type="text"], .file-btn, select {
+      width: 100%;
+      height: 48px;
+      background: var(--accent-base);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 14px;
+      cursor: pointer;
+      outline: none;
+      transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%23860111" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      cursor: pointer;
+    }
+
+    select option {
+      background: #140d0c;
+      color: #f4f0e8;
+    }
+
+    input[type="text"] {
+      background: #0f0a09;
+      cursor: text;
+      text-transform: none;
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    input[type="text"]:focus, button:focus-visible, .file-btn:focus-visible, select:focus {
+      border-color: var(--text-primary);
+      color: #fff;
+    }
+
+    button:hover, .file-btn:hover, select:hover {
+      background: var(--accent-active);
+      border-color: var(--text-primary);
+      color: #b71328;
+    }
+
+    button:active, .file-btn:active {
+      background: #300304;
+    }
+
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-row-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .btn-row-4 button {
+      height: 38px;
+      font-size: 10px;
+      padding: 0;
+    }
+
+    .color-swatch-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .color-picker-box {
+      height: 50px;
+      background: #0f0a09;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .color-picker-box span {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .color-picker-box input[type="color"] {
+      border: 0;
+      padding: 0;
+      width: 26px;
+      height: 18px;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    #stage {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      padding: 30px;
+      overflow: auto;
+    }
+
+    .stage-frame {
+      padding: 12px;
+      background: #0c0807;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: center center;
+      transition: transform 200ms ease;
+    }
+
+    #poster {
+      width: 700px;
+      height: 1000px;
+      min-width: 700px;
+      min-height: 1000px;
+      position: relative;
+      overflow: hidden;
+      background: #f4f0e8;
+      transition: background 250ms ease;
+    }
+
+    #pillar, #portrait, #title-wrap, .meta, #polar-oscilloscope {
+      position: absolute;
+    }
+
+    #polar-oscilloscope {
+      pointer-events: none;
+      z-index: 1;
+      transform-origin: center center;
+    }
+
+    #portrait {
+      overflow: hidden;
+      z-index: 2;
+      transform: translate(calc(var(--vocal-dx) * -0.5), calc(var(--vocal-dy) * -0.5)) scale(var(--note-portrait-scale));
+      transition: transform 0.12s ease-out, clip-path 120ms ease;
+      will-change: transform;
+    }
+
+    #portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      transform-origin: center center;
+      transition: transform 180ms ease, filter 180ms ease;
+    }
+
+    #pillar {
+      width: var(--note-line-width);
+      transform: translate(var(--vocal-dx), 0px) rotate(calc(var(--base-pillar-rot, 0deg) + var(--note-slant-deg)));
+      transition: transform 0.12s ease-out, width 0.15s ease-out, background 250ms ease;
+      will-change: transform;
+    }
+
+    #title-wrap {
+      z-index: 4;
+      cursor: grab;
+      user-select: none;
+      transform-origin: center center;
+      transition: transform 0.14s ease-out;
+    }
+
+    #title-wrap:active {
+      cursor: grabbing;
+    }
+
+    .title-layer {
+      position: relative;
+      font-family: var(--font-stack);
+      font-weight: 800;
+      line-height: 0.88;
+      letter-spacing: var(--font-tracking);
+      text-transform: uppercase;
+      word-break: break-word;
+      font-variation-settings: 'CASL' var(--font-axis-primary), 'CRSV' var(--font-axis-secondary), 'slnt' var(--font-axis-slnt), 'wght' var(--font-axis-weight);
+      transition: color 220ms ease, font-variation-settings 0.1s ease-out, letter-spacing 0.12s ease-out;
+      will-change: font-variation-settings;
+      filter: var(--target-glow);
+    }
+
+    .title-echo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: var(--echo-opacity);
+      transition: opacity 0.2s ease, transform 0.15s ease-out;
+    }
+
+    #echo-1 {
+      transform: translate(var(--echo-offset-1), calc(var(--echo-offset-1) * -0.5));
+      filter: blur(1.5px);
+    }
+
+    #echo-2 {
+      transform: translate(var(--echo-offset-2), calc(var(--echo-offset-2) * -1));
+      filter: blur(3px);
+    }
+
+    .meta {
+      z-index: 5;
+      padding: 6px 10px;
+      font-family: inherit;
+      font-weight: 700;
+      letter-spacing: var(--note-meta-spacing);
+      text-transform: uppercase;
+      pointer-events: none;
+      line-height: 1.25;
+      transform: translate(calc(var(--vocal-dx) * 0.3 + var(--sibilance-scatter)), calc(var(--vocal-dy) * 0.3));
+      transition: transform 0.12s ease-out, letter-spacing 0.15s ease, color 250ms ease, background 250ms ease;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .svg-shapes-def {
+      position: absolute;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    @media (max-width: 1080px) {
+      body {
+        flex-direction: column-reverse;
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+      }
+      #ui {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        border-right: none;
+        border-top: 1px solid var(--border-color);
+        padding: 20px 16px;
+      }
+      #stage {
+        padding: 20px;
+        height: 720px;
+      }
+      .stage-frame {
+        transform: scale(0.65);
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="shooting-star-canvas"></canvas>
+
+  <svg class="svg-shapes-def" viewBox="0 0 100 100">
+    <defs>
+      <clipPath id="clip-heart" clipPathUnits="objectBoundingBox">
+        <path d="M0.5,0.85 C0.1,0.55 0,0.35 0,0.22 C0,0.08 0.12,0 0.27,0 C0.37,0 0.45,0.06 0.5,0.15 C0.55,0.06 0.63,0 0.73,0 C0.88,0 1,0.08 1,0.22 C1,0.35 0.9,0.55 0.5,0.85 Z" />
+      </clipPath>
+      <clipPath id="clip-clover" clipPathUnits="objectBoundingBox">
+        <path d="M 0.5,0.48 C 0.4,0.32 0.22,0.32 0.22,0.5 C 0.22,0.68 0.4,0.68 0.5,0.52 C 0.4,0.68 0.4,0.86 0.58,0.86 C 0.76,0.86 0.76,0.68 0.6,0.52 C 0.76,0.68 0.94,0.68 0.94,0.5 C 0.94,0.32 0.76,0.32 0.6,0.48 C 0.76,0.32 0.76,0.14 0.58,0.14 C 0.4,0.14 0.4,0.32 0.5,0.48 Z" />
+      </clipPath>
+      <clipPath id="clip-star" clipPathUnits="objectBoundingBox">
+        <polygon points="0.5,0 0.63,0.35 1,0.36 0.71,0.58 0.81,0.95 0.5,0.72 0.19,0.95 0.29,0.58 0,0.36 0.37,0.35" />
+      </clipPath>
+      <clipPath id="clip-sparkle" clipPathUnits="objectBoundingBox">
+        <path d="M 0.5,0 C 0.5,0.35 0.65,0.5 1,0.5 C 0.65,0.5 0.5,0.65 0.5,1 C 0.5,0.65 0.35,0.5 0,0.5 C 0.35,0.5 0.5,0.35 0.5,0 Z" />
+      </clipPath>
+      <clipPath id="clip-diamond" clipPathUnits="objectBoundingBox">
+        <polygon points="0.5,0 1,0.5 0.5,1 0,0.5" />
+      </clipPath>
+      <clipPath id="clip-shield" clipPathUnits="objectBoundingBox">
+        <path d="M 0,0 L 1,0 L 1,0.55 C 1,0.85 0.5,1 0.5,1 C 0.5,1 0,0.85 0,0.55 Z" />
+      </clipPath>
+      <clipPath id="clip-arch" clipPathUnits="objectBoundingBox">
+        <path d="M 0,1 L 0,0.45 C 0,0.15 0.22,0 0.5,0 C 0.78,0 1,0.15 1,0.45 L 1,1 Z" />
+      </clipPath>
+    </defs>
+  </svg>
+
+  <aside id="ui">
+    <div class="hero-header">
+      <span class="hero-badge">Session 06 // Voice Pique Engine</span>
+      <h1 class="hero-title">VOICE PIQUE</h1>
+    </div>
+
+    <div>
+      <div class="section-label">Acoustic Vocal Driver</div>
+      <div class="control-group">
+        <button id="micBtn" style="border-color: #00e5ff; color: #00e5ff;">Start Vocal Stream (Mic)</button>
+        <div class="hud-card">
+          <div class="hud-row">
+            <span class="status-indicator" id="streamStatus" style="color: #00e5ff;">Voice: Awaiting mic input...</span>
+            <span class="status-indicator" id="vowelReadout" style="color: #e8ff00;">Vowel: Neutral</span>
+          </div>
+          <div class="status-indicator" id="pitchReadout" style="color: #ffb703;">Key / Pitch: -- Hz (---)</div>
+          <div class="pitch-meter-container">
+            <div class="pitch-meter-fill" id="pitchFill"></div>
+          </div>
+          <div class="hud-row" style="margin-top: 4px;">
+            <span class="status-indicator" id="noteArchetypeStatus" style="color: #00ff66;">Archetype: Resting C</span>
+            <span class="status-indicator" id="vibratoStatus" style="color: #00e5ff;">Vibrato: 0.0 Hz</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">12-Tone Archetype Mapping Modes</div>
+      <div class="control-group">
+        <select id="noteBehaviorMode">
+          <option value="chromaticPersonality" selected>12 Musical Keys: Distinct Typographic Archetypes</option>
+          <option value="fontCycler">12 Musical Keys: Switch Curated Google Fonts</option>
+          <option value="shapeMorpher">12 Musical Keys: Auto-Cycle Portrait Shapes</option>
+          <option value="off">Note Personality Mapping: OFF</option>
+        </select>
+        <div class="btn-row">
+          <button id="targetModeBtn">Target Note: OFF</button>
+          <button id="cycleToneModeBtn">Cycle Key Mode</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Speech Recognition & Live Transmutation</div>
+      <div class="control-group">
+        <button id="speechRecBtn">Enable Spoken Headline Rec</button>
+        <div class="status-indicator" id="speechStatus">Transcribe: Inactive</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Performance Recording & Export</div>
+      <div class="control-group">
+        <button id="recordVideoBtn" style="border-color: #ff007f; color: #ff007f;">Record Take (WebM Video)</button>
+        <button id="exportSvgBtn" style="border-color: #860111;">Export Poster as SVG</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Generator Core</div>
+      <div class="control-group">
+        <button id="gen">Generate All</button>
+        <div class="btn-row">
+          <button id="layout">New Layout</button>
+          <button id="morph">Morph Art</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Dynamic Title & Safe Bounds</div>
+      <div class="control-group">
+        <select id="fontSelect">
+          <option value="" disabled selected>Select Variable Font...</option>
+        </select>
+        <div class="btn-row">
+          <button id="titleBtn">New Phrase</button>
+          <button id="fontBtn">Cycle Font</button>
+        </div>
+        <div class="btn-row">
+          <button id="posTitleBtn">Reposition Title</button>
+          <button id="rotTitleBtn">Angle Shift</button>
+        </div>
+        <div class="btn-row-4">
+          <button id="alignLeft">Left</button>
+          <button id="alignCenter">Center</button>
+          <button id="alignRight">Right</button>
+          <button id="layerTitleBtn">Toggle Layer</button>
+        </div>
+        <div class="status-indicator" id="fontStatus">Font: Recursive • Pos: Mid-Hero (0°)</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Portrait Geometry & Crop</div>
+      <div class="control-group">
+        <select id="shapeSelect">
+          <option value="" disabled selected>Select Shape...</option>
+        </select>
+        <div class="btn-row">
+          <button id="shapeBtn">Cycle Shape</button>
+          <button id="shapeRandBtn">Random Shape</button>
+        </div>
+        <div class="status-indicator" id="shapeStatus">Shape: Full Rectangle</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Poster Color & Palettes</div>
+      <div class="control-group">
+        <select id="paletteSelect">
+          <option value="" disabled selected>Select Curated Theme...</option>
+        </select>
+        <div class="btn-row">
+          <button id="colors">Cycle Curated</button>
+          <button id="randomPaletteBtn">Gen Harmonic</button>
+        </div>
+        <div class="color-swatch-row">
+          <div class="color-picker-box">
+            <span>Canvas</span>
+            <input type="color" id="bgPicker">
+          </div>
+          <div class="color-picker-box">
+            <span>Title</span>
+            <input type="color" id="titlePicker">
+          </div>
+          <div class="color-picker-box">
+            <span>Accent</span>
+            <input type="color" id="accentPicker">
+          </div>
+        </div>
+        <div class="status-indicator" id="paletteName">Active: 12-Tone Circle of Fifths</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Curated Layout Presets</div>
+      <div class="btn-row-3">
+        <button id="presetMinimal">Clean</button>
+        <button id="presetBrutal">Block</button>
+        <button id="presetEditorial">Serif</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Subject & Framing</div>
+      <div class="control-group">
+        <input id="url" type="text" placeholder="Paste remote image URL...">
+        <button id="load">Load Image URL</button>
+        <div class="btn-row">
+          <label class="file-btn" for="upload">Upload File</label>
+          <input id="upload" type="file" accept="image/*">
+          <label class="file-btn" for="camera">Camera</label>
+          <input id="camera" type="file" accept="image/*" capture="user">
+        </div>
+        <div class="btn-row">
+          <button id="zoomIn">Zoom In (+)</button>
+          <button id="zoomOut">Zoom Out (-)</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main id="stage">
+    <div class="stage-frame">
+      <div id="poster">
+        <canvas id="polar-oscilloscope" width="600" height="600"></canvas>
+        <div id="pillar"></div>
+        <div id="portrait"><img id="img" alt="Poster Subject"></div>
+        <div id="title-wrap">
+          <div id="echo-2" class="title-layer title-echo"></div>
+          <div id="echo-1" class="title-layer title-echo"></div>
+          <div id="title" class="title-layer"></div>
+        </div>
+        <div id="credits" class="meta"></div>
+        <div id="venue" class="meta"></div>
+        <div id="schedule" class="meta"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const POSTER_W = 700;
+    const POSTER_H = 1000;
+    const MARGIN = 36;
+
+    // --- Starfield Background with Audio Reactivity ---
+    const starCanvas = document.getElementById('shooting-star-canvas');
+    const ctx = starCanvas.getContext('2d');
+    let stars = [];
+    let shootingStars = [];
+    let audioBassPower = 0;
+
+    function resizeCanvas() {
+      starCanvas.width = window.innerWidth;
+      starCanvas.height = window.innerHeight;
+      initStars();
+    }
+
+    function initStars() {
+      stars = [];
+      const count = Math.floor((starCanvas.width * starCanvas.height) / 6500);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * starCanvas.height,
+          radius: 0.6 + Math.random() * 1.2,
+          alpha: 0.15 + Math.random() * 0.45
+        });
+      }
+    }
+
+    function spawnShootingStar(force = false) {
+      const spawnChance = force ? 0.25 : (0.02 + audioBassPower * 0.08);
+      if (shootingStars.length < (force ? 6 : 4) && Math.random() < spawnChance) {
+        shootingStars.push({
+          x: Math.random() * starCanvas.width * 0.8,
+          y: Math.random() * (starCanvas.height * 0.4),
+          length: 70 + Math.random() * 100 + (audioBassPower * 80),
+          speed: 9 + Math.random() * 8 + (audioBassPower * 12),
+          angle: (Math.PI / 4) + (Math.random() * 0.16 - 0.08),
+          alpha: 1
+        });
+      }
+    }
+
+    function renderStarfield() {
+      ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+      ctx.fillStyle = '#480607';
+      stars.forEach(s => {
+        const pulseAlpha = Math.min(1.0, s.alpha + (audioBassPower * 0.35));
+        const pulseRad = s.radius * (1 + audioBassPower * 0.4);
+        ctx.globalAlpha = pulseAlpha;
+        ctx.fillRect(s.x, s.y, pulseRad * 2, pulseRad * 2);
+      });
+
+      spawnShootingStar();
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const s = shootingStars[i];
+        const tailX = s.x - Math.cos(s.angle) * s.length;
+        const tailY = s.y - Math.sin(s.angle) * s.length;
+
+        const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
+        grad.addColorStop(0, 'rgba(72, 6, 7, 0)');
+        grad.addColorStop(1, 'rgba(134, 1, 17, ' + s.alpha + ')');
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2 + (audioBassPower * 2);
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(s.x, s.y);
+        ctx.stroke();
+
+        s.x += Math.cos(s.angle) * s.speed;
+        s.y += Math.sin(s.angle) * s.speed;
+        s.alpha -= 0.014;
+
+        if (s.alpha <= 0 || s.x > starCanvas.width || s.y > starCanvas.height) {
+          shootingStars.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(renderStarfield);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    renderStarfield();
+
+    // --- DOM Elements ---
+    const $ = id => document.getElementById(id);
+    const titleWrap = $('title-wrap');
+    const title = $('title');
+    const echo1 = $('echo-1');
+    const echo2 = $('echo-2');
+    const portrait = $('portrait');
+    const img = $('img');
+    const pillar = $('pillar');
+    const poster = $('poster');
+    const polarCanvas = $('polar-oscilloscope');
+    const polarCtx = polarCanvas.getContext('2d');
+    const metas = [$('credits'), $('venue'), $('schedule')];
+    const paletteName = $('paletteName');
+    const paletteSelect = $('paletteSelect');
+    const noteBehaviorMode = $('noteBehaviorMode');
+    const cycleToneModeBtn = $('cycleToneModeBtn');
+    const bgPicker = $('bgPicker');
+    const titlePicker = $('titlePicker');
+    const accentPicker = $('accentPicker');
+    const fontSelect = $('fontSelect');
+    const fontStatus = $('fontStatus');
+    const streamStatus = $('streamStatus');
+    const pitchReadout = $('pitchReadout');
+    const pitchFill = $('pitchFill');
+    const vowelReadout = $('vowelReadout');
+    const targetChallengeStatus = $('targetChallengeStatus');
+    const noteArchetypeStatus = $('noteArchetypeStatus');
+    const vibratoStatus = $('vibratoStatus');
+    const speechRecBtn = $('speechRecBtn');
+    const speechStatus = $('speechStatus');
+    const recordVideoBtn = $('recordVideoBtn');
+    const shapeSelect = $('shapeSelect');
+    const shapeStatus = $('shapeStatus');
+    const micBtn = $('micBtn');
+    const targetModeBtn = $('targetModeBtn');
+    const exportSvgBtn = $('exportSvgBtn');
+
+    let zoom = 1;
+    let currentPaletteIndex = 0;
+    let currentFontIndex = 0;
+    let currentShapeIndex = 0;
+
+    let titleRotation = 0;
+    let currentTitlePresetIndex = 0;
+    let isTitleFront = true;
+    let basePillarAngle = 0;
+
+    // --- 12 Musical Semitones: Distinct Architectural Archetypes ---
+    const NOTE_ARCHETYPES = {
+      "C": {
+        name: "C Grounded Linear",
+        casl: 0.0, crsv: 0.0, slant: 0,
+        lineWidth: 65, portraitScale: 1.0, tracking: -0.05, metaSpacing: 0.04,
+        fontIdx: 0, shapeIdx: 0,
+        palette: { bg: "#140a0b", title: "#ff2a3b", accent: "#590910" }
+      },
+      "C#": {
+        name: "C# Sharp Cant",
+        casl: 0.25, crsv: 0.8, slant: -8,
+        lineWidth: 24, portraitScale: 1.06, tracking: 0.02, metaSpacing: 0.08,
+        fontIdx: 5, shapeIdx: 4,
+        palette: { bg: "#160b07", title: "#ff6d00", accent: "#5e2600" }
+      },
+      "D": {
+        name: "D Monolithic Block",
+        casl: 0.0, crsv: 0.0, slant: 0,
+        lineWidth: 90, portraitScale: 0.96, tracking: -0.06, metaSpacing: 0.03,
+        fontIdx: 7, shapeIdx: 9,
+        palette: { bg: "#161205", title: "#ffd000", accent: "#5a4500" }
+      },
+      "D#": {
+        name: "D# Wonky Jitter",
+        casl: 0.85, crsv: 0.2, slant: 6,
+        lineWidth: 35, portraitScale: 1.04, tracking: 0.04, metaSpacing: 0.09,
+        fontIdx: 14, shapeIdx: 2,
+        palette: { bg: "#141508", title: "#b7ff00", accent: "#3c5400" }
+      },
+      "E": {
+        name: "E Organic Casual",
+        casl: 1.0, crsv: 0.4, slant: -3,
+        lineWidth: 42, portraitScale: 1.02, tracking: -0.01, metaSpacing: 0.05,
+        fontIdx: 0, shapeIdx: 2,
+        palette: { bg: "#08160d", title: "#00ff66", accent: "#005221" }
+      },
+      "F": {
+        name: "F Cursive Flow",
+        casl: 0.4, crsv: 1.0, slant: -12,
+        lineWidth: 18, portraitScale: 1.08, tracking: 0.05, metaSpacing: 0.11,
+        fontIdx: 0, shapeIdx: 1,
+        palette: { bg: "#061515", title: "#00ffd5", accent: "#005244" }
+      },
+      "F#": {
+        name: "F# Cyber Brutal",
+        casl: 0.0, crsv: 0.0, slant: 8,
+        lineWidth: 80, portraitScale: 0.98, tracking: -0.04, metaSpacing: 0.02,
+        fontIdx: 11, shapeIdx: 7,
+        palette: { bg: "#06131a", title: "#00b4d8", accent: "#003b5c" }
+      },
+      "G": {
+        name: "G Royal Classical",
+        casl: 0.1, crsv: 0.0, slant: 0,
+        lineWidth: 48, portraitScale: 1.0, tracking: 0.08, metaSpacing: 0.12,
+        fontIdx: 6, shapeIdx: 6,
+        palette: { bg: "#090d1f", title: "#4361ee", accent: "#121b5c" }
+      },
+      "G#": {
+        name: "G# Gothic Drama",
+        casl: 0.6, crsv: 0.7, slant: -5,
+        lineWidth: 30, portraitScale: 1.05, tracking: -0.02, metaSpacing: 0.06,
+        fontIdx: 12, shapeIdx: 6,
+        palette: { bg: "#120a20", title: "#7b2cbf", accent: "#3c096c" }
+      },
+      "A": {
+        name: "A Pure Harmonic Center",
+        casl: 0.5, crsv: 0.5, slant: 0,
+        lineWidth: 50, portraitScale: 1.0, tracking: 0.0, metaSpacing: 0.05,
+        fontIdx: 0, shapeIdx: 0,
+        palette: { bg: "#19081f", title: "#d90429", accent: "#6a040f" }
+      },
+      "A#": {
+        name: "A# Electric Sibilance",
+        casl: 0.9, crsv: 0.9, slant: -14,
+        lineWidth: 16, portraitScale: 1.1, tracking: 0.06, metaSpacing: 0.14,
+        fontIdx: 13, shapeIdx: 3,
+        palette: { bg: "#1c0716", title: "#ff007f", accent: "#660033" }
+      },
+      "B": {
+        name: "B Ethereal Whistle",
+        casl: 0.3, crsv: 1.0, slant: -10,
+        lineWidth: 22, portraitScale: 1.12, tracking: 0.09, metaSpacing: 0.16,
+        fontIdx: 9, shapeIdx: 4,
+        palette: { bg: "#1f1011", title: "#f72585", accent: "#7209b7" }
+      }
+    };
+
+    let targetNotes = [
+      { name: 'A3', freq: 220.0 },
+      { name: 'C4', freq: 261.63 },
+      { name: 'E4', freq: 329.63 },
+      { name: 'G4', freq: 392.0 },
+      { name: 'A4', freq: 440.0 }
+    ];
+    let activeTargetIdx = -1;
+    let isTargetLocked = false;
+
+    const pitchHistory = [];
+    const PITCH_HISTORY_LEN = 16;
+    let currentVibratoRate = 0;
+
+    let sustainStartTime = 0;
+    let lastDetectedMidi = -1;
+    let currentSustainDuration = 0;
+    let lastAppliedNoteClass = "";
+
+    const zones = [
+      { x: MARGIN, y: MARGIN, w: 260 },
+      { x: POSTER_W - MARGIN - 260, y: MARGIN, w: 260 },
+      { x: MARGIN, y: POSTER_H - MARGIN - 64, w: 280 },
+      { x: POSTER_W - MARGIN - 280, y: POSTER_H - MARGIN - 64, w: 280 },
+      { x: MARGIN, y: 720, w: 260 },
+      { x: POSTER_W - MARGIN - 260, y: 720, w: 260 }
+    ];
+
+    const titleAnchorZones = [
+      { name: "Top Header", left: MARGIN, top: 120, width: POSTER_W - (MARGIN * 2), align: 'left', rot: 0 },
+      { name: "Mid-Hero", left: MARGIN, top: 250, width: POSTER_W - (MARGIN * 2), align: 'left', rot: 0 },
+      { name: "Center Frame", left: MARGIN, top: 380, width: POSTER_W - (MARGIN * 2), align: 'center', rot: 0 },
+      { name: "Lower Deck", left: MARGIN, top: 520, width: POSTER_W - (MARGIN * 2), align: 'left', rot: 0 },
+      { name: "Bottom Base", left: MARGIN, top: 620, width: POSTER_W - (MARGIN * 2), align: 'left', rot: 0 },
+      { name: "Angled Slash", left: MARGIN + 12, top: 300, width: POSTER_W - (MARGIN * 2) - 24, align: 'left', rot: -4 },
+      { name: "Ascending Cant", left: MARGIN + 12, top: 320, width: POSTER_W - (MARGIN * 2) - 24, align: 'center', rot: 4 }
+    ];
+
+    const NOTE_STRINGS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    function frequencyToNoteData(freq) {
+      const midiNum = 12 * (Math.log(freq / 440) / Math.log(2)) + 69;
+      const rounded = Math.round(midiNum);
+      const noteClass = NOTE_STRINGS[((rounded % 12) + 12) % 12];
+      const octave = Math.floor(rounded / 12) - 1;
+      const cents = Math.round((midiNum - rounded) * 100);
+      return { noteClass: noteClass, note: `${noteClass}${octave}`, octave: octave, midi: rounded, cents: cents };
+    }
+
+    const fonts = [
+      { 
+        name: 'Recursive Casual/Cursive (Variable)', 
+        family: '"Recursive", sans-serif',
+        axes: {
+          primary: 'CASL',
+          secondary: 'CRSV',
+          min1: 0, max1: 1,
+          min2: 0, max2: 1,
+          weightMin: 300, weightMax: 1000,
+          hasSlant: true
+        }
+      },
+      { 
+        name: 'Fraunces Wonk/Soft (Variable)', 
+        family: '"Fraunces", serif',
+        axes: {
+          primary: 'WONK',
+          secondary: 'SOFT',
+          min1: 0, max1: 1,
+          min2: 0, max2: 100,
+          weightMin: 100, weightMax: 900
+        }
+      },
+      { 
+        name: 'Fraunces Optical/Weight (Variable)', 
+        family: '"Fraunces", serif',
+        axes: {
+          primary: 'opsz',
+          secondary: 'wght',
+          min1: 9, max1: 144,
+          min2: 100, max2: 900,
+          weightMin: 100, weightMax: 900
+        }
+      },
+      { name: 'Asap Sharp Variable', family: '"Asap", sans-serif' },
+      { name: 'Space Grotesk Modern', family: '"Space Grotesk", sans-serif' },
+      { name: 'Syne Avant-Garde', family: '"Syne", sans-serif' },
+      { name: 'Cinzel Classical Roman', family: '"Cinzel", serif' },
+      { name: 'Bebas Neue Display', family: '"Bebas Neue", sans-serif' },
+      { name: 'Anton Swiss Impact', family: '"Anton", sans-serif' },
+      { name: 'Playfair Editorial', family: '"Playfair Display", serif' },
+      { name: 'Courier Prime Typewriter', family: '"Courier Prime", monospace' },
+      { name: 'Orbitron Cyberpunk', family: '"Orbitron", sans-serif' },
+      { name: 'Unifraktur Blackletter', family: '"UnifrakturMaguntia", cursive' },
+      { name: 'Major Mono Monospace', family: '"Major Mono Display", monospace' },
+      { name: 'Rubik Glitch Distorted', family: '"Rubik Glitch", cursive' },
+      { name: 'Monoton Disco Linear', family: '"Monoton", cursive' }
+    ];
+
+    fonts.forEach((f, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = f.name;
+      fontSelect.appendChild(opt);
+    });
+
+    const curatedPhrases = [
+      ['PIQUE', 'DAME'],
+      ['QUEEN OF', 'SPADES'],
+      ['SECRET', 'CARDS'],
+      ['SEVEN THREE', 'ACE'],
+      ['MIDNIGHT', 'REQUIEM'],
+      ['CRIMSON', 'GHOST'],
+      ['PHANTOM', 'OPERA'],
+      ['ELECTRIC', 'MEMORY'],
+      ['SILENT', 'PROTOCOL'],
+      ['VELVET', 'SHADOWS'],
+      ['FATAL', 'CHANCE'],
+      ['SOLAR', 'SYNTHESIS'],
+      ['NEON', 'CATHEDRAL'],
+      ['ANALOG', 'DREAMS'],
+      ['ABSOLUTE', 'ZERO']
+    ];
+
+    const wordBankA = ['PIQUE', 'NEON', 'CRIMSON', 'MIDNIGHT', 'MEMORY', 'ELECTRIC', 'PHANTOM', 'SILENT', 'HOUSE', 'CITY', 'SOLAR', 'CYBER', 'VELVET', 'GOTHIC', 'BRUTAL'];
+    const wordBankB = ['DAME', 'ARCHIVE', 'REQUIEM', 'MACHINE', 'SIGNAL', 'OPERA', 'WINDOW', 'STAIRCASE', 'CATALOG', 'SHADOWS', 'DRIFT', 'VECTOR', 'ECHO', 'CHAMBER', 'PORTAL'];
+
+    const metaLine1 = [
+      'PROGRAM NO. XII // PIQUE DAME', 'ARCHIVE REISSUE • EDITION 04', 'SYMPHONIC SYNTHESIS SERIES',
+      'SPECIAL MIDNIGHT PRESENTATION', 'AVANT-GARDE CHRONICLES', 'THE QUEEN OF SPADES / 1890'
+    ];
+    const metaLine2 = [
+      'PHOEBUSPALAST • DRESDEN', 'METROPOL THEATRE • BERLIN', 'MUSEUM OF MODERN ARCHIVE',
+      'KRAFTWERK HALLE / WEST WING', 'HERMITAGE THEATRE • PETERSBURG', 'CIVIC OPERA COMPLEX 01'
+    ];
+    const metaLine3 = [
+      '4:00 • 6:15 • 8:30 PM', 'DOORS OPEN 19:00 SHARP', 'THREE CARDS: 7 • 3 • ACE',
+      'ADMISSION FREE // RSVP REQ', 'OCTOBER 14-28 • AUTUMN RUN', 'ORIGINAL LIBRETTO & SCORE'
+    ];
+
+    const shapes = [
+      { name: 'Full Rectangle', clip: 'none' },
+      { name: 'Heart Shape', clip: 'url(#clip-heart)' },
+      { name: '4-Leaf Clover', clip: 'url(#clip-clover)' },
+      { name: '5-Point Star', clip: 'url(#clip-star)' },
+      { name: 'Sparkle / Diamond Star', clip: 'url(#clip-sparkle)' },
+      { name: 'Playing Diamond', clip: 'url(#clip-diamond)' },
+      { name: 'Cathedral Arch', clip: 'url(#clip-arch)' },
+      { name: 'Medieval Shield', clip: 'url(#clip-shield)' },
+      { name: 'Circle / Oval', clip: 'circle(48% at 50% 50%)' },
+      { name: 'Hexagon', clip: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }
+    ];
+
+    shapes.forEach((s, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = s.name;
+      shapeSelect.appendChild(opt);
+    });
+
+    const palettes = [
+      { name: "Pique Crimson", colors: ['#1a1110', '#860111', '#480607'] },
+      { name: "Bone & Wine", colors: ['#f4f0e8', '#140d0c', '#860111'] },
+      { name: "Electric Cyan", colors: ['#0b1219', '#00f0ff', '#005f73'] },
+      { name: "Toxic Bauhaus", colors: ['#111111', '#e8ff00', '#2a2a2a'] },
+      { name: "Swiss International", colors: ['#ffffff', '#ff2200', '#111111'] },
+      { name: "Oatmeal Noir", colors: ['#faf3dd', '#860111', '#1a1110'] },
+      { name: "Acid Tangerine", colors: ['#161311', '#ff5500', '#3b2518'] },
+      { name: "Cobalt Modern", colors: ['#0d1322', '#3b82f6', '#1d2c4e'] },
+      { name: "Monochrome Strict", colors: ['#000000', '#ffffff', '#2b2b2b'] },
+      { name: "Paper Inverted", colors: ['#f5f4ef', '#080808', '#bbbbbb'] },
+      { name: "Solar Flare", colors: ['#230d07', '#ffb703', '#9e2a2b'] },
+      { name: "Cyber Plum", colors: ['#180f1d', '#e056fd', '#481d59'] }
+    ];
+
+    palettes.forEach((p, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = p.name;
+      paletteSelect.appendChild(opt);
+    });
+
+    function r(n) { return Math.floor(Math.random() * n); }
+
+    function hslToHex(h, s, l) {
+      l /= 100;
+      const a = s * Math.min(l, 1 - l) / 100;
+      const f = n => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color).toString(16).padStart(2, '0');
+      };
+      return `#${f(0)}${f(8)}${f(4)}`;
+    }
+
+    function lerp(min, max, t) {
+      return min + Math.max(0, Math.min(1, t)) * (max - min);
+    }
+
+    function fit() {
+      let s = 136;
+      title.style.fontSize = s + 'px';
+      echo1.style.fontSize = s + 'px';
+      echo2.style.fontSize = s + 'px';
+      
+      const titleLeft = parseInt(titleWrap.style.left, 10) || MARGIN;
+      const titleTop = parseInt(titleWrap.style.top, 10) || 200;
+      
+      const maxAvailableWidth = Math.max(200, POSTER_W - titleLeft - MARGIN);
+      const maxAvailableHeight = Math.max(120, POSTER_H - titleTop - MARGIN);
+
+      titleWrap.style.width = maxAvailableWidth + 'px';
+
+      while ((title.scrollHeight > maxAvailableHeight || title.scrollWidth > maxAvailableWidth) && s > 24) {
+        s -= 2;
+        title.style.fontSize = s + 'px';
+        echo1.style.fontSize = s + 'px';
+        echo2.style.fontSize = s + 'px';
+      }
+    }
+
+    function clampWithinPoster(x, y, w, h) {
+      const clampedX = Math.max(MARGIN, Math.min(POSTER_W - MARGIN - w, x));
+      const clampedY = Math.max(MARGIN, Math.min(POSTER_H - MARGIN - h, y));
+      return { x: clampedX, y: clampedY };
+    }
+
+    function updateTitleTransform() {
+      titleWrap.style.transform = `rotate(${titleRotation}deg)`;
+      const currentPresetName = titleAnchorZones[currentTitlePresetIndex]?.name || 'Custom';
+      fontStatus.textContent = `Font: ${fonts[currentFontIndex].name} • Pos: ${currentPresetName} (${titleRotation}°) [Layer: ${isTitleFront ? 'Front' : 'Behind'}]`;
+    }
+
+    function applyTitlePlacement(zone) {
+      const safeWidth = Math.min(zone.width, POSTER_W - (MARGIN * 2));
+      const clamped = clampWithinPoster(zone.left, zone.top, safeWidth, 200);
+
+      titleWrap.style.left = clamped.x + 'px';
+      titleWrap.style.top = clamped.y + 'px';
+      titleWrap.style.width = safeWidth + 'px';
+      title.style.textAlign = zone.align || 'left';
+      echo1.style.textAlign = zone.align || 'left';
+      echo2.style.textAlign = zone.align || 'left';
+      titleRotation = zone.rot || 0;
+      
+      updateTitleTransform();
+      fit();
+    }
+
+    function cycleTitlePlacement(idx = null) {
+      if (idx !== null) {
+        currentTitlePresetIndex = idx;
+      } else {
+        currentTitlePresetIndex = (currentTitlePresetIndex + 1) % titleAnchorZones.length;
+      }
+      applyTitlePlacement(titleAnchorZones[currentTitlePresetIndex]);
+    }
+
+    function cycleTitleRotation() {
+      const angles = [0, -4, 4, -8, 8];
+      const nextAngle = angles[(angles.indexOf(titleRotation) + 1) % angles.length];
+      titleRotation = nextAngle !== undefined ? nextAngle : 0;
+      updateTitleTransform();
+      fit();
+    }
+
+    function toggleTitleLayering() {
+      isTitleFront = !isTitleFront;
+      titleWrap.style.zIndex = isTitleFront ? 4 : 1;
+      updateTitleTransform();
+    }
+
+    function updateOscilloscopePosition() {
+      const pLeft = parseInt(portrait.style.left, 10) || 120;
+      const pTop = parseInt(portrait.style.top, 10) || 260;
+      const pWidth = parseInt(portrait.style.width, 10) || 400;
+      const pHeight = parseInt(portrait.style.height, 10) || 440;
+
+      const centerX = pLeft + (pWidth / 2);
+      const centerY = pTop + (pHeight / 2);
+
+      polarCanvas.style.left = `${centerX - 300}px`;
+      polarCanvas.style.top = `${centerY - 300}px`;
+    }
+
+    // --- Autocorrelation Pitch & Formant Analysis Engine ---
+    function analyzeVocalBuffer(timeBuffer, freqBuffer, sampleRate) {
+      const SIZE = timeBuffer.length;
+      let rms = 0;
+      for (let i = 0; i < SIZE; i++) {
+        const val = timeBuffer[i];
+        rms += val * val;
+      }
+      rms = Math.sqrt(rms / SIZE);
+
+      if (rms < 0.012) return { freq: -1, volume: rms, vowel: 'Neutral', sibilance: 0 };
+
+      let r1 = 0, r2 = SIZE - 1;
+      const thres = 0.2;
+      for (let i = 0; i < SIZE / 2; i++) {
+        if (Math.abs(timeBuffer[i]) < thres) { r1 = i; break; }
+      }
+      for (let i = 1; i < SIZE / 2; i++) {
+        if (Math.abs(timeBuffer[SIZE - i]) < thres) { r2 = SIZE - i; break; }
+      }
+
+      const trimmed = timeBuffer.slice(r1, r2);
+      const c = new Array(trimmed.length).fill(0);
+      for (let i = 0; i < trimmed.length; i++) {
+        for (let j = 0; j < trimmed.length - i; j++) {
+          c[i] += trimmed[j] * trimmed[j + i];
+        }
+      }
+
+      let d = 0;
+      while (c[d] > c[d + 1]) d++;
+      let maxval = -1, maxpos = -1;
+      for (let i = d; i < trimmed.length; i++) {
+        if (c[i] > maxval) {
+          maxval = c[i];
+          maxpos = i;
+        }
+      }
+
+      let T0 = maxpos;
+      const x1 = c[T0 - 1], x2 = c[T0], x3 = c[T0 + 1];
+      const a = (x1 + x3 - 2 * x2) / 2;
+      const b = (x3 - x1) / 2;
+      if (a) T0 = T0 - b / (2 * a);
+      const detectedFreq = sampleRate / T0;
+
+      const binHz = sampleRate / 2048;
+      const getEnergy = (lowHz, highHz) => {
+        const start = Math.floor(lowHz / binHz);
+        const end = Math.min(freqBuffer.length - 1, Math.ceil(highHz / binHz));
+        let sum = 0;
+        for (let i = start; i <= end; i++) sum += freqBuffer[i];
+        return sum / Math.max(1, (end - start + 1));
+      };
+
+      const f1Energy = getEnergy(300, 850);
+      const f2Energy = getEnergy(900, 2400);
+      const sibilanceEnergy = getEnergy(5000, 10000);
+
+      let detectedVowel = 'Neutral';
+      if (f1Energy > 55 && f2Energy > 45) {
+        if (f2Energy > f1Energy * 1.3) {
+          detectedVowel = 'EEE';
+        } else if (f1Energy > 70) {
+          detectedVowel = 'AAH';
+        } else {
+          detectedVowel = 'OOH';
+        }
+      }
+
+      return {
+        freq: (detectedFreq >= 65 && detectedFreq <= 1100) ? detectedFreq : -1,
+        volume: rms,
+        vowel: detectedVowel,
+        sibilance: Math.min(1.0, sibilanceEnergy / 110)
+      };
+    }
+
+    // --- Circular Polar Waveform / Oscilloscope Ring ---
+    function renderPolarOscilloscope(freqData, volNorm) {
+      polarCtx.clearRect(0, 0, 600, 600);
+      if (volNorm < 0.02) return;
+
+      const centerX = 300;
+      const centerY = 300;
+      const baseRadius = 140 + (volNorm * 45);
+      const points = 120;
+      const currentAccent = pillar.style.background || '#480607';
+
+      polarCtx.save();
+      polarCtx.beginPath();
+      for (let i = 0; i <= points; i++) {
+        const angle = (i / points) * Math.PI * 2;
+        const binIndex = Math.floor((i / points) * 64);
+        const amplitude = (freqData[binIndex] || 0) / 255;
+        const r = baseRadius + (amplitude * (40 + volNorm * 65));
+        const x = centerX + Math.cos(angle) * r;
+        const y = centerY + Math.sin(angle) * r;
+
+        if (i === 0) polarCtx.moveTo(x, y);
+        else polarCtx.lineTo(x, y);
+      }
+      polarCtx.closePath();
+      polarCtx.strokeStyle = currentAccent;
+      polarCtx.lineWidth = 2 + (volNorm * 3);
+      polarCtx.globalAlpha = Math.min(0.85, 0.25 + (volNorm * 0.6));
+      polarCtx.stroke();
+      polarCtx.restore();
+    }
+
+    // --- Acoustic Vocal Driver Engine ---
+    let audioCtx = null;
+    let analyser = null;
+    let timeDomainBuffer = null;
+    let freqDataBuffer = null;
+    let mediaStreamRef = null;
+    let isAudioActive = false;
+
+    let smoothedPitchNorm = 0.2;
+    let smoothedVolumeNorm = 0.0;
+    let smoothedSibilance = 0.0;
+    let currentNoteString = "--";
+    let lastVolumeLevel = 0.0;
+
+    async function initAudioStream() {
+      try {
+        mediaStreamRef = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioCtx.createMediaStreamSource(mediaStreamRef);
+
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        analyser.smoothingTimeConstant = 0.72;
+
+        timeDomainBuffer = new Float32Array(analyser.fftSize);
+        freqDataBuffer = new Uint8Array(analyser.frequencyBinCount);
+        source.connect(analyser);
+
+        isAudioActive = true;
+        micBtn.textContent = 'Mute Vocal Stream (Active)';
+        micBtn.style.borderColor = '#00e5ff';
+        micBtn.style.color = '#00e5ff';
+
+        renderAudioLoop();
+      } catch (err) {
+        console.error('Microphone initialization failed:', err);
+        alert('Microphone access was denied or unsupported in this browser environment.');
+      }
+    }
+
+    function renderAudioLoop() {
+      if (!isAudioActive || !analyser) return;
+
+      analyser.getFloatTimeDomainData(timeDomainBuffer);
+      analyser.getByteFrequencyData(freqDataBuffer);
+
+      const metrics = analyzeVocalBuffer(timeDomainBuffer, freqDataBuffer, audioCtx.sampleRate);
+
+      const targetVol = Math.min(1.0, Math.max(0.0, (metrics.volume - 0.012) / 0.16));
+      const volumeDelta = targetVol - lastVolumeLevel;
+
+      if (volumeDelta > 0.42 && targetVol > 0.5) {
+        triggerPlosiveBurst();
+      }
+      lastVolumeLevel = targetVol;
+
+      const smoothingFactor = targetVol > smoothedVolumeNorm ? 0.35 : 0.08;
+      smoothedVolumeNorm += (targetVol - smoothedVolumeNorm) * smoothingFactor;
+      audioBassPower = smoothedVolumeNorm;
+      smoothedSibilance += (metrics.sibilance - smoothedSibilance) * 0.25;
+
+      let detectedNoteData = null;
+      if (metrics.freq > 0) {
+        detectedNoteData = frequencyToNoteData(metrics.freq);
+        currentNoteString = `${detectedNoteData.note} (${Math.round(metrics.freq)} Hz)`;
+
+        const targetPitch = Math.min(1.0, Math.max(0.0, (metrics.freq - 80) / (650 - 80)));
+        smoothedPitchNorm += (targetPitch - smoothedPitchNorm) * 0.22;
+
+        pitchHistory.push(metrics.freq);
+        if (pitchHistory.length > PITCH_HISTORY_LEN) pitchHistory.shift();
+
+        if (pitchHistory.length >= PITCH_HISTORY_LEN) {
+          let zeroCrossings = 0;
+          const avgFreq = pitchHistory.reduce((a, b) => a + b) / PITCH_HISTORY_LEN;
+          for (let i = 1; i < pitchHistory.length; i++) {
+            if ((pitchHistory[i - 1] - avgFreq) * (pitchHistory[i] - avgFreq) < 0) {
+              zeroCrossings++;
+            }
+          }
+          currentVibratoRate = (zeroCrossings / 2) * 4;
+        }
+
+        if (detectedNoteData.midi === lastDetectedMidi) {
+          currentSustainDuration = (performance.now() - sustainStartTime) / 1000;
+        } else {
+          lastDetectedMidi = detectedNoteData.midi;
+          sustainStartTime = performance.now();
+          currentSustainDuration = 0;
+        }
+      } else {
+        currentSustainDuration = Math.max(0, currentSustainDuration - 0.05);
+        currentVibratoRate = Math.max(0, currentVibratoRate - 0.3);
+      }
+
+      renderPolarOscilloscope(freqDataBuffer, smoothedVolumeNorm);
+
+      applyVoicePosterState(smoothedPitchNorm, smoothedVolumeNorm, metrics.vowel, currentNoteString, detectedNoteData, smoothedSibilance, currentSustainDuration, currentVibratoRate);
+
+      requestAnimationFrame(renderAudioLoop);
+    }
+
+    function triggerPlosiveBurst() {
+      const burstShapes = [3, 4, 1, 9];
+      const burstIdx = burstShapes[r(burstShapes.length)];
+      setShape(burstIdx);
+      spawnShootingStar(true);
+      setTimeout(() => {
+        setShape(0);
+      }, 350);
+    }
+
+    function applyVoicePosterState(pitchNorm, volNorm, vowel, noteLabel, noteData, sibilance, sustainSec, vibratoRate) {
+      const root = document.documentElement;
+      const currentFont = fonts[currentFontIndex];
+
+      pitchReadout.textContent = `Key / Pitch: ${noteLabel}`;
+      pitchFill.style.width = `${(pitchNorm * 100).toFixed(0)}%`;
+      vowelReadout.textContent = `Vowel: ${vowel}`;
+      vibratoStatus.textContent = `Vibrato: ${vibratoRate.toFixed(1)} Hz`;
+
+      // 1. Target Note Mini-Game Lock
+      let pitchJitterX = 0;
+      if (activeTargetIdx >= 0 && noteData) {
+        const target = targetNotes[activeTargetIdx];
+        const isNoteMatch = Math.abs(noteData.cents) <= 15 && noteLabel.startsWith(target.name.substring(0, 1));
+
+        if (isNoteMatch) {
+          isTargetLocked = true;
+          targetChallengeStatus.textContent = `Target ${target.name}: LOCKED!`;
+          targetChallengeStatus.style.color = '#00e5ff';
+          root.style.setProperty('--target-glow', 'drop-shadow(0 0 16px #00e5ff)');
+        } else {
+          isTargetLocked = false;
+          targetChallengeStatus.textContent = `Target ${target.name}: Flat/Sharp (${noteData.cents > 0 ? '+' : ''}${noteData.cents}c)`;
+          targetChallengeStatus.style.color = '#ff5500';
+          root.style.setProperty('--target-glow', 'none');
+          pitchJitterX = ((Math.random() - 0.5) * Math.min(18, Math.abs(noteData.cents) * 0.4)).toFixed(1);
+        }
+      } else {
+        root.style.setProperty('--target-glow', 'none');
+      }
+
+      // 2. Note-Driven Structural Archetypes (The 12 Semitones System)
+      const selectedBehavior = noteBehaviorMode.value;
+      let activeArchetype = NOTE_ARCHETYPES[noteData ? noteData.noteClass : "C"] || NOTE_ARCHETYPES["C"];
+
+      if (noteData && volNorm > 0.04) {
+        noteArchetypeStatus.textContent = `Archetype: ${activeArchetype.name}`;
+
+        if (selectedBehavior === 'chromaticPersonality') {
+          // Note governs Slant, Tracking, Pillar Width, and Portrait Scale
+          root.style.setProperty('--note-slant-deg', `${activeArchetype.slant}deg`);
+          root.style.setProperty('--note-line-width', `${activeArchetype.lineWidth}px`);
+          root.style.setProperty('--note-portrait-scale', `${activeArchetype.portraitScale * (1.0 + volNorm * 0.12)}`);
+          root.style.setProperty('--note-meta-spacing', `${activeArchetype.metaSpacing}em`);
+
+          // Apply Note-Specific Complementary Palette
+          const p = activeArchetype.palette;
+          poster.style.background = p.bg;
+          title.style.color = p.title;
+          echo1.style.color = p.title;
+          echo2.style.color = p.title;
+          pillar.style.background = p.accent;
+          metas.forEach(m => m.style.color = p.title);
+          paletteName.textContent = `Active: ${activeArchetype.name}`;
+          pitchFill.style.background = p.title;
+        } else if (selectedBehavior === 'fontCycler') {
+          // Switch font family when transitioning to a new semitone
+          if (noteData.noteClass !== lastAppliedNoteClass) {
+            setFont(activeArchetype.fontIdx);
+            lastAppliedNoteClass = noteData.noteClass;
+          }
+        } else if (selectedBehavior === 'shapeMorpher') {
+          // Morph clipping shape based on musical key
+          if (noteData.noteClass !== lastAppliedNoteClass) {
+            setShape(activeArchetype.shapeIdx);
+            lastAppliedNoteClass = noteData.noteClass;
+          }
+        }
+      }
+
+      // 3. Variable Font Axes Driving & Vibrato Slant Oscillation
+      if (currentFont && currentFont.axes) {
+        const { primary, secondary, min1, max1, min2, max2, weightMin, weightMax } = currentFont.axes;
+
+        const currentWeight = Math.round(lerp(weightMin || 300, weightMax || 1000, volNorm));
+        root.style.setProperty('--font-axis-weight', currentWeight);
+
+        let primaryVal = lerp(min1, max1, pitchNorm);
+        let secondaryVal = lerp(min2, max2, 1.0 - pitchNorm);
+
+        if (selectedBehavior === 'chromaticPersonality') {
+          // Blend note archetype preference with pitch
+          primaryVal = lerp(primaryVal, activeArchetype.casl, 0.45);
+          secondaryVal = lerp(secondaryVal, activeArchetype.crsv, 0.45);
+        }
+
+        if (vowel === 'AAH') {
+          root.style.setProperty('--font-axis-opsz', '144');
+        } else if (vowel === 'EEE') {
+          secondaryVal = max2;
+        } else if (vowel === 'OOH') {
+          primaryVal = min1;
+        }
+
+        root.style.setProperty('--font-axis-primary', primaryVal.toFixed(2));
+        root.style.setProperty('--font-axis-secondary', secondaryVal.toFixed(2));
+
+        const vibratoSlant = (vibratoRate > 2.0) ? -Math.min(14, vibratoRate * 2.2).toFixed(1) : 0;
+        root.style.setProperty('--font-axis-slnt', vibratoSlant);
+
+        const weightProgression = (currentWeight - (weightMin || 300)) / ((weightMax || 1000) - (weightMin || 300));
+        const dynamicTracking = lerp(0.03, -0.065, weightProgression).toFixed(3);
+        root.style.setProperty('--font-tracking', `${dynamicTracking}em`);
+
+        streamStatus.textContent = `Voice: [${primary}: ${primaryVal.toFixed(2)}] [wght: ${currentWeight}] [Key: ${noteData ? noteData.noteClass : '--'}]`;
+      }
+
+      // 4. Sustained Note Echo Trail
+      if (sustainSec > 1.2) {
+        const echoAlpha = Math.min(0.7, (sustainSec - 1.2) * 0.45).toFixed(2);
+        root.style.setProperty('--echo-opacity', echoAlpha);
+        root.style.setProperty('--echo-offset-1', `${(sustainSec * 9).toFixed(1)}px`);
+        root.style.setProperty('--echo-offset-2', `${(sustainSec * 18).toFixed(1)}px`);
+      } else {
+        root.style.setProperty('--echo-opacity', '0');
+      }
+
+      // 5. Sibilance Scatter
+      const sibilanceScatterPx = (sibilance * 14 * (Math.random() - 0.5)).toFixed(1) + 'px';
+      root.style.setProperty('--sibilance-scatter', sibilanceScatterPx);
+
+      // 6. Vocal Kinetic Offsets
+      const pitchElevationY = ((pitchNorm - 0.5) * -38).toFixed(1) + 'px';
+      const pitchDriftX = (((pitchNorm - 0.5) * 20) + parseFloat(pitchJitterX)).toFixed(1) + 'px';
+      const vibratoPendulum = (vibratoRate > 2.0) ? (Math.sin(performance.now() * 0.015) * vibratoRate * 1.5) : 0;
+      const pillarAngleShift = (((pitchNorm - 0.5) * 14) + vibratoPendulum).toFixed(2) + 'deg';
+
+      root.style.setProperty('--vocal-dy', pitchElevationY);
+      root.style.setProperty('--vocal-dx', pitchDriftX);
+    }
+
+    micBtn.onclick = () => {
+      if (!isAudioActive) {
+        initAudioStream();
+      } else {
+        if (audioCtx && audioCtx.state === 'running') {
+          audioCtx.suspend();
+          micBtn.textContent = 'Vocal Stream Paused';
+          micBtn.style.color = '#b71328';
+          micBtn.style.borderColor = '#32080a';
+        } else if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+          micBtn.textContent = 'Mute Vocal Stream (Active)';
+          micBtn.style.color = '#00e5ff';
+          micBtn.style.borderColor = '#00e5ff';
+        }
+      }
+    };
+
+    // --- Web Speech API Live Recognition Engine ---
+    let speechRecognizer = null;
+    let isSpeechRecActive = false;
+
+    function initSpeechRecognition() {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRec) {
+        alert('Web Speech API is not supported in this browser. Please use Chrome.');
+        return;
+      }
+
+      speechRecognizer = new SpeechRec();
+      speechRecognizer.continuous = true;
+      speechRecognizer.interimResults = true;
+      speechRecognizer.lang = 'en-US';
+
+      speechRecognizer.onstart = () => {
+        isSpeechRecActive = true;
+        speechRecBtn.textContent = 'Stop Speech Rec (Listening)';
+        speechRecBtn.style.borderColor = '#00e5ff';
+        speechRecBtn.style.color = '#00e5ff';
+        speechStatus.textContent = 'Transcribe: Listening...';
+      };
+
+      speechRecognizer.onresult = event => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        transcript = transcript.trim().toUpperCase();
+        if (!transcript) return;
+
+        speechStatus.textContent = `Transcribe: "${transcript}"`;
+
+        const words = transcript.split(/\s+/);
+        if (words.length === 1) {
+          title.innerHTML = words[0];
+          echo1.innerHTML = words[0];
+          echo2.innerHTML = words[0];
+        } else {
+          const mid = Math.ceil(words.length / 2);
+          const line1 = words.slice(0, mid).join(' ');
+          const line2 = words.slice(mid).join(' ');
+          title.innerHTML = `${line1}<br>${line2}`;
+          echo1.innerHTML = `${line1}<br>${line2}`;
+          echo2.innerHTML = `${line1}<br>${line2}`;
+        }
+        fit();
+      };
+
+      speechRecognizer.onerror = event => {
+        console.error('Speech recognition error:', event.error);
+        speechStatus.textContent = `Transcribe Error: ${event.error}`;
+      };
+
+      speechRecognizer.onend = () => {
+        if (isSpeechRecActive) {
+          try { speechRecognizer.start(); } catch (e) {}
+        } else {
+          speechRecBtn.textContent = 'Enable Spoken Headline Rec';
+          speechRecBtn.style.borderColor = 'var(--border-color)';
+          speechRecBtn.style.color = 'inherit';
+          speechStatus.textContent = 'Transcribe: Inactive';
+        }
+      };
+
+      speechRecognizer.start();
+    }
+
+    speechRecBtn.onclick = () => {
+      if (!isSpeechRecActive) {
+        initSpeechRecognition();
+      } else {
+        isSpeechRecActive = false;
+        if (speechRecognizer) speechRecognizer.stop();
+      }
+    };
+
+    // --- Performance Video & Audio Recording Engine (MediaRecorder API) ---
+    let mediaRecorder = null;
+    let recordedChunks = [];
+    let isRecording = false;
+
+    async function toggleRecording() {
+      if (!isRecording) {
+        try {
+          const recordCanvas = document.createElement('canvas');
+          recordCanvas.width = POSTER_W;
+          recordCanvas.height = POSTER_H;
+          const rCtx = recordCanvas.getContext('2d');
+
+          const canvasStream = recordCanvas.captureStream(30);
+
+          let combinedStream = canvasStream;
+          if (mediaStreamRef) {
+            combinedStream = new MediaStream([
+              ...canvasStream.getVideoTracks(),
+              ...mediaStreamRef.getAudioTracks()
+            ]);
+          }
+
+          mediaRecorder = new MediaRecorder(combinedStream, {
+            mimeType: MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9' : 'video/webm'
+          });
+
+          recordedChunks = [];
+          mediaRecorder.ondataavailable = e => e.data.size > 0 && recordedChunks.push(e.data);
+          mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: 'video/webm' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `voice_pique_take_${Date.now()}.webm`;
+            a.click();
+            URL.revokeObjectURL(url);
+            recordVideoBtn.textContent = 'Record Take (WebM Video)';
+            recordVideoBtn.style.borderColor = '#ff007f';
+            recordVideoBtn.style.color = '#ff007f';
+          };
+
+          mediaRecorder.start();
+          isRecording = true;
+          recordVideoBtn.textContent = 'Stop Recording & Download';
+          recordVideoBtn.style.borderColor = '#00ff66';
+          recordVideoBtn.style.color = '#00ff66';
+
+          function drawRecordFrame() {
+            if (!isRecording) return;
+            rCtx.fillStyle = poster.style.background || '#1a1110';
+            rCtx.fillRect(0, 0, POSTER_W, POSTER_H);
+
+            const pLeft = parseInt(pillar.style.left, 10) || 60;
+            const pWidth = parseInt(pillar.style.width, 10) || 40;
+            rCtx.save();
+            rCtx.fillStyle = pillar.style.background || '#480607';
+            rCtx.translate(pLeft + pWidth / 2, POSTER_H / 2);
+            rCtx.rotate((basePillarAngle * Math.PI) / 180);
+            rCtx.fillRect(-pWidth / 2, -POSTER_H / 2, pWidth, POSTER_H);
+            rCtx.restore();
+
+            rCtx.fillStyle = title.style.color || '#860111';
+            rCtx.font = `800 ${window.getComputedStyle(title).fontSize} ${fonts[currentFontIndex].family}`;
+            rCtx.textAlign = 'left';
+            const titleLeft = parseInt(titleWrap.style.left, 10) || MARGIN;
+            const titleTop = parseInt(titleWrap.style.top, 10) || 200;
+            const lines = title.innerHTML.split('<br>');
+            lines.forEach((l, idx) => {
+              rCtx.fillText(l.replace(/<[^>]*>?/gm, ''), titleLeft, titleTop + 100 + (idx * 110));
+            });
+
+            requestAnimationFrame(drawRecordFrame);
+          }
+          drawRecordFrame();
+
+        } catch (err) {
+          console.error('Media recording error:', err);
+          alert('Could not start video recording: ' + err.message);
+        }
+      } else {
+        isRecording = false;
+        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+          mediaRecorder.stop();
+        }
+      }
+    }
+
+    recordVideoBtn.onclick = toggleRecording;
+
+    targetModeBtn.onclick = () => {
+      activeTargetIdx = (activeTargetIdx + 2) % (targetNotes.length + 1) - 1;
+      if (activeTargetIdx === -1) {
+        targetModeBtn.textContent = 'Target Note: OFF';
+        targetModeBtn.style.color = 'inherit';
+        targetModeBtn.style.borderColor = 'var(--border-color)';
+        targetChallengeStatus.textContent = 'Target Note: OFF';
+        targetChallengeStatus.style.color = '#fff';
+      } else {
+        const t = targetNotes[activeTargetIdx];
+        targetModeBtn.textContent = `Target: ${t.name} (${Math.round(t.freq)}Hz)`;
+        targetModeBtn.style.color = '#00e5ff';
+        targetModeBtn.style.borderColor = '#00e5ff';
+        targetChallengeStatus.textContent = `Target ${t.name}: Sing note!`;
+        targetChallengeStatus.style.color = '#ffb703';
+      }
+    };
+
+    cycleToneModeBtn.onclick = () => {
+      const modes = ['chromaticPersonality', 'fontCycler', 'shapeMorpher', 'off'];
+      const nextIdx = (modes.indexOf(noteBehaviorMode.value) + 1) % modes.length;
+      noteBehaviorMode.value = modes[nextIdx];
+      paletteName.textContent = `Active: ${noteBehaviorMode.options[noteBehaviorMode.selectedIndex].text}`;
+    };
+
+    // --- Vector SVG Serialization Export Engine ---
+    exportSvgBtn.onclick = () => {
+      const currentBg = poster.style.background || '#1a1110';
+      const titleColor = title.style.color || '#860111';
+      const pillarColor = pillar.style.background || '#480607';
+
+      const titleLeft = parseInt(titleWrap.style.left, 10) || MARGIN;
+      const titleTop = parseInt(titleWrap.style.top, 10) || 200;
+      const titleFontSize = window.getComputedStyle(title).fontSize;
+      const titleLines = title.innerHTML.split('<br>');
+
+      const pillarLeft = parseInt(pillar.style.left, 10) || 60;
+      const pillarWidth = parseInt(pillar.style.width, 10) || 40;
+      const pillarRot = basePillarAngle;
+
+      let metaSvg = '';
+      metas.forEach(m => {
+        metaSvg += `<text x="${parseInt(m.style.left, 10)}" y="${parseInt(m.style.top, 10) + 12}" fill="${titleColor}" font-family="sans-serif" font-weight="700" font-size="${m.style.fontSize}" letter-spacing="0.05em">${m.textContent}</text>\n`;
+      });
+
+      let titleSvgLines = '';
+      const fSizeNum = parseInt(titleFontSize, 10);
+      titleLines.forEach((line, idx) => {
+        titleSvgLines += `<tspan x="${titleLeft}" dy="${idx === 0 ? 0 : fSizeNum * 0.9}">${line}</tspan>`;
+      });
+
+      const svgDoc = `<?xml version="1.0" encoding="UTF-8"?>
+<svg width="${POSTER_W}" height="${POSTER_H}" viewBox="0 0 ${POSTER_W} ${POSTER_H}" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="${currentBg}"/>
+  <rect x="${pillarLeft}" y="0" width="${pillarWidth}" height="${POSTER_H}" fill="${pillarColor}" transform="rotate(${pillarRot} ${pillarLeft + (pillarWidth/2)} 500)"/>
+  <text x="${titleLeft}" y="${titleTop + fSizeNum}" fill="${titleColor}" font-family="${fonts[currentFontIndex].family.replace(/"/g, '')}" font-weight="800" font-size="${titleFontSize}" letter-spacing="-0.04em">
+    ${titleSvgLines}
+  </text>
+  ${metaSvg}
+</svg>`;
+
+      const blob = new Blob([svgDoc], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `voice_pique_note_poster_${Date.now()}.svg`;
+      link.click();
+      URL.revokeObjectURL(url);
+    };
+
+    // --- Interactive Manual Title Repositioning (Mouse Dragging ONLY) ---
+    let isDragging = false;
+    let dragStartX, dragStartY, initialLeft, initialTop;
+
+    titleWrap.addEventListener('mousedown', e => {
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      initialLeft = parseInt(titleWrap.style.left, 10) || MARGIN;
+      initialTop = parseInt(titleWrap.style.top, 10) || 200;
+      titleWrap.style.transition = 'none';
+      e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const scale = poster.getBoundingClientRect().width / POSTER_W;
+      const dx = (e.clientX - dragStartX) / scale;
+      const dy = (e.clientY - dragStartY) / scale;
+
+      const titleWidth = titleWrap.offsetWidth || 300;
+      const titleHeight = titleWrap.offsetHeight || 150;
+
+      const minX = MARGIN;
+      const maxX = POSTER_W - MARGIN - titleWidth;
+      const minY = MARGIN;
+      const maxY = POSTER_H - MARGIN - titleHeight;
+
+      const newL = Math.max(minX, Math.min(maxX, initialLeft + dx));
+      const newT = Math.max(minY, Math.min(maxY, initialTop + dy));
+
+      titleWrap.style.left = newL + 'px';
+      titleWrap.style.top = newT + 'px';
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        titleWrap.style.transition = 'transform 0.14s ease-out';
+        currentTitlePresetIndex = -1;
+        fit();
+        updateTitleTransform();
+      }
+    });
+
+    function newTitle(top = null, bot = null) {
+      let phraseHtml = '';
+      if (top && bot) {
+        phraseHtml = `${top}<br>${bot}`;
+      } else if (Math.random() > 0.45) {
+        const pair = curatedPhrases[r(curatedPhrases.length)];
+        phraseHtml = `${pair[0]}<br>${pair[1]}`;
+      } else {
+        const wordA = wordBankA[r(wordBankA.length)];
+        const wordB = wordBankB[r(wordBankB.length)];
+        phraseHtml = `${wordA}<br>${wordB}`;
+      }
+      title.innerHTML = phraseHtml;
+      echo1.innerHTML = phraseHtml;
+      echo2.innerHTML = phraseHtml;
+      fit();
+    }
+
+    function setFont(idx) {
+      currentFontIndex = (idx + fonts.length) % fonts.length;
+      const f = fonts[currentFontIndex];
+      title.style.fontFamily = f.family;
+      echo1.style.fontFamily = f.family;
+      echo2.style.fontFamily = f.family;
+      fontSelect.value = currentFontIndex;
+
+      if (!f.axes) {
+        title.style.fontVariationSettings = 'normal';
+        echo1.style.fontVariationSettings = 'normal';
+        echo2.style.fontVariationSettings = 'normal';
+        streamStatus.textContent = 'Stream: Static Font Active';
+      }
+
+      updateTitleTransform();
+      fit();
+    }
+
+    function setShape(idx) {
+      currentShapeIndex = (idx + shapes.length) % shapes.length;
+      const s = shapes[currentShapeIndex];
+      portrait.style.clipPath = s.clip;
+      shapeStatus.textContent = 'Shape: ' + s.name;
+      shapeSelect.value = currentShapeIndex;
+    }
+
+    function applyPalette(bgColor, titleColor, accentColor, label = 'Custom Palette') {
+      poster.style.background = bgColor;
+      title.style.color = titleColor;
+      echo1.style.color = titleColor;
+      echo2.style.color = titleColor;
+      pillar.style.background = accentColor;
+      
+      bgPicker.value = bgColor.length === 7 ? bgColor : '#1a1110';
+      titlePicker.value = titleColor.length === 7 ? titleColor : '#860111';
+      accentPicker.value = accentColor.length === 7 ? accentColor : '#480607';
+
+      metas.forEach(m => {
+        m.style.color = titleColor;
+        m.style.background = 'transparent';
+        m.style.border = 'none';
+      });
+
+      paletteName.textContent = 'Active: ' + label;
+    }
+
+    function setCuratedPalette(index) {
+      currentPaletteIndex = (index + palettes.length) % palettes.length;
+      const p = palettes[currentPaletteIndex];
+      applyPalette(p.colors[0], p.colors[1], p.colors[2], p.name);
+      paletteSelect.value = currentPaletteIndex;
+    }
+
+    function generateHarmonicPalette() {
+      const baseHue = r(360);
+      const mode = r(4);
+      let bg, tc, ac, modeName;
+
+      if (mode === 0) {
+        bg = hslToHex(baseHue, 20, 8);
+        tc = hslToHex((baseHue + 180) % 360, 95, 60);
+        ac = hslToHex(baseHue, 40, 22);
+        modeName = 'Harmonic Contrast';
+      } else if (mode === 1) {
+        bg = hslToHex(baseHue, 25, 94);
+        tc = hslToHex((baseHue + 30) % 360, 85, 25);
+        ac = hslToHex((baseHue + 180) % 360, 70, 45);
+        modeName = 'Light Editorial';
+      } else if (mode === 2) {
+        bg = hslToHex(baseHue, 35, 12);
+        tc = hslToHex((baseHue + 60) % 360, 100, 65);
+        ac = hslToHex((baseHue + 210) % 360, 80, 40);
+        modeName = 'Neon Clash';
+      } else {
+        bg = hslToHex(baseHue, 15, 10);
+        tc = hslToHex((baseHue + 25) % 360, 90, 55);
+        ac = hslToHex((baseHue - 25 + 360) % 360, 50, 28);
+        modeName = 'Analogous Shift';
+      }
+
+      applyPalette(bg, tc, ac, modeName + ` (${baseHue}°)`);
+    }
+
+    function placeMeta() {
+      const used = [0, 1, 2, 3, 4, 5].sort(() => Math.random() - 0.5);
+      const txt = [metaLine1[r(metaLine1.length)], metaLine2[r(metaLine2.length)], metaLine3[r(metaLine3.length)]];
+      metas.forEach((m, i) => {
+        const z = zones[used[i]];
+        m.className = 'meta';
+        m.textContent = txt[i];
+        m.style.left = z.x + 'px';
+        m.style.top = z.y + 'px';
+        m.style.width = z.w + 'px';
+        m.style.fontSize = (11 + r(3)) + 'px';
+        m.style.color = title.style.color || '#860111';
+      });
+    }
+
+    function newLayout() {
+      const safeAnchors = [
+        { x: MARGIN + 10, y: 70, w: 320, h: 420 },
+        { x: POSTER_W - MARGIN - 340, y: 80, w: 330, h: 430 },
+        { x: 140, y: 120, w: 420, h: 460 },
+        { x: MARGIN + 10, y: 380, w: 330, h: 440 },
+        { x: POSTER_W - MARGIN - 330, y: 380, w: 320, h: 430 },
+        { x: 120, y: 260, w: 460, h: 480 }
+      ];
+      const p = safeAnchors[r(safeAnchors.length)];
+      portrait.style.left = p.x + 'px';
+      portrait.style.top = p.y + 'px';
+      portrait.style.width = p.w + 'px';
+      portrait.style.height = p.h + 'px';
+
+      const pWidth = 40 + r(80);
+      basePillarAngle = (r(16) - 8);
+      document.documentElement.style.setProperty('--base-pillar-rot', `${basePillarAngle}deg`);
+
+      pillar.style.left = (MARGIN + r(POSTER_W - (MARGIN * 2) - pWidth)) + 'px';
+      pillar.style.top = '0px';
+      pillar.style.width = pWidth + 'px';
+      pillar.style.height = POSTER_H + 'px';
+      
+      cycleTitlePlacement(r(titleAnchorZones.length));
+      placeMeta();
+      updateOscilloscopePosition();
+    }
+
+    function morph() {
+      zoom = 0.95 + Math.random() * 0.35;
+      img.style.filter = 'hue-rotate(' + r(360) + 'deg) saturate(' + (85 + r(90)) + '%) contrast(' + (105 + r(55)) + '%)';
+      img.style.transform = 'scale(' + zoom + ')';
+    }
+
+    function generate() {
+      if (Math.random() > 0.4) {
+        setCuratedPalette(r(palettes.length));
+      } else {
+        generateHarmonicPalette();
+      }
+      setFont(r(fonts.length));
+      setShape(r(shapes.length));
+      newTitle();
+      newLayout();
+      morph();
+    }
+
+    $('presetMinimal').onclick = () => {
+      setCuratedPalette(1);
+      setFont(3);
+      setShape(0);
+      portrait.style.left = '48px';
+      portrait.style.top = '72px';
+      portrait.style.width = '320px';
+      portrait.style.height = '430px';
+      pillar.style.width = '24px';
+      pillar.style.left = '520px';
+      pillar.style.top = '0px';
+      pillar.style.height = POSTER_H + 'px';
+      basePillarAngle = 0;
+      document.documentElement.style.setProperty('--base-pillar-rot', '0deg');
+      applyTitlePlacement(titleAnchorZones[0]);
+      newTitle('PIQUE', 'DAME');
+      placeMeta();
+      updateOscilloscopePosition();
+    };
+
+    $('presetBrutal').onclick = () => {
+      setCuratedPalette(3);
+      setFont(0);
+      setShape(9);
+      portrait.style.left = '140px';
+      portrait.style.top = '60px';
+      portrait.style.width = '420px';
+      portrait.style.height = '460px';
+      pillar.style.width = '120px';
+      pillar.style.left = '60px';
+      pillar.style.top = '0px';
+      pillar.style.height = POSTER_H + 'px';
+      basePillarAngle = 8;
+      document.documentElement.style.setProperty('--base-pillar-rot', '8deg');
+      applyTitlePlacement(titleAnchorZones[5]);
+      newTitle('ATOMIC', 'MONOLITH');
+      placeMeta();
+      updateOscilloscopePosition();
+    };
+
+    $('presetEditorial').onclick = () => {
+      setCuratedPalette(5);
+      setFont(1);
+      setShape(6);
+      portrait.style.left = '100px';
+      portrait.style.top = '90px';
+      portrait.style.width = '320px';
+      portrait.style.height = '430px';
+      pillar.style.width = '14px';
+      pillar.style.left = '48px';
+      pillar.style.top = '0px';
+      pillar.style.height = POSTER_H + 'px';
+      basePillarAngle = 0;
+      document.documentElement.style.setProperty('--base-pillar-rot', '0deg');
+      applyTitlePlacement(titleAnchorZones[3]);
+      newTitle('VELVET', 'SHADOWS');
+      placeMeta();
+      updateOscilloscopePosition();
+    };
+
+    function loadFile(f) {
+      const fr = new FileReader();
+      fr.onload = e => { img.src = e.target.result; };
+      fr.readAsDataURL(f);
+    }
+
+    $('gen').onclick = generate;
+    $('morph').onclick = morph;
+    $('layout').onclick = newLayout;
+    $('titleBtn').onclick = () => newTitle();
+    
+    $('fontBtn').onclick = () => setFont(currentFontIndex + 1);
+    fontSelect.onchange = e => {
+      if (e.target.value !== "") setFont(parseInt(e.target.value, 10));
+    };
+    $('posTitleBtn').onclick = () => cycleTitlePlacement();
+    $('rotTitleBtn').onclick = cycleTitleRotation;
+    $('alignLeft').onclick = () => { 
+      title.style.textAlign = 'left';
+      echo1.style.textAlign = 'left';
+      echo2.style.textAlign = 'left';
+      fit(); 
+    };
+    $('alignCenter').onclick = () => { 
+      title.style.textAlign = 'center'; 
+      echo1.style.textAlign = 'center';
+      echo2.style.textAlign = 'center';
+      fit(); 
+    };
+    $('alignRight').onclick = () => { 
+      title.style.textAlign = 'right'; 
+      echo1.style.textAlign = 'right';
+      echo2.style.textAlign = 'right';
+      fit(); 
+    };
+    $('layerTitleBtn').onclick = toggleTitleLayering;
+
+    $('shapeBtn').onclick = () => setShape(currentShapeIndex + 1);
+    $('shapeRandBtn').onclick = () => setShape(r(shapes.length));
+    shapeSelect.onchange = e => {
+      if (e.target.value !== "") setShape(parseInt(e.target.value, 10));
+    };
+
+    $('colors').onclick = () => setCuratedPalette(currentPaletteIndex + 1);
+    $('randomPaletteBtn').onclick = generateHarmonicPalette;
+    paletteSelect.onchange = e => {
+      if (e.target.value !== "") setCuratedPalette(parseInt(e.target.value, 10));
+    };
+
+    bgPicker.oninput = e => {
+      poster.style.background = e.target.value;
+      paletteName.textContent = 'Active: Custom Picker';
+    };
+    titlePicker.oninput = e => {
+      title.style.color = e.target.value;
+      echo1.style.color = e.target.value;
+      echo2.style.color = e.target.value;
+      metas.forEach(m => m.style.color = e.target.value);
+      paletteName.textContent = 'Active: Custom Picker';
+    };
+    accentPicker.oninput = e => {
+      pillar.style.background = e.target.value;
+      paletteName.textContent = 'Active: Custom Picker';
+    };
+
+    $('load').onclick = () => { if ($('url').value) img.src = $('url').value; };
+    $('upload').onchange = e => e.target.files[0] && loadFile(e.target.files[0]);
+    $('camera').onchange = e => e.target.files[0] && loadFile(e.target.files[0]);
+    
+    $('zoomIn').onclick = () => {
+      zoom = Math.min(2.2, zoom + 0.12);
+      img.style.transform = 'scale(' + zoom + ')';
+    };
+    $('zoomOut').onclick = () => {
+      zoom = Math.max(0.6, zoom - 0.12);
+      img.style.transform = 'scale(' + zoom + ')';
+    };
+
+    img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="800"%3E%3Crect width="100%25" height="100%25" fill="%23240709"/%3E%3Crect x="60" y="60" width="480" height="680" fill="none" stroke="%23480607" stroke-width="4"/%3E%3Ccircle cx="300" cy="290" r="130" fill="%23480607"/%3E%3Cpath d="M140 680 C140 480, 460 480, 460 680 Z" fill="%23860111"/%3E%3C/svg%3E';
+    
+    setCuratedPalette(0);
+    setFont(0);
+    setShape(0);
+    applyTitlePlacement(titleAnchorZones[1]);
+    newLayout();
+    newTitle('PIQUE', 'DAME');
+  </script>
+</body>
+</html>
