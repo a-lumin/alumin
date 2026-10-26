@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wandering the Stars — Visual Development & Iteration Showcase</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Asap Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #1a1110;
+      --text-color: #860111;
+      --accent-color: #480607;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-radius: 0px !important; /* Zero rounded corners globally */
+      font-family: 'Asap', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      font-weight: 325;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, .heading-sharp {
+      font-weight: 655;
+      line-height: 1.1;
+      color: var(--text-color);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    /* Responsive Font Scale */
+    .h1-scale { font-size: 36px; }
+    @media (min-width: 768px) { .h1-scale { font-size: 48px; } }
+    @media (min-width: 1024px) { .h1-scale { font-size: 72px; } }
+
+    .h2-scale { font-size: 28px; }
+    @media (min-width: 768px) { .h2-scale { font-size: 36px; } }
+    @media (min-width: 1024px) { .h2-scale { font-size: 48px; } }
+
+    .h3-scale { font-size: 24px; }
+    @media (min-width: 768px) { .h3-scale { font-size: 28px; } }
+    @media (min-width: 1024px) { .h3-scale { font-size: 32px; } }
+
+    .body-scale { font-size: 16px; }
+    @media (min-width: 1024px) { .body-scale { font-size: 18px; } }
+
+    .small-scale { font-size: 14px; }
+
+    /* Canvas Shooting Star Background */
+    #star-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Centered Container */
+    .container-custom {
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    @media (min-width: 768px) {
+      .container-custom { padding-left: 20px; padding-right: 20px; }
+    }
+    @media (min-width: 1024px) {
+      .container-custom { padding-left: 32px; padding-right: 32px; }
+    }
+
+    /* Buttons */
+    .btn-custom {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 64px;
+      padding: 16px 24px;
+      background-color: var(--accent-color);
+      color: var(--text-color);
+      border: 2px solid var(--accent-color);
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 655;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
+    }
+
+    .btn-custom:hover {
+      background-color: #860111 !important;
+      color: #1a1110 !important;
+      border-color: #860111 !important;
+    }
+
+    .btn-custom:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 4px;
+    }
+
+    /* Filter & Tab Buttons */
+    .nav-tab {
+      padding: 12px 20px;
+      background-color: transparent;
+      color: var(--text-color);
+      border: 2px solid var(--accent-color);
+      font-weight: 655;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 200ms ease-out;
+    }
+    .nav-tab.active, .nav-tab:hover {
+      background-color: #860111;
+      color: #1a1110;
+      border-color: #860111;
+    }
+
+    /* Grid Gaps */
+    .gallery-grid {
+      display: grid;
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (min-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+    }
+
+    /* Flat Borders */
+    .flat-border { border: 2px solid var(--accent-color); }
+    .flat-border-t { border-top: 2px solid var(--accent-color); }
+    .flat-border-b { border-bottom: 2px solid var(--accent-color); }
+
+    /* Comparison Slider */
+    .compare-wrapper {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      width: 100%;
+      height: 540px;
+      border: 2px solid var(--accent-color);
+      background-color: #1a1110;
+    }
+    .compare-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .compare-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      overflow: hidden;
+      width: 50%;
+      border-right: 2px solid #860111;
+    }
+    .compare-slider-bar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: #860111;
+      cursor: ew-resize;
+      z-index: 20;
+    }
+    .compare-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      background-color: #860111;
+      color: #1a1110;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="relative">
+
+  <!-- Background Canvas: Diagonal Shooting Stars -->
+  <canvas id="star-canvas"></canvas>
+
+  <div class="relative z-10 w-full flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="w-full flat-border-b bg-[#1a1110]" style="border-color: #480607;">
+      <div class="container-custom py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-3 h-3 bg-[#860111]"></div>
+          <span class="heading-sharp text-base tracking-widest" style="color: #860111;">
+            ARCHIVE // WANDERING THE STARS
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="#gallery" class="nav-tab">ALL ITERATIONS</a>
+          <a href="#compare" class="nav-tab hidden sm:inline-block">SKETCH VS FINAL</a>
+          <a href="#prompts" class="nav-tab hidden md:inline-block">PROMPTS</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Cinematic Hero Section -->
+    <section class="w-full relative flat-border-b overflow-hidden" style="border-color: #480607;">
+      <div class="relative w-full" style="height: 50vh; min-height: 340px;">
+        <!-- Hero Background Banner -->
+        <img 
+          src="watermarked_img_1963305488070274521.jpg" 
+          alt="Wandering the Stars Key Art"
+          class="w-full h-full object-cover object-center filter contrast-125"
+          onerror="this.src='https://placehold.co/1920x800/1a1110/860111?text=WANDERING+THE+STARS'"
+        />
+        
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-[#1a1110] bg-opacity-75"></div>
+
+        <!-- Overlaid Titles -->
+        <div class="absolute inset-0 container-custom flex flex-col justify-end pb-10 md:pb-14">
+          <div class="max-w-4xl p-6 md:p-8 flat-border bg-[#1a1110] bg-opacity-95" style="border-color: #480607;">
+            <span class="small-scale tracking-widest uppercase font-bold block mb-2" style="color: #860111;">
+              VISUAL DEVELOPMENT & ITERATION SHOWCASE
+            </span>
+            <h1 class="h1-scale m-0">WANDERING THE STARS</h1>
+            <p class="body-scale mt-3 m-0" style="color: #860111;">
+              From a hand-drawn pencil layout to a finished anime-cinematic movie poster. Explore the six progressive stages of character design, composition, atmospheric lighting, and camera perspective.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="container-custom w-full py-12 md:py-20 space-y-20 md:space-y-28">
+
+      <!-- Stats / Overview Bar -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div class="p-6 flat-border bg-[#1a1110]" style="border-color: #480607;">
+          <span class="small-scale block font-mono opacity-75">FOUNDATION</span>
+          <div class="heading-sharp text-2xl md:text-3xl mt-1">PENCIL SKETCH</div>
+          <span class="small-scale mt-2 block" style="color: #860111;">Original Graphite Primitive</span>
+        </div>
+        <div class="p-6 flat-border bg-[#1a1110]" style="border-color: #480607;">
+          <span class="small-scale block font-mono opacity-75">REVISIONS</span>
+          <div class="heading-sharp text-2xl md:text-3xl mt-1">6 MILESTONES</div>
+          <span class="small-scale mt-2 block" style="color: #860111;">Targeted Directive Loops</span>
+        </div>
+        <div class="p-6 flat-border bg-[#1a1110]" style="border-color: #480607;">
+          <span class="small-scale block font-mono opacity-75">ASPECT RATIO</span>
+          <div class="heading-sharp text-2xl md:text-3xl mt-1">2:3 ONE-SHEET</div>
+          <span class="small-scale mt-2 block" style="color: #860111;">Promotional Movie Standard</span>
+        </div>
+        <div class="p-6 flat-border bg-[#1a1110]" style="border-color: #480607;">
+          <span class="small-scale block font-mono opacity-75">PALETTE</span>
+          <div class="heading-sharp text-2xl md:text-3xl mt-1">CRIMSON / NOIR</div>
+          <span class="small-scale mt-2 block" style="color: #860111;">#1a1110 & #860111</span>
+        </div>
+      </section>
+
+      <!-- Interactive Gallery -->
+      <section id="gallery" class="space-y-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between border-b-2 pb-4" style="border-color: #480607;">
+          <div>
+            <span class="small-scale uppercase tracking-widest font-bold" style="color: #860111;">EXHIBITION TIMELINE</span>
+            <h2 class="h2-scale mt-1">THE SIX ARTWORK PHASES</h2>
+          </div>
+          <span class="small-scale uppercase tracking-wider font-semibold" style="color: #860111;">
+            CLICK ANY PIECE TO INSPECT PROMPTS & DETAILS
+          </span>
+        </div>
+
+        <div class="gallery-grid">
+
+          <!-- 01: Pencil Sketch -->
+          <article class="flat-border flex flex-col justify-between bg-[#1a1110] group" style="border-color: #480607;">
+            <div class="relative overflow-hidden cursor-pointer" onclick="openLightbox(0)">
+              <img 
+                src="IMG_1004.webp" 
+                alt="01 Pencil Sketch" 
+                class="w-full h-80 object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                onerror="this.src='https://placehold.co/600x800/1a1110/860111?text=01+PENCIL+SKETCH'"
+              />
+              <div class="absolute top-0 right-0 bg-[#480607] px-3 py-1 text-xs font-bold tracking-widest uppercase">
+                INPUT // GRAPHITE
+              </div>
+              <div class="absolute inset-0 bg-[#1a1110] opacity-0 group-hover:opacity-30 transition-opacity"></div>
+            </div>
+            <div class="p-6">
+              <span class="small-scale font-mono opacity-75">PHASE 01</span>
+              <h3 class="h3-scale mt-1 mb-2">ORIGINAL SKETCH</h3>
+              <p class="body-scale mb-4" style="color: #860111;">
+                Graphite composition mapping the curved "WANDERING THE STARS" headline, observation dome, central figure holding a screen, and twin alien entities.
+              </p>
+              <button onclick="openLightbox(0)" class="btn-custom w-full text-center">
+                INSPECT ARTIFACT
+              </button>
+            </div>
+          </article>
+
+          <!-- 02: Initial Synthesis (Boy) -->
+          <article class="flat-border flex flex-col justify-between bg-[#1a1110] group" style="border-color: #480607;">
+            <div class="relative overflow-hidden cursor-pointer" onclick="openLightbox(1)">
+              <img 
+                src="watermarked_img_6696071790720579553.jpg" 
+                alt="02 First Generation" 
+                class="w-full h-80 object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                onerror="this.src='https://placehold.co/600x800/1a1110/860111?text=02+FIRST+GEN'"
+              />
+              <div class="absolute top-0 right-0 bg-[#480607] px-3 py-1 text-xs font-bold tracking-widest uppercase">
+                GEN 01
+              </div>
+              <div class="absolute inset-0 bg-[#1a1110] opacity-0 group-hover:opacity-30 transition-opacity"></div>
+            </div>
+            <div class="p-6">
+              <span class="small-scale font-mono opacity-75">PHASE 02</span>
+              <h3 class="h3-scale mt-1 mb-2">INITIAL SYNTHESIS</h3>
+              <p class="body-scale mb-4" style="color: #860111;">
+                Direct sketch interpretation: boy with headphones holding an emissive starmap deck, with the fluffy twin-antenna orb and single-eyed mascot rendered in space.
+              </p>
+              <button onclick="openLightbox(1)" class="btn-custom w-full text-center">
+                INSPECT ARTIFACT
+              </button>
+            </div>
+          </article>
+
+          <!-- 03: Character Pivot (Girl) -->
+          <article class="flat-border flex flex-col justify-between bg-[#1a1110] group" style="border-color: #480607;">
+            <div class="relative overflow-hidden cursor-pointer" onclick="openLightbox(2)">
+              <img 
+                src="watermarked_img_17674060143971425613.jpg" 
+                alt="03 Character Pivot" 
+                class="w-full h-80 object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                onerror="this.src='https://placehold.co/600x800/1a1110/860111?text=03+CHARACTER+PIVOT'"
+              />
+              <div class="absolute top-0 right-0 bg-[#480607] px-3 py-1 text-xs font-bold tracking-widest uppercase">
+                WIDE FORMAT
+              </div>
+              <div class="absolute inset-0 bg-[#1a1110] opacity-0 group-hover:opacity-30 transition-opacity"></div>
+            </div>
+            <div class="p-6">
+              <span class="small-scale font-mono opacity-75">PHASE 03</span>
+              <h3 class="h3-scale mt-1 mb-2">CHARACTER PIVOT</h3>
+              <p class="body-scale mb-4" style="color: #860111;">
+                User instruction: <em>"create another iteration, but maybe with a girl in the middle"</em>. Introduced dynamic ponytail, tailored flight suit, and a wider cinematic view.
+              </p>
+              <button onclick="openLightbox(2)" class="btn-custom w-full text-center">
+                INSPECT ARTIFACT
+              </button>
+            </div>
+          </article>
+
+          <!-- 04: Poster Adaptation -->
+          <article class="flat-border flex flex-col justify-between bg-[#1a1110] group" style="border-color: #480607;">
+            <div class="relative overflow-hidden cursor-pointer" onclick="openLightbox(3)">
+              <img 
+                src="watermarked_img_2857968250385330090.jpg" 
+                alt="04 Poster Form" 
+                class="w-full h-80 object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                onerror="this.src='https://placehold.co/600x800/1a1110/860111?text=04+POSTER+FORM'"
+              />
+              <div class="absolute top-0 right-0 bg-[#480607] px-3 py-1 text-xs font-bold tracking-widest uppercase">
+                PORTRAIT 2:3
+              </div>
+              <div class="absolute inset-0 bg-[#1a1110] opacity-0 group-hover:opacity-30 transition-opacity"></div>
+            </div>
+            <div class="p-6">
+              <span class="small-scale font-mono opacity-75">PHASE 04</span>
+              <h3 class="h3-scale mt-1 mb-2">POSTER ADAPTATION</h3>
+              <p class="body-scale mb-4" style="color: #860111;">
+                User instruction: <em>"make it into a poster form"</em>. Transitioned into standard 2:3 one-sheet verticality, adding cockpit controls and movie billing credits.
+              </p>
+              <button onclick="openLightbox(3)" class="btn-custom w-full text-center">
+                INSPECT ARTIFACT
+              </button>
+            </div>
+          </article>
+
+          <!-- 05: Enhanced Clarity -->
+          <article class="flat-border flex flex-col justify-between bg-[#1a1110] group" style="border-color: #480607;">
+            <div class="relative overflow-hidden cursor-pointer" onclick="openLightbox(4)">
+              <img 
+                src="watermarked_img_9309969786140579049.jpg" 
+                alt="05 Clarity Pass" 
+                class="w-full h-80 object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                onerror="this.src='https://placehold.co/600x800/1a1110/860111?text=05+CLARITY+PASS'"
+              />
+              <div class="absolute top-0 right-0 bg-[#480607] px-3 py-1 text-xs font-bold tracking-widest uppercase">
+                HI-RES DEFINITION
+              </div>
+              <div class="absolute inset-0 bg-[#1a1110] opacity-0 group-hover:opacity-30 transition-opacity"></div>
+            </div>
+            <div class="p-6">
+              <span class="small-scale font-mono opacity-75">PHASE 05</span>
+              <h3 class="h3-scale mt-1 mb-2">ENHANCED CLARITY</h3>
+              <p class="body-scale mb-4" style="color: #860111;">
+                User instruction: <em>"make it clearer"</em>. Sharpened lines, boosted ambient constellation sparkles, refined eye catchlights, and enriched the purple-blue nebula.
+              </p>
+              <button onclick="openLightbox(4)" class="btn-custom w-full text-center">
+                INSPECT ARTIFACT
+              </button>
+            </div>
+          </article>
+
+          <!-- 06: Final Key Art (3/4 Screen View) -->
+          <article class="flat-border flex flex-col justify-between bg-[#1a1110] group" style="border-color: #480607;">
+            <div class="relative overflow-hidden cursor-pointer" onclick="openLightbox(5)">
+              <img 
+                src="watermarked_img_1963305488070274521.jpg" 
+                alt="06 Final Key Art" 
+                class="w-full h-80 object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                onerror="this.src='https://placehold.co/600x800/1a1110/860111?text=06+FINAL+KEY+ART'"
+              />
+              <div class="absolute top-0 right-0 bg-[#860111] text-[#1a1110] px-3 py-1 text-xs font-bold tracking-widest uppercase">
+                FINAL KEY ART
+              </div>
+              <div class="absolute inset-0 bg-[#1a1110] opacity-0 group-hover:opacity-30 transition-opacity"></div>
+            </div>
+            <div class="p-6">
+              <span class="small-scale font-mono opacity-75">PHASE 06</span>
+              <h3 class="h3-scale mt-1 mb-2">3/4 SCREEN PERSPECTIVE</h3>
+              <p class="body-scale mb-4" style="color: #860111;">
+                User instruction: <em>"maybe have her look 3/4s of the screen?"</em>. Rotated the face outward toward the camera, generating an emotional connection with the viewer.
+              </p>
+              <button onclick="openLightbox(5)" class="btn-custom w-full text-center">
+                INSPECT ARTIFACT
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Side-by-Side Interactive Comparison Slider (Rule 4: Interactive Tool) -->
+      <section id="compare" class="space-y-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between border-b-2 pb-4" style="border-color: #480607;">
+          <div>
+            <span class="small-scale uppercase tracking-widest font-bold" style="color: #860111;">INTERACTIVE COMPARISON</span>
+            <h2 class="h2-scale mt-1">HAND SKETCH VS FINAL KEY ART</h2>
+          </div>
+          <span class="small-scale uppercase tracking-wider font-semibold" style="color: #860111;">
+            DRAG THE RED DIVIDER TO REVEAL DIFFERENCES
+          </span>
+        </div>
+
+        <div class="compare-wrapper" id="compare-box">
+          <!-- Background Image: Final Key Art -->
+          <img 
+            src="watermarked_img_1963305488070274521.jpg" 
+            alt="Final Key Art" 
+            class="compare-img object-center"
+            onerror="this.src='https://placehold.co/1200x800/1a1110/860111?text=FINAL+KEY+ART'"
+          />
+          <div class="absolute bottom-4 right-4 bg-[#1a1110] px-3 py-2 flat-border text-xs uppercase font-bold tracking-widest pointer-events-none" style="border-color: #480607;">
+            FINAL ARTWORK (STAGE 06)
+          </div>
+
+          <!-- Foreground Overlay: Original Pencil Sketch -->
+          <div class="compare-overlay" id="compare-overlay">
+            <img 
+              src="IMG_1004.webp" 
+              alt="Original Pencil Sketch" 
+              class="compare-img object-top"
+              id="compare-sketch-img"
+              onerror="this.src='https://placehold.co/1200x800/1a1110/860111?text=ORIGINAL+SKETCH'"
+            />
+            <div class="absolute bottom-4 left-4 bg-[#1a1110] px-3 py-2 flat-border text-xs uppercase font-bold tracking-widest pointer-events-none" style="border-color: #480607;">
+              PENCIL SKETCH (STAGE 01)
+            </div>
+          </div>
+
+          <!-- Draggable Divider Handle -->
+          <div class="compare-slider-bar" id="compare-bar" style="left: 50%;">
+            <div class="compare-handle">⇄</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prompt Methodology & Directive Loop Log -->
+      <section id="prompts" class="p-8 md:p-12 flat-border bg-[#1a1110]" style="border-color: #480607;">
+        <span class="small-scale uppercase tracking-widest font-bold block mb-2" style="color: #860111;">
+          ITERATION METHODOLOGY & PROMPT LOG
+        </span>
+        <h2 class="h2-scale mb-6">HOW CONVERSATIONAL DIRECTIVES RESHAPED THE WORK</h2>
+        
+        <div class="space-y-6 body-scale">
+          <div class="p-4 flat-border bg-[#1a1110]" style="border-color: #480607;">
+            <div class="flex items-center justify-between mb-2">
+              <strong class="uppercase text-sm tracking-widest">Step 01 // Input Sketch & Structural Breakdown</strong>
+              <span class="small-scale font-mono opacity-75">GRAPHITE -> BASELINE</span>
+            </div>
+            <p class="m-0" style="color: #860111;">
+              "this is a sketch for the promotional poster to a movie called WANDERING THE STARS. The dome is an observation cupola framing outer space nebulae. Protagonist is holding an emissive holographic starmap deck. Two floating alien mascots: a fluffy twin-antenna sprite on the left, and a single-eyed floating creature on the right."
+            </p>
+          </div>
+
+          <div class="p-4 flat-border bg-[#1a1110]" style="border-color: #480607;">
+            <div class="flex items-center justify-between mb-2">
+              <strong class="uppercase text-sm tracking-widest">Step 02 // Character Evolution</strong>
+              <span class="small-scale font-mono opacity-75">USER PROMPT</span>
+            </div>
+            <p class="m-0" style="color: #860111;">
+              <strong>"create another iteration, but maybe with a girl in the middle"</strong> — Kept the composition intact while introducing a messy ponytail, sci-fi flight jacket patches, and wireless headphones.
+            </p>
+          </div>
+
+          <div class="p-4 flat-border bg-[#1a1110]" style="border-color: #480607;">
+            <div class="flex items-center justify-between mb-2">
+              <strong class="uppercase text-sm tracking-widest">Step 03 // Aspect Ratio & Theatrical Poster Packaging</strong>
+              <span class="small-scale font-mono opacity-75">USER PROMPT</span>
+            </div>
+            <p class="m-0" style="color: #860111;">
+              <strong>"make it into a poster form"</strong> — Adapted the artwork to vertical 2:3 proportions, lowered cockpit instrumentation buttons, and rendered the billing block at the base.
+            </p>
+          </div>
+
+          <div class="p-4 flat-border bg-[#1a1110]" style="border-color: #480607;">
+            <div class="flex items-center justify-between mb-2">
+              <strong class="uppercase text-sm tracking-widest">Step 04 // Clarity & Linework Pass</strong>
+              <span class="small-scale font-mono opacity-75">USER PROMPT</span>
+            </div>
+            <p class="m-0" style="color: #860111;">
+              <strong>"make it clearer"</strong> — Enhanced sharpness, contrast, starlight reflection on glass surfaces, and refined facial details.
+            </p>
+          </div>
+
+          <div class="p-4 flat-border bg-[#1a1110]" style="border-color: #480607;">
+            <div class="flex items-center justify-between mb-2">
+              <strong class="uppercase text-sm tracking-widest">Step 05 // Perspective Breakthrough (Final)</strong>
+              <span class="small-scale font-mono opacity-75">USER PROMPT</span>
+            </div>
+            <p class="m-0" style="color: #860111;">
+              <strong>"maybe have her look 3/4s of the screen?"</strong> — The critical artistic leap. Moving away from the rigid flat profile and turning her face 3/4 toward the viewer gives the poster its signature warmth and emotional weight.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full flat-border-t py-12 mt-12 bg-[#1a1110]" style="border-color: #480607;">
+      <div class="container-custom flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <div class="heading-sharp text-xl tracking-wider" style="color: #860111;">
+            WANDERING THE STARS
+          </div>
+          <p class="small-scale mt-1 m-0" style="color: #860111;">
+            Dedicated Visual Development Exhibition & Iteration Archive.
+          </p>
+        </div>
+        <div class="flex gap-4">
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-custom py-2 px-6 min-h-0 text-sm">
+            BACK TO TOP ↑
+          </button>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Fullscreen Modal / Lightbox for Detailed Inspection -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-[#1a1110] bg-opacity-95 p-4 md:p-8 flex items-center justify-center">
+    <div class="relative w-full max-w-5xl flat-border flex flex-col max-h-[92vh] overflow-hidden bg-[#1a1110]" style="border-color: #480607;">
+      
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center p-4 flat-border-b bg-[#1a1110]" style="border-color: #480607;">
+        <div>
+          <span id="modal-tag" class="small-scale font-mono tracking-widest uppercase block opacity-75">STAGE 01</span>
+          <h3 id="modal-title" class="h3-scale m-0">INSPECTOR</h3>
+        </div>
+        <button onclick="closeLightbox()" class="btn-custom py-2 px-4 min-h-0 text-sm">
+          [ ESC / CLOSE ]
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-4 md:p-6 overflow-y-auto flex flex-col lg:flex-row gap-6 items-center">
+        <!-- Artwork Canvas Holder -->
+        <div class="w-full lg:w-3/5 flex justify-center flat-border p-2 bg-[#1a1110]" style="border-color: #480607;">
+          <img id="modal-img" src="" alt="Detail view" class="max-h-[58vh] w-auto object-contain" />
+        </div>
+
+        <!-- Metadata & Directives -->
+        <div class="w-full lg:w-2/5 flex flex-col justify-start space-y-4">
+          <div>
+            <span class="small-scale uppercase tracking-widest font-bold block mb-1" style="color: #860111;">STAGE OVERVIEW</span>
+            <p id="modal-desc" class="body-scale m-0" style="color: #860111;"></p>
+          </div>
+
+          <div class="p-4 flat-border bg-[#1a1110]" style="border-color: #480607;">
+            <span class="small-scale font-mono uppercase tracking-widest block mb-2 opacity-75">PROMPT DIRECTIVE</span>
+            <p id="modal-prompt" class="small-scale italic m-0" style="color: #860111;"></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <button id="modal-prev-btn" onclick="prevArtwork()" class="btn-custom min-h-[48px] py-2 text-sm">
+              ← PREVIOUS
+            </button>
+            <button id="modal-next-btn" onclick="nextArtwork()" class="btn-custom min-h-[48px] py-2 text-sm">
+              NEXT →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Artwork Archive Data */
+    const artworks = [
+      {
+        tag: "STAGE 01 // INPUT",
+        title: "PENCIL SKETCH FOUNDATION",
+        src: "IMG_1004.webp",
+        desc: "The original hand-drawn graphite composition on notebook paper. Establishes the convex arching title 'WANDERING THE STARS', the observation dome ring, the side profile holding a luminescent card, and the two distinct alien companion mascots.",
+        prompt: "Visual Reference: Uploaded physical graphite sketch. Keep layout, dome shape, mascot placement, and curved title identical."
+      },
+      {
+        tag: "STAGE 02 // GENERATION 01",
+        title: "INITIAL STRUCTURAL SYNTHESIS",
+        src: "watermarked_img_6696071790720579553.jpg",
+        desc: "First digital conversion. Interprets the graphite wireframe into an anime-cinematic dome looking out upon glowing galactic spirals, featuring a young male explorer wearing over-ear headphones.",
+        prompt: "Promotional poster for movie called 'Wandering the Stars'. The observation window frames outer space nebulae. Protagonist in headphones holding glowing holographic starmap deck. Twin alien creatures floating nearby."
+      },
+      {
+        tag: "STAGE 03 // ITERATION 02",
+        title: "CHARACTER PIVOT (WIDE HORIZON)",
+        src: "watermarked_img_17674060143971425613.jpg",
+        desc: "Wide-aspect composition introducing a female protagonist with a high ponytail and detailed flight suit, keeping the floating companions and celestial ring.",
+        prompt: "'create another iteration, but maybe with a girl in the middle'"
+      },
+      {
+        tag: "STAGE 04 // ITERATION 03",
+        title: "ONE-SHEET POSTER FORMAT",
+        src: "watermarked_img_2857968250385330090.jpg",
+        desc: "Converted from panoramic wallpaper to an authentic vertical movie poster. Adds cockpit console dials at the base and a credit billing block.",
+        prompt: "'make it into a poster form'"
+      },
+      {
+        tag: "STAGE 05 // ITERATION 04",
+        title: "HIGH-FIDELITY CLARITY PASS",
+        src: "watermarked_img_9309969786140579049.jpg",
+        desc: "Clarity refinement round. Intensifies nebular dust, sharpens line art around the eyes and fur, and enhances atmospheric rim lighting on the jacket.",
+        prompt: "'make it clearer'"
+      },
+      {
+        tag: "STAGE 06 // FINAL KEY ART",
+        title: "3/4 PERSPECTIVE ANGLE VIEW",
+        src: "watermarked_img_1963305488070274521.jpg",
+        desc: "The final breakthrough iteration. Rotating the wanderer's head from a flat profile into a 3/4 view connects her gaze directly with the cosmos and the viewer, giving the poster genuine depth.",
+        prompt: "'maybe have her look 3/4s of the screen?'"
+      }
+    ];
+
+    let currentIdx = 0;
+
+    /* Lightbox Functions */
+    function openLightbox(index) {
+      currentIdx = index;
+      const modal = document.getElementById('lightbox-modal');
+      const item = artworks[index];
+
+      document.getElementById('modal-img').src = item.src;
+      document.getElementById('modal-title').innerText = item.title;
+      document.getElementById('modal-tag').innerText = item.tag;
+      document.getElementById('modal-desc').innerText = item.desc;
+      document.getElementById('modal-prompt').innerText = `"${item.prompt}"`;
+
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function nextArtwork() {
+      currentIdx = (currentIdx + 1) % artworks.length;
+      openLightbox(currentIdx);
+    }
+
+    function prevArtwork() {
+      currentIdx = (currentIdx - 1 + artworks.length) % artworks.length;
+      openLightbox(currentIdx);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextArtwork();
+      if (e.key === 'ArrowLeft') prevArtwork();
+    });
+
+    document.getElementById('lightbox-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox-modal') closeLightbox();
+    });
+
+    /* Side-by-Side Comparison Slider */
+    (function initComparison() {
+      const box = document.getElementById('compare-box');
+      const overlay = document.getElementById('compare-overlay');
+      const bar = document.getElementById('compare-bar');
+      const sketchImg = document.getElementById('compare-sketch-img');
+      let isDragging = false;
+
+      function updateSlider(clientX) {
+        const rect = box.getBoundingClientRect();
+        let pos = clientX - rect.left;
+        if (pos < 0) pos = 0;
+        if (pos > rect.width) pos = rect.width;
+        
+        const pct = (pos / rect.width) * 100;
+        overlay.style.width = pct + '%';
+        bar.style.left = pct + '%';
+        sketchImg.style.width = rect.width + 'px';
+      }
+
+      function onStart(e) {
+        isDragging = true;
+        updateSlider(e.clientX || (e.touches && e.touches[0].clientX));
+      }
+
+      function onMove(e) {
+        if (!isDragging) return;
+        updateSlider(e.clientX || (e.touches && e.touches[0].clientX));
+      }
+
+      function onEnd() {
+        isDragging = false;
+      }
+
+      bar.addEventListener('mousedown', onStart);
+      box.addEventListener('mousedown', onStart);
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onEnd);
+
+      bar.addEventListener('touchstart', onStart, { passive: true });
+      box.addEventListener('touchstart', onStart, { passive: true });
+      window.addEventListener('touchmove', onMove, { passive: true });
+      window.addEventListener('touchend', onEnd);
+
+      window.addEventListener('resize', () => {
+        sketchImg.style.width = box.getBoundingClientRect().width + 'px';
+      });
+      sketchImg.style.width = box.getBoundingClientRect().width + 'px';
+    })();
+
+    /* Canvas Shooting Star System (handoff.md Rules 36-45) */
+    (function initShootingStars() {
+      const canvas = document.getElementById('star-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const starCount = 28; // 20-30 active shooting stars
+      const starColors = ['#000000', '#860111', '#ffffff'];
+
+      class ShootingStar {
+        constructor() {
+          this.reset(true);
+        }
+
+        reset(initial = false) {
+          this.x = initial ? Math.random() * width : Math.random() * width - 200;
+          this.y = initial ? Math.random() * height : -50;
+          this.size = 1 + Math.random() * 3; // 1px to 4px
+          this.opacity = 0.3 + Math.random() * 0.7; // 0.3 to 1.0
+          this.color = starColors[Math.floor(Math.random() * starColors.length)];
+
+          // 4s to 8s duration traversal
+          const duration = 4 + Math.random() * 4;
+          const diagonalDist = Math.hypot(width, height);
+          const speed = (diagonalDist / duration) / 60;
+
+          const angle = Math.PI / 4 + (Math.random() * 0.12 - 0.06);
+          this.vx = Math.cos(angle) * speed;
+          this.vy = Math.sin(angle) * speed;
+          this.tailLength = 22 + Math.random() * 32;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x > width + 100 || this.y > height + 100) {
+            this.reset();
+          }
+        }
+
+        draw(ctx) {
+          ctx.save();
+          ctx.globalAlpha = this.opacity;
+          ctx.strokeStyle = this.color;
+          ctx.lineWidth = this.size;
+          ctx.lineCap = 'butt'; // strict flat geometry
+
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(
+            this.x - (this.vx / Math.hypot(this.vx, this.vy)) * this.tailLength,
+            this.y - (this.vy / Math.hypot(this.vx, this.vy)) * this.tailLength
+          );
+          ctx.stroke();
+
+          ctx.fillStyle = this.color;
+          ctx.fillRect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+          ctx.restore();
+        }
+      }
+
+      const stars = Array.from({ length: starCount }, () => new ShootingStar());
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        stars.forEach(star => {
+          star.update();
+          star.draw(ctx);
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>
