@@ -3,20 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Baruch SSEP Mission Patch Generator</title>
+  <title>Baruch SSEP Space Mission Patch Generator // Cute Chibi Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,700;0,900;1,700&family=Bebas+Neue&family=Cinzel:wght@700;900&family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,700;0,900;1,700&family=Bebas+Neue&family=Cinzel:wght@700;900&family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Monoton&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-canvas: #060911;
-      --bg-panel: #0c1220;
+      --bg-canvas: #060913;
+      --bg-panel: #0b1120;
       --text-primary: #e2e8f0;
-      --text-muted: #7d8ea6;
-      --accent-base: #13203b;
-      --accent-active: #1d325c;
-      --border-color: #1a2c4e;
+      --text-muted: #8294ae;
+      --accent-base: #13223f;
+      --accent-active: #1d3360;
+      --border-color: #1a2d52;
       --baruch-gold: #fdb813;
+      --baruch-blue: #0267b2;
       --font-stack: "Asap", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
@@ -50,16 +51,16 @@
     }
 
     #ui {
-      width: 420px;
-      min-width: 420px;
+      width: 440px;
+      min-width: 440px;
       height: 100%;
       background: var(--bg-panel);
       border-right: 1px solid var(--border-color);
       overflow-y: auto;
-      padding: 22px 18px;
+      padding: 20px 16px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 15px;
       z-index: 20;
       position: relative;
     }
@@ -67,7 +68,7 @@
     .hero-header {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 3px;
       border-bottom: 1px solid var(--border-color);
       padding-bottom: 12px;
     }
@@ -81,7 +82,7 @@
     }
 
     .hero-title {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 900;
       letter-spacing: -0.02em;
       line-height: 1.15;
@@ -89,23 +90,23 @@
     }
 
     .section-label {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
     .status-indicator {
-      font-size: 10.5px;
+      font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--baruch-gold);
-      margin-top: 4px;
+      margin-top: 3px;
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
@@ -115,12 +116,12 @@
     .control-group {
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 6px;
     }
 
     button, input[type="text"], select {
       width: 100%;
-      height: 46px;
+      height: 44px;
       background: var(--accent-base);
       border: 1px solid var(--border-color);
       color: #ffffff;
@@ -132,7 +133,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0 12px;
+      padding: 0 10px;
       cursor: pointer;
       outline: none;
       transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
@@ -148,12 +149,12 @@
     }
 
     select option {
-      background: #0c1220;
+      background: #0b1120;
       color: #f4f0e8;
     }
 
     input[type="text"] {
-      background: #070c16;
+      background: #070c17;
       cursor: text;
       text-transform: none;
       font-weight: 500;
@@ -172,24 +173,36 @@
     }
 
     button:active {
-      background: #091326;
+      background: #070e1c;
     }
 
     .btn-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 7px;
+      gap: 6px;
+    }
+
+    .btn-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5px;
+    }
+
+    .btn-row-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
     }
 
     .color-swatch-row {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 6px;
+      gap: 5px;
     }
 
     .color-picker-box {
-      height: 46px;
-      background: #070c16;
+      height: 44px;
+      background: #070c17;
       border: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
@@ -211,8 +224,8 @@
     .color-picker-box input[type="color"] {
       border: 0;
       padding: 0;
-      width: 26px;
-      height: 18px;
+      width: 24px;
+      height: 16px;
       cursor: pointer;
       background: transparent;
     }
@@ -223,10 +236,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 32px;
+      gap: 28px;
       position: relative;
       z-index: 2;
-      padding: 20px;
+      padding: 16px;
       overflow: auto;
     }
 
@@ -234,16 +247,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .patch-frame {
-      width: 560px;
-      height: 560px;
-      padding: 8px;
-      background: #080d16;
+      width: 580px;
+      height: 580px;
+      padding: 6px;
+      background: #080d18;
       border: 1px solid var(--border-color);
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.88);
+      box-shadow: 0 25px 85px rgba(0, 0, 0, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -255,21 +268,26 @@
       height: 100%;
       display: block;
       filter: drop-shadow(0 6px 18px rgba(0,0,0,0.65));
+      cursor: grab;
+      user-select: none;
+    }
+
+    #patch-svg:active {
+      cursor: grabbing;
     }
 
     .size-check-box {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
-      background: #080d16;
+      gap: 5px;
+      background: #080d18;
       border: 1px solid var(--border-color);
-      padding: 10px 16px;
-      border-radius: 0;
+      padding: 8px 16px;
     }
 
     .size-check-label {
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -303,6 +321,27 @@
       color: #000000 !important;
     }
 
+    @keyframes cuteZeroG {
+      0% { transform: translate(var(--bx, 0px), var(--by, 0px)) scale(var(--bscale, 1)) rotate(var(--brot, 0deg)); }
+      50% { transform: translate(var(--bx, 0px), calc(var(--by, 0px) - 12px)) scale(var(--bscale, 1)) rotate(calc(var(--brot, 0deg) + 2.5deg)); }
+      100% { transform: translate(var(--bx, 0px), var(--by, 0px)) scale(var(--bscale, 1)) rotate(var(--brot, 0deg)); }
+    }
+
+    .animated-zero-g {
+      animation: cuteZeroG 4.2s ease-in-out infinite;
+    }
+
+    @keyframes sparkleTwinkle {
+      0%, 100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.25); filter: drop-shadow(0 0 6px #fdb813); }
+    }
+
+    .constellation-star {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: sparkleTwinkle 2.5s ease-in-out infinite;
+    }
+
     @media (max-width: 1180px) {
       body {
         flex-direction: column-reverse;
@@ -319,11 +358,11 @@
       }
       #stage {
         flex-direction: column;
-        padding: 20px 10px;
+        padding: 16px 8px;
       }
       .patch-frame {
-        width: 400px;
-        height: 400px;
+        width: 380px;
+        height: 380px;
       }
     }
   </style>
@@ -348,8 +387,75 @@
       </div>
     </div>
 
+    <!-- CUTE CHIBI EXPRESSIONS -->
     <div>
-      <div class="section-label">Mottos & Typography</div>
+      <div class="section-label">
+        <span>Cute Expressions & Blush</span>
+      </div>
+      <div class="control-group">
+        <select id="expressionSelect">
+          <option value="wink">Playful Wink & Fang (^ ◕)</option>
+          <option value="sparkle">Starry Wonder Eyes (✧ ✧)</option>
+          <option value="excited">Happy Excited Grin (> ▽ <)</option>
+          <option value="dizzy">Zero-G Dizzy Swirl (๑ ~w~ ๑)</option>
+          <option value="smug">Sweet Chibi Smirk (◕ ‿ ◕)</option>
+        </select>
+        <div class="btn-row-3">
+          <button id="exprWinkBtn">^ ◕ Wink</button>
+          <button id="exprSparkleBtn">✧ ✧ Stars</button>
+          <button id="exprExcitedBtn">> ▽ < Grin</button>
+        </div>
+        <div class="btn-row-3">
+          <button id="exprDizzyBtn">๑ ๑ Dizzy</button>
+          <button id="exprSmugBtn">◕ ‿ ◕ Sweet</button>
+          <button id="toggleBlushBtn">Toggle Blush (///)</button>
+        </div>
+        <div class="status-indicator" id="expressionStatus">Active: Playful Wink & Fang (^ ◕)</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">
+        <span>Full-Body Chibi Poses</span>
+      </div>
+      <div class="control-group">
+        <div class="btn-row-4">
+          <button id="posePointBtn" title="Cute Pointing Up to Stars">Point</button>
+          <button id="posePounceBtn" title="Playful Kitty Pounce">Pounce</button>
+          <button id="poseVictoryBtn" title="Two-Paw Cheer Hooray">Cheer</button>
+          <button id="poseFloatBtn" title="Marshmallow Float">Float</button>
+        </div>
+        <div class="btn-row">
+          <button id="toggleFloatAnimBtn">Toggle Zero-G Bobbing</button>
+          <button id="cycleUniformBtn">Suit: Puffy EVA / Baruch #43</button>
+        </div>
+        <div class="status-indicator" id="bernieStatus">Pose: Pointing to Stars • Suit: Puffy EVA</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">
+        <span>Movement & Drag Controls</span>
+      </div>
+      <div class="control-group">
+        <div class="btn-row-3">
+          <button id="zoomInBtn">Scale Up (+)</button>
+          <button id="resetTransformBtn">Reset Center</button>
+          <button id="zoomOutBtn">Scale Down (-)</button>
+        </div>
+        <div class="btn-row-3">
+          <button id="rotateCCWBtn">↺ Tilt L</button>
+          <button id="flipHorizBtn">Flip Horiz ⇄</button>
+          <button id="rotateCWBtn">Tilt R ↻</button>
+        </div>
+        <div class="status-indicator" id="transformStatus">Pos: (0, 0) • Scale: 1.0x • Angle: 0° [Drag Bernie anywhere!]</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">
+        <span>Constellation Typography & Star Spells</span>
+      </div>
       <div class="control-group">
         <input type="text" id="customMottoInput" placeholder="Upper Motto (e.g. CHASE THE STARS)...">
         <input type="text" id="customSubMottoInput" placeholder="Lower Plaque (e.g. BARUCH • SSEP 2027)..." value="BARUCH • SSEP 2027">
@@ -359,7 +465,12 @@
           <option value="Orbitron">Orbitron (ISS Aerospace Sans)</option>
           <option value="Cinzel">Cinzel (Commemorative Roman)</option>
           <option value="Fraunces">Fraunces (Heritage Editorial Serif)</option>
+          <option value="Monoton">Monoton (Linear Cosmic Wave)</option>
         </select>
+        <div class="btn-row">
+          <button id="toggleStarTextBtn" style="border-color: #fdb813; color: #fdb813;">★ Constellation Star Font</button>
+          <button id="toggleStarNodesBtn">Constellation Nodes</button>
+        </div>
         <div class="btn-row">
           <button id="adjustTextSpanBtn">Upper Tracking (+ / -)</button>
           <button id="adjustSubSpanBtn">Lower Tracking (+ / -)</button>
@@ -368,17 +479,16 @@
     </div>
 
     <div>
-      <div class="section-label">Bernie the Bearcat Astronaut</div>
+      <div class="section-label">Helmet & Accessories</div>
       <div class="control-group">
         <div class="btn-row">
-          <button id="cycleVisorBtn">Visor Material</button>
-          <button id="toggleFangsBtn">Toggle Fangs</button>
+          <button id="toggleVisorTintBtn">Visor: Glass / Golden Tint</button>
+          <button id="toggleTailBtn">Toggle Fluffy Tail</button>
         </div>
         <div class="btn-row">
-          <button id="cycleArmPoseBtn">Pointing Arm Angle</button>
           <button id="toggleWhiskersBtn">Toggle Whiskers</button>
+          <button id="toggleHatchBtn">Toggle Hatch Lines</button>
         </div>
-        <div class="status-indicator" id="bernieStatus">Visor: Golden Amber Tint • Pose: Skyward 0°</div>
       </div>
     </div>
 
@@ -391,14 +501,13 @@
         </div>
         <div class="btn-row">
           <button id="toggleSmokeBtn">Toggle Plasma Plume</button>
-          <button id="toggleMoonBtn">Toggle Celestial Orb</button>
+          <button id="toggleMoonBtn">Toggle Moon / Orb</button>
         </div>
-        <div class="status-indicator" id="rocketStatus">Rocket: Orbit Climb (Scale 1.25x)</div>
       </div>
     </div>
 
     <div>
-      <div class="section-label">Curated Color Palettes</div>
+      <div class="section-label">Curated Mission Palettes</div>
       <div class="control-group">
         <select id="paletteSelect">
           <option value="0">Baruch Cosmos (Navy, Gold, White)</option>
@@ -406,6 +515,7 @@
           <option value="2">Gemini 1965 Classic (Deep Crimson, Ivory, Navy)</option>
           <option value="3">Microgravity Blueprint (Cyan, Neon Teal, Slate)</option>
           <option value="4">Apollo Gold Honor (Rich Ochre, Obsidian, Silver)</option>
+          <option value="5">Athletics Light Blue (CUNY Baruch Blue, White)</option>
         </select>
         <div class="color-swatch-row">
           <div class="color-picker-box">
@@ -450,18 +560,25 @@
               <circle cx="500" cy="500" r="460" />
             </clipPath>
 
-            <clipPath id="visor-clip">
-              <ellipse cx="370" cy="545" rx="145" ry="140" />
-            </clipPath>
+            <!-- Star Spangled Pattern for Constellation Font Fill -->
+            <pattern id="starLetterPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="#00142e"/>
+              <path d="M 20,4 L 23,15 L 34,15 L 25,22 L 28,33 L 20,26 L 12,33 L 15,22 L 6,15 L 17,15 Z" fill="#fdb813" opacity="0.95"/>
+              <circle cx="6" cy="6" r="1.5" fill="#ffffff" opacity="0.8"/>
+              <circle cx="34" cy="6" r="1.5" fill="#ffffff" opacity="0.8"/>
+              <circle cx="6" cy="34" r="1.5" fill="#ffffff" opacity="0.8"/>
+              <circle cx="34" cy="34" r="1.5" fill="#ffffff" opacity="0.8"/>
+              <line x1="6" y1="6" x2="20" y2="20" stroke="#fdb813" stroke-width="0.8" opacity="0.4"/>
+            </pattern>
 
             <filter id="embroider-filter" x="-10%" y="-10%" width="120%" height="120%">
               <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
               <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G" />
             </filter>
 
-            <!-- Upper Arc Path for Primary Motto ("CHASE THE STARS") -->
+            <!-- Upper Arc Path for Primary Motto -->
             <path id="textPathUpper" d="M 180,310 A 385,385 0 0,1 840,430" fill="none" />
-            <!-- Lower Concentric Arc Path for Commemorative Text ("BARUCH • SSEP 2027") -->
+            <!-- Lower Concentric Arc Path for Commemorative Text -->
             <path id="textPathLowerArc" d="M 180,680 A 390,390 0 0,0 820,680" fill="none" />
 
             <!-- Visor Gradients -->
@@ -473,9 +590,9 @@
             </linearGradient>
 
             <linearGradient id="visorGlassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
-              <stop offset="40%" stop-color="#93c5fd" stop-opacity="0.6"/>
-              <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0.85"/>
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"/>
+              <stop offset="30%" stop-color="#bae6fd" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#0284c7" stop-opacity="0.55"/>
             </linearGradient>
 
             <linearGradient id="visorCosmicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -492,7 +609,6 @@
               <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
             </linearGradient>
 
-            <!-- Sky Radial Atmospheric Gradient -->
             <radialGradient id="skyGrad" cx="50%" cy="40%" r="65%">
               <stop id="skyStop1" offset="0%" stop-color="#0e1a38"/>
               <stop id="skyStop2" offset="100%" stop-color="#03060f"/>
@@ -509,8 +625,8 @@
               <circle cx="760" cy="205" r="75" fill="url(#skyGrad)" opacity="0.9" />
             </g>
 
-            <!-- Orbital Speed Hatch Lines -->
-            <g id="hatchLinesGroup" stroke="#ffffff" stroke-width="1.2" opacity="0.15">
+            <!-- Orbital Speed Hatch Lines (Direct from Sketch) -->
+            <g id="hatchLinesGroup" stroke="#ffffff" stroke-width="1.2" opacity="0.18">
               <line x1="200" y1="80" x2="880" y2="80" />
               <line x1="160" y1="130" x2="890" y2="130" />
               <line x1="220" y1="180" x2="860" y2="180" />
@@ -518,152 +634,406 @@
               <line x1="330" y1="280" x2="820" y2="280" />
               <line x1="390" y1="330" x2="800" y2="330" />
               <line x1="430" y1="380" x2="780" y2="380" />
+              <line x1="480" y1="430" x2="750" y2="430" />
             </g>
 
             <!-- Starfield Constellations -->
             <g id="starFieldGroup"></g>
 
-            <!-- Blasting Rocket Launch Vehicle (Scaled for small-scale readability) -->
-            <g id="rocketGroup" transform="translate(345, 345) scale(1.22) rotate(-2)">
-              <!-- Plasma Exhaust Plume -->
+            <!-- Blasting Rocket Launch Vehicle (Direct from Sketches) -->
+            <g id="rocketGroup" transform="translate(680, 420) scale(1.15) rotate(12)">
               <path id="rocketPlume" d="M -18,44 Q -26,130 0,195 Q 26,130 18,44 Z" fill="url(#flameGrad)" />
               <path d="M -9,44 Q -14,100 0,140 Q 14,100 9,44 Z" fill="#ffffff" opacity="0.85"/>
-              
-              <!-- Fins -->
               <path d="M -26,35 L -42,56 L -20,50 Z" fill="#e03a3e" stroke="#1e293b" stroke-width="2" />
               <path d="M 26,35 L 42,56 L 20,50 Z" fill="#e03a3e" stroke="#1e293b" stroke-width="2" />
-              <!-- Fuselage -->
               <path d="M 0,-44 C -28, -6 -26,44 -20,50 L 20,50 C 26,44 28,-6 0,-44 Z" fill="#ffffff" stroke="#1e293b" stroke-width="5" />
-              <!-- Nose Cone -->
               <path d="M 0,-44 C -14,-24 -18,-12 -18,-12 L 18,-12 C 18,-12 14,-24 0,-44 Z" fill="#e03a3e" />
-              <!-- Circular Window -->
               <circle cx="0" cy="12" r="12" fill="#0284c7" stroke="#cbd5e1" stroke-width="3.5" />
               <circle cx="-3.5" cy="8.5" r="4" fill="#ffffff" opacity="0.9" />
             </g>
 
-            <!-- Bernie's Spacesuit Body (Torso & Badges) -->
-            <g id="suitBodyGroup">
-              <!-- Suit Torso -->
-              <path id="suitTorso" d="M 120,950 L 140,680 C 170,620 280,590 400,620 C 580,660 760,780 820,950 Z" 
-                    fill="#f8fafc" stroke="#334155" stroke-width="8" stroke-linejoin="round" />
-              <!-- Seams & Collar Gasket -->
-              <path d="M 210,645 C 310,680 440,690 560,670" fill="none" stroke="#cbd5e1" stroke-width="12" stroke-linecap="round" />
-              <path d="M 205,665 C 315,705 450,715 570,695" fill="none" stroke="#002d62" stroke-width="6" stroke-linecap="round" />
-              <!-- Center Harness Pack -->
-              <rect x="520" y="730" width="46" height="110" rx="4" fill="#002d62" stroke="#94a3b8" stroke-width="4" />
-              <line x1="543" y1="730" x2="543" y2="840" stroke="#fdb813" stroke-width="5" />
-              <rect x="533" y="770" width="20" height="20" fill="#e03a3e" />
+            <!-- Constellation Words Layer -->
+            <g id="constellationWordsGroup"></g>
 
-              <!-- NASA Meatball Insignia -->
-              <g id="nasaBadge" transform="translate(640, 810) scale(0.95)">
-                <circle cx="40" cy="40" r="34" fill="#0033a0" stroke="#ffffff" stroke-width="3"/>
-                <path d="M 12,52 L 40,15 L 68,52 L 56,52 L 40,30 L 24,52 Z" fill="#fc3d21"/>
-                <circle cx="28" cy="28" r="2.8" fill="#ffffff"/>
-                <circle cx="52" cy="26" r="2.4" fill="#ffffff"/>
-                <circle cx="36" cy="44" r="2" fill="#ffffff"/>
-                <text x="40" y="44" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="14" text-anchor="middle" letter-spacing="1">NASA</text>
+            <!-- ============================================================== -->
+            <!-- BERNIE THE BEARCAT: CUTE CHIBI FULL-BODY RIG (DRAGGABLE)       -->
+            <!-- ============================================================== -->
+            <g id="bernieMascotRig" transform="translate(0, 0)">
+
+              <!-- Fluffy Bearcat Tail -->
+              <g id="bearcatTailGroup">
+                <path d="M 230,680 C 130,680 80,600 110,500 C 125,430 185,440 170,490 C 145,545 175,615 240,630 Z" 
+                      fill="#8193a8" stroke="#002d62" stroke-width="6" stroke-linejoin="round"/>
+                <!-- Cute fluffy white tail tip -->
+                <path d="M 110,500 C 120,440 180,445 170,490 C 150,515 130,515 110,500 Z" fill="#ffffff" stroke="#002d62" stroke-width="2"/>
               </g>
 
-              <!-- Baruch Bearcat Paw Emblem -->
-              <g id="bearcatPawBadge" transform="translate(615, 680) scale(0.9)">
-                <ellipse cx="40" cy="46" rx="22" ry="17" fill="#002d62" stroke="#ffffff" stroke-width="3"/>
-                <circle cx="16" cy="22" r="7.5" fill="#fdb813" stroke="#002d62" stroke-width="2"/>
-                <circle cx="32" cy="13" r="8" fill="#fdb813" stroke="#002d62" stroke-width="2"/>
-                <circle cx="49" cy="13" r="8" fill="#fdb813" stroke="#002d62" stroke-width="2"/>
-                <circle cx="65" cy="22" r="7.5" fill="#fdb813" stroke="#002d62" stroke-width="2"/>
-              </g>
-            </g>
-
-            <!-- Bernie's Extended Pointing Arm -->
-            <g id="armGroup" transform="translate(420, 560)">
-              <path id="armSleeve" d="M 80,110 L 120,40 C 135,-30 180,-120 180,-190 L 105,-190 C 95,-120 70,-40 20,40 Z" 
-                    fill="#f8fafc" stroke="#334155" stroke-width="8" stroke-linejoin="round" />
-              <!-- Glove Cuff -->
-              <rect x="85" y="-210" width="115" height="30" rx="6" fill="#002d62" stroke="#fdb813" stroke-width="4" />
-              <!-- Clenched Fist -->
-              <ellipse cx="140" cy="-240" rx="36" ry="32" fill="#f1f5f9" stroke="#334155" stroke-width="6" />
-              <path d="M 125,-225 C 135,-215 155,-215 165,-225" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" fill="none" />
-              <!-- Index Finger Pointing to Cosmos -->
-              <path d="M 120,-245 L 85,-335 C 80,-348 95,-358 106,-350 L 142,-255 Z" 
-                    fill="#f8fafc" stroke="#334155" stroke-width="6" stroke-linejoin="round" />
-              <ellipse cx="98" cy="-335" rx="5" ry="8" fill="#fdb813" opacity="0.9" />
-              <!-- Starlight Sparkle at Fingertip -->
-              <g transform="translate(95, -368) scale(1.2)">
-                <path d="M 0,-25 L 5,-7 L 25,0 L 5,7 L 0,25 L -5,7 L -25,0 L -5,-7 Z" fill="#fdb813" />
-                <circle cx="0" cy="0" r="4.5" fill="#ffffff" />
-              </g>
-            </g>
-
-            <!-- Helmet & Head with Ear Pods -->
-            <g id="headGroup">
-              <!-- Left Ear Pod Cowl -->
-              <g id="earLeft">
-                <path d="M 235,460 C 200,420 185,340 235,310 C 275,345 295,410 280,455 Z" 
-                      fill="#f8fafc" stroke="#334155" stroke-width="8" stroke-linejoin="round" />
-                <path d="M 225,435 C 210,385 215,350 240,335 C 255,370 260,410 250,440 Z" fill="#002d62" />
-                <path d="M 232,415 C 225,385 230,365 240,355" stroke="#fdb813" stroke-width="4" stroke-linecap="round" />
+              <!-- Cute Chibi Puffy Legs & Boots -->
+              <g id="bearcatLegsGroup">
+                <!-- Left Leg -->
+                <g id="legLeft">
+                  <path d="M 255,650 L 225,780 C 220,815 235,845 250,855 L 290,855 C 305,845 305,815 300,780 L 315,650 Z" 
+                        fill="#f8fafc" stroke="#334155" stroke-width="7" stroke-linejoin="round"/>
+                  <!-- Rounded Puffy Astronaut Boot -->
+                  <path d="M 225,835 C 205,850 195,875 230,885 L 285,885 C 300,885 300,855 285,840 Z" 
+                        fill="#002d62" stroke="#fdb813" stroke-width="4"/>
+                  <!-- Cute Golden Paw Print under boot -->
+                  <ellipse cx="255" cy="870" rx="10" ry="7" fill="#fdb813"/>
+                  <circle cx="242" cy="860" r="3" fill="#fdb813"/>
+                  <circle cx="250" cy="855" r="3.5" fill="#fdb813"/>
+                  <circle cx="260" cy="855" r="3.5" fill="#fdb813"/>
+                  <circle cx="268" cy="860" r="3" fill="#fdb813"/>
+                </g>
+                <!-- Right Leg -->
+                <g id="legRight">
+                  <path d="M 365,650 L 395,780 C 400,815 385,845 370,855 L 330,855 C 315,845 315,815 320,780 L 305,650 Z" 
+                        fill="#f8fafc" stroke="#334155" stroke-width="7" stroke-linejoin="round"/>
+                  <!-- Rounded Puffy Astronaut Boot -->
+                  <path d="M 355,840 C 340,855 340,885 355,885 L 410,885 C 445,875 435,850 415,835 Z" 
+                        fill="#002d62" stroke="#fdb813" stroke-width="4"/>
+                  <!-- Cute Golden Paw Print under boot -->
+                  <ellipse cx="385" cy="870" rx="10" ry="7" fill="#fdb813"/>
+                  <circle cx="372" cy="860" r="3" fill="#fdb813"/>
+                  <circle cx="380" cy="855" r="3.5" fill="#fdb813"/>
+                  <circle cx="390" cy="855" r="3.5" fill="#fdb813"/>
+                  <circle cx="398" cy="860" r="3" fill="#fdb813"/>
+                </g>
               </g>
 
-              <!-- Right Ear Pod Cowl -->
-              <g id="earRight">
-                <path d="M 430,420 C 460,370 515,320 545,360 C 530,415 480,455 440,450 Z" 
-                      fill="#f8fafc" stroke="#334155" stroke-width="8" stroke-linejoin="round" />
-                <path d="M 450,420 C 475,380 505,355 525,375 C 505,420 480,435 450,420 Z" fill="#002d62" />
-                <path d="M 465,405 C 485,380 498,370 510,380" stroke="#fdb813" stroke-width="4" stroke-linecap="round" />
-              </g>
-
-              <!-- Spherical Helmet Shell -->
-              <ellipse cx="370" cy="545" rx="165" ry="160" fill="#f8fafc" stroke="#334155" stroke-width="10" />
-              
-              <!-- Collar Seam Ring -->
-              <path d="M 225,640 C 270,685 450,685 515,640" fill="none" stroke="#002d62" stroke-width="16" stroke-linecap="round" />
-              <path d="M 240,650 C 285,690 435,690 500,650" fill="none" stroke="#fdb813" stroke-width="6" stroke-linecap="round" />
-
-              <!-- Visor Outer Rim -->
-              <ellipse id="visorBase" cx="370" cy="545" rx="142" ry="136" fill="#030712" stroke="#1e293b" stroke-width="6" />
-
-              <!-- Bernie's Face Inside Visor -->
-              <g id="bernieFace" clip-path="url(#visor-clip)">
-                <!-- Fur Mask -->
-                <ellipse cx="370" cy="555" rx="130" ry="120" fill="#001833" />
-                <path d="M 270,590 C 290,520 340,510 370,530 C 400,510 450,520 470,590 C 430,645 310,645 270,590 Z" fill="#ffffff" opacity="0.95" />
+              <!-- Cute Puffy Marshmallow Spacesuit Torso -->
+              <g id="suitBodyGroup">
+                <!-- Puffy Marshmallow Torso Outline -->
+                <path id="suitTorso" d="M 225,480 C 190,560 195,640 240,670 L 380,670 C 425,640 430,560 395,480 Z" 
+                      fill="#f8fafc" stroke="#334155" stroke-width="8" stroke-linejoin="round"/>
                 
-                <!-- Specular Catchlight Eyes -->
-                <g id="bernieLeftEye" transform="translate(325, 535)">
-                  <ellipse cx="0" cy="0" rx="18" ry="24" fill="#0a0a0a" stroke="#002d62" stroke-width="3" />
-                  <circle cx="-5" cy="-8" r="8.5" fill="#ffffff" />
-                  <circle cx="5" cy="8" r="4" fill="#ffffff" />
-                </g>
-                <g id="bernieRightEye" transform="translate(415, 535)">
-                  <ellipse cx="0" cy="0" rx="18" ry="24" fill="#0a0a0a" stroke="#002d62" stroke-width="3" />
-                  <circle cx="-5" cy="-8" r="8.5" fill="#ffffff" />
-                  <circle cx="5" cy="8" r="4" fill="#ffffff" />
-                </g>
+                <!-- Soft Ribbed Collar & Seams -->
+                <path d="M 240,500 C 300,535 320,535 380,500" fill="none" stroke="#cbd5e1" stroke-width="12" stroke-linecap="round"/>
+                <path d="M 245,518 C 300,550 320,550 375,518" fill="none" stroke="#002d62" stroke-width="6" stroke-linecap="round"/>
 
-                <!-- Nose -->
-                <path d="M 364,570 L 376,570 C 378,570 374,580 370,582 C 366,580 362,570 364,570 Z" fill="#002d62" />
-
-                <!-- Intrepid Smile & Fangs -->
-                <g id="bernieMouth">
-                  <path d="M 345,585 C 358,598 368,594 370,586 C 372,594 382,598 395,585" 
-                        fill="none" stroke="#0a0a0a" stroke-width="4.5" stroke-linecap="round" />
-                  <path id="fangLeft" d="M 353,592 L 358,605 L 363,592 Z" fill="#ffffff" stroke="#002d62" stroke-width="1.8" />
-                  <path id="fangRight" d="M 377,592 L 382,605 L 387,592 Z" fill="#ffffff" stroke="#002d62" stroke-width="1.8" />
+                <!-- Cute Mini Life-Support Harness -->
+                <g id="harnessPack">
+                  <rect x="285" y="550" width="50" height="75" rx="10" fill="#002d62" stroke="#94a3b8" stroke-width="3.5"/>
+                  <line x1="310" y1="550" x2="310" y2="625" stroke="#fdb813" stroke-width="4"/>
+                  <rect x="296" y="575" width="12" height="12" rx="3" fill="#e03a3e"/>
+                  <circle cx="323" cy="581" r="6" fill="#38bdf8"/>
                 </g>
 
-                <!-- Whiskers -->
-                <g id="bernieWhiskers" stroke="#002d62" stroke-width="3.2" stroke-linecap="round" opacity="0.85">
-                  <line x1="330" y1="578" x2="255" y2="570" />
-                  <line x1="332" y1="588" x2="250" y2="590" />
-                  <line x1="334" y1="598" x2="260" y2="610" />
-                  <line x1="410" y1="578" x2="485" y2="570" />
-                  <line x1="408" y1="588" x2="490" y2="590" />
-                  <line x1="406" y1="598" x2="480" y2="610" />
+                <!-- Baruch Jersey #43 (Toggleable) -->
+                <g id="jerseyOverlay" style="display: none;">
+                  <path d="M 230,495 C 295,530 325,530 390,495 L 405,665 L 215,665 Z" fill="#6ba4d9" stroke="#002d62" stroke-width="5"/>
+                  <path d="M 240,505 C 295,538 325,538 380,505" fill="none" stroke="#ffffff" stroke-width="3"/>
+                  <text x="310" y="565" fill="#ffffff" font-family="'Bebas Neue', sans-serif" font-size="28" font-weight="900" text-anchor="middle" letter-spacing="3">BARUCH</text>
+                  <text x="310" y="630" fill="#ffffff" stroke="#002d62" stroke-width="2" font-family="'Space Grotesk', sans-serif" font-size="48" font-weight="900" text-anchor="middle">43</text>
                 </g>
 
-                <!-- Visor Flare Reflection -->
-                <path id="visorReflectionOverlay" d="M 255,480 C 320,440 420,440 480,480 C 440,460 350,455 255,480 Z" fill="url(#visorGoldGrad)" opacity="0.65" />
-                <ellipse cx="320" cy="485" rx="45" ry="18" fill="#ffffff" opacity="0.35" transform="rotate(-18 320 485)" />
+                <!-- NASA Badge on Suit -->
+                <g id="nasaBadge" transform="translate(360, 570) scale(0.6)">
+                  <circle cx="40" cy="40" r="34" fill="#0033a0" stroke="#ffffff" stroke-width="3"/>
+                  <path d="M 12,52 L 40,15 L 68,52 L 56,52 L 40,30 L 24,52 Z" fill="#fc3d21"/>
+                  <circle cx="28" cy="28" r="2.8" fill="#ffffff"/>
+                  <circle cx="52" cy="26" r="2.4" fill="#ffffff"/>
+                  <text x="40" y="44" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="14" text-anchor="middle">NASA</text>
+                </g>
+
+                <!-- Cute Baruch Bearcat Paw Badge -->
+                <g id="bearcatPawBadge" transform="translate(225, 565) scale(0.6)">
+                  <ellipse cx="40" cy="46" rx="22" ry="17" fill="#002d62" stroke="#ffffff" stroke-width="3"/>
+                  <circle cx="16" cy="22" r="7.5" fill="#fdb813" stroke="#002d62" stroke-width="2"/>
+                  <circle cx="32" cy="13" r="8" fill="#fdb813" stroke="#002d62" stroke-width="2"/>
+                  <circle cx="49" cy="13" r="8" fill="#fdb813" stroke="#002d62" stroke-width="2"/>
+                  <circle cx="65" cy="22" r="7.5" fill="#fdb813" stroke="#002d62" stroke-width="2"/>
+                </g>
+              </g>
+
+              <!-- ======================================= -->
+              <!-- CHIBI ARMS & POSES                      -->
+              <!-- ======================================= -->
+              <!-- POSE 1: CUTE SKYWARD POINT (DEFAULT) -->
+              <g id="posePointArms">
+                <!-- Left Hand on Belly -->
+                <path d="M 230,510 L 175,560 C 160,590 170,620 190,625 L 235,580 Z" fill="#f8fafc" stroke="#334155" stroke-width="6"/>
+                <ellipse cx="180" cy="610" rx="16" ry="14" fill="#002d62" stroke="#fdb813" stroke-width="3"/>
+                <!-- Right Arm Lifting Skyward (Direct from Sketch) -->
+                <g id="pointingArm" transform="translate(370, 490)">
+                  <path d="M 15,20 L 70,-40 C 90,-90 120,-160 140,-230 L 80,-230 C 65,-170 45,-100 -5,-30 Z" 
+                        fill="#f8fafc" stroke="#334155" stroke-width="7" stroke-linejoin="round"/>
+                  <rect x="75" y="-250" width="80" height="24" rx="6" fill="#002d62" stroke="#fdb813" stroke-width="3"/>
+                  <ellipse cx="115" cy="-275" rx="26" ry="22" fill="#f1f5f9" stroke="#334155" stroke-width="5"/>
+                  <!-- Cute rounded pointing finger -->
+                  <path d="M 100,-280 L 80,-355 C 75,-368 90,-375 100,-365 L 125,-290 Z" fill="#f8fafc" stroke="#334155" stroke-width="5"/>
+                  <ellipse cx="90,-355" rx="4" ry="7" fill="#fdb813"/>
+                  <!-- Star Sparkle at Fingertip -->
+                  <g transform="translate(86, -385) scale(1.3)">
+                    <path d="M 0,-25 L 5,-7 L 25,0 L 5,7 L 0,25 L -5,7 L -25,0 L -5,-7 Z" fill="#fdb813"/>
+                    <circle cx="0" cy="0" r="4.5" fill="#ffffff"/>
+                  </g>
+                </g>
+              </g>
+
+              <!-- POSE 2: PLAYFUL KITTY POUNCE (ROUND MITTS) -->
+              <g id="posePounceArms" style="display: none;">
+                <!-- Left Cute Paw -->
+                <g transform="translate(140, 510)">
+                  <path d="M 85,0 L 25,40 C 5,55 0,80 15,95 L 70,80 Z" fill="#f8fafc" stroke="#334155" stroke-width="7"/>
+                  <circle cx="20" cy="85" r="28" fill="#002d62" stroke="#ffffff" stroke-width="4"/>
+                  <!-- Pink Cute Paw Pads -->
+                  <ellipse cx="20" cy="88" rx="10" ry="8" fill="#f472b6"/>
+                  <circle cx="10" cy="74" r="3.5" fill="#f472b6"/>
+                  <circle cx="18" cy="70" r="3.5" fill="#f472b6"/>
+                  <circle cx="26" cy="74" r="3.5" fill="#f472b6"/>
+                </g>
+                <!-- Right Cute Paw -->
+                <g transform="translate(410, 510)">
+                  <path d="M -25,0 L 35,40 C 55,55 60,80 45,95 L -10,80 Z" fill="#f8fafc" stroke="#334155" stroke-width="7"/>
+                  <circle cx="40" cy="85" r="28" fill="#002d62" stroke="#ffffff" stroke-width="4"/>
+                  <!-- Pink Cute Paw Pads -->
+                  <ellipse cx="40" cy="88" rx="10" ry="8" fill="#f472b6"/>
+                  <circle cx="30" cy="74" r="3.5" fill="#f472b6"/>
+                  <circle cx="38" cy="70" r="3.5" fill="#f472b6"/>
+                  <circle cx="46" cy="74" r="3.5" fill="#f472b6"/>
+                </g>
+              </g>
+
+              <!-- POSE 3: TWO-PAW CHEER HOORAY -->
+              <g id="poseVictoryArms" style="display: none;">
+                <g transform="translate(150, 430)">
+                  <path d="M 75,70 L 25,15 C 5,-10 30,-35 55,-15 L 85,50 Z" fill="#f8fafc" stroke="#334155" stroke-width="7"/>
+                  <circle cx="40" cy="-15" r="22" fill="#002d62" stroke="#fdb813" stroke-width="4"/>
+                </g>
+                <g transform="translate(390, 430)">
+                  <path d="M -15,70 L 35,15 C 55,-10 30,-35 5,-15 L -25,50 Z" fill="#f8fafc" stroke="#334155" stroke-width="7"/>
+                  <circle cx="20" cy="-15" r="22" fill="#002d62" stroke="#fdb813" stroke-width="4"/>
+                </g>
+              </g>
+
+              <!-- POSE 4: MARSHMALLOW FLOAT -->
+              <g id="poseFloatArms" style="display: none;">
+                <g transform="translate(130, 530) rotate(-15)">
+                  <path d="M 90,10 C 30,20 -10,60 10,90 L 70,80 Z" fill="#f8fafc" stroke="#334155" stroke-width="6"/>
+                  <circle cx="10" cy="85" r="20" fill="#002d62" stroke="#fdb813" stroke-width="3"/>
+                </g>
+                <g transform="translate(410, 510) rotate(15)">
+                  <path d="M -10,10 C 50,20 90,60 70,90 L 10,80 Z" fill="#f8fafc" stroke="#334155" stroke-width="6"/>
+                  <circle cx="70" cy="85" r="20" fill="#002d62" stroke="#fdb813" stroke-width="3"/>
+                </g>
+              </g>
+
+              <!-- ============================================================== -->
+              <!-- CUTE CHIBI BEARCAT HEAD RIG (FAITHFUL TO SKETCHES 1 & 2)        -->
+              <!-- ============================================================== -->
+              <g id="mascotHeadRig" transform="translate(0, 0)">
+                
+                <!-- Helmet Collar Mount -->
+                <path d="M 235,465 C 270,495 350,495 385,465" fill="none" stroke="#002d62" stroke-width="16" stroke-linecap="round"/>
+                <path d="M 245,475 C 280,505 340,505 375,475" fill="none" stroke="#fdb813" stroke-width="5" stroke-linecap="round"/>
+
+                <!-- Custom Bubble Helmet Ear Cowls (Round & Cute) -->
+                <g id="helmetEarPods">
+                  <!-- Left Bubble Ear Pod -->
+                  <path d="M 235,280 C 190,225 195,140 250,115 C 285,150 300,210 285,275 Z" 
+                        fill="#f8fafc" stroke="#334155" stroke-width="8" stroke-linejoin="round"/>
+                  <!-- Right Bubble Ear Pod -->
+                  <path d="M 385,275 C 370,210 385,150 420,115 C 475,140 480,225 435,280 Z" 
+                        fill="#f8fafc" stroke="#334155" stroke-width="8" stroke-linejoin="round"/>
+                </g>
+
+                <!-- Spherical Bubble Helmet Dome -->
+                <ellipse cx="310" cy="320" rx="180" ry="170" fill="none" stroke="#f8fafc" stroke-width="14"/>
+                <ellipse cx="310" cy="320" rx="180" ry="170" fill="none" stroke="#334155" stroke-width="4"/>
+                <ellipse id="visorBaseGlass" cx="310" cy="320" rx="172" ry="162" fill="url(#visorGlassGrad)" opacity="0.45"/>
+
+                <!-- =================================================== -->
+                <!-- CUTE CHIBI MASCOT FACE (SWEET & EXPRESSIVE)         -->
+                <!-- =================================================== -->
+                <g id="bearcatMascotFace">
+                  
+                  <!-- Soft Round Fluffy Ears with Pink Centers -->
+                  <g id="mascotEarLeft">
+                    <path d="M 240,250 C 215,200 215,135 250,125 C 275,150 285,210 275,250 Z" 
+                          fill="#8899a8" stroke="#001833" stroke-width="5" stroke-linejoin="round"/>
+                    <!-- Cute Pink Inner Ear -->
+                    <path d="M 248,230 C 238,190 242,150 260,140 C 265,170 265,205 260,230 Z" fill="#f472b6" opacity="0.85"/>
+                    <path d="M 252,210 L 270,195" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                  </g>
+                  
+                  <g id="mascotEarRight">
+                    <path d="M 380,250 C 370,210 380,150 405,125 C 440,135 440,200 415,250 Z" 
+                          fill="#8899a8" stroke="#001833" stroke-width="5" stroke-linejoin="round"/>
+                    <!-- Cute Pink Inner Ear -->
+                    <path d="M 402,230 C 412,190 408,150 390,140 C 385,170 385,205 390,230 Z" fill="#f472b6" opacity="0.85"/>
+                    <path d="M 398,210 L 380,195" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+                  </g>
+
+                  <!-- Cute Round Bearcat Head Base (Soft Silver Grey) -->
+                  <ellipse cx="310" cy="335" rx="135" ry="120" fill="#8a9baa" stroke="#001a33" stroke-width="5"/>
+
+                  <!-- Soft White Cheek Puffs / Muzzle (Chibi Rounded Cheeks) -->
+                  <path d="M 210,345 C 190,380 230,440 310,440 C 390,440 430,380 410,345 C 390,320 370,300 310,300 C 250,300 230,320 210,345 Z" 
+                        fill="#f8fafc"/>
+
+                  <!-- Sweet Little Forehead Stripes -->
+                  <path d="M 310,255 L 313,275 L 307,275 Z" fill="#001a33"/>
+                  <path d="M 295,260 L 302,275 L 293,272 Z" fill="#001a33"/>
+                  <path d="M 325,260 L 318,275 L 327,272 Z" fill="#001a33"/>
+
+                  <!-- Cheek Striping Marks -->
+                  <path d="M 205,340 L 235,345 L 225,352 L 200,346 Z" fill="#001a33"/>
+                  <path d="M 200,360 L 230,365 L 220,372 L 195,366 Z" fill="#001a33"/>
+                  <path d="M 415,340 L 385,345 L 395,352 L 420,346 Z" fill="#001a33"/>
+                  <path d="M 420,360 L 390,365 L 400,372 L 425,366 Z" fill="#001a33"/>
+
+                  <!-- Cute Rosy Pink Cheek Blush (///) -->
+                  <g id="blushGroup">
+                    <!-- Left Blush -->
+                    <ellipse cx="235" cy="370" rx="16" ry="9" fill="#f472b6" opacity="0.6"/>
+                    <line x1="228" y1="365" x2="234" y2="375" stroke="#db2777" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="234" y1="365" x2="240" y2="375" stroke="#db2777" stroke-width="1.8" stroke-linecap="round"/>
+                    <!-- Right Blush -->
+                    <ellipse cx="385" cy="370" rx="16" ry="9" fill="#f472b6" opacity="0.6"/>
+                    <line x1="378" y1="365" x2="384" y2="375" stroke="#db2777" stroke-width="1.8" stroke-linecap="round"/>
+                    <line x1="384" y1="365" x2="390" y2="375" stroke="#db2777" stroke-width="1.8" stroke-linecap="round"/>
+                  </g>
+
+                  <!-- Tiny Cute Kitty Nose (Soft Pink Heart/Inverted Triangle) -->
+                  <g id="mascotNose" transform="translate(310, 360)">
+                    <path d="M -10,-6 C -3,-8 3,-8 10,-6 C 12,0 6,8 0,11 C -6,8 -12,0 -10,-6 Z" 
+                          fill="#f472b6" stroke="#db2777" stroke-width="1.5"/>
+                    <circle cx="-2" cy="-3" r="1.5" fill="#ffffff" opacity="0.8"/>
+                  </g>
+
+                  <!-- ======================================================== -->
+                  <!-- DYNAMIC CUTE EYES (BASED ON SKETCHES)                    -->
+                  <!-- ======================================================== -->
+                  <g id="dynamicEyeContainer">
+                    
+                    <!-- 1. WINK EXPRESSION (Sketch 2 Main: Left Wedge ^, Right Big Starry ◕) -->
+                    <g id="eyesWink">
+                      <!-- Left Eye: Playful Winking Arched Wedge (^) -->
+                      <path d="M 240,340 Q 262,316 285,340" fill="none" stroke="#001428" stroke-width="6" stroke-linecap="round"/>
+                      <path d="M 240,340 Q 262,322 285,340" fill="none" stroke="#0267b2" stroke-width="2" stroke-linecap="round"/>
+                      <!-- Right Eye: Big Glossy Starry Eye -->
+                      <g transform="translate(360, 335)">
+                        <circle cx="0" cy="0" r="18" fill="#001833"/>
+                        <circle cx="0" cy="0" r="16" fill="#0267b2"/>
+                        <circle cx="0" cy="0" r="11" fill="#080808"/>
+                        <!-- Star Catchlight -->
+                        <path d="M -2,-8 L 0,-2 L 6,-2 L 1,1 L 3,7 L -2,3 L -7,7 L -5,1 L -10,-2 L -4,-2 Z" fill="#ffffff"/>
+                        <circle cx="4" cy="5" r="2.5" fill="#ffffff"/>
+                      </g>
+                    </g>
+
+                    <!-- 2. SPARKLE ANIME EYES (Sketch 2 #1: Huge Starry Wonder ✧ ✧) -->
+                    <g id="eyesSparkle" style="display: none;">
+                      <g transform="translate(260, 335)">
+                        <circle cx="0" cy="0" r="19" fill="#001833"/>
+                        <circle cx="0" cy="0" r="17" fill="#0267b2"/>
+                        <circle cx="0" cy="0" r="12" fill="#0a0a0a"/>
+                        <!-- Big Golden Star pupil -->
+                        <path d="M 0,-13 L 3,-3 L 13,0 L 3,3 L 0,13 L -3,3 L -13,0 L -3,-3 Z" fill="#fdb813"/>
+                        <circle cx="-5" cy="-5" r="4.5" fill="#ffffff"/>
+                        <circle cx="5" cy="5" r="3" fill="#ffffff"/>
+                      </g>
+                      <g transform="translate(360, 335)">
+                        <circle cx="0" cy="0" r="19" fill="#001833"/>
+                        <circle cx="0" cy="0" r="17" fill="#0267b2"/>
+                        <circle cx="0" cy="0" r="12" fill="#0a0a0a"/>
+                        <!-- Big Golden Star pupil -->
+                        <path d="M 0,-13 L 3,-3 L 13,0 L 3,3 L 0,13 L -3,3 L -13,0 L -3,-3 Z" fill="#fdb813"/>
+                        <circle cx="-5" cy="-5" r="4.5" fill="#ffffff"/>
+                        <circle cx="5" cy="5" r="3" fill="#ffffff"/>
+                      </g>
+                    </g>
+
+                    <!-- 3. HAPPY EXCITED (> ▽ <) (Sketch 2 #2) -->
+                    <g id="eyesExcited" style="display: none;">
+                      <!-- Left Eye: > -->
+                      <path d="M 240,325 L 268,338 L 240,351" fill="none" stroke="#001428" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <!-- Right Eye: < -->
+                      <path d="M 380,325 L 352,338 L 380,351" fill="none" stroke="#001428" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+
+                    <!-- 4. ZERO-G DIZZY SWIRL (Sketch 2 #3: ๑ ๑) -->
+                    <g id="eyesDizzy" style="display: none;">
+                      <g transform="translate(260, 335)">
+                        <circle cx="0" cy="0" r="16" fill="#ffffff" stroke="#001428" stroke-width="3"/>
+                        <path d="M 0,0 m -9,0 a 9,9 0 1,0 18,0 a 6.5,6.5 0 1,0 -13,0 a 4,4 0 1,0 8,0 a 2,2 0 1,0 -4,0" fill="none" stroke="#001428" stroke-width="2.5"/>
+                      </g>
+                      <g transform="translate(360, 335)">
+                        <circle cx="0" cy="0" r="16" fill="#ffffff" stroke="#001428" stroke-width="3"/>
+                        <path d="M 0,0 m -9,0 a 9,9 0 1,0 18,0 a 6.5,6.5 0 1,0 -13,0 a 4,4 0 1,0 8,0 a 2,2 0 1,0 -4,0" fill="none" stroke="#001428" stroke-width="2.5"/>
+                      </g>
+                    </g>
+
+                    <!-- 5. SWEET CHIBI SMUG (Round Anime Pupils ◕ ◕) -->
+                    <g id="eyesSmug" style="display: none;">
+                      <g transform="translate(260, 335)">
+                        <circle cx="0" cy="0" r="17" fill="#001833"/>
+                        <circle cx="0" cy="0" r="15" fill="#0267b2"/>
+                        <circle cx="0" cy="0" r="10" fill="#080808"/>
+                        <circle cx="-4" cy="-5" r="5" fill="#ffffff"/>
+                        <circle cx="4" cy="4" r="2.5" fill="#ffffff"/>
+                      </g>
+                      <g transform="translate(360, 335)">
+                        <circle cx="0" cy="0" r="17" fill="#001833"/>
+                        <circle cx="0" cy="0" r="15" fill="#0267b2"/>
+                        <circle cx="0" cy="0" r="10" fill="#080808"/>
+                        <circle cx="-4" cy="-5" r="5" fill="#ffffff"/>
+                        <circle cx="4" cy="4" r="2.5" fill="#ffffff"/>
+                      </g>
+                    </g>
+                  </g>
+
+                  <!-- ======================================================== -->
+                  <!-- CUTE DYNAMIC MOUTHS & FANGS                              -->
+                  <!-- ======================================================== -->
+                  <g id="dynamicMouthContainer" transform="translate(310, 385)">
+                    
+                    <!-- 1. CUTE CURVY W-LIP WITH LITTLE FANGS (DEFAULT) -->
+                    <g id="mouthWink">
+                      <!-- Curvy kitty `w` smile line -->
+                      <path d="M -30,-4 C -16,10 -4,8 0,0 C 4,8 16,10 30,-4" fill="none" stroke="#001428" stroke-width="4.5" stroke-linecap="round"/>
+                      <!-- Sweet little white fangs peeking out -->
+                      <path d="M -18,-2 L -14,12 L -9,-1 Z" fill="#ffffff" stroke="#001428" stroke-width="1.5"/>
+                      <path d="M 9,-1 L 14,12 L 18,-2 Z" fill="#ffffff" stroke="#001428" stroke-width="1.5"/>
+                    </g>
+
+                    <!-- 2. OPEN HAPPY TRIANGLE (▽) WITH FANGS (EXCITED) -->
+                    <g id="mouthExcited" style="display: none;">
+                      <path d="M -24,-2 Q 0,26 24,-2 Q 0,4 -24,-2 Z" fill="#db2777" stroke="#001428" stroke-width="3"/>
+                      <path d="M -16,-2 L -12,8 L -8,-1 Z" fill="#ffffff"/>
+                      <path d="M 8,-1 L 12,8 L 16,-2 Z" fill="#ffffff"/>
+                      <path d="M -10,14 Q 0,22 10,14" fill="#f472b6"/>
+                    </g>
+
+                    <!-- 3. SQUIGGLY ZERO-G WOBBLE (~w~) (DIZZY) -->
+                    <g id="mouthDizzy" style="display: none;">
+                      <path d="M -26,6 Q -16,-6 -8,6 Q 0,-6 8,6 Q 16,-6 26,6" fill="none" stroke="#001428" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- 4. SWEET SMUG SMILE -->
+                    <g id="mouthSmug" style="display: none;">
+                      <path d="M -25,0 Q 0,16 25,0" fill="none" stroke="#001428" stroke-width="4.5" stroke-linecap="round"/>
+                      <path d="M 8,4 L 12,12 L 15,2 Z" fill="#ffffff" stroke="#001428" stroke-width="1.5"/>
+                    </g>
+                  </g>
+
+                  <!-- Cute Whisker Tufts (Direct from Sketches) -->
+                  <g id="mascotWhiskers" stroke="#001833" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+                    <line x1="260" y1="380" x2="190" y2="375"/>
+                    <line x1="260" y1="390" x2="185" y2="395"/>
+                    <line x1="260" y1="400" x2="195" y2="415"/>
+                    <line x1="360" y1="380" x2="430" y2="375"/>
+                    <line x1="360" y1="390" x2="435" y2="395"/>
+                    <line x1="360" y1="400" x2="425" y2="415"/>
+                  </g>
+
+                  <!-- Soft Visor Glass Reflection -->
+                  <g id="visorGlassReflections">
+                    <path d="M 180,240 C 250,195 370,195 440,240 C 390,215 310,210 180,240 Z" fill="#ffffff" opacity="0.35"/>
+                    <ellipse cx="230" cy="235" rx="45" ry="14" fill="#ffffff" opacity="0.4" transform="rotate(-22 230 235)"/>
+                  </g>
+
+                </g>
               </g>
             </g>
           </g>
@@ -673,7 +1043,7 @@
           <circle cx="500" cy="500" r="462" fill="none" stroke="#002d62" stroke-width="22" id="patchBorderRing" />
           <circle cx="500" cy="500" r="448" fill="none" stroke="#fdb813" stroke-width="5" id="patchInnerRing" stroke-dasharray="10 4" />
 
-          <!-- Lower Concentric Arc Commemorative Text ("BARUCH • SSEP 2027") -->
+          <!-- Lower Concentric Arc Commemorative Text -->
           <g id="commemorativeDetails" fill="#ffffff" stroke="#001833" stroke-width="2" paint-order="stroke fill" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.8))">
             <text font-family="'Space Grotesk', sans-serif" font-size="28" font-weight="900" letter-spacing="6" id="subMottoSvgText">
               <textPath href="#textPathLowerArc" startOffset="50%" text-anchor="middle" id="subMottoTextPath">
@@ -682,7 +1052,7 @@
             </text>
           </g>
 
-          <!-- Upper Arc Mission Motto ("CHASE THE STARS") -->
+          <!-- Upper Arc Mission Motto (Regular or Constellation Mode) -->
           <g id="patchTextGroup" fill="#fdb813" stroke="#001833" stroke-width="3" paint-order="stroke fill" filter="drop-shadow(0 3px 6px rgba(0,0,0,0.85))">
             <text font-family="'Bebas Neue', 'Space Grotesk', sans-serif" font-size="56" font-weight="900" letter-spacing="7" id="mottoSvgText">
               <textPath href="#textPathUpper" startOffset="50%" text-anchor="middle" id="mottoTextPath">
@@ -702,6 +1072,7 @@
   </main>
 
   <script>
+    // Ambient Starfield Animation Loop
     const starCanvas = document.getElementById('starfield-canvas');
     const ctx = starCanvas.getContext('2d');
     let stars = [];
@@ -779,6 +1150,7 @@
     resizeCanvas();
     renderStarfield();
 
+    // DOM & Element Handles
     const $ = id => document.getElementById(id);
     const patchSvg = $('patch-svg');
     const starFieldGroup = $('starFieldGroup');
@@ -798,17 +1170,58 @@
     const paletteSelect = $('paletteSelect');
     const paletteName = $('paletteName');
     const bernieStatus = $('bernieStatus');
-    const rocketStatus = $('rocketStatus');
-    const visorReflectionOverlay = $('visorReflectionOverlay');
-    const visorBase = $('visorBase');
+    const transformStatus = $('transformStatus');
+    const expressionStatus = $('expressionStatus');
+    const expressionSelect = $('expressionSelect');
     const sizeCheckDock = $('sizeCheckDock');
-    const armGroup = $('armGroup');
     const rocketGroup = $('rocketGroup');
     const rocketPlume = $('rocketPlume');
     const celestialGroup = $('celestialGroup');
     const suitTorso = $('suitTorso');
-    const armSleeve = $('armSleeve');
-    const bernieWhiskers = $('bernieWhiskers');
+    const bearcatTailGroup = $('bearcatTailGroup');
+    const bernieMascotRig = $('bernieMascotRig');
+    const jerseyOverlay = $('jerseyOverlay');
+    const constellationWordsGroup = $('constellationWordsGroup');
+    const visorBaseGlass = $('visorBaseGlass');
+    const mascotWhiskers = $('mascotWhiskers');
+    const hatchLinesGroup = $('hatchLinesGroup');
+    const blushGroup = $('blushGroup');
+
+    // Pose Handles
+    const posePointArms = $('posePointArms');
+    const posePounceArms = $('posePounceArms');
+    const poseVictoryArms = $('poseVictoryArms');
+    const poseFloatArms = $('poseFloatArms');
+
+    // Expression Element Handles
+    const eyesWink = $('eyesWink');
+    const eyesSparkle = $('eyesSparkle');
+    const eyesExcited = $('eyesExcited');
+    const eyesDizzy = $('eyesDizzy');
+    const eyesSmug = $('eyesSmug');
+
+    const mouthWink = $('mouthWink');
+    const mouthExcited = $('mouthExcited');
+    const mouthDizzy = $('mouthDizzy');
+    const mouthSmug = $('mouthSmug');
+
+    // Transformation States
+    let bx = 0;
+    let by = 0;
+    let bscale = 1.0;
+    let brot = 0;
+    let bflip = 1;
+    let isZeroGAnimating = false;
+    let isJerseyOn = false;
+    let currentPose = 'point';
+    let currentExpression = 'wink';
+    let isConstellationFont = false;
+    let isStarNodesOn = false;
+    let showWhiskers = true;
+    let showHatch = true;
+    let showTail = true;
+    let showBlush = true;
+    let isGoldVisor = false;
 
     const palettes = [
       {
@@ -855,6 +1268,15 @@
         thread: '#fef08a',
         suit: '#fafafa',
         accent: '#991b1b'
+      },
+      {
+        name: "Athletics Light Blue",
+        sky: ['#0a192f', '#030814'],
+        border: '#0267b2',
+        rim: '#00284d',
+        thread: '#ffffff',
+        suit: '#6ba4d9',
+        accent: '#fdb813'
       }
     ];
 
@@ -865,27 +1287,30 @@
       "RESEARCH IN ORBIT",
       "AD ASTRA BEARCATS",
       "MICROGRAVITY 2027",
-      "SCIENCE BEYOND EARTH"
+      "BARUCH EXPEDITION"
     ];
 
-    const visorStyles = [
-      { name: "Golden Amber Tint", fill: "url(#visorGoldGrad)", base: "#030712", opacity: 0.65 },
-      { name: "Apollo Clear Visor", fill: "url(#visorGlassGrad)", base: "#021226", opacity: 0.4 },
-      { name: "Deep Cosmic Aurora", fill: "url(#visorCosmicGrad)", base: "#110c1f", opacity: 0.75 },
-      { name: "Solid Gold EVA Mirror", fill: "url(#visorGoldGrad)", base: "#fdb813", opacity: 0.95 }
-    ];
+    const expressionsList = ['wink', 'sparkle', 'excited', 'dizzy', 'smug'];
 
     let currentPaletteIdx = 0;
     let currentMottoIdx = 0;
-    let currentVisorIdx = 0;
-    let currentArmAngle = 0;
-    let showFangs = true;
-    let showWhiskers = true;
     let showSmoke = true;
     let showMoon = true;
     let stitchTextureOn = false;
 
     function r(n) { return Math.floor(Math.random() * n); }
+
+    function updateBernieTransform() {
+      bernieMascotRig.style.setProperty('--bx', `${bx}px`);
+      bernieMascotRig.style.setProperty('--by', `${by}px`);
+      bernieMascotRig.style.setProperty('--bscale', `${bscale * bflip}, ${bscale}`);
+      bernieMascotRig.style.setProperty('--brot', `${brot}deg`);
+      
+      const flipScaleStr = bflip === -1 ? `scaleX(-1) ` : '';
+      bernieMascotRig.setAttribute('transform', `translate(${bx}, ${by}) ${flipScaleStr}scale(${bscale}) rotate(${brot} 310 380)`);
+      transformStatus.textContent = `Pos: (${Math.round(bx)}, ${Math.round(by)}) • Scale: ${bscale.toFixed(2)}x • Angle: ${brot}° [Drag Bernie anywhere!]`;
+      updateSizeCheck();
+    }
 
     function generateStars(count = 28) {
       starFieldGroup.innerHTML = '';
@@ -913,15 +1338,221 @@
       }
     }
 
+    // === CUTE CHIBI EXPRESSIONS ===
+    function setExpression(expr) {
+      currentExpression = expr;
+      expressionSelect.value = expr;
+
+      eyesWink.style.display = 'none';
+      eyesSparkle.style.display = 'none';
+      eyesExcited.style.display = 'none';
+      eyesDizzy.style.display = 'none';
+      eyesSmug.style.display = 'none';
+
+      mouthWink.style.display = 'none';
+      mouthExcited.style.display = 'none';
+      mouthDizzy.style.display = 'none';
+      mouthSmug.style.display = 'none';
+
+      const labels = {
+        wink: 'Playful Wink & Fang (^ ◕)',
+        sparkle: 'Starry Wonder Eyes (✧ ✧)',
+        excited: 'Happy Excited Grin (> ▽ <)',
+        dizzy: 'Zero-G Dizzy Swirl (๑ ~w~ ๑)',
+        smug: 'Sweet Chibi Smirk (◕ ‿ ◕)'
+      };
+
+      if (expr === 'wink') {
+        eyesWink.style.display = 'block';
+        mouthWink.style.display = 'block';
+      } else if (expr === 'sparkle') {
+        eyesSparkle.style.display = 'block';
+        mouthWink.style.display = 'block';
+      } else if (expr === 'excited') {
+        eyesExcited.style.display = 'block';
+        mouthExcited.style.display = 'block';
+      } else if (expr === 'dizzy') {
+        eyesDizzy.style.display = 'block';
+        mouthDizzy.style.display = 'block';
+      } else if (expr === 'smug') {
+        eyesSmug.style.display = 'block';
+        mouthSmug.style.display = 'block';
+      }
+
+      expressionStatus.textContent = 'Active: ' + (labels[expr] || expr);
+      updateSizeCheck();
+    }
+
+    // === CONSTELLATION TYPOGRAPHY ===
+    function renderConstellationWords() {
+      constellationWordsGroup.innerHTML = '';
+      if (!isStarNodesOn && !isConstellationFont) return;
+
+      const motto = mottotextPath.textContent.trim();
+      const numStars = Math.min(32, motto.length * 2 + 6);
+      
+      const arcCenterX = 500;
+      const arcCenterY = 500;
+      const arcRadius = 385;
+      const startAngle = -140 * (Math.PI / 180);
+      const endAngle = -20 * (Math.PI / 180);
+
+      const starPoints = [];
+      for (let i = 0; i < numStars; i++) {
+        const frac = i / (numStars - 1);
+        const angle = startAngle + frac * (endAngle - startAngle);
+        const jitterR = (Math.random() - 0.5) * 20;
+        const px = arcCenterX + (arcRadius + jitterR) * Math.cos(angle);
+        const py = arcCenterY + (arcRadius + jitterR) * Math.sin(angle);
+        starPoints.push({ x: px, y: py });
+      }
+
+      for (let i = 0; i < starPoints.length - 1; i++) {
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', starPoints[i].x);
+        line.setAttribute('y1', starPoints[i].y);
+        line.setAttribute('x2', starPoints[i + 1].x);
+        line.setAttribute('y2', starPoints[i + 1].y);
+        line.setAttribute('stroke', '#fdb813');
+        line.setAttribute('stroke-width', '1.5');
+        line.setAttribute('stroke-dasharray', '3 3');
+        line.setAttribute('opacity', '0.75');
+        constellationWordsGroup.appendChild(line);
+      }
+
+      starPoints.forEach((pt, idx) => {
+        const star = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const s = idx % 3 === 0 ? 1.4 : 0.8;
+        star.setAttribute('d', `M ${pt.x},${pt.y - 8 * s} L ${pt.x + 2.5 * s},${pt.y - 2.5 * s} L ${pt.x + 8 * s},${pt.y} L ${pt.x + 2.5 * s},${pt.y + 2.5 * s} L ${pt.x},${pt.y + 8 * s} L ${pt.x - 2.5 * s},${pt.y + 2.5 * s} L ${pt.x - 8 * s},${pt.y} L ${pt.x - 2.5 * s},${pt.y - 2.5 * s} Z`);
+        star.setAttribute('fill', idx % 2 === 0 ? '#ffffff' : '#fdb813');
+        star.setAttribute('class', 'constellation-star');
+        constellationWordsGroup.appendChild(star);
+      });
+    }
+
+    function toggleStarLetters() {
+      isConstellationFont = !isConstellationFont;
+      if (isConstellationFont) {
+        patchTextGroup.setAttribute('fill', 'url(#starLetterPattern)');
+        patchTextGroup.setAttribute('stroke', '#fdb813');
+        patchTextGroup.setAttribute('stroke-width', '1.5');
+        mottoSvgText.setAttribute('font-family', "'Monoton', cursive");
+      } else {
+        const threadCol = $('threadPicker').value || '#fdb813';
+        patchTextGroup.setAttribute('fill', threadCol);
+        patchTextGroup.setAttribute('stroke', '#001833');
+        patchTextGroup.setAttribute('stroke-width', '3');
+        mottoSvgText.setAttribute('font-family', `'${fontSelect.value}', sans-serif`);
+      }
+      renderConstellationWords();
+      updateSizeCheck();
+    }
+
+    function toggleStarNodes() {
+      isStarNodesOn = !isStarNodesOn;
+      renderConstellationWords();
+      updateSizeCheck();
+    }
+
+    // === CUTE POSES ===
+    function setPose(poseName) {
+      currentPose = poseName;
+      posePointArms.style.display = poseName === 'point' ? 'block' : 'none';
+      posePounceArms.style.display = poseName === 'pounce' ? 'block' : 'none';
+      poseVictoryArms.style.display = poseName === 'victory' ? 'block' : 'none';
+      poseFloatArms.style.display = poseName === 'float' ? 'block' : 'none';
+
+      if (poseName === 'pounce') {
+        bearcatTailGroup.setAttribute('transform', 'translate(30, -35) rotate(16 200 600)');
+      } else if (poseName === 'victory') {
+        bearcatTailGroup.setAttribute('transform', 'translate(-15, -10) rotate(-12 200 600)');
+      } else {
+        bearcatTailGroup.setAttribute('transform', 'none');
+      }
+
+      const poseLabels = {
+        point: 'Pointing to Stars',
+        pounce: 'Playful Kitty Pounce',
+        victory: 'Two-Paw Cheer Hooray',
+        float: 'Marshmallow Float'
+      };
+      bernieStatus.textContent = `Pose: ${poseLabels[poseName]} • Suit: ${isJerseyOn ? 'Baruch #43' : 'Puffy EVA'}`;
+      updateSizeCheck();
+    }
+
+    function toggleFloatAnimation() {
+      isZeroGAnimating = !isZeroGAnimating;
+      if (isZeroGAnimating) {
+        bernieMascotRig.classList.add('animated-zero-g');
+        $('toggleFloatAnimBtn').textContent = 'Pause Bobbing';
+      } else {
+        bernieMascotRig.classList.remove('animated-zero-g');
+        $('toggleFloatAnimBtn').textContent = 'Toggle Zero-G Bobbing';
+      }
+    }
+
+    function toggleJersey() {
+      isJerseyOn = !isJerseyOn;
+      jerseyOverlay.style.display = isJerseyOn ? 'block' : 'none';
+      $('harnessPack').style.display = isJerseyOn ? 'none' : 'block';
+      bernieStatus.textContent = `Pose: ${currentPose.toUpperCase()} • Suit: ${isJerseyOn ? 'Baruch #43' : 'Puffy EVA'}`;
+      updateSizeCheck();
+    }
+
+    function toggleVisorTint() {
+      isGoldVisor = !isGoldVisor;
+      visorBaseGlass.setAttribute('fill', isGoldVisor ? 'url(#visorGoldGrad)' : 'url(#visorGlassGrad)');
+      visorBaseGlass.setAttribute('opacity', isGoldVisor ? '0.75' : '0.45');
+      updateSizeCheck();
+    }
+
+    function toggleBlush() {
+      showBlush = !showBlush;
+      blushGroup.style.display = showBlush ? 'block' : 'none';
+      updateSizeCheck();
+    }
+
+    // Dragging Bernie inside patch
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let origBX = 0;
+    let origBY = 0;
+
+    patchSvg.addEventListener('mousedown', e => {
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      origBX = bx;
+      origBY = by;
+    });
+
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const rect = patchSvg.getBoundingClientRect();
+      const scale = 1000 / rect.width;
+      const dx = (e.clientX - dragStartX) * scale;
+      const dy = (e.clientY - dragStartY) * scale;
+      bx = Math.max(-280, Math.min(280, origBX + dx));
+      by = Math.max(-240, Math.min(240, origBY + dy));
+      updateBernieTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
     function applyPalette(p) {
       skyStop1.setAttribute('stop-color', p.sky[0]);
       skyStop2.setAttribute('stop-color', p.sky[1]);
       patchBorderRing.setAttribute('stroke', p.border);
       patchRimOuter.setAttribute('stroke', p.rim);
       patchInnerRing.setAttribute('stroke', p.thread);
-      patchTextGroup.setAttribute('fill', p.thread);
+      
+      if (!isConstellationFont) {
+        patchTextGroup.setAttribute('fill', p.thread);
+      }
       suitTorso.setAttribute('fill', p.suit);
-      armSleeve.setAttribute('fill', p.suit);
 
       $('skyPicker').value = p.sky[0];
       $('borderPicker').value = p.border;
@@ -935,6 +1566,7 @@
     function setMotto(text) {
       mottotextPath.textContent = text;
       customMottoInput.value = text;
+      renderConstellationWords();
       updateSizeCheck();
     }
 
@@ -945,52 +1577,40 @@
     }
 
     function setFont(fontFamily) {
-      mottoSvgText.setAttribute('font-family', `'${fontFamily}', sans-serif`);
+      if (!isConstellationFont) {
+        mottoSvgText.setAttribute('font-family', `'${fontFamily}', sans-serif`);
+      }
       fontSelect.value = fontFamily;
-      updateSizeCheck();
-    }
-
-    function cycleVisor(idx = null) {
-      currentVisorIdx = idx !== null ? idx : (currentVisorIdx + 1) % visorStyles.length;
-      const v = visorStyles[currentVisorIdx];
-      visorReflectionOverlay.setAttribute('fill', v.fill);
-      visorReflectionOverlay.setAttribute('opacity', v.opacity);
-      visorBase.setAttribute('fill', v.base);
-      bernieStatus.textContent = `Visor: ${v.name} • Pose: Skyward (${currentArmAngle}°)`;
-      updateSizeCheck();
-    }
-
-    function cycleArmPose() {
-      const angles = [0, -6, 6, -10, 8];
-      const nextIdx = (angles.indexOf(currentArmAngle) + 1) % angles.length;
-      currentArmAngle = angles[nextIdx];
-      armGroup.setAttribute('transform', `translate(420, 560) rotate(${currentArmAngle} 140 -240)`);
-      bernieStatus.textContent = `Visor: ${visorStyles[currentVisorIdx].name} • Pose: Skyward (${currentArmAngle}°)`;
       updateSizeCheck();
     }
 
     function cycleRocket() {
       const trajectories = [
-        { x: 345, y: 345, scale: 1.22, rot: -2 },
-        { x: 320, y: 320, scale: 1.3, rot: -8 },
-        { x: 375, y: 360, scale: 1.18, rot: 5 }
+        { x: 680, y: 420, scale: 1.15, rot: 12 },
+        { x: 660, y: 390, scale: 1.25, rot: 5 },
+        { x: 710, y: 450, scale: 1.05, rot: 18 },
+        { x: 330, y: 330, scale: 1.2, rot: -8 }
       ];
       const t = trajectories[r(trajectories.length)];
       rocketGroup.setAttribute('transform', `translate(${t.x}, ${t.y}) scale(${t.scale}) rotate(${t.rot})`);
-      rocketStatus.textContent = `Rocket: Orbital Trajectory (${t.rot}°) • Scale ${t.scale}x`;
-      updateSizeCheck();
-    }
-
-    function toggleSmile() {
-      showFangs = !showFangs;
-      $('fangLeft').style.display = showFangs ? 'block' : 'none';
-      $('fangRight').style.display = showFangs ? 'block' : 'none';
       updateSizeCheck();
     }
 
     function toggleWhiskers() {
       showWhiskers = !showWhiskers;
-      bernieWhiskers.style.display = showWhiskers ? 'block' : 'none';
+      mascotWhiskers.style.display = showWhiskers ? 'block' : 'none';
+      updateSizeCheck();
+    }
+
+    function toggleTail() {
+      showTail = !showTail;
+      bearcatTailGroup.style.display = showTail ? 'block' : 'none';
+      updateSizeCheck();
+    }
+
+    function toggleHatchLines() {
+      showHatch = !showHatch;
+      hatchLinesGroup.style.display = showHatch ? 'block' : 'none';
       updateSizeCheck();
     }
 
@@ -1035,10 +1655,14 @@
       const fonts = ['Bebas Neue', 'Space Grotesk', 'Orbitron', 'Cinzel', 'Fraunces'];
       setFont(fonts[r(fonts.length)]);
 
+      const poses = ['point', 'pounce', 'victory', 'float'];
+      setPose(poses[r(poses.length)]);
+
+      setExpression(expressionsList[r(expressionsList.length)]);
+
       generateStars(24 + r(18));
-      cycleVisor(r(visorStyles.length));
-      cycleArmPose();
       cycleRocket();
+      renderConstellationWords();
     }
 
     function exportSvg() {
@@ -1051,7 +1675,7 @@
       const url = URL.createObjectURL(blob);
       const downloadLink = document.createElement('a');
       downloadLink.href = url;
-      downloadLink.download = 'baruch_ssep_mission_patch_v1.svg';
+      downloadLink.download = 'baruch_ssep_mission_patch_cute.svg';
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
@@ -1086,6 +1710,7 @@
       img.src = url;
     }
 
+    // UI Handlers
     $('genBtn').onclick = randomizeAll;
     $('cyclePaletteBtn').onclick = () => {
       currentPaletteIdx = (currentPaletteIdx + 1) % palettes.length;
@@ -1096,18 +1721,55 @@
       currentMottoIdx = (currentMottoIdx + 1) % mottoBank.length;
       setMotto(mottoBank[currentMottoIdx]);
     };
-    $('cycleVisorBtn').onclick = () => cycleVisor();
-    $('toggleFangsBtn').onclick = toggleSmile;
-    $('toggleWhiskersBtn').onclick = toggleWhiskers;
-    $('cycleArmPoseBtn').onclick = cycleArmPose;
+
+    // Cute Expression Selectors
+    expressionSelect.onchange = e => setExpression(e.target.value);
+    $('exprWinkBtn').onclick = () => setExpression('wink');
+    $('exprSparkleBtn').onclick = () => setExpression('sparkle');
+    $('exprExcitedBtn').onclick = () => setExpression('excited');
+    $('exprDizzyBtn').onclick = () => setExpression('dizzy');
+    $('exprSmugBtn').onclick = () => setExpression('smug');
+    $('toggleBlushBtn').onclick = toggleBlush;
+
     $('cycleRocketBtn').onclick = cycleRocket;
     $('cycleStarsBtn').onclick = () => generateStars(20 + r(20));
     $('toggleSmokeBtn').onclick = toggleSmoke;
     $('toggleMoonBtn').onclick = toggleMoon;
+    $('toggleHatchBtn').onclick = toggleHatchLines;
+    $('toggleVisorTintBtn').onclick = toggleVisorTint;
+    $('toggleWhiskersBtn').onclick = toggleWhiskers;
+    $('toggleTailBtn').onclick = toggleTail;
+
+    // Constellation Typography
+    $('toggleStarTextBtn').onclick = toggleStarLetters;
+    $('toggleStarNodesBtn').onclick = toggleStarNodes;
+
+    // Poses
+    $('posePointBtn').onclick = () => setPose('point');
+    $('posePounceBtn').onclick = () => setPose('pounce');
+    $('poseVictoryBtn').onclick = () => setPose('victory');
+    $('poseFloatBtn').onclick = () => setPose('float');
+
+    // Uniform & Drift
+    $('toggleFloatAnimBtn').onclick = toggleFloatAnimation;
+    $('cycleUniformBtn').onclick = toggleJersey;
+
+    // Movement
+    $('zoomInBtn').onclick = () => { bscale = Math.min(1.8, bscale + 0.1); updateBernieTransform(); };
+    $('zoomOutBtn').onclick = () => { bscale = Math.max(0.6, bscale - 0.1); updateBernieTransform(); };
+    $('rotateCWBtn').onclick = () => { brot = (brot + 15) % 360; updateBernieTransform(); };
+    $('rotateCCWBtn').onclick = () => { brot = (brot - 15 + 360) % 360; updateBernieTransform(); };
+    $('flipHorizBtn').onclick = () => { bflip *= -1; updateBernieTransform(); };
+    $('nudgeUp').onclick = () => { by -= 20; updateBernieTransform(); };
+    $('nudgeLeft').onclick = () => { bx -= 20; updateBernieTransform(); };
+    $('nudgeRight').onclick = () => { bx += 20; updateBernieTransform(); };
+    $('resetTransformBtn').onclick = () => { bx = 0; by = 0; bscale = 1.0; brot = 0; bflip = 1; updateBernieTransform(); };
+
     $('adjustTextSpanBtn').onclick = () => {
       const currentSpacing = parseInt(mottoSvgText.getAttribute('letter-spacing') || '7', 10);
       const nextSpacing = currentSpacing >= 12 ? 4 : currentSpacing + 2;
       mottoSvgText.setAttribute('letter-spacing', nextSpacing);
+      renderConstellationWords();
       updateSizeCheck();
     };
     $('adjustSubSpanBtn').onclick = () => {
@@ -1120,6 +1782,7 @@
 
     customMottoInput.oninput = e => {
       mottotextPath.textContent = e.target.value.toUpperCase();
+      renderConstellationWords();
       updateSizeCheck();
     };
 
@@ -1144,20 +1807,24 @@
     };
     $('threadPicker').oninput = e => {
       patchInnerRing.setAttribute('stroke', e.target.value);
-      patchTextGroup.setAttribute('fill', e.target.value);
+      if (!isConstellationFont) {
+        patchTextGroup.setAttribute('fill', e.target.value);
+      }
       updateSizeCheck();
     };
     $('suitPicker').oninput = e => {
       suitTorso.setAttribute('fill', e.target.value);
-      armSleeve.setAttribute('fill', e.target.value);
       updateSizeCheck();
     };
 
     $('exportSvgBtn').onclick = exportSvg;
     $('exportPngBtn').onclick = exportPng;
 
+    // Initial Setup
     generateStars(32);
     applyPalette(palettes[0]);
+    setExpression('wink');
+    updateBernieTransform();
     updateSizeCheck();
   </script>
 </body>
