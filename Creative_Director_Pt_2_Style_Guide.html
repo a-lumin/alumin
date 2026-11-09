@@ -128,71 +128,6 @@
       padding: var(--space-xxl) var(--space-l);
     }
 
-    .section-header {
-      margin-bottom: var(--space-l);
-    }
-
-    .section-title {
-      font-variation-settings: 'wght' 655, 'wdth' 100;
-      font-size: 48px;
-      line-height: 1.1;
-      text-transform: uppercase;
-      color: var(--text-color);
-      margin-bottom: var(--space-xs);
-    }
-
-    .section-subtitle {
-      font-size: 18px;
-      color: var(--text-color);
-      opacity: 0.85;
-    }
-
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-bottom: var(--space-xxxl);
-    }
-
-    .assignment-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      min-height: 64px;
-      padding: 16px 24px;
-      background-color: var(--accent-color);
-      color: var(--text-color);
-      border: 2px solid var(--accent-color);
-      border-radius: 0px;
-      font-variation-settings: 'wght' 655, 'wdth' 100;
-      font-size: 18px;
-      text-decoration: none;
-      text-transform: uppercase;
-      cursor: pointer;
-      outline: none;
-      transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
-    }
-
-    .assignment-btn:hover {
-      background-color: var(--text-color);
-      color: var(--bg-color);
-      border-color: var(--text-color);
-    }
-
-    .assignment-btn:focus-visible {
-      outline: 2px solid var(--accent-color);
-      outline-offset: 4px;
-    }
-
-    .divider {
-      width: 100%;
-      height: 2px;
-      background-color: var(--accent-color);
-      margin: var(--space-xxl) 0;
-      border: none;
-    }
-
     .article-post {
       background: rgba(26, 17, 16, 0.5);
       border: 2px solid var(--accent-color);
@@ -248,10 +183,12 @@
       margin-bottom: 0;
     }
 
+    /* 3-COLUMN LOGO SHOWCASE GRID */
     .logo-showcase-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      margin-top: 16px;
       margin-bottom: var(--space-l);
     }
 
@@ -264,12 +201,22 @@
       gap: 16px;
     }
 
-    .logo-card canvas {
+    .logo-media-container {
       width: 100%;
       aspect-ratio: 1 / 1;
-      object-fit: cover;
       border: 1px solid var(--accent-color);
       background: #0d0808;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-media-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .logo-meta h4 {
@@ -285,32 +232,7 @@
       line-height: 1.4;
     }
 
-    .concepts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: var(--space-l);
-    }
-
-    .concept-box {
-      background: #190f0e;
-      border: 1px solid var(--accent-color);
-      padding: var(--space-s);
-    }
-
-    .concept-box h5 {
-      font-variation-settings: 'wght' 655, 'wdth' 100;
-      font-size: 16px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .concept-box p {
-      font-size: 14px;
-      line-height: 1.45;
-      opacity: 0.85;
-    }
-
+    /* DYNAMIC HERO ENGINE SCENARIO */
     .hero-engine-frame {
       border: 2px solid var(--accent-color);
       background: #050404;
@@ -863,12 +785,10 @@
     }
 
     @media (max-width: 1023px) {
-      .work-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .logo-showcase-grid { grid-template-columns: 1fr; }
-      .concepts-grid { grid-template-columns: 1fr; }
       .engine-workspace { grid-template-columns: 1fr; }
       .hero-headline h1 { font-size: 48px; }
-      .section-title, .post-title { font-size: 36px; }
+      .post-title { font-size: 36px; }
       .block-title { font-size: 28px; }
       .content-container { padding: var(--space-xl) 20px; }
       .hero-content { padding: var(--space-m) 20px; }
@@ -877,40 +797,14 @@
     @media (max-width: 767px) {
       .hero-container { height: 40vh; min-height: 320px; }
       .hero-headline h1 { font-size: 36px; }
-      .section-title, .post-title { font-size: 28px; }
+      .post-title { font-size: 28px; }
       .block-title { font-size: 24px; }
       body { font-size: 16px; }
       .content-container { padding: var(--space-l) 16px; }
       .hero-content { padding: var(--space-s) 16px; }
-      .work-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
       .detail-modal { grid-template-columns: 1fr; }
     }
-  
-    /* PHOTO PLACEHOLDER STYLING */
-    .photo-placeholder {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      border: 2px dashed var(--brass);
-      background: #150c0b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-    .photo-placeholder:hover {
-      background: #231412;
-      border-color: var(--text-color);
-    }
-    .placeholder-prompt {
-      padding: 20px;
-      pointer-events: none;
-    }
-
   </style>
 </head>
 <body>
@@ -930,8 +824,6 @@
     </header>
 
     <main class="content-container">
-      
-      
 
       <article id="creative-director-2" class="article-post">
         
@@ -950,24 +842,45 @@
         <h3 class="block-title">02. Campaign Logomark: Research &amp; AI Utilization</h3>
         <p>Through systematic prompt engineering and iterative image synthesis, we developed a tactile, embroidered star emblem inspired by vintage varsity patches, heavy knitwear labels, and Upper East Side tailoring:</p>
         
-        <div class="logo-showcase-grid" style="margin-top: 16px;">
-          <img src="wild_fable_autumn.jpg">   
+        <!-- 3 SHOWCASE CARDS -->
+        <div class="logo-showcase-grid">
+          
+          <!-- Card 1: Original Campaign Logomark -->
           <div class="logo-card">
-         <div class="logo-meta">
+            <div class="logo-media-container">
+              <img src="wild_fable_autumn.jpg" alt="Original Campaign Logomark" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'400\' height=\'400\' fill=\'%231a1110\'/><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23c89d5c\' font-family=\'sans-serif\' font-size=\'16\'>wild_fable_autumn.jpg</text></svg>';">
+            </div>
+            <div class="logo-meta">
               <h4>Original Campaign Logomark</h4>
               <p>The core campaign emblem featuring the stitched brown star patch with contrast whip-stitching and bold collegiate all-caps Wild Fable lettering in deep oxblood and oat cream.</p>
             </div>
           </div>
 
+          <!-- Card 2: Other Design Iterations -->
           <div class="logo-card">
-            <img src="wild_fable_logos.jpg">   
+            <div class="logo-media-container">
+              <img src="wild_fable_logos.jpg" alt="Other Design Iterations &amp; Concepts" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'400\' height=\'400\' fill=\'%231a1110\'/><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23c89d5c\' font-family=\'sans-serif\' font-size=\'16\'>wild_fable_logos.jpg</text></svg>';">
+            </div>
             <div class="logo-meta">
               <h4>Other Design Iterations &amp; Concepts</h4>
               <p>Generative exploration translating Upper East Side collegiate motifs, analog lens geometry (Option 1), transit ticket wayfinding (Option 2), and Ivy crest shields (Option 3).</p>
             </div>
           </div>
 
-        <h3 class="block-title">02. The Dynamic Hero Image &amp; Interactive Studio</h3>
+          <!-- Card 3: Sweater Application Mockup -->
+          <div class="logo-card">
+            <div class="logo-media-container">
+              <img src="wild_fable_sweater.jpg" alt="Sweater Application Mockup" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'400\' height=\'400\' fill=\'%231a1110\'/><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23c89d5c\' font-family=\'sans-serif\' font-size=\'16\'>wild_fable_sweater.jpg</text></svg>';">
+            </div>
+            <div class="logo-meta">
+              <h4>Sweater Application Mockup</h4>
+              <p>Executed as an interior woven damask collar tag and exterior hem patch on oversized ribbed cardigans. Stitched with high-contrast thread over heavy-gauge camel melange wool.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <h3 class="block-title">03. The Dynamic Hero Image &amp; Interactive Studio</h3>
         <p>The interactive hero engine for <em>Autumn on Madison</em> allows real-time manipulation of optics, camera grain, editorial layout presets, and collection cards:</p>
 
         <div class="hero-engine-frame">
@@ -1271,70 +1184,6 @@
       animate();
     })();
 
-    function drawProceduralLogos() {
-      const pCanvas = document.getElementById('primaryLogoCanvas');
-      if (pCanvas) {
-        const pCtx = pCanvas.getContext('2d');
-        const w = pCanvas.width, h = pCanvas.height;
-        pCtx.fillStyle = '#1a1110';
-        pCtx.fillRect(0, 0, w, h);
-
-        pCtx.save();
-        pCtx.translate(w/2, h/2 - 15);
-        pCtx.fillStyle = '#3a201a';
-        pCtx.strokeStyle = '#ffffff';
-        pCtx.lineWidth = 2.5;
-        pCtx.setLineDash([6, 5]);
-
-        pCtx.beginPath();
-        for (let i = 0; i < 5; i++) {
-          pCtx.lineTo(Math.cos((18 + i * 72) * Math.PI / 180) * 110, -Math.sin((18 + i * 72) * Math.PI / 180) * 110);
-          pCtx.lineTo(Math.cos((54 + i * 72) * Math.PI / 180) * 50, -Math.sin((54 + i * 72) * Math.PI / 180) * 50);
-        }
-        pCtx.closePath();
-        pCtx.fill();
-        pCtx.stroke();
-        pCtx.restore();
-
-        pCtx.font = '700 36px "Space Grotesk", sans-serif';
-        pCtx.textAlign = 'center';
-        pCtx.textBaseline = 'middle';
-        pCtx.fillStyle = '#860111';
-        pCtx.strokeStyle = '#f4eee2';
-        pCtx.lineWidth = 2;
-        pCtx.strokeText('WILD FABLE', w/2, h/2 + 75);
-        pCtx.fillText('WILD FABLE', w/2, h/2 + 75);
-      }
-
-      const mCanvas = document.getElementById('mockupLogoCanvas');
-      if (mCanvas) {
-        const mCtx = mCanvas.getContext('2d');
-        const w = mCanvas.width, h = mCanvas.height;
-        mCtx.fillStyle = '#614638';
-        mCtx.fillRect(0, 0, w, h);
-        mCtx.strokeStyle = 'rgba(0,0,0,0.2)';
-        mCtx.lineWidth = 4;
-        for (let x = 8; x < w; x += 14) {
-          mCtx.beginPath(); mCtx.moveTo(x, 0); mCtx.lineTo(x, h); mCtx.stroke();
-        }
-
-        mCtx.fillStyle = '#221513';
-        mCtx.fillRect(60, 100, w - 120, h - 200);
-        mCtx.strokeStyle = '#c89d5c';
-        mCtx.lineWidth = 2;
-        mCtx.strokeRect(60, 100, w - 120, h - 200);
-
-        mCtx.font = '600 24px "Space Grotesk", sans-serif';
-        mCtx.textAlign = 'center';
-        mCtx.fillStyle = '#f4eee2';
-        mCtx.fillText('WILD FABLE', w/2, h/2 - 10);
-        mCtx.font = '400 12px "Space Grotesk", monospace';
-        mCtx.fillStyle = '#c89d5c';
-        mCtx.fillText('AUTUMN ON MADISON • NYC', w/2, h/2 + 20);
-        mCtx.fillText('KNITWEAR ARCHIVE • 2026', w/2, h/2 + 38);
-      }
-    }
-
     const heroState = {
       grain: 0.45,
       warmth: 0.20,
@@ -1346,8 +1195,16 @@
       currentAspect: 'desktop',
       currentLUT: 'portra',
       activeCardIndex: null,
-      cardMedia: [null, null, null, null],
+      heroImageLoaded: false,
+      heroImage: new Image(),
       modalPerspective: { rx: 0, ry: 0, dragging: false, startX: 0, startY: 0 }
+    };
+
+    // Preload hero image for dynamic studio background
+    heroState.heroImage.src = 'hero.jpg';
+    heroState.heroImage.onload = () => {
+      heroState.heroImageLoaded = true;
+      renderBackdrop();
     };
 
     const tartanThemes = {
@@ -1457,9 +1314,15 @@
 
     function renderBackdrop() {
       const w = heroBackdropCanvas.width, h = heroBackdropCanvas.height;
-      heroCtx.fillStyle = '#120e0d';
-      heroCtx.fillRect(0, 0, w, h);
-      heroCtx.strokeStyle = 'rgba(200, 157, 92, 0.04)';
+      if (heroState.heroImageLoaded) {
+        heroCtx.drawImage(heroState.heroImage, 0, 0, w, h);
+        heroCtx.fillStyle = 'rgba(18, 14, 13, 0.72)';
+        heroCtx.fillRect(0, 0, w, h);
+      } else {
+        heroCtx.fillStyle = '#120e0d';
+        heroCtx.fillRect(0, 0, w, h);
+      }
+      heroCtx.strokeStyle = 'rgba(200, 157, 92, 0.05)';
       heroCtx.lineWidth = 1;
       for (let x = 60; x < w; x += 100) {
         heroCtx.beginPath(); heroCtx.moveTo(x, 0); heroCtx.lineTo(x, h); heroCtx.stroke();
@@ -1657,7 +1520,13 @@
       const expCanvas = document.createElement('canvas');
       expCanvas.width = 1440; expCanvas.height = 900;
       const expCtx = expCanvas.getContext('2d');
-      expCtx.fillStyle = '#120e0d'; expCtx.fillRect(0, 0, 1440, 900);
+      if (heroState.heroImageLoaded) {
+        expCtx.drawImage(heroState.heroImage, 0, 0, 1440, 900);
+        expCtx.fillStyle = 'rgba(18, 14, 13, 0.72)';
+        expCtx.fillRect(0, 0, 1440, 900);
+      } else {
+        expCtx.fillStyle = '#120e0d'; expCtx.fillRect(0, 0, 1440, 900);
+      }
       expCtx.drawImage(tartanStripCanvas, 0, 0, 28, 900);
       expCtx.fillStyle = heroState.brassAccent;
       expCtx.font = '500 14px "Space Grotesk", sans-serif';
@@ -1693,26 +1562,10 @@
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-      // logos loaded via images
       renderBackdrop();
       applyHeroState();
       renderAnalogOptics();
     });
-  
-    function previewImage(input, imgId, textId) {
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const img = document.getElementById(imgId);
-          const txt = document.getElementById(textId);
-          img.src = e.target.result;
-          img.style.display = 'block';
-          txt.style.display = 'none';
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
   </script>
 </body>
 </html>
