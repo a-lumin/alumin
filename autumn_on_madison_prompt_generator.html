@@ -1,757 +1,1045 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autumn on Madison // Campaign Prompt & Shot List Engine</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Target Wild Fable — Autumn on Madison Campaign Prompt Engine</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@400;500;700;900&family=Overpass:wght@400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --deep-espresso: #1a1110;
+      --bg-dark: #120b0a;
+      --bg-surface: #1a1110;
+      --bg-card: #241816;
+      --bg-card-hover: #2e1f1c;
+      --border-subtle: #3b2219;
+      --border-strong: #5a2e22;
       --roasted-chestnut: #3B2219;
       --burnt-cocoa: #480607;
       --raw-umber: #860111;
       --toffee-saddle: #966847;
-      --sandstone: #B59E87;
-      --crisp-ivory: #F5F0EA;
+      --toffee-light: #b38562;
+      --weathered-sandstone: #B59E87;
+      --cream-parchment: #ece2d5;
+      --text-muted: #8e7a72;
+      --text-dim: #63524b;
+      --accent-badge: #dfb288;
     }
 
     * {
-      border-radius: 0px !important;
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important; /* Strict 0px brutalist sharp aesthetic */
     }
 
     body {
-      background-color: var(--deep-espresso);
-      color: var(--sandstone);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      background-image: radial-gradient(circle at 50% 0%, rgba(72, 6, 7, 0.28) 0%, transparent 65%);
+      background-color: var(--bg-dark);
+      color: var(--cream-parchment);
+      font-family: 'EB Garamond', serif;
+      line-height: 1.5;
+      padding: 24px;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(72, 6, 7, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(59, 34, 25, 0.3) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, rgba(26, 17, 16, 0.4) 0px, rgba(26, 17, 16, 0.4) 2px, transparent 2px, transparent 8px);
+      background-attachment: fixed;
     }
 
-    .font-serif-vintage { font-family: 'EB Garamond', serif; }
-    .font-mono-spec { font-family: 'Courier Prime', monospace; }
-    .font-display { font-family: 'Inter', sans-serif; font-weight: 900; letter-spacing: 0.18em; }
-
-    #canvas-grain {
+    /* Subtle Film Grain Overlay */
+    body::before {
+      content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
-      z-index: 99;
-      opacity: 0.055;
+      opacity: 0.035;
+      background: repeating-radial-gradient(#fff 0 0.0001%, #000 0 0.0002%);
+      background-size: 150px 150px;
+      z-index: 999;
     }
 
-    ::-webkit-scrollbar { width: 4px; height: 4px; }
-    ::-webkit-scrollbar-track { background: #150d0c; }
-    ::-webkit-scrollbar-thumb { background: #480607; }
-    ::-webkit-scrollbar-thumb:hover { background: #860111; }
-
-    .brand-checkbox:checked {
-      background-color: #860111;
-      border-color: #860111;
+    .container {
+      max-width: 1480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
 
-    .border-chestnut { border-color: rgba(59, 34, 25, 0.7); }
-    .glow-accent { box-shadow: 0 0 25px rgba(134, 1, 17, 0.25); }
+    /* Masthead Header */
+    header {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-left: 6px solid var(--raw-umber);
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .tag-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--toffee-saddle);
+    }
+
+    .tag-pill {
+      background: var(--burnt-cocoa);
+      color: var(--weathered-sandstone);
+      padding: 3px 8px;
+      border: 1px solid var(--raw-umber);
+    }
+
+    .brand-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 900;
+      font-size: 2.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream-parchment);
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+
+    .brand-title span.sub {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.6rem;
+      text-transform: none;
+      color: var(--toffee-light);
+    }
+
+    .header-specs {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.6;
+      border-left: 1px dashed var(--border-subtle);
+      padding-left: 20px;
+    }
+
+    /* Layout Grid */
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 1080px) {
+      .app-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards & Panels */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+    }
+
+    .card-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--weathered-sandstone);
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title .counter {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--raw-umber);
+      background: #1e0909;
+      padding: 2px 8px;
+      border: 1px solid var(--burnt-cocoa);
+    }
+
+    /* Form Elements */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--toffee-light);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    label span.note {
+      color: var(--text-dim);
+      text-transform: none;
+      font-style: italic;
+    }
+
+    select, input[type="text"], textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--cream-parchment);
+      padding: 12px 14px;
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      transition: all 0.2s ease;
+      outline: none;
+      width: 100%;
+    }
+
+    select:focus, input[type="text"]:focus, textarea:focus {
+      border-color: var(--raw-umber);
+      background: var(--bg-card-hover);
+      box-shadow: 0 0 0 1px var(--raw-umber);
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .row-2, .row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Checkbox & Radio Toggles */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      color: var(--weathered-sandstone);
+      background: var(--bg-card);
+      padding: 10px 14px;
+      border: 1px solid var(--border-subtle);
+      user-select: none;
+    }
+
+    .toggle-row:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-strong);
+    }
+
+    .toggle-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--raw-umber);
+      cursor: pointer;
+    }
+
+    /* Preset Quick Buttons */
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px;
+    }
+
+    .btn-preset {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--weathered-sandstone);
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.78rem;
+      padding: 8px 10px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .btn-preset span.badge {
+      font-size: 0.65rem;
+      color: var(--toffee-saddle);
+      text-transform: uppercase;
+    }
+
+    .btn-preset:hover {
+      background: var(--border-subtle);
+      color: #fff;
+      border-color: var(--toffee-saddle);
+    }
+
+    /* Live Output Terminal */
+    .output-panel {
+      background: #0d0807;
+      border: 1px solid var(--border-strong);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 10px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.8rem;
+      color: var(--toffee-saddle);
+    }
+
+    .prompt-box {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: #f7eedf;
+      background: transparent;
+      border: none;
+      width: 100%;
+      min-height: 180px;
+      resize: vertical;
+      outline: none;
+      white-space: pre-wrap;
+    }
+
+    .negative-box {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: #b56e6e;
+      background: #170b0b;
+      padding: 10px 14px;
+      border: 1px solid #3d1414;
+      line-height: 1.4;
+      word-break: break-all;
+    }
+
+    /* Action Buttons */
+    .action-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--raw-umber);
+      color: #fff;
+      flex: 2;
+    }
+
+    .btn-primary:hover {
+      background: #aa0217;
+      box-shadow: 0 0 15px rgba(134, 1, 17, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--weathered-sandstone);
+      flex: 1;
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      color: #fff;
+      border-color: var(--toffee-saddle);
+    }
+
+    /* Campaign Queue Deck */
+    .queue-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      padding: 24px;
+    }
+
+    .queue-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 6px;
+      margin-top: 16px;
+    }
+
+    .queue-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .queue-list::-webkit-scrollbar-thumb {
+      background: var(--border-subtle);
+    }
+
+    .queue-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .queue-item:hover {
+      border-color: var(--raw-umber);
+    }
+
+    .queue-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      overflow: hidden;
+    }
+
+    .queue-item-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--toffee-saddle);
+      display: flex;
+      gap: 12px;
+    }
+
+    .queue-item-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.98rem;
+      color: var(--cream-parchment);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-icon {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 10px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .btn-icon:hover {
+      color: #fff;
+      border-color: var(--raw-umber);
+      background: var(--burnt-cocoa);
+    }
+
+    /* Modal / Toast */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--raw-umber);
+      color: #fff;
+      padding: 12px 24px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      border: 1px solid #ff4c4c;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.25s ease;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-[#860111] selection:text-[#F5F0EA]">
-  <canvas id="canvas-grain"></canvas>
+<body>
 
-  <!-- Header -->
-  <header class="border-b border-chestnut bg-[#150e0d]/90 backdrop-blur-md sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-4">
-        <div class="h-8 w-8 bg-[#860111] flex items-center justify-center text-[#F5F0EA] font-mono-spec font-bold text-sm tracking-wider">
-          WF
+  <div class="container">
+    
+    <!-- Masthead -->
+    <header>
+      <div class="brand-meta">
+        <div class="tag-row">
+          <span>Target Corp &bull; Wild Fable Division</span>
+          <span class="tag-pill">Fall 2026 Directive</span>
+          <span>NYC Campus Series</span>
         </div>
-        <div>
-          <span class="text-xs uppercase font-mono-spec tracking-widest text-[#966847]">TARGET // WILD FABLE STUDIO</span>
-          <h1 class="text-sm tracking-wider font-display uppercase text-[#F5F0EA] leading-none">Autumn on Madison &mdash; Campaign Hub</h1>
+        <div class="brand-title">
+          Autumn on Madison <span class="sub">&mdash; AI Image Prompt Architect</span>
         </div>
       </div>
-
-      <div class="hidden md:flex items-center space-x-6 text-xs font-mono-spec">
-        <span class="text-[#B59E87]/70 flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 bg-[#860111] inline-block animate-pulse"></span>
-          CAMPAIGN: AUTUMN ON MADISON
-        </span>
-        <button onclick="scrollToShotList()" class="border border-[#860111] px-3 py-1 text-[#F5F0EA] bg-[#480607]/40 hover:bg-[#860111] transition flex items-center gap-1.5">
-          <span>SHOT LIST QUEUE</span>
-          <span id="queue-badge" class="bg-[#1a1110] text-[#F5F0EA] px-1.5 text-[10px] font-bold">0</span>
-        </button>
+      <div class="header-specs">
+        LOCATION: Madison Ave & E 68th St, NYC<br>
+        PALETTE: #1A1110 / #3B2219 / #480607 / #860111 / #966847<br>
+        FILM: Kodak Portra 400 &bull; Yashica 35mm Analog Warmth
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Presets -->
-  <div class="border-b border-chestnut bg-[#19100f] overflow-x-auto py-2 px-4 sm:px-6">
-    <div class="max-w-7xl mx-auto flex items-center gap-2 text-xs font-mono-spec whitespace-nowrap">
-      <span class="text-[#966847] uppercase mr-2 tracking-widest text-[10px]">CAMPAIGN SLOTS:</span>
-      <button onclick="loadPreset('stoop')" class="border border-chestnut hover:border-[#860111] px-3 py-1 bg-[#150d0c] text-[#F5F0EA] hover:bg-[#3B2219] transition">
-        01. Madison Ave Stoop Hero
-      </button>
-      <button onclick="loadPreset('maryjane')" class="border border-chestnut hover:border-[#860111] px-3 py-1 bg-[#150d0c] text-[#F5F0EA] hover:bg-[#3B2219] transition">
-        02. Mary Jane Footwear Detail
-      </button>
-      <button onclick="loadPreset('flatlay')" class="border border-chestnut hover:border-[#860111] px-3 py-1 bg-[#150d0c] text-[#F5F0EA] hover:bg-[#3B2219] transition">
-        03. Tartan & Knitwear Flat Lay
-      </button>
-      <button onclick="loadPreset('cafe')" class="border border-chestnut hover:border-[#860111] px-3 py-1 bg-[#150d0c] text-[#F5F0EA] hover:bg-[#3B2219] transition">
-        04. Madison Rainy Cafe Window
-      </button>
-      <button onclick="loadPreset('bookstore')" class="border border-chestnut hover:border-[#860111] px-3 py-1 bg-[#150d0c] text-[#F5F0EA] hover:bg-[#3B2219] transition">
-        05. Academic Bookstore Look
-      </button>
-    </div>
-  </div>
-
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full space-y-8">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Main Builder Grid -->
+    <div class="app-grid">
       
-      <!-- CONTROLS (7 cols) -->
-      <section class="lg:col-span-7 space-y-6">
+      <!-- Left Column: Parameters & Selectors -->
+      <div class="card">
+        <div class="card-title">
+          <span>1. Creative & Optical Parameters</span>
+          <span class="counter">SPECS</span>
+        </div>
 
-        <!-- CAMPAIGN DELIVERABLE / PLACEMENT -->
-        <div class="border border-chestnut bg-[#160e0d] p-5">
-          <div class="flex items-center justify-between mb-4 pb-2 border-b border-chestnut">
-            <h2 class="text-xs font-mono-spec uppercase tracking-widest text-[#966847] flex items-center gap-2">
-              <span class="w-2 h-2 bg-[#860111]"></span> 01 // CAMPAIGN DELIVERABLE & CHANNEL
-            </h2>
-            <span class="text-[10px] font-mono-spec text-[#B59E87]/60">PRODUCTION TARGET</span>
-          </div>
-
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono-spec mb-3">
-            <button type="button" onclick="selectPlacement('lookbook', '4:5')" id="place-lookbook" class="place-btn p-3 text-left border border-[#860111] bg-[#3B2219] text-[#F5F0EA] transition">
-              <span class="block text-[10px] text-[#B59E87] mb-1">LOOKBOOK</span>
-              Editorial Print (4:5)
+        <!-- Quick Campaign Presets -->
+        <div class="field-group">
+          <label>Campaign Quick Presets <span class="note">Pre-calibrated brand alignments</span></label>
+          <div class="preset-grid">
+            <button class="btn-preset" onclick="loadPreset('brownstone')">
+              <span class="badge">Hero Lookbook</span>
+              <strong>Brownstone Stoop</strong>
             </button>
-            <button type="button" onclick="selectPlacement('billboard', '16:9')" id="place-billboard" class="place-btn p-3 text-left border border-chestnut bg-[#1c1211] text-[#B59E87] hover:border-[#966847] transition">
-              <span class="block text-[10px] text-[#B59E87]/60 mb-1">OUT-OF-HOME</span>
-              Urban Banner (16:9)
+            <button class="btn-preset" onclick="loadPreset('library')">
+              <span class="badge">Atmosphere</span>
+              <strong>Dark Oak Stacks</strong>
             </button>
-            <button type="button" onclick="selectPlacement('social', '9:16')" id="place-social" class="place-btn p-3 text-left border border-chestnut bg-[#1c1211] text-[#B59E87] hover:border-[#966847] transition">
-              <span class="block text-[10px] text-[#B59E87]/60 mb-1">MOBILE SOCIAL</span>
-              Story / Reel (9:16)
+            <button class="btn-preset" onclick="loadPreset('cafe')">
+              <span class="badge">Lifestyle Candid</span>
+              <strong>Corner Window Seat</strong>
             </button>
-            <button type="button" onclick="selectPlacement('ecomm', '1:1')" id="place-ecomm" class="place-btn p-3 text-left border border-chestnut bg-[#1c1211] text-[#B59E87] hover:border-[#966847] transition">
-              <span class="block text-[10px] text-[#B59E87]/60 mb-1">E-COMMERCE</span>
-              Catalog Tile (1:1)
+            <button class="btn-preset" onclick="loadPreset('flatlay')">
+              <span class="badge">E-Commerce Detail</span>
+              <strong>Texture Flat-Lay</strong>
             </button>
           </div>
         </div>
 
-        <!-- CAMPAIGN CONTINUITY ANCHORS -->
-        <div class="border border-chestnut bg-[#160e0d] p-5">
-          <div class="flex items-center justify-between mb-4 pb-2 border-b border-chestnut">
-            <h2 class="text-xs font-mono-spec uppercase tracking-widest text-[#966847] flex items-center gap-2">
-              <span class="w-2 h-2 bg-[#860111]"></span> 02 // CAMPAIGN CONSISTENCY ANCHORS
-            </h2>
-            <span class="text-[10px] font-mono-spec text-[#22c55e]">BATCH GENERATION READY</span>
+        <!-- Shot Type & Target Placement -->
+        <div class="row-2">
+          <div class="field-group">
+            <label for="shotType">Shot Type & Category</label>
+            <select id="shotType" onchange="generatePrompt()">
+              <option value="lifestyle">Lifestyle & Candid Streetwear</option>
+              <option value="editorial_portrait">Editorial Fashion Portrait</option>
+              <option value="product_catalog">Garment Catalog & Still-Life</option>
+              <option value="macro_detail">Macro Detail & Textile Close-up</option>
+              <option value="setting_atmosphere">Architectural Setting & Environment</option>
+            </select>
           </div>
+          <div class="field-group">
+            <label for="deliverableFormat">Campaign Format / Aspect Ratio</label>
+            <select id="deliverableFormat" onchange="generatePrompt()">
+              <option value="lookbook">Editorial Lookbook Print (4:5 / --ar 4:5)</option>
+              <option value="billboard">OOH Billboard / Banner (16:9 / --ar 16:9)</option>
+              <option value="social_story">Mobile Story / Reel Cover (9:16 / --ar 9:16)</option>
+              <option value="ecommerce_tile">Web E-Comm Square (1:1 / --ar 1:1)</option>
+              <option value="cinematic_header">Panoramic Store Display (21:9 / --ar 21:9)</option>
+            </select>
+          </div>
+        </div>
 
-          <div class="space-y-3">
-            <label class="flex items-start space-x-2.5 p-2.5 bg-[#1c1211] border border-chestnut cursor-pointer">
-              <input type="checkbox" id="anchor-talent" checked onchange="triggerUpdate()" class="brand-checkbox mt-0.5 rounded-none text-[#860111] bg-[#150d0c] border-[#3B2219]">
-              <div class="text-xs font-mono-spec">
-                <span class="text-[#F5F0EA] block font-bold">Lock Consistent Campaign Muse</span>
-                <span class="text-[#B59E87]/70 text-[11px]">Recurring Gen-Z college student, tousled brunette bob, minimal natural makeup, authentic student presence.</span>
-              </div>
-            </label>
+        <!-- Optical Specs: Perspective & Lighting -->
+        <div class="row-2">
+          <div class="field-group">
+            <label for="cameraAngle">Camera Angle & Optics</label>
+            <select id="cameraAngle" onchange="generatePrompt()">
+              <option value="eye_level_35mm">Eye-level 35mm street perspective (f/2.0 candid depth)</option>
+              <option value="low_angle_stoop">Low-angle upward framing stoop steps (architectural prestige)</option>
+              <option value="portrait_85mm">85mm f/1.4 tight portraiture (creamy bokeh, subject isolate)</option>
+              <option value="over_shoulder">Over-the-shoulder voyeuristic documentary angle</option>
+              <option value="flat_lay_90">Top-down 90-degree bird's-eye flat-lay (balanced tabletop)</option>
+              <option value="macro_105mm">105mm macro close-up (fiber weave, button stitching)</option>
+              <option value="wide_sidewalk">50mm medium wide street corner composition</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="lightingStyle">Lighting & Atmospheric Temperature</label>
+            <select id="lightingStyle" onchange="generatePrompt()">
+              <option value="golden_hour">Golden hour late October sun with long amber shadows</option>
+              <option value="diffused_overcast">Diffused overcast autumn sky with soft low-contrast wrap</option>
+              <option value="tungsten_cafe">Warm interior amber tungsten illumination through rain-condensed pane</option>
+              <option value="dappled_canopy">Dappled natural sunlight filtered through drying maple leaves</option>
+              <option value="blue_hour_glow">Dusk blue hour with warm storefront lantern accent glows</option>
+            </select>
+          </div>
+        </div>
 
-            <label class="flex items-start space-x-2.5 p-2.5 bg-[#1c1211] border border-chestnut cursor-pointer">
-              <input type="checkbox" id="anchor-lighting" checked onchange="triggerUpdate()" class="brand-checkbox mt-0.5 rounded-none text-[#860111] bg-[#150d0c] border-[#3B2219]">
-              <div class="text-xs font-mono-spec">
-                <span class="text-[#F5F0EA] block font-bold">Lock Campaign Color Grading & Film Stock</span>
-                <span class="text-[#B59E87]/70 text-[11px]">Matching warm 35mm Portra tones, consistent soft halation, and monochrome brown harmony across every shot.</span>
-              </div>
+        <!-- Setting & Environment -->
+        <div class="field-group">
+          <label for="settingEnvironment">Madison Ave Corridor & Setting</label>
+          <select id="settingEnvironment" onchange="generatePrompt()">
+            <option value="stoop">Historic brownstone stoop stairs, black cast-iron railings, Madison Ave & E 68th St</option>
+            <option value="cafe_table">Cozy dark-walnut bistro table, condensation-streaked coffee shop window</option>
+            <option value="library_stacks">Floor-to-ceiling collegiate dark mahogany library shelves, vintage leather book spines</option>
+            <option value="sidewalk_crosswalk">Upper East Side leaf-strewn sidewalk curb with vintage green NYC street sign</option>
+            <option value="subway_entrance">Heritage tiled subway stair entrance with brass handrails and fallen oak leaves</option>
+            <option value="central_park_bench">Weathered stone park wall overlooking golden autumn foliage and Manhattan skyline</option>
+          </select>
+        </div>
+
+        <!-- Wardrobe & Garment Assemblies -->
+        <div class="field-group">
+          <label>Wardrobe Layering (Autumn Academia Combinations)</label>
+          <div class="row-3">
+            <select id="garmentTop" onchange="generatePrompt()">
+              <option value="ribbed_knit_cardigan">Oversized espresso ribbed knit cardigan (#1A1110)</option>
+              <option value="cable_knit_sweater">Chunky roasted chestnut cable-knit crewneck (#3B2219)</option>
+              <option value="argyle_vest">Layered argyle knit sweater vest over crisp oxford collar</option>
+              <option value="fitted_turtleneck">Burnt cocoa fine-gauge turtleneck (#480607)</option>
+              <option value="wool_trench">Tailored camel-toffee wool overcoat (#966847)</option>
+            </select>
+            <select id="garmentBottom" onchange="generatePrompt()">
+              <option value="tartan_mini">Pleated tartan wool mini skirt in muted umber & chestnut</option>
+              <option value="pleated_midi">Midi-length accordion pleated wool skirt in toffee brown</option>
+              <option value="corduroy_trousers">High-waisted wide-leg corduroy trousers in burnt cocoa</option>
+              <option value="plaid_culottes">Tailored heritage houndstooth wool trousers</option>
+            </select>
+            <select id="garmentFootwear" onchange="generatePrompt()">
+              <option value="mary_janes">Burnished leather Mary Jane T-straps with white slouch socks</option>
+              <option value="lug_sole_loafers">Chunky lug-sole penny loafers with cream ribbed crew socks</option>
+              <option value="riding_boots">Antique espresso knee-high riding boots in distressed leather</option>
+              <option value="oxfords">Polished raw umber wingtip brogue oxfords</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Model Casting / Subject Anchors -->
+        <div class="field-group">
+          <label for="talentAnchor">Talent Casting & Demographic Continuity</label>
+          <select id="talentAnchor" onchange="generatePrompt()">
+            <option value="east_asian_collegiate">East Asian collegiate student with effortless soft curtain bangs and thoughtful gaze</option>
+            <option value="black_collegiate">Black female student with neat natural mini-braids and subtle vintage tortoiseshell glasses</option>
+            <option value="south_asian_collegiate">South Asian female university student holding leather journal with relaxed street posture</option>
+            <option value="latina_collegiate">Latina literature student with natural wavy dark hair tucked beneath newsboy cap</option>
+            <option value="male_collegiate">Young male collegiate student in heavy wool knit sweater reading paperback novel</option>
+            <option value="duo_students">Two university companions sitting side-by-side on brownstone step in layered textures</option>
+            <option value="none_still_life">[Still Life / No Human Figure] Garments arranged with props</option>
+          </select>
+        </div>
+
+        <!-- Props & Hardware -->
+        <div class="field-group">
+          <label for="heroProps">Hero Tactile Props & Narrative Artifacts</label>
+          <select id="heroProps" onchange="generatePrompt()">
+            <option value="yashica_camera">Vintage metallic Yashica 35mm rangefinder camera on braided strap and ceramic cappuccino</option>
+            <option value="books_latte">Stack of clothbound classic literature novels, ceramic cup with delicate leaf latte art</option>
+            <option value="canvas_tote_coffee">Heavyweight weathered canvas collegiate tote bag, steaming paper takeaway cup with sleeve</option>
+            <option value="vinyl_and_map">Faded Upper East Side street map, vintage vinyl record sleeve in cardboard jacket</option>
+            <option value="glasses_and_leaves">Tortoiseshell round reading spectacles resting on crisp fallen golden maple leaves</option>
+          </select>
+        </div>
+
+        <!-- AI Engine Target -->
+        <div class="row-2">
+          <div class="field-group">
+            <label for="engineMode">Target Generator Syntax</label>
+            <select id="engineMode" onchange="generatePrompt()">
+              <option value="midjourney">Midjourney v6.0 (--style raw / parameter tuning)</option>
+              <option value="flux">Flux.1 Schnell / Dev (Natural descriptive weight)</option>
+              <option value="dalle3">DALL&middot;E 3 (Rich natural language director brief)</option>
+              <option value="sdxl">Stable Diffusion XL (Keyframe weighted token format)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Brand Guardrails</label>
+            <label class="toggle-row">
+              <input type="checkbox" id="strictNegative" checked onchange="generatePrompt()">
+              Enforce strict off-brand negative prompt
             </label>
           </div>
         </div>
 
-        <!-- CATEGORY & OPTICS -->
-        <div class="border border-chestnut bg-[#160e0d] p-5">
-          <div class="flex items-center justify-between mb-4 pb-2 border-b border-chestnut">
-            <h2 class="text-xs font-mono-spec uppercase tracking-widest text-[#966847] flex items-center gap-2">
-              <span class="w-2 h-2 bg-[#860111]"></span> 03 // SHOT TYPE & OPTICS
-            </h2>
+      </div>
+
+      <!-- Right Column: Live Prompt Terminal & Campaign Queue -->
+      <div class="card">
+        <div class="card-title">
+          <span>2. Live Campaign Prompt Terminal</span>
+          <span class="counter" id="formatBadge">ASPECT: 4:5</span>
+        </div>
+
+        <div class="output-panel">
+          <div class="output-header">
+            <span id="activeEngineLabel">MIDJOURNEY V6.0 SYNTAX</span>
+            <span id="charCount">0 CHARACTERS</span>
+          </div>
+
+          <textarea id="promptOutput" class="prompt-box" spellcheck="false" placeholder="Generating prompt..."></textarea>
+          
+          <div id="negativeContainer">
+            <div style="font-family:'Courier Prime', monospace; font-size:0.75rem; color:var(--text-muted); margin-bottom:4px;">
+              ENFORCED NEGATIVE FILTERS (OFF-BRAND GUARDRAIL):
+            </div>
+            <div class="negative-box" id="negativeOutput"></div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-primary" onclick="copyCurrentPrompt()">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+            Copy Image Prompt
+          </button>
+          <button class="btn btn-secondary" onclick="addToCampaignQueue()">
+            + Add to Shot List
+          </button>
+        </div>
+
+        <!-- Campaign Queue Deck -->
+        <div class="queue-panel">
+          <div class="card-title" style="padding-bottom: 8px;">
+            <span>Campaign Shot List Deck</span>
+            <span style="font-family:'Space Mono', monospace; font-size:0.8rem; color:var(--toffee-light);" id="queueCount">0 SHOTS</span>
           </div>
           
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono-spec mb-4">
-            <button type="button" onclick="selectCategory('lifestyle')" id="cat-lifestyle" class="cat-btn p-2.5 text-left border border-[#860111] bg-[#3B2219] text-[#F5F0EA]">
-              Lifestyle
-            </button>
-            <button type="button" onclick="selectCategory('product')" id="cat-product" class="cat-btn p-2.5 text-left border border-chestnut bg-[#1c1211] text-[#B59E87]">
-              Product
-            </button>
-            <button type="button" onclick="selectCategory('detail')" id="cat-detail" class="cat-btn p-2.5 text-left border border-chestnut bg-[#1c1211] text-[#B59E87]">
-              Detail / Macro
-            </button>
-            <button type="button" onclick="selectCategory('setting')" id="cat-setting" class="cat-btn p-2.5 text-left border border-chestnut bg-[#1c1211] text-[#B59E87]">
-              Setting
-            </button>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-mono-spec uppercase text-[#F5F0EA] mb-2">Perspective & Angle</label>
-              <select id="select-angle" onchange="triggerUpdate()" class="w-full bg-[#1c1211] border border-chestnut px-3 py-2 text-xs font-mono-spec text-[#F5F0EA] focus:border-[#860111] focus:outline-none">
-                <option value="Low angle looking up from sidewalk toward classic brownstone stoop">Low angle looking up stoop</option>
-                <option value="Eye-level candid snapshot, unposed street moment">Eye-level candid snapshot</option>
-                <option value="Extreme close-up macro, razor-thin focal plane, creamy bokeh">Extreme close-up macro (f/1.4)</option>
-                <option value="Overhead 90-degree flat-lay editorial composition">Overhead 90° flat-lay</option>
-                <option value="Dynamic 3/4 street portrait, model captured mid-stride">3/4 dynamic street portrait</option>
-                <option value="Medium environmental frame highlighting brownstone facade">Medium environmental facade frame</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-xs font-mono-spec uppercase text-[#F5F0EA] mb-2">Lens & Aperture</label>
-              <select id="select-lens" onchange="triggerUpdate()" class="w-full bg-[#1c1211] border border-chestnut px-3 py-2 text-xs font-mono-spec text-[#F5F0EA] focus:border-[#860111] focus:outline-none">
-                <option value="35mm f/1.8 prime lens, subtle optical halation">35mm f/1.8 (Candid Street)</option>
-                <option value="50mm f/1.4 lens, cinematic subject separation">50mm f/1.4 (Natural Depth)</option>
-                <option value="85mm f/1.8 telephoto lens, compressed background">85mm f/1.8 (Editorial Look)</option>
-                <option value="105mm f/2.8 Micro lens, tactile fabric thread clarity">105mm f/2.8 Macro (Textures)</option>
-              </select>
+          <div class="queue-list" id="queueList">
+            <div style="font-family:'EB Garamond'; font-style:italic; color:var(--text-dim); text-align:center; padding: 20px 0;">
+              Shot list queue is currently empty. Build custom variations and click "+ Add to Shot List" to assemble your campaign production package.
             </div>
           </div>
-        </div>
 
-        <!-- HERO GARMENTS & SETTING -->
-        <div class="border border-chestnut bg-[#160e0d] p-5">
-          <div class="flex items-center justify-between mb-4 pb-2 border-b border-chestnut">
-            <h2 class="text-xs font-mono-spec uppercase tracking-widest text-[#966847] flex items-center gap-2">
-              <span class="w-2 h-2 bg-[#860111]"></span> 04 // STYLING & LOCATION
-            </h2>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono-spec mb-4">
-            <label class="flex items-center space-x-2 p-2 bg-[#1c1211] border border-chestnut">
-              <input type="checkbox" name="garment" value="heavy ribbed knit cardigan in deep espresso wool" checked onchange="triggerUpdate()" class="brand-checkbox">
-              <span class="text-[#F5F0EA]">Espresso Ribbed Cardigan</span>
-            </label>
-            <label class="flex items-center space-x-2 p-2 bg-[#1c1211] border border-chestnut">
-              <input type="checkbox" name="garment" value="pleated wool tartan mini skirt in burnt cocoa" checked onchange="triggerUpdate()" class="brand-checkbox">
-              <span class="text-[#F5F0EA]">Pleated Tartan Skirt</span>
-            </label>
-            <label class="flex items-center space-x-2 p-2 bg-[#1c1211] border border-chestnut">
-              <input type="checkbox" name="garment" value="glossy roasted chestnut Mary Jane shoes with slouch socks" checked onchange="triggerUpdate()" class="brand-checkbox">
-              <span class="text-[#F5F0EA]">Mary Janes + Slouch Socks</span>
-            </label>
-            <label class="flex items-center space-x-2 p-2 bg-[#1c1211] border border-chestnut">
-              <input type="checkbox" name="garment" value="chocolate brown corduroy newsboy cap" onchange="triggerUpdate()" class="brand-checkbox">
-              <span class="text-[#F5F0EA]">Corduroy Newsboy Cap</span>
-            </label>
-            <label class="flex items-center space-x-2 p-2 bg-[#1c1211] border border-chestnut">
-              <input type="checkbox" name="garment" value="vintage Yashica 35mm rangefinder camera" checked onchange="triggerUpdate()" class="brand-checkbox">
-              <span class="text-[#F5F0EA]">Analog Yashica Camera</span>
-            </label>
-            <label class="flex items-center space-x-2 p-2 bg-[#1c1211] border border-chestnut">
-              <input type="checkbox" name="garment" value="porcelain cup of cappuccino with leaf latte art" onchange="triggerUpdate()" class="brand-checkbox">
-              <span class="text-[#F5F0EA]">Cappuccino & Latte Art</span>
-            </label>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-mono-spec uppercase text-[#F5F0EA] mb-2">Location</label>
-              <select id="select-setting" onchange="triggerUpdate()" class="w-full bg-[#1c1211] border border-chestnut px-3 py-2 text-xs font-mono-spec text-[#F5F0EA] focus:outline-none">
-                <option value="Upper East Side brownstone stoop with amber maple leaves on steps">Upper East Side Brownstone Stoop</option>
-                <option value="Madison Avenue & E 68th Street corner with vintage street blades">Madison Ave & E 68th St Corner</option>
-                <option value="Wood-paneled coffee house with condensation on glass window">Wood-Paneled Neighborhood Cafe</option>
-                <option value="Academic collegiate library aisle with tall walnut bookshelves">Collegiate Library Bookshelves</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-mono-spec uppercase text-[#F5F0EA] mb-2">Lighting</label>
-              <select id="select-lighting" onchange="triggerUpdate()" class="w-full bg-[#1c1211] border border-chestnut px-3 py-2 text-xs font-mono-spec text-[#F5F0EA] focus:outline-none">
-                <option value="Low golden hour autumn sunlight raking across brick facades">Low Golden Hour Autumn Light</option>
-                <option value="Soft overcast autumn afternoon light, diffused shadows">Soft Overcast Autumn Daylight</option>
-                <option value="Intimate warm tungsten and candlelight interior glow">Warm Tungsten & Candlelight</option>
-                <option value="Drizzly morning light with wet pavement reflections">Rainy Sidewalk Reflections</option>
-              </select>
-            </div>
+          <div class="action-row" style="margin-top: 16px;">
+            <button class="btn btn-secondary" style="font-size: 0.78rem;" onclick="exportQueueText()">Export Shot List (.txt)</button>
+            <button class="btn btn-secondary" style="font-size: 0.78rem;" onclick="exportQueueJSON()">Export Deck (.json)</button>
+            <button class="btn-icon" style="padding: 10px;" onclick="clearQueue()" title="Clear Shot List">Clear</button>
           </div>
         </div>
 
-      </section>
-
-      <!-- OUTPUT & SHOT QUEUE (5 cols) -->
-      <section class="lg:col-span-5 space-y-6">
-        
-        <!-- ENGINE SELECTOR & CAMPAIGN TAGS -->
-        <div class="border border-chestnut bg-[#160e0d] p-5">
-          <div class="flex items-center justify-between mb-3 pb-2 border-b border-chestnut">
-            <h2 class="text-xs font-mono-spec uppercase tracking-widest text-[#966847] flex items-center gap-2">
-              <span class="w-2 h-2 bg-[#860111]"></span> ENGINE SYNTAX
-            </h2>
-            <span class="text-[10px] font-mono-spec text-[#B59E87]/60" id="current-slot-tag">SLOT: LOOKBOOK (4:5)</span>
-          </div>
-
-          <div class="grid grid-cols-3 gap-2 text-xs font-mono-spec mb-3">
-            <button type="button" onclick="setEngine('midjourney')" id="eng-midjourney" class="eng-btn py-2 text-center border border-[#860111] bg-[#3B2219] text-[#F5F0EA]">
-              Midjourney v6
-            </button>
-            <button type="button" onclick="setEngine('flux')" id="eng-flux" class="eng-btn py-2 text-center border border-chestnut bg-[#1c1211] text-[#B59E87]">
-              Flux.1 / SDXL
-            </button>
-            <button type="button" onclick="setEngine('dalle')" id="eng-dalle" class="eng-btn py-2 text-center border border-chestnut bg-[#1c1211] text-[#B59E87]">
-              DALL·E 3
-            </button>
-          </div>
-
-          <div class="flex items-center justify-between text-xs font-mono-spec text-[#B59E87]/70 pt-2 border-t border-chestnut/50">
-            <span>Campaign Seed Anchor:</span>
-            <input type="text" id="seed-input" value="1968" onchange="triggerUpdate()" class="w-20 bg-[#120a09] border border-chestnut px-2 py-0.5 text-right text-[#F5F0EA]">
-          </div>
-        </div>
-
-        <!-- COMPILED PROMPT & ACTIONS -->
-        <div class="border border-[#860111] bg-[#170f0e] p-5 relative">
-          <div class="flex items-center justify-between mb-3 pb-2 border-b border-chestnut">
-            <h3 class="text-xs font-mono-spec uppercase tracking-widest text-[#F5F0EA] flex items-center gap-2">
-              <span class="w-2.5 h-2.5 bg-[#860111]"></span> ACTIVE CAMPAIGN PROMPT
-            </h3>
-            <span id="shot-id-display" class="text-[10px] font-mono-spec text-[#966847]">WF-MAD-001</span>
-          </div>
-
-          <textarea id="final-prompt" rows="7" class="w-full bg-[#120a09] border border-chestnut/80 p-3 text-xs sm:text-sm font-mono-spec text-[#F5F0EA] leading-relaxed focus:border-[#860111] focus:outline-none resize-none"></textarea>
-
-          <div class="mt-4 grid grid-cols-2 gap-2">
-            <button onclick="copyToClipboard('final-prompt', 'copy-btn')" id="copy-btn" class="py-2.5 px-3 bg-[#1c1211] border border-chestnut hover:border-[#860111] text-[#F5F0EA] font-mono-spec text-xs uppercase transition">
-              Copy Prompt
-            </button>
-            <button onclick="saveCurrentShotToQueue()" class="py-2.5 px-3 bg-[#860111] hover:bg-[#a10416] text-[#F5F0EA] font-mono-spec text-xs uppercase tracking-wider glow-accent transition font-bold">
-              + Save To Campaign Shot List
-            </button>
-          </div>
-        </div>
-
-        <!-- NEGATIVE PROMPT -->
-        <div class="border border-chestnut bg-[#160e0d] p-4">
-          <div class="flex items-center justify-between mb-2">
-            <h4 class="text-xs font-mono-spec uppercase tracking-widest text-[#B59E87]">Campaign Negative Prompt</h4>
-            <button onclick="copyToClipboard('negative-prompt', 'copy-neg')" id="copy-neg" class="text-[10px] font-mono-spec text-[#966847] hover:underline">COPY</button>
-          </div>
-          <textarea id="negative-prompt" rows="3" readonly class="w-full bg-[#120a09] border border-chestnut/60 p-2 text-xs font-mono-spec text-[#B59E87]/80 resize-none"></textarea>
-        </div>
-
-      </section>
+      </div>
 
     </div>
 
-    <!-- CAMPAIGN SHOT LIST & REPOSITORY FOR LATER CREATION -->
-    <section id="campaign-shot-list-section" class="border border-chestnut bg-[#160e0d] p-6 mt-8">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b border-chestnut gap-4">
-        <div>
-          <span class="text-[10px] font-mono-spec text-[#966847] uppercase tracking-widest">SAVED FOR GENERATION</span>
-          <h3 class="text-sm font-display uppercase text-[#F5F0EA]">Campaign Shot List & Asset Repository</h3>
-        </div>
-        <div class="flex items-center gap-2">
-          <button onclick="exportShotList()" class="px-3 py-1.5 border border-chestnut hover:border-[#860111] bg-[#1a1110] text-[#F5F0EA] text-xs font-mono-spec transition">
-            Export JSON
-          </button>
-          <button onclick="exportShotListMarkdown()" class="px-3 py-1.5 border border-[#860111] bg-[#480607]/40 hover:bg-[#860111] text-[#F5F0EA] text-xs font-mono-spec transition">
-            Export Markdown Deck
-          </button>
-          <button onclick="clearShotList()" class="px-3 py-1.5 border border-chestnut hover:border-red-600 text-red-400 hover:text-red-300 text-xs font-mono-spec transition">
-            Clear
-          </button>
-        </div>
-      </div>
-
-      <!-- Shot List Cards -->
-      <div id="shot-list-container" class="space-y-3">
-        <!-- Rendered via JS -->
-      </div>
-    </section>
-  </main>
-
-  <div id="toast" class="fixed bottom-6 right-6 border border-[#860111] bg-[#1a1110] text-[#F5F0EA] px-4 py-2.5 font-mono-spec text-xs shadow-2xl tracking-wider uppercase transition-opacity duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2">
-    <span class="w-2 h-2 bg-emerald-400"></span>
-    <span id="toast-message">Notification</span>
   </div>
 
-  <footer class="border-t border-chestnut bg-[#120a09] py-4">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono-spec text-[#B59E87]/60">
-      <div>TARGET WILD FABLE &mdash; AUTUMN ON MADISON CAMPAIGN WORKSPACE</div>
-      <div>BATCH QUEUE ENGINE READY</div>
-    </div>
-  </footer>
+  <!-- Notification Toast -->
+  <div id="toast" class="toast">COPIED TO CLIPBOARD</div>
 
   <script>
-    let currentCategory = 'lifestyle';
-    let currentPlacement = 'lookbook';
-    let currentAspectRatio = '4:5';
-    let currentEngine = 'midjourney';
-    let shotIndexCounter = 1;
+    // In-memory campaign production queue
+    let campaignQueue = [];
+    let shotCounter = 1;
 
-    let shotList = [];
+    // Palette & Constant tokens
+    const BRAND_COLORS = "deep espresso (#1A1110), roasted chestnut brown (#3B2219), burnt cocoa (#480607), raw umber burgundy (#860111), toffee saddle tan (#966847), and weathered sandstone (#B59E87)";
+    const FILM_STOCK = "shot on 35mm analog film, Kodak Portra 400 aesthetic, organic subtle film grain, natural halation, warm shadow tones";
+    const BRAND_IDENTITY = "Wild Fable Autumn on Madison campaign editorial aesthetic, collegiate dark academia meets nostalgic Upper East Side street style";
 
-    const standardNegative = "neon colors, cyan, vibrant saturated greens, 3d render, CGI, cartoon, futuristic athletic wear, flip-flops, neon sneakers, harsh direct strobe flash, modern glossy digital look, distorted hands";
+    const OFF_BRAND_NEGATIVE = "athletic wear, neon colors, gym sneakers, futuristic clothes, modern glass skyscraper, direct harsh flash, glossy 3D render, over-saturated vivid greens, plasticky synthetic skin, deformed hands, distorted fingers, sterile cyclorama studio, cartoon, anime, illustration, oversaturated cyber aesthetics, modern sports logos, plastic fabrics";
 
-    function selectPlacement(placement, ar) {
-      currentPlacement = placement;
-      currentAspectRatio = ar;
-      document.querySelectorAll('.place-btn').forEach(b => {
-        b.classList.remove('border-[#860111]', 'bg-[#3B2219]', 'text-[#F5F0EA]');
-        b.classList.add('border-chestnut', 'bg-[#1c1211]', 'text-[#B59E87]');
-      });
-      const active = document.getElementById(`place-${placement}`);
-      if (active) {
-        active.classList.remove('border-chestnut', 'bg-[#1c1211]', 'text-[#B59E87]');
-        active.classList.add('border-[#860111]', 'bg-[#3B2219]', 'text-[#F5F0EA]');
-      }
-      document.getElementById('current-slot-tag').innerText = `SLOT: ${placement.toUpperCase()} (${ar})`;
-      triggerUpdate();
-    }
-
-    function selectCategory(cat) {
-      currentCategory = cat;
-      document.querySelectorAll('.cat-btn').forEach(btn => {
-        btn.classList.remove('border-[#860111]', 'bg-[#3B2219]', 'text-[#F5F0EA]');
-        btn.classList.add('border-chestnut', 'bg-[#1c1211]', 'text-[#B59E87]');
-      });
-      const active = document.getElementById(`cat-${cat}`);
-      active.classList.remove('border-chestnut', 'bg-[#1c1211]', 'text-[#B59E87]');
-      active.classList.add('border-[#860111]', 'bg-[#3B2219]', 'text-[#F5F0EA]');
-      triggerUpdate();
-    }
-
-    function setEngine(eng) {
-      currentEngine = eng;
-      document.querySelectorAll('.eng-btn').forEach(b => {
-        b.classList.remove('border-[#860111]', 'bg-[#3B2219]', 'text-[#F5F0EA]');
-        b.classList.add('border-chestnut', 'bg-[#1c1211]', 'text-[#B59E87]');
-      });
-      const active = document.getElementById(`eng-${eng}`);
-      active.classList.remove('border-chestnut', 'bg-[#1c1211]', 'text-[#B59E87]');
-      active.classList.add('border-[#860111]', 'bg-[#3B2219]', 'text-[#F5F0EA]');
-      triggerUpdate();
-    }
+    // Format aspect ratios for engines
+    const FORMAT_SPECS = {
+      lookbook: { ar: "4:5", name: "Editorial Lookbook Print (4:5)", mj: "--ar 4:5" },
+      billboard: { ar: "16:9", name: "OOH Billboard (16:9)", mj: "--ar 16:9" },
+      social_story: { ar: "9:16", name: "Mobile Story (9:16)", mj: "--ar 9:16" },
+      ecommerce_tile: { ar: "1:1", name: "Web E-Comm Tile (1:1)", mj: "--ar 1:1" },
+      cinematic_header: { ar: "21:9", name: "Panoramic Banner (21:9)", mj: "--ar 21:9" }
+    };
 
     function generatePrompt() {
-      const angle = document.getElementById('select-angle').value;
-      const lens = document.getElementById('select-lens').value;
-      const setting = document.getElementById('select-setting').value;
-      const lighting = document.getElementById('select-lighting').value;
-      const seed = document.getElementById('seed-input').value || "1968";
+      const shotType = document.getElementById('shotType').value;
+      const deliverableFormat = document.getElementById('deliverableFormat').value;
+      const cameraAngle = document.getElementById('cameraAngle').value;
+      const lightingStyle = document.getElementById('lightingStyle').value;
+      const setting = document.getElementById('settingEnvironment').value;
+      const top = document.getElementById('garmentTop').value;
+      const bottom = document.getElementById('garmentBottom').value;
+      const footwear = document.getElementById('garmentFootwear').value;
+      const talent = document.getElementById('talentAnchor').value;
+      const props = document.getElementById('heroProps').value;
+      const engine = document.getElementById('engineMode').value;
+      const strictNeg = document.getElementById('strictNegative').checked;
 
-      const anchorTalent = document.getElementById('anchor-talent').checked;
-      const anchorLighting = document.getElementById('anchor-lighting').checked;
+      const formatSpec = FORMAT_SPECS[deliverableFormat];
+      document.getElementById('formatBadge').innerText = `ASPECT: ${formatSpec.ar}`;
 
-      const checkedGarments = Array.from(document.querySelectorAll('input[name="garment"]:checked'))
-        .map(el => el.value);
-
-      const museClause = anchorTalent 
-        ? "Consistent campaign muse: collegiate Gen-Z student with wavy brunette bob, minimal makeup, contemplative expression." 
-        : "";
-
-      const garmentClause = checkedGarments.length > 0 
-        ? `Wardrobe: ${checkedGarments.join(', ')}.` 
-        : "Wardrobe: collegiate dark academia layers.";
-
-      const filmAnchor = anchorLighting
-        ? "Shot on 35mm Kodak Portra 400 film, natural halation, soft grain, warm monochromatic brown palette (#1A1110, #3B2219, #480607, #966847, #B59E87)."
-        : "Warm 35mm film aesthetic, brown earth tones.";
-
-      const shotId = `WF-MAD-${String(shotIndexCounter).padStart(3, '0')}`;
-      document.getElementById('shot-id-display').innerText = `${shotId} // ${currentPlacement.toUpperCase()}`;
-
-      let compiled = "";
-
-      if (currentEngine === 'midjourney') {
-        compiled = `Wild Fable campaign editorial 'Autumn on Madison'. ${museClause} ${garmentClause} Scene: ${setting}. Lighting: ${lighting}. Framing: ${angle}, ${lens}. ${filmAnchor} --ar ${currentAspectRatio} --seed ${seed} --style raw --v 6.0`;
-      } else if (currentEngine === 'flux') {
-        compiled = `Wild Fable 'Autumn on Madison' campaign, ${museClause} ${garmentClause} ${setting}, ${lighting}, ${angle}, ${lens}, ${filmAnchor}, campaign lookbook photography`;
+      // Build subject & scene descriptors
+      let subjectClause = "";
+      if (talent !== 'none_still_life') {
+        const talentSelect = document.getElementById('talentAnchor');
+        const talentText = talentSelect.options[talentSelect.selectedIndex].text;
+        subjectClause = `A ${talentText.toLowerCase()}, wearing a coordinated Autumn on Madison ensemble: a ${getSelectText('garmentTop')}, paired with a ${getSelectText('garmentBottom')}, finished with ${getSelectText('garmentFootwear')}`;
       } else {
-        compiled = `Editorial campaign photograph for Target Wild Fable 'Autumn on Madison'. ${museClause} ${garmentClause} Setting: ${setting}. Lighting: ${lighting}. Angle: ${angle}, ${lens}. Visual style: 35mm analog film aesthetic with rich espresso and roasted chestnut tones.`;
+        subjectClause = `An intentional apparel still-life arrangement featuring a folded ${getSelectText('garmentTop')}, laid alongside a ${getSelectText('garmentBottom')} and ${getSelectText('garmentFootwear')}`;
       }
 
-      document.getElementById('final-prompt').value = compiled;
-      document.getElementById('negative-prompt').value = standardNegative;
+      const opticsText = getSelectText('cameraAngle');
+      const lightingText = getSelectText('lightingStyle');
+      const settingText = getSelectText('settingEnvironment');
+      const propsText = getSelectText('heroProps');
+
+      let finalPrompt = "";
+      let negText = strictNeg ? OFF_BRAND_NEGATIVE : "blurry, low quality, distorted, watermark";
+
+      if (engine === 'midjourney') {
+        document.getElementById('activeEngineLabel').innerText = "MIDJOURNEY V6.0 SYNTAX";
+        finalPrompt = `${BRAND_IDENTITY}. ${subjectClause}. Environment: ${settingText}. Tactile accessories include a ${propsText}. Composition and optics: ${opticsText}. Lighting: ${lightingText}. Tactile textures of ribbed wool knit, authentic wool tartan twill, and burnished leather. Strict campaign color grading of ${BRAND_COLORS}. ${FILM_STOCK} ${formatSpec.mj} --style raw --v 6.0`;
+      } 
+      else if (engine === 'flux') {
+        document.getElementById('activeEngineLabel').innerText = "FLUX.1 SCHNELL / DEV SYNTAX";
+        finalPrompt = `Authentic fashion editorial photograph for Wild Fable 'Autumn on Madison'. ${subjectClause}. Set against ${settingText}, accompanied by ${propsText}. Captured with ${opticsText}, under ${lightingText}. Warm earthy color palette featuring ${BRAND_COLORS}. Natural textile weave details, realistic wool drape, matte finish, ${FILM_STOCK}, high fidelity tactile photograph, ${formatSpec.ar} aspect ratio.`;
+      } 
+      else if (engine === 'dalle3') {
+        document.getElementById('activeEngineLabel').innerText = "DALL·E 3 DIRECTOR PROMPT";
+        finalPrompt = `Editorial fashion campaign photograph for Target's Wild Fable 'Autumn on Madison'. The scene portrays ${subjectClause}. The setting is ${settingText}, accented with ${propsText}. The image is captured with ${opticsText} using natural ${lightingText}. The color palette is strictly rooted in autumnal tones: ${BRAND_COLORS}. The visual style embraces authentic 35mm film grain, analog color science, warm nostalgic collegiate mood, rich tactile fabric textures, avoiding digital perfection or artificial gloss. Aspect ratio: ${formatSpec.ar}.`;
+      } 
+      else if (engine === 'sdxl') {
+        document.getElementById('activeEngineLabel').innerText = "STABLE DIFFUSION XL SYNTAX";
+        finalPrompt = `(masterpiece, best quality:1.2), (editorial fashion campaign:1.2), Wild Fable Autumn on Madison, ${subjectClause}, ${settingText}, ${propsText}, (${opticsText}:1.1), (${lightingText}:1.1), (${BRAND_COLORS}:1.2), (35mm film photography, Kodak Portra 400, analog film grain, vintage Manhattan street style:1.2)`;
+      }
+
+      document.getElementById('promptOutput').value = finalPrompt;
+      document.getElementById('charCount').innerText = `${finalPrompt.length} CHARACTERS`;
+      
+      const negContainer = document.getElementById('negativeContainer');
+      const negOutput = document.getElementById('negativeOutput');
+      if (strictNeg) {
+        negContainer.style.display = 'block';
+        negOutput.innerText = negText;
+      } else {
+        negContainer.style.display = 'none';
+      }
     }
 
-    function triggerUpdate() {
+    function getSelectText(id) {
+      const el = document.getElementById(id);
+      return el.options[el.selectedIndex].text;
+    }
+
+    function loadPreset(key) {
+      if (key === 'brownstone') {
+        document.getElementById('shotType').value = 'lifestyle';
+        document.getElementById('deliverableFormat').value = 'lookbook';
+        document.getElementById('cameraAngle').value = 'low_angle_stoop';
+        document.getElementById('lightingStyle').value = 'golden_hour';
+        document.getElementById('settingEnvironment').value = 'stoop';
+        document.getElementById('garmentTop').value = 'ribbed_knit_cardigan';
+        document.getElementById('garmentBottom').value = 'tartan_mini';
+        document.getElementById('garmentFootwear').value = 'mary_janes';
+        document.getElementById('talentAnchor').value = 'east_asian_collegiate';
+        document.getElementById('heroProps').value = 'yashica_camera';
+      } else if (key === 'library') {
+        document.getElementById('shotType').value = 'editorial_portrait';
+        document.getElementById('deliverableFormat').value = 'lookbook';
+        document.getElementById('cameraAngle').value = 'portrait_85mm';
+        document.getElementById('lightingStyle').value = 'dappled_canopy';
+        document.getElementById('settingEnvironment').value = 'library_stacks';
+        document.getElementById('garmentTop').value = 'argyle_vest';
+        document.getElementById('garmentBottom').value = 'corduroy_trousers';
+        document.getElementById('garmentFootwear').value = 'lug_sole_loafers';
+        document.getElementById('talentAnchor').value = 'black_collegiate';
+        document.getElementById('heroProps').value = 'books_latte';
+      } else if (key === 'cafe') {
+        document.getElementById('shotType').value = 'lifestyle';
+        document.getElementById('deliverableFormat').value = 'social_story';
+        document.getElementById('cameraAngle').value = 'eye_level_35mm';
+        document.getElementById('lightingStyle').value = 'tungsten_cafe';
+        document.getElementById('settingEnvironment').value = 'cafe_table';
+        document.getElementById('garmentTop').value = 'cable_knit_sweater';
+        document.getElementById('garmentBottom').value = 'pleated_midi';
+        document.getElementById('garmentFootwear').value = 'oxfords';
+        document.getElementById('talentAnchor').value = 'south_asian_collegiate';
+        document.getElementById('heroProps').value = 'books_latte';
+      } else if (key === 'flatlay') {
+        document.getElementById('shotType').value = 'product_catalog';
+        document.getElementById('deliverableFormat').value = 'ecommerce_tile';
+        document.getElementById('cameraAngle').value = 'flat_lay_90';
+        document.getElementById('lightingStyle').value = 'diffused_overcast';
+        document.getElementById('settingEnvironment').value = 'cafe_table';
+        document.getElementById('garmentTop').value = 'ribbed_knit_cardigan';
+        document.getElementById('garmentBottom').value = 'tartan_mini';
+        document.getElementById('garmentFootwear').value = 'mary_janes';
+        document.getElementById('talentAnchor').value = 'none_still_life';
+        document.getElementById('heroProps').value = 'yashica_camera';
+      }
       generatePrompt();
+      showToast("LOADED PRESET: " + key.toUpperCase());
     }
 
-    function saveCurrentShotToQueue() {
-      const promptText = document.getElementById('final-prompt').value;
-      const shotId = `WF-MAD-${String(shotIndexCounter).padStart(3, '0')}`;
+    function copyCurrentPrompt() {
+      const text = document.getElementById('promptOutput').value;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("PROMPT COPIED TO CLIPBOARD");
+      });
+    }
+
+    function copyShotPrompt(index) {
+      if (campaignQueue[index]) {
+        navigator.clipboard.writeText(campaignQueue[index].prompt).then(() => {
+          showToast("SHOT #" + campaignQueue[index].shotId + " PROMPT COPIED");
+        });
+      }
+    }
+
+    function addToCampaignQueue() {
+      const prompt = document.getElementById('promptOutput').value;
+      const deliverableFormat = document.getElementById('deliverableFormat').value;
+      const shotType = document.getElementById('shotType').value;
+      const engine = document.getElementById('engineMode').value;
+      const formatSpec = FORMAT_SPECS[deliverableFormat];
+      
+      const shotId = `WF-MAD-${String(shotCounter).padStart(3, '0')}`;
+      shotCounter++;
+
       const item = {
-        id: shotId,
-        placement: currentPlacement.toUpperCase(),
-        aspectRatio: currentAspectRatio,
-        engine: currentEngine,
-        prompt: promptText,
+        shotId,
+        type: shotType,
+        format: formatSpec.name,
+        aspectRatio: formatSpec.ar,
+        engine: engine,
+        prompt: prompt,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
 
-      shotList.push(item);
-      shotIndexCounter++;
-      saveToStorage();
-      renderShotList();
-      showToast(`Saved to Campaign Queue (${item.id})`);
-      triggerUpdate();
+      campaignQueue.unshift(item);
+      renderQueue();
+      showToast(`SAVED TO QUEUE [${shotId}]`);
     }
 
-    function renderShotList() {
-      const container = document.getElementById('shot-list-container');
-      const badge = document.getElementById('queue-badge');
-      badge.innerText = shotList.length;
+    function removeQueueItem(index) {
+      campaignQueue.splice(index, 1);
+      renderQueue();
+    }
 
-      if (shotList.length === 0) {
-        container.innerHTML = `
-          <div class="p-6 border border-dashed border-chestnut text-center text-xs font-mono-spec text-[#B59E87]/60">
-            No campaign shots saved yet. Build your shot and click "+ Save To Campaign Shot List" to queue images for batch creation later.
+    function renderQueue() {
+      const queueList = document.getElementById('queueList');
+      const queueCount = document.getElementById('queueCount');
+      queueCount.innerText = `${campaignQueue.length} SHOTS`;
+
+      if (campaignQueue.length === 0) {
+        queueList.innerHTML = `
+          <div style="font-family:'EB Garamond'; font-style:italic; color:var(--text-dim); text-align:center; padding: 20px 0;">
+            Shot list queue is currently empty. Build custom variations and click "+ Add to Shot List" to assemble your campaign production package.
           </div>
         `;
         return;
       }
 
-      container.innerHTML = shotList.map((shot, idx) => `
-        <div class="p-4 border border-chestnut bg-[#140c0b] flex flex-col md:flex-row justify-between items-start md:items-center gap-3 font-mono-spec">
-          <div class="space-y-1 flex-1">
-            <div class="flex items-center gap-2 text-xs">
-              <span class="px-2 py-0.5 bg-[#860111] text-[#F5F0EA] font-bold text-[10px]">${shot.id}</span>
-              <span class="text-[#F5F0EA] font-semibold">${shot.placement} (${shot.aspectRatio})</span>
-              <span class="text-[#966847] text-[10px]">${shot.engine.toUpperCase()}</span>
-              <span class="text-[#B59E87]/50 text-[10px]">${shot.timestamp}</span>
+      queueList.innerHTML = campaignQueue.map((item, idx) => `
+        <div class="queue-item">
+          <div class="queue-item-info">
+            <div class="queue-item-meta">
+              <span style="color:var(--cream-parchment); font-weight:700;">${item.shotId}</span>
+              <span>${item.type.toUpperCase()}</span>
+              <span>${item.aspectRatio}</span>
+              <span>${item.engine.toUpperCase()}</span>
             </div>
-            <p class="text-xs text-[#B59E87]/90 leading-snug line-clamp-2">${shot.prompt}</p>
+            <div class="queue-item-text" title="${escapeHtml(item.prompt)}">${escapeHtml(item.prompt)}</div>
           </div>
-          <div class="flex items-center gap-2 w-full md:w-auto justify-end">
-            <button onclick="copyShotPrompt(${idx})" class="px-3 py-1 bg-[#1c1211] hover:border-[#860111] border border-chestnut text-[#F5F0EA] text-xs transition">
-              Copy
-            </button>
-            <button onclick="removeShot(${idx})" class="px-2 py-1 text-red-400 hover:text-red-300 text-xs">
-              &times;
-            </button>
+          <div style="display:flex; gap:6px;">
+            <button class="btn-icon" onclick="copyShotPrompt(${idx})" title="Copy Prompt">Copy</button>
+            <button class="btn-icon" onclick="removeQueueItem(${idx})" title="Remove Shot">&times;</button>
           </div>
         </div>
       `).join('');
     }
 
-    function copyShotPrompt(idx) {
-      if (shotList[idx]) {
-        copyRawText(shotList[idx].prompt);
+    function clearQueue() {
+      campaignQueue = [];
+      renderQueue();
+      showToast("CAMPAIGN QUEUE CLEARED");
+    }
+
+    function exportQueueText() {
+      if (campaignQueue.length === 0) {
+        showToast("QUEUE IS EMPTY");
+        return;
       }
-    }
 
-    function removeShot(idx) {
-      shotList.splice(idx, 1);
-      saveToStorage();
-      renderShotList();
-      showToast("Shot removed from queue");
-    }
+      let content = "TARGET WILD FABLE - AUTUMN ON MADISON\nCAMPAIGN PRODUCTION SHOT LIST & AI IMAGE PROMPTS\n";
+      content += "=".repeat(70) + "\n\n";
 
-    function clearShotList() {
-      if (shotList.length === 0) return;
-      shotList = [];
-      saveToStorage();
-      renderShotList();
-      showToast("Queue cleared");
-    }
-
-    function exportShotList() {
-      if (shotList.length === 0) return showToast("Queue is empty");
-      const blob = new Blob([JSON.stringify(shotList, null, 2)], { type: 'application/json' });
-      downloadFile(blob, 'autumn-on-madison-shotlist.json');
-    }
-
-    function exportShotListMarkdown() {
-      if (shotList.length === 0) return showToast("Queue is empty");
-      let md = "# Wild Fable: Autumn on Madison &mdash; Campaign Image Generation Plan\n\n";
-      md += `**Total Deliverables:** ${shotList.length} shots\n`;
-      md += `**Palette:** Deep Espresso (#1A1110), Roasted Chestnut (#3B2219), Burnt Cocoa (#480607), Sandstone (#B59E87)\n\n---\n\n`;
-      
-      shotList.forEach(s => {
-        md += `### ${s.id}: ${s.placement} (${s.aspectRatio})\n`;
-        md += `- **Engine:** ${s.engine}\n`;
-        md += `- **Prompt:** \`${s.prompt}\`\n\n`;
+      campaignQueue.forEach(item => {
+        content += `[SHOT ID]: ${item.shotId}\n`;
+        content += `[CATEGORY]: ${item.type} | [FORMAT]: ${item.format} (${item.aspectRatio})\n`;
+        content += `[ENGINE]: ${item.engine.toUpperCase()}\n`;
+        content += `[PROMPT]:\n${item.prompt}\n`;
+        content += "-".repeat(70) + "\n\n";
       });
 
-      const blob = new Blob([md], { type: 'text/markdown' });
-      downloadFile(blob, 'autumn-on-madison-shotlist.md');
+      downloadFile(content, "wild-fable-autumn-campaign-shots.txt", "text/plain");
+      showToast("SHOT LIST EXPORTED (.TXT)");
     }
 
-    function downloadFile(blob, filename) {
+    function exportQueueJSON() {
+      if (campaignQueue.length === 0) {
+        showToast("QUEUE IS EMPTY");
+        return;
+      }
+      const dataStr = JSON.stringify({ campaign: "Wild Fable Autumn on Madison", date: "Fall 2026", shots: campaignQueue }, null, 2);
+      downloadFile(dataStr, "wild-fable-autumn-deck.json", "application/json");
+      showToast("CAMPAIGN DECK EXPORTED (.JSON)");
+    }
+
+    function downloadFile(content, filename, contentType) {
+      const blob = new Blob([content], { type: contentType });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       a.download = filename;
       a.click();
       URL.revokeObjectURL(url);
-      showToast(`Exported ${filename}`);
     }
 
-    function escapeQuotes(str) {
-      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-    }
-
-    function copyRawText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        showToast("Prompt copied for generator");
-      });
-    }
-
-    function copyToClipboard(elementId, btnId) {
-      const textarea = document.getElementById(elementId);
-      textarea.select();
-      document.execCommand('copy');
-      showToast("Copied to clipboard");
-    }
-
-    function showToast(text) {
+    function showToast(msg) {
       const toast = document.getElementById('toast');
-      document.getElementById('toast-message').innerText = text;
-      toast.style.opacity = '1';
-      setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2200);
     }
 
-    function scrollToShotList() {
-      document.getElementById('campaign-shot-list-section').scrollIntoView({ behavior: 'smooth' });
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    function saveToStorage() {
-      try {
-        localStorage.setItem('wf_autumn_shotlist', JSON.stringify(shotList));
-      } catch (e) {}
-    }
-
-    function loadFromStorage() {
-      try {
-        const stored = localStorage.getItem('wf_autumn_shotlist');
-        if (stored) {
-          shotList = JSON.parse(stored);
-          shotIndexCounter = shotList.length + 1;
-        }
-      } catch (e) {}
-    }
-
-    const presets = {
-      stoop: {
-        category: 'lifestyle',
-        placement: 'lookbook',
-        ar: '4:5',
-        angle: "Low angle looking up from sidewalk toward classic brownstone stoop",
-        lens: "35mm f/1.8 prime lens, subtle optical halation",
-        setting: "Upper East Side brownstone stoop with amber maple leaves on steps",
-        lighting: "Low golden hour autumn sunlight raking across brick facades",
-        garments: [
-          "heavy ribbed knit cardigan in deep espresso wool",
-          "pleated wool tartan mini skirt in burnt cocoa",
-          "glossy roasted chestnut Mary Jane shoes with slouch socks",
-          "vintage Yashica 35mm rangefinder camera"
-        ]
-      },
-      maryjane: {
-        category: 'detail',
-        placement: 'ecomm',
-        ar: '1:1',
-        angle: "Extreme close-up macro, razor-thin focal plane, creamy bokeh",
-        lens: "105mm f/2.8 Micro lens, tactile fabric thread clarity",
-        setting: "Upper East Side brownstone stoop with amber maple leaves on steps",
-        lighting: "Soft overcast autumn afternoon light, diffused shadows",
-        garments: [
-          "glossy roasted chestnut Mary Jane shoes with slouch socks"
-        ]
-      },
-      flatlay: {
-        category: 'product',
-        placement: 'lookbook',
-        ar: '4:5',
-        angle: "Overhead 90-degree flat-lay editorial composition",
-        lens: "50mm f/1.4 lens, cinematic subject separation",
-        setting: "Wood-paneled coffee house with condensation on glass window",
-        lighting: "Soft overcast autumn afternoon light, diffused shadows",
-        garments: [
-          "heavy ribbed knit cardigan in deep espresso wool",
-          "pleated wool tartan mini skirt in burnt cocoa",
-          "vintage Yashica 35mm rangefinder camera"
-        ]
-      },
-      cafe: {
-        category: 'setting',
-        placement: 'social',
-        ar: '9:16',
-        angle: "Eye-level candid snapshot, unposed street moment",
-        lens: "35mm f/1.8 prime lens, subtle optical halation",
-        setting: "Wood-paneled coffee house with condensation on glass window",
-        lighting: "Intimate warm tungsten and candlelight interior glow",
-        garments: [
-          "porcelain cup of cappuccino with leaf latte art"
-        ]
-      },
-      bookstore: {
-        category: 'lifestyle',
-        placement: 'billboard',
-        ar: '16:9',
-        angle: "Dynamic 3/4 street portrait, model captured mid-stride",
-        lens: "50mm f/1.4 lens, cinematic subject separation",
-        setting: "Academic collegiate library aisle with tall walnut bookshelves",
-        lighting: "Intimate warm tungsten and candlelight interior glow",
-        garments: [
-          "chocolate brown corduroy newsboy cap",
-          "heavy ribbed knit cardigan in deep espresso wool"
-        ]
-      }
-    };
-
-    function loadPreset(key) {
-      const p = presets[key];
-      if (!p) return;
-      selectPlacement(p.placement, p.ar);
-      selectCategory(p.category);
-      document.getElementById('select-angle').value = p.angle;
-      document.getElementById('select-lens').value = p.lens;
-      document.getElementById('select-setting').value = p.setting;
-      document.getElementById('select-lighting').value = p.lighting;
-      document.querySelectorAll('input[name="garment"]').forEach(cb => {
-        cb.checked = p.garments.includes(cb.value);
-      });
-      triggerUpdate();
-      showToast(`Loaded: ${key.toUpperCase()}`);
-    }
-
-    function initGrain() {
-      const canvas = document.getElementById('canvas-grain');
-      const ctx = canvas.getContext('2d');
-      let width = canvas.width = window.innerWidth;
-      let height = canvas.height = window.innerHeight;
-
-      window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      });
-
-      function render() {
-        const imgData = ctx.createImageData(width, height);
-        const buf = new Uint32Array(imgData.data.buffer);
-        const len = buf.length;
-        for (let i = 0; i < len; i += 2) {
-          if (Math.random() < 0.1) buf[i] = 0x1affffff;
-        }
-        ctx.putImageData(imgData, 0, 0);
-        requestAnimationFrame(render);
-      }
-      render();
-    }
-
-    window.onload = function() {
-      initGrain();
-      loadFromStorage();
-      renderShotList();
+    // Initialize with default state
+    window.addEventListener('DOMContentLoaded', () => {
       generatePrompt();
-    };
+    });
   </script>
 </body>
 </html>
