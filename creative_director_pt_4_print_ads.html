@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Director Pt. 4: Print Ads — Portfolio &amp; Class Index</title>
+
+  <!-- Load Asap Variable Font (supporting weights 300–700 & width 100) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Asap:wdth,wght@100,300..700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & STRICT SQUARE GEOMETRY (0px RADIUS)
+       ========================================================================== */
+    :root {
+      --bg-primary: #1a1110;
+      --surface-dark: #231413;
+      --text-crimson: #860111;
+      --accent-crimson: #480607;
+      --text-readable: #e8dedd;
+    }
+
+    *,
+    *::before,
+    *::after {
+      border-radius: 0px !important;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-crimson);
+      font-family: 'Asap', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 325;
+      font-variation-settings: "wdth" 100, "wght" 325;
+      line-height: 1.5;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Typography Scale & Asap Sharp Hierarchy */
+    h1, h2, h3, .heading-font {
+      font-family: 'Asap', sans-serif;
+      font-weight: 655;
+      font-variation-settings: "wdth" 100, "wght" 655;
+      line-height: 1.1;
+      color: var(--text-crimson);
+    }
+
+    h1 {
+      font-size: 36px;
+    }
+    h2 {
+      font-size: 28px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+
+    @media (min-width: 768px) {
+      h1 { font-size: 48px; }
+      h2 { font-size: 36px; }
+      h3 { font-size: 28px; }
+    }
+
+    @media (min-width: 1024px) {
+      h1 { font-size: 72px; }
+      h2 { font-size: 48px; }
+      h3 { font-size: 32px; }
+    }
+
+    .text-small {
+      font-size: 14px;
+    }
+
+    /* Centered 1440px Container (16px mobile, 20px tablet, 32px desktop) */
+    .site-container {
+      width: 100%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .site-container {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .site-container {
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+    }
+
+    /* Focus State */
+    *:focus-visible {
+      outline: 2px solid var(--accent-crimson);
+      outline-offset: 2px;
+    }
+
+    /* ==========================================================================
+       HERO BANNER (Full Width, 40vh Mobile / 50vh Desktop, Min 320px)
+       ========================================================================== */
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      height: 40vh;
+      min-height: 320px;
+      background-color: #140c0b;
+      background-image: url('Gemini_Generated_Image_mxl3cbmxl3cbmxl3 (1).jpg');
+      background-size: cover;
+      background-position: center 28%;
+      border-bottom: 2px solid var(--accent-crimson);
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-banner {
+        height: 50vh;
+      }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(26, 17, 16, 0.84);
+      z-index: 1;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 24px;
+      padding-bottom: 32px;
+    }
+
+    /* ==========================================================================
+       BUTTONS & FILTER PILLS (Sharp Square, 200ms Ease-Out Inversion)
+       ========================================================================== */
+    .p5-btn {
+      display: inline-flex;
+      align-items: center;
+      min-height: 64px;
+      padding: 16px 24px;
+      background-color: var(--accent-crimson);
+      color: var(--text-crimson);
+      border: 2px solid var(--accent-crimson);
+      font-family: 'Asap', sans-serif;
+      font-weight: 655;
+      font-variation-settings: "wdth" 100, "wght" 655;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
+    }
+
+    .p5-btn:hover {
+      background-color: var(--text-crimson);
+      color: var(--bg-primary);
+      border-color: var(--text-crimson);
+    }
+
+    .filter-pill {
+      padding: 10px 16px;
+      background-color: var(--bg-primary);
+      color: var(--text-crimson);
+      border: 2px solid var(--accent-crimson);
+      font-family: 'Asap', sans-serif;
+      font-weight: 655;
+      font-variation-settings: "wdth" 100, "wght" 655;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
+    }
+
+    .filter-pill:hover,
+    .filter-pill.active {
+      background-color: var(--accent-crimson);
+      color: #e8dedd;
+      border-color: var(--text-crimson);
+    }
+
+    /* ==========================================================================
+       SUBTLE STARFIELD & 4-POINT SHOOTING STARS LAYER
+       ========================================================================== */
+    #shooting-stars-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background-color: var(--bg-primary);
+    }
+
+    /* Ambient tiny twinkling stars */
+    .ambient-star {
+      position: absolute;
+      clip-path: polygon(
+        50% 0%, 60% 40%, 100% 50%, 60% 60%,
+        50% 100%, 40% 60%, 0% 50%, 40% 40%
+      );
+      animation: starTwinkle ease-in-out infinite alternate;
+      will-change: opacity, transform;
+    }
+
+    @keyframes starTwinkle {
+      0% {
+        opacity: 0.06;
+        transform: scale(0.85);
+      }
+      100% {
+        opacity: 0.32;
+        transform: scale(1.1);
+      }
+    }
+
+    /* Delicate diagonal shooting stars with 4-point starburst head & tapering tail */
+    .shooting-star {
+      position: absolute;
+      top: -140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: rotate(35deg);
+      animation-name: diagonalStarFall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      will-change: transform, opacity;
+    }
+
+    .shooting-star-tail {
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--star-color));
+      opacity: 0.7;
+    }
+
+    .shooting-star-head {
+      background-color: var(--star-color);
+      clip-path: polygon(
+        50% 0%, 61% 39%, 100% 50%, 61% 61%,
+        50% 100%, 39% 61%, 0% 50%, 39% 39%
+      );
+      margin-top: -2px;
+    }
+
+    @keyframes diagonalStarFall {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(35deg);
+        opacity: 0;
+      }
+      12% {
+        opacity: var(--star-opacity);
+      }
+      85% {
+        opacity: var(--star-opacity);
+      }
+      100% {
+        transform: translate3d(-115vw, 135vh, 0) rotate(35deg);
+        opacity: 0;
+      }
+    }
+
+    /* ==========================================================================
+       PRINT AD CARD & SHARP EDITORIAL PRESENTATION
+       ========================================================================== */
+    .print-card {
+      background-color: var(--surface-dark);
+      border: 2px solid var(--accent-crimson);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 200ms ease-out, background-color 200ms ease-out;
+    }
+
+    .print-card:hover {
+      border-color: var(--text-crimson);
+      background-color: #2b1514;
+    }
+
+    .print-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 350ms ease-out;
+    }
+
+    .print-card:hover .print-card-img {
+      transform: scale(1.02);
+    }
+
+    /* High-contrast readable body copy inside dark cards while preserving #860111 headings/labels */
+    .body-copy-readable {
+      color: var(--text-readable);
+      font-weight: 325;
+      line-height: 1.5;
+    }
+
+    .section-divider {
+      border-top: 2px solid var(--accent-crimson);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative Fixed Moving Shooting-Star Background (Behind All Content) -->
+  <div id="shooting-stars-layer" aria-hidden="true"></div>
+
+  <!-- Main Content Wrapper (Above Starfield) -->
+  <div class="relative z-10">
+
+    <!-- ========================================================================
+         HERO SECTION (Full Width, Top of Page, 50vh Desktop / 40vh Mobile)
+         ======================================================================== -->
+    <header class="hero-banner">
+      <div class="hero-overlay"></div>
+
+      <div class="site-container hero-inner">
+        <!-- Top Identity Bar Inside Hero -->
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#480607] pb-4">
+          <div class="flex items-center gap-3">
+            <span class="inline-block w-3 h-3 bg-[#860111]"></span>
+            <span
+              id="portfolio-owner-name"
+              contenteditable="true"
+              spellcheck="false"
+              title="Click to edit your name"
+              class="heading-font text-sm sm:text-base uppercase tracking-[0.14em] text-[#860111] px-2 py-1 border border-transparent hover:border-[#480607] focus:border-[#860111] focus:bg-[#1a1110]"
+            >YOUR NAME // PORTFOLIO</span>
+          </div>
+        </div>
+
+        <!-- Hero Main Title & Campaign Subtitle -->
+        <div class="my-auto pt-4">
+          <p class="text-small uppercase tracking-[0.18em] text-[#860111] font-semibold mb-2">
+            WILD FABLE — AUTUMN ON MADISON
+          </p>
+          <h1 class="uppercase text-[#860111] max-w-5xl">
+            CREATIVE DIRECTOR PT. 4: PRINT ADS
+          </h1>
+          <p class="mt-3 text-base sm:text-lg text-[#e8dedd] max-w-3xl">
+            5 Out-of-Home &amp; Print Media Executions across New York City
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================================================================
+         PRINT ADS SHOWCASE & PLACEMENT FILTER
+         ======================================================================== -->
+    <main class="site-container">
+
+      <section id="print-executions" class="py-12 lg:py-20">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+          <div>
+            <span class="text-small uppercase tracking-[0.16em] text-[#860111] font-semibold block mb-2">
+              CAMPAIGN LOOKBOOK // 05 EXECUTIONS
+            </span>
+            <h2 class="uppercase">THE 5 PRINT ADS</h2>
+          </div>
+
+          <!-- Placement Filter Controls -->
+          <div id="filter-bar" class="flex flex-wrap gap-2">
+            <button data-filter="all" class="filter-pill active">ALL EXECUTIONS (05)</button>
+            <button data-filter="mural" class="filter-pill">LARGE-FORMAT MURAL</button>
+            <button data-filter="subway-station" class="filter-pill">SUBWAY BILLBOARD</button>
+            <button data-filter="bus-shelter" class="filter-pill">BUS SHELTER KIOSK</button>
+            <button data-filter="subway-car" class="filter-pill">SUBWAY CAR INTERIOR</button>
+            <button data-filter="wheatpaste" class="filter-pill">STREET WHEATPASTE</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Print Ads Grid -->
+        <div id="ads-showcase-grid" class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
+          <!-- Populated via JS with exact uploaded images -->
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           MINIMAL FOOTER
+           ====================================================================== -->
+      <footer class="section-divider py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <p class="heading-font text-small uppercase tracking-wider text-[#860111]">
+          CREATIVE DIRECTOR PT. 4: PRINT ADS — WILD FABLE
+        </p>
+        <button onclick="openLightbox(0)" class="filter-pill">
+          FULL-SCREEN GALLERY VIEW ↗
+        </button>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       FULL-SCREEN CRITIQUE LIGHTBOX MODAL (Square Edges, High Contrast)
+       ========================================================================== -->
+  <div
+    id="critique-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-heading"
+    class="fixed inset-0 z-50 hidden bg-[#1a1110]/95 p-4 sm:p-8 flex items-center justify-center"
+  >
+    <div class="w-full max-w-6xl max-h-[92vh] bg-[#1a1110] border-2 border-[#860111] flex flex-col lg:flex-row overflow-hidden">
+
+      <!-- Left: High-Res Ad Image -->
+      <div class="lg:w-7/12 bg-[#0a0606] border-b-2 lg:border-b-0 lg:border-r-2 border-[#480607] relative flex items-center justify-center p-4 sm:p-6 min-h-[280px] sm:min-h-[420px]">
+        <img
+          id="modal-img"
+          src=""
+          alt=""
+          class="max-h-[45vh] lg:max-h-[80vh] w-auto max-w-full object-contain border border-[#480607]"
+        />
+        <div class="absolute top-4 left-4 bg-[#480607] border border-[#860111] px-3 py-1 text-small font-semibold uppercase tracking-widest text-[#860111]">
+          <span id="modal-badge">EXECUTION 01 / 05</span>
+        </div>
+      </div>
+
+      <!-- Right: Art Direction Breakdown -->
+      <div class="lg:w-5/12 p-6 sm:p-8 flex flex-col justify-between overflow-y-auto bg-[#231413]">
+        <div>
+          <div class="flex items-start justify-between gap-4 pb-5 border-b-2 border-[#480607]">
+            <div>
+              <span id="modal-format" class="text-small uppercase tracking-[0.14em] text-[#860111] font-semibold block mb-1">
+                FORMAT
+              </span>
+              <h3 id="modal-heading" class="uppercase text-[#860111]">
+                AD TITLE
+              </h3>
+              <p id="modal-location" class="text-small text-[#a89694] mt-1">
+                LOCATION
+              </p>
+            </div>
+
+            <button
+              onclick="closeLightbox()"
+              aria-label="Close Gallery View"
+              class="px-4 py-2 bg-[#480607] text-[#860111] border-2 border-[#480607] hover:bg-[#860111] hover:text-[#1a1110] hover:border-[#860111] font-semibold uppercase text-small transition-colors duration-200"
+            >
+              ESC ✕
+            </button>
+          </div>
+
+          <div class="py-6 space-y-5">
+            <div>
+              <span class="text-small uppercase tracking-widest text-[#860111] font-semibold block mb-2">
+                CREATIVE DESCRIPTION
+              </span>
+              <p id="modal-rationale" class="body-copy-readable text-base"></p>
+            </div>
+
+            <div class="p-4 bg-[#1a1110] border-2 border-[#480607]">
+              <span class="text-small uppercase tracking-widest text-[#860111] font-semibold block mb-1">
+                PLACEMENT CONTEXT
+              </span>
+              <p id="modal-insight" class="body-copy-readable text-small"></p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="p-3 bg-[#1a1110] border border-[#480607]">
+                <span class="text-small uppercase text-[#860111] font-semibold block">DIMENSIONS</span>
+                <span id="modal-specs" class="text-small text-[#e8dedd]"></span>
+              </div>
+              <div class="p-3 bg-[#1a1110] border border-[#480607]">
+                <span class="text-small uppercase text-[#860111] font-semibold block">COLOR GRADE</span>
+                <span id="modal-grade" class="text-small text-[#e8dedd]"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prev / Next Navigation -->
+        <div class="pt-5 border-t-2 border-[#480607] grid grid-cols-2 gap-4">
+          <button onclick="stepLightbox(-1)" class="p5-btn justify-center">
+            <span>← PREV AD</span>
+          </button>
+          <button onclick="stepLightbox(1)" class="p5-btn justify-center">
+            <span>NEXT AD →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SCRIPT: SUBTLE STARFIELD, PRINT EXECUTIONS DATA, FILTERING & LIGHTBOX
+       ========================================================================== -->
+  <script>
+    // 1. Generate Subtle Ambient Stars + Delicate 4-Point Starburst Shooting Stars
+    function initShootingStars() {
+      const container = document.getElementById('shooting-stars-layer');
+      const ambientCount = 34;
+      const shootingCount = 10;
+      const starColors = [
+        '#860111', // Crimson Red
+        '#480607', // Deep Maroon
+        '#e8dedd', // Soft Warm White
+        '#860111',
+        '#480607'
+      ];
+
+      let starsHTML = '';
+
+      // Subtle stationary twinkling 4-point stars in deep obsidian sky
+      for (let i = 0; i < ambientCount; i++) {
+        const size = Math.floor(Math.random() * 4) + 3; // 3px–6px 4-point star
+        const left = (Math.random() * 100).toFixed(2);
+        const top = (Math.random() * 100).toFixed(2);
+        const twinkleDur = (Math.random() * 4 + 3.5).toFixed(2);
+        const twinkleDelay = -(Math.random() * 6).toFixed(2);
+        const color = starColors[i % starColors.length];
+
+        starsHTML += `
+          <span
+            class="ambient-star"
+            style="
+              left: ${left}vw;
+              top: ${top}vh;
+              width: ${size}px;
+              height: ${size}px;
+              background-color: ${color};
+              animation-duration: ${twinkleDur}s;
+              animation-delay: ${twinkleDelay}s;
+            "
+          ></span>
+        `;
+      }
+
+      // Gentle, non-distracting shooting stars with 4-point starburst heads & tapered tails
+      for (let i = 0; i < shootingCount; i++) {
+        const headSize = Math.floor(Math.random() * 4) + 6; // 6px–9px 4-point starburst head
+        const tailLength = Math.floor(Math.random() * 65) + 55; // 55px–120px sleek tapering tail
+        const leftPercent = Math.floor(Math.random() * 130) - 5;
+        const duration = (Math.random() * 4 + 7.5).toFixed(2); // 7.5s–11.5s gentle glide
+        const delay = -(Math.random() * 12).toFixed(2);
+        const opacity = (Math.random() * 0.22 + 0.14).toFixed(2); // 0.14–0.36 calm, non-distracting opacity
+        const color = starColors[i % starColors.length];
+
+        starsHTML += `
+          <span
+            class="shooting-star"
+            style="
+              left: ${leftPercent}vw;
+              --star-color: ${color};
+              --star-opacity: ${opacity};
+              animation-duration: ${duration}s;
+              animation-delay: ${delay}s;
+            "
+          >
+            <span class="shooting-star-tail" style="height: ${tailLength}px;"></span>
+            <span class="shooting-star-head" style="width: ${headSize}px; height: ${headSize}px;"></span>
+          </span>
+        `;
+      }
+
+      container.innerHTML = starsHTML;
+    }
+
+    // 2. Five Wild Fable "Autumn on Madison" Print Campaign Executions
+    const executions = [
+      {
+        id: '01',
+        anchor: 'ad-01',
+        category: 'mural',
+        title: 'LARGE-FORMAT BUILDING MURAL',
+        format: 'EXTERIOR BRICK WALLSCAPE',
+        location: 'Soho, Crosby St & Broome St',
+        image: 'Gemini_Generated_Image_mxl3cbmxl3cbmxl3 (1).jpg',
+        span: 'md:col-span-7',
+        aspect: 'aspect-[4/3]',
+        specs: '28ft × 38ft Painted/Vinyl Wall',
+        grade: 'Espresso & Terracotta',
+        rationale:
+          'Solo model posed on classic brownstone steps holding a vintage 35mm film camera, styled in a chunky chocolate cardigan, plaid mini skirt, and Mary Janes. Anchors the campaign with towering architectural scale against historic red brick.',
+        insight:
+          'Positioned along a high-foot-traffic SoHo shopping corridor where pedestrians naturally look upward, establishing flagship brand prestige and autumnal mood.'
+      },
+      {
+        id: '02',
+        anchor: 'ad-02',
+        category: 'subway-station',
+        title: 'SUBWAY STATION PLATFORM BILLBOARD',
+        format: 'ILLUMINATED PLATFORM TWO-SHEET',
+        location: 'Prince St Station, N/R/W Line',
+        image: 'Gemini_Generated_Image_5rlp035rlp035rlp (1).jpg',
+        span: 'md:col-span-5',
+        aspect: 'aspect-[3/4]',
+        specs: '144in × 60in Backlit Frame',
+        grade: 'Warm Sandstone & Camel',
+        rationale:
+          'Intimate editorial storytelling captured during the subterranean commute. Two models seated on warm carpeted steps immersed in hardcover books and handwritten notes, transforming the tiled platform into a cozy literary vignette.',
+        insight:
+          'Engages riders during the 3–6 minute platform wait window with warm tungsten lighting that contrasts sharply against the cool ceramic station tiles.'
+      },
+      {
+        id: '03',
+        anchor: 'ad-03',
+        category: 'bus-shelter',
+        title: 'STREET-LEVEL BUS SHELTER KIOSK',
+        format: 'ILLUMINATED TRANSIT SHELTER',
+        location: 'Madison Ave & E 68th St',
+        image: 'Gemini_Generated_Image_13ng8e13ng8e13ng (1).jpg',
+        span: 'md:col-span-5',
+        aspect: 'aspect-[3/4]',
+        specs: '48in × 68in Backlit Glass Kiosk',
+        grade: 'Tailored Camel & Limestone',
+        rationale:
+          'Environmental mirroring in situ—the subject in a camel overcoat, plaid scarf, newsboy cap, and rangefinder camera stands directly in front of the exact brownstone block commuters occupy, seamlessly merging ad and streetscape.',
+        insight:
+          'Eye-level sidewalk placement triggers an immediate double-take for passersby waiting at the curb, reinforcing the geographical authenticity of “Autumn on Madison.”'
+      },
+      {
+        id: '04',
+        anchor: 'ad-04',
+        category: 'subway-car',
+        title: 'SUBWAY CAR INTERIOR SUITE',
+        format: 'WINDOW POSTER & OVERHEAD CAR CARD',
+        location: 'MTA Commuter Line',
+        image: 'Gemini_Generated_Image_psio2bpsio2bpsio.jpg',
+        span: 'md:col-span-7',
+        aspect: 'aspect-[4/3]',
+        specs: '28in × 28in + 11in × 42in Header',
+        grade: 'Chestnut Leather & Cream',
+        rationale:
+          'Dual-tier captive audience execution combining an eye-level window frame (model seated on stoop with leather satchel and tall riding boots) with an overhead brand header strip for unavoidable visual repetition.',
+        insight:
+          'Guarantees clear sightlines for both seated riders across the aisle and standing commuters holding overhead handrails during peak Manhattan rush hours.'
+      },
+      {
+        id: '05',
+        anchor: 'ad-05',
+        category: 'wheatpaste',
+        title: 'SEQUENTIAL STREET WHEATPASTE',
+        format: 'WILD POSTING INSTALLATION',
+        location: 'Lower Manhattan Construction Hoarding',
+        image: 'Gemini_Generated_Image_69l3li69l3li69l3 (1).jpg',
+        span: 'md:col-span-12',
+        aspect: 'aspect-[16/9] md:aspect-[21/9]',
+        specs: '5 × (42in × 60in) Sequential Run',
+        grade: 'Weathered Timber & Espresso',
+        rationale:
+          'Guerrilla-style sequential rhythm featuring five repeating and alternating café-window and stoop vignettes pasted across weathered plywood hoarding, creating cinematic motion as pedestrians walk past.',
+        insight:
+          'Brings grassroots downtown cultural credibility to Wild Fable, turning utilitarian sidewalk scaffolding into a rhythmic, frame-by-frame lookbook installation.'
+      }
+    ];
+
+    let activeIndex = 0;
+
+    // 3. Render Print Execution Cards
+    function renderExecutions(filter = 'all') {
+      const grid = document.getElementById('ads-showcase-grid');
+      const items =
+        filter === 'all'
+          ? executions
+          : executions.filter((item) => item.category === filter);
+
+      grid.innerHTML = items
+        .map((ad) => {
+          const fullIdx = executions.findIndex((e) => e.id === ad.id);
+          const colSpan = filter === 'all' ? ad.span : 'md:col-span-10 md:col-start-2';
+          const fallback = `https://placehold.co/1200x900/1a1110/860111?text=AD+${ad.id}+${encodeURIComponent(ad.title)}`;
+
+          return `
+            <article
+              id="${ad.anchor}"
+              onclick="openLightbox(${fullIdx})"
+              tabindex="0"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(${fullIdx});}"
+              class="print-card ${colSpan} cursor-pointer group"
+            >
+              <div>
+                <!-- Sharp 0px Image Frame -->
+                <div class="relative overflow-hidden bg-[#0a0606] border-b-2 border-[#480607] ${ad.aspect}">
+                  <img
+                    src="${ad.image}"
+                    alt="${ad.title} — ${ad.format}"
+                    onerror="this.onerror=null; this.src='${fallback}';"
+                    class="print-card-img"
+                    loading="lazy"
+                  />
+
+                  <!-- Index Tag -->
+                  <div class="absolute top-0 left-0 bg-[#480607] border-r-2 border-b-2 border-[#860111] px-4 py-2 text-small font-semibold uppercase tracking-widest text-[#860111]">
+                    AD // ${ad.id}
+                  </div>
+
+                  <!-- Hover Critique Prompt -->
+                  <div class="absolute bottom-0 right-0 bg-[#860111] text-[#1a1110] px-4 py-2 text-small font-semibold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    INSPECT EXECUTION ↗
+                  </div>
+                </div>
+
+                <!-- Card Content -->
+                <div class="p-6 sm:p-8">
+                  <div class="flex flex-wrap items-center justify-between gap-2 text-small uppercase tracking-[0.12em] text-[#860111] font-semibold mb-2">
+                    <span>${ad.format}</span>
+                    <span class="text-[#a89694]">${ad.location}</span>
+                  </div>
+
+                  <h3 class="uppercase mb-3 group-hover:text-[#b80d21] transition-colors duration-200">
+                    ${ad.title}
+                  </h3>
+
+                  <p class="body-copy-readable text-base">
+                    ${ad.rationale}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card Footer Metadata Bar -->
+              <div class="px-6 sm:px-8 py-4 bg-[#1a1110] border-t-2 border-[#480607] flex items-center justify-between text-small">
+                <span class="uppercase tracking-wider text-[#860111] font-semibold">${ad.specs}</span>
+                <span class="uppercase tracking-wider text-[#860111] font-semibold group-hover:translate-x-1 transition-transform duration-200">
+                  OPEN BRIEF →
+                </span>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+
+    // 4. Filter Pill Interactions
+    document.querySelectorAll('.filter-pill').forEach((pill) => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+        renderExecutions(pill.getAttribute('data-filter'));
+      });
+    });
+
+    // 5. Lightbox Inspection Modal Controls
+    function openLightbox(index) {
+      activeIndex = index;
+      syncLightbox();
+      document.getElementById('critique-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('critique-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function stepLightbox(dir) {
+      activeIndex = (activeIndex + dir + executions.length) % executions.length;
+      syncLightbox();
+    }
+
+    function syncLightbox() {
+      const ad = executions[activeIndex];
+      const img = document.getElementById('modal-img');
+      const fallback = `https://placehold.co/1200x900/1a1110/860111?text=AD+${ad.id}+${encodeURIComponent(ad.title)}`;
+
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = fallback;
+      };
+      img.src = ad.image;
+      img.alt = `${ad.title} — ${ad.format}`;
+
+      document.getElementById('modal-badge').textContent = `EXECUTION ${ad.id} / 0${executions.length}`;
+      document.getElementById('modal-format').textContent = ad.format;
+      document.getElementById('modal-heading').textContent = ad.title;
+      document.getElementById('modal-location').textContent = ad.location;
+      document.getElementById('modal-rationale').textContent = ad.rationale;
+      document.getElementById('modal-insight').textContent = ad.insight;
+      document.getElementById('modal-specs').textContent = ad.specs;
+      document.getElementById('modal-grade').textContent = ad.grade;
+    }
+
+    // Backdrop click & Keyboard navigation (Escape, Left/Right Arrows)
+    document.getElementById('critique-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'critique-modal') closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('critique-modal');
+      if (modal.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') stepLightbox(1);
+      if (e.key === 'ArrowLeft') stepLightbox(-1);
+    });
+
+    // Boot
+    window.addEventListener('DOMContentLoaded', () => {
+      initShootingStars();
+      renderExecutions('all');
+    });
+  </script>
+</body>
+</html>
