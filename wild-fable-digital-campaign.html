@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wild Fable — Autumn on Madison | Digital Campaign & Motion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #1a1110;
+      --bg-elevated: #130c0b;
+      --text-crimson: #860111;
+      --border-maroon: #480607;
+      --warm-tan: #b59e87;
+      --cocoa-mid: #3b2219;
+      --gold-ochre: #966847;
+      --cream-ink: #f4ede4;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-radius: 0px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-primary);
+      color: var(--text-crimson);
+      font-family: 'Asap', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle Shooting Star Background Canvas */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+    }
+
+    .wf-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Campaign Header */
+    .campaign-hero {
+      border-bottom: 1px solid var(--border-maroon);
+      padding: 48px 0 40px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--warm-tan);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-maroon);
+      padding-bottom: 12px;
+    }
+
+    .campaign-hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin: 16px 0 8px;
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+
+    .campaign-hero .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--warm-tan);
+      margin: 0;
+    }
+
+    .spec-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      border-top: 1px solid var(--border-maroon);
+      border-left: 1px solid var(--border-maroon);
+      margin-top: 32px;
+    }
+
+    .spec-cell {
+      padding: 16px;
+      border-right: 1px solid var(--border-maroon);
+      border-bottom: 1px solid var(--border-maroon);
+      background: rgba(19, 12, 11, 0.75);
+    }
+
+    .spec-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-ochre);
+      margin-bottom: 4px;
+    }
+
+    .spec-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cream-ink);
+    }
+
+    /* Section Headings */
+    .section-block {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border-maroon);
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    .section-header h2 {
+      font-size: 1.75rem;
+      letter-spacing: 0.04em;
+      margin: 0 0 6px 0;
+      text-transform: uppercase;
+    }
+
+    .section-header p {
+      color: var(--warm-tan);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .control-hint {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-ochre);
+      border: 1px solid var(--border-maroon);
+      padding: 6px 12px;
+      background: var(--bg-elevated);
+    }
+
+    /* 1. Auto-Scrolling Dynamic Island Phone Marquee */
+    .wf-marquee-viewport {
+      width: 100%;
+      overflow: hidden;
+      padding: 16px 0;
+    }
+
+    .wf-marquee-track {
+      display: flex;
+      gap: 32px;
+      width: max-content;
+      animation: wfScroll 28s linear infinite;
+    }
+
+    .wf-marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    /* Hardware phone silhouette keeps realistic device curves inside sharp 0px section grid */
+    .wf-phone {
+      width: 276px;
+      height: 572px;
+      background: #0d0808;
+      border: 2px solid var(--border-maroon);
+      border-radius: 42px;
+      padding: 11px;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.75);
+    }
+
+    .wf-dynamic-island {
+      width: 84px;
+      height: 22px;
+      background: #000000;
+      border-radius: 20px;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    .wf-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-primary);
+    }
+
+    .wf-screen img,
+    .wf-screen video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Animated Ken Burns / Cinematic Motion fallback for static stills inside motion slots */
+    .motion-sim {
+      animation: kenBurnsAutumn 10s ease-in-out infinite alternate;
+      transform-origin: center center;
+    }
+
+    @keyframes kenBurnsAutumn {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.07) translate(-1%, -1.5%); }
+    }
+
+    .wf-badge-motion {
+      position: absolute;
+      top: 52px;
+      right: 14px;
+      background: rgba(26, 17, 16, 0.85);
+      border: 1px solid var(--text-crimson);
+      color: var(--cream-ink);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      text-transform: uppercase;
+      z-index: 8;
+    }
+
+    .wf-social-ui {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 40px 14px 18px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.88));
+      color: var(--cream-ink);
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 5;
+    }
+
+    .wf-social-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0.9;
+    }
+
+    .wf-pill {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      padding: 8px 12px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    @keyframes wfScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* 2. Desktop Web Display Mockup (Leaderboard + 4:5 Feed + Skyscraper) */
+    .wf-browser-frame {
+      border: 1px solid var(--border-maroon);
+      background: var(--bg-elevated);
+    }
+
+    .wf-browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-maroon);
+      background: var(--bg-primary);
+    }
+
+    .wf-dot {
+      width: 10px;
+      height: 10px;
+      border: 1px solid var(--text-crimson);
+      background: var(--border-maroon);
+      display: inline-block;
+    }
+
+    .wf-url {
+      margin-left: 12px;
+      padding: 6px 12px;
+      border: 1px solid var(--border-maroon);
+      color: var(--warm-tan);
+      font-size: 12px;
+      flex: 1;
+      background: var(--bg-elevated);
+    }
+
+    .wf-browser-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .ad-placement-tag {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-ochre);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .wf-leaderboard-slot img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--border-maroon);
+    }
+
+    .wf-editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .wf-editorial-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .wf-card-slot img,
+    .wf-skyscraper-slot img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--border-maroon);
+    }
+
+    /* Asset Loader Bar for Local File Swapping */
+    .asset-bar {
+      margin-top: 24px;
+      padding: 16px;
+      border: 1px solid var(--border-maroon);
+      background: var(--bg-elevated);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .asset-bar span {
+      font-size: 12px;
+      color: var(--warm-tan);
+    }
+
+    .asset-bar code {
+      color: var(--cream-ink);
+      background: var(--cocoa-mid);
+      padding: 2px 6px;
+      border: 1px solid var(--border-maroon);
+    }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--gold-ochre);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .wf-editorial-grid {
+        grid-template-columns: 1fr;
+      }
+      .wf-editorial-main {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+
+  <div class="page-wrapper">
+    <!-- Campaign Header -->
+    <header class="campaign-hero">
+      <div class="wf-container">
+        <div class="eyebrow">
+          <span>WILD FABLE × TARGET // CAMPAIGN DELIVERABLE</span>
+          <span>5 DIGITAL PLACEMENTS + MOTION</span>
+        </div>
+        <h1>04 // Digital Ad Campaign &amp; Motion</h1>
+        <p class="subtitle">Autumn on Madison — Social, Mobile Stories &amp; Web Display Architecture</p>
+
+        <div class="spec-strip">
+          <div class="spec-cell">
+            <div class="spec-label">01 // IG &amp; TikTok Story</div>
+            <div class="spec-value">9:16 Vertical (1080×1920)</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">02 // Motion Reel (Animated)</div>
+            <div class="spec-value">9:16 MP4 Loop / Cinemagraph</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">03 // IG Feed Editorial</div>
+            <div class="spec-value">4:5 Portrait (1080×1350)</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">04 // Web Leaderboard</div>
+            <div class="spec-value">21:9 Desktop Banner (970×250)</div>
+          </div>
+          <div class="spec-cell">
+            <div class="spec-label">05 // Editorial Skyscraper</div>
+            <div class="spec-value">1:4 Sidebar Unit (300×600)</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Section 1: Auto-Scrolling Dynamic Island Phone Marquee -->
+    <section class="section-block">
+      <div class="wf-container">
+        <div class="section-header">
+          <div>
+            <h2>Mobile &amp; Social Placements (Dynamic Island)</h2>
+            <p>Instagram Stories, Reels &amp; TikTok In-Feed Auto-Carousel</p>
+          </div>
+          <div class="control-hint">Hover any device to pause scroll</div>
+        </div>
+      </div>
+
+      <div class="wf-marquee-viewport">
+        <div class="wf-marquee-track">
+          <!-- Phone 1: Animated Motion Ad 1 -->
+          <div class="wf-phone">
+            <div class="wf-dynamic-island"></div>
+            <div class="wf-screen">
+              <div class="wf-badge-motion">● Motion Loop</div>
+              <video src="motion-ad-1.mp4" poster="ad-2-ig-story.jpg" autoplay loop muted playsinline></video>
+              <div class="wf-social-ui">
+                <div class="wf-social-meta"><span>wildfable · Sponsored</span><span>01 / 05</span></div>
+                <div class="wf-pill">Shop the Madison Edit</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone 2: Instagram Story 9:16 -->
+          <div class="wf-phone">
+            <div class="wf-dynamic-island"></div>
+            <div class="wf-screen">
+              <img src="ad-2-ig-story.jpg" alt="Wild Fable Instagram Story — Stoop Study" />
+              <div class="wf-social-ui">
+                <div class="wf-social-meta"><span>wildfable · Sponsored</span><span>02 / 05</span></div>
+                <div class="wf-pill">Explore Lookbook</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone 3: Animated Motion Ad 2 -->
+          <div class="wf-phone">
+            <div class="wf-dynamic-island"></div>
+            <div class="wf-screen">
+              <div class="wf-badge-motion">● Motion Loop</div>
+              <video src="motion-ad-2.mp4" poster="ad-3-tiktok.jpg" autoplay loop muted playsinline></video>
+              <div class="wf-social-ui">
+                <div class="wf-social-meta"><span>wildfable · Sponsored</span><span>03 / 05</span></div>
+                <div class="wf-pill">Shop Outerwear</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone 4: TikTok In-Feed 9:16 -->
+          <div class="wf-phone">
+            <div class="wf-dynamic-island"></div>
+            <div class="wf-screen">
+              <img class="motion-sim" src="ad-3-tiktok.jpg" alt="Wild Fable TikTok Ad — Collegiate Library" />
+              <div class="wf-social-ui">
+                <div class="wf-social-meta"><span>wildfable · Sponsored</span><span>04 / 05</span></div>
+                <div class="wf-pill">Shop Now</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone 5: IG Feed Macro Portrait -->
+          <div class="wf-phone">
+            <div class="wf-dynamic-island"></div>
+            <div class="wf-screen">
+              <img src="ad-1-library-macro.jpg" alt="Wild Fable Library Macro Portrait" />
+              <div class="wf-social-ui">
+                <div class="wf-social-meta"><span>wildfable · Sponsored</span><span>05 / 05</span></div>
+                <div class="wf-pill">View Collection</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seamless Loop Duplicates -->
+          <div class="wf-phone">
+            <div class="wf-dynamic-island"></div>
+            <div class="wf-screen">
+              <div class="wf-badge-motion">● Motion Loop</div>
+              <video src="motion-ad-1.mp4" poster="ad-2-ig-story.jpg" autoplay loop muted playsinline></video>
+              <div class="wf-social-ui">
+                <div class="wf-social-meta"><span>wildfable · Sponsored</span><span>01 / 05</span></div>
+                <div class="wf-pill">Shop the Madison Edit</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-phone">
+            <div class="wf-dynamic-island"></div>
+            <div class="wf-screen">
+              <img src="ad-2-ig-story.jpg" alt="Wild Fable Instagram Story — Stoop Study" />
+              <div class="wf-social-ui">
+                <div class="wf-social-meta"><span>wildfable · Sponsored</span><span>02 / 05</span></div>
+                <div class="wf-pill">Explore Lookbook</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-phone">
+            <div class="wf-dynamic-island"></div>
+            <div class="wf-screen">
+              <div class="wf-badge-motion">● Motion Loop</div>
+              <video src="motion-ad-2.mp4" poster="ad-3-tiktok.jpg" autoplay loop muted playsinline></video>
+              <div class="wf-social-ui">
+                <div class="wf-social-meta"><span>wildfable · Sponsored</span><span>03 / 05</span></div>
+                <div class="wf-pill">Shop Outerwear</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Desktop Browser Web Banner & Editorial Display Mockup -->
+    <section class="section-block">
+      <div class="wf-container">
+        <div class="section-header">
+          <div>
+            <h2>Desktop Web &amp; E-Commerce Placements</h2>
+            <p>Leaderboard Banner, Sponsored Feed Cards &amp; Sidebar Skyscraper</p>
+          </div>
+          <div class="control-hint">0px Sharp Grid System</div>
+        </div>
+
+        <div class="wf-browser-frame">
+          <div class="wf-browser-bar">
+            <span class="wf-dot"></span>
+            <span class="wf-dot"></span>
+            <span class="wf-dot"></span>
+            <div class="wf-url">https://www.target.com/c/wild-fable-autumn-on-madison</div>
+          </div>
+
+          <div class="wf-browser-body">
+            <!-- Ad 4: Panoramic Leaderboard Banner -->
+            <div class="wf-leaderboard-slot">
+              <div class="ad-placement-tag">
+                <span>PLACEMENT 04 // DESKTOP LEADERBOARD BANNER</span>
+                <span>970 × 250 PX (21:9)</span>
+              </div>
+              <img src="ad-4-leaderboard.jpg" alt="Wild Fable Desktop Leaderboard Banner" />
+            </div>
+
+            <!-- Main Editorial Grid + Ad 5 Skyscraper -->
+            <div class="wf-editorial-grid">
+              <div class="wf-editorial-main">
+                <div class="wf-card-slot">
+                  <div class="ad-placement-tag">
+                    <span>PLACEMENT 01 // SOCIAL FEED AD</span>
+                    <span>4:5 RATIO</span>
+                  </div>
+                  <img src="ad-1-feed-4x5.jpg" alt="Wild Fable 4:5 Stoop Street Portrait Ad" />
+                </div>
+
+                <div class="wf-card-slot">
+                  <div class="ad-placement-tag">
+                    <span>PLACEMENT 01B // MACRO EDITORIAL AD</span>
+                    <span>4:5 RATIO</span>
+                  </div>
+                  <img src="ad-1-library-macro.jpg" alt="Wild Fable 4:5 Library Macro Portrait Ad" />
+                </div>
+              </div>
+
+              <!-- Ad 5: Vertical Skyscraper Banner -->
+              <aside class="wf-skyscraper-slot">
+                <div class="ad-placement-tag">
+                  <span>PLACEMENT 05 // SKYSCRAPER</span>
+                  <span>300 × 600</span>
+                </div>
+                <img src="ad-5-skyscraper.jpg" alt="Wild Fable Vertical Sidebar Skyscraper Ad" />
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        <div class="asset-bar">
+          <span>Drop your exported files into the same folder as this HTML file using these filenames:</span>
+          <div>
+            <code>motion-ad-1.mp4</code>
+            <code>motion-ad-2.mp4</code>
+            <code>ad-1-feed-4x5.jpg</code>
+            <code>ad-1-library-macro.jpg</code>
+            <code>ad-2-ig-story.jpg</code>
+            <code>ad-3-tiktok.jpg</code>
+            <code>ad-4-leaderboard.jpg</code>
+            <code>ad-5-skyscraper.jpg</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      WILD FABLE — AUTUMN ON MADISON // DIGITAL &amp; MOTION CAMPAIGN ARCHITECTURE
+    </footer>
+  </div>
+
+  <!-- Subtle Shooting Star Background Script -->
+  <script>
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let width, height, stars = [];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    function createStar() {
+      return {
+        x: Math.random() * width,
+        y: Math.random() * height * 0.6,
+        len: 40 + Math.random() * 70,
+        speed: 2.5 + Math.random() * 3,
+        opacity: 0.12 + Math.random() * 0.25
+      };
+    }
+
+    function init() {
+      resize();
+      stars = Array.from({ length: 6 }, createStar);
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      stars.forEach((s, i) => {
+        ctx.beginPath();
+        const grad = ctx.createLinearGradient(s.x, s.y, s.x - s.len, s.y - s.len * 0.45);
+        grad.addColorStop(0, `rgba(134, 1, 17, ${s.opacity})`);
+        grad.addColorStop(1, 'rgba(134, 1, 17, 0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.2;
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(s.x - s.len, s.y - s.len * 0.45);
+        ctx.stroke();
+
+        s.x += s.speed;
+        s.y += s.speed * 0.45;
+        if (s.x - s.len > width || s.y - s.len > height) {
+          stars[i] = createStar();
+          stars[i].x = -20;
+        }
+      });
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    init();
+    draw();
+  </script>
+</body>
+</html>
