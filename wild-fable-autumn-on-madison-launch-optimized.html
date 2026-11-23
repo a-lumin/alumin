@@ -1,0 +1,3682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WILD FABLE // Autumn on Madison — Official Campaign Launch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Asap:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Press+Start+2P&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-espresso: #1a1110;
+      --bg-panel: #130c0b;
+      --bg-card: #1f1412;
+      --crimson-primary: #860111;
+      --crimson-bright: #a80418;
+      --burgundy-border: #480607;
+      --warm-tan: #b59e87;
+      --ochre-accent: #966847;
+      --cocoa-deep: #3b2219;
+      --cream-paper: #f4ede4;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-radius: 0px !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-espresso);
+      color: var(--cream-paper);
+      font-family: 'Asap', sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Shooting Star Background */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Sticky Editorial Top Bar */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(19, 12, 11, 0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--burgundy-border);
+      padding: 14px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo .wf {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--cream-paper);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo .sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--warm-tan);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--warm-tan);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--cream-paper);
+    }
+
+    .nav-cta {
+      background: var(--crimson-primary);
+      color: var(--cream-paper) !important;
+      border: 1px solid var(--crimson-bright);
+      padding: 8px 14px;
+      box-shadow: 3px 3px 0px var(--burgundy-border);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* Section Dividers & Headers */
+    .section-block {
+      padding: 84px 0;
+      border-bottom: 1px solid var(--burgundy-border);
+    }
+
+    .section-kicker {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--crimson-primary);
+      background: var(--bg-panel);
+      border: 1px solid var(--burgundy-border);
+      padding: 6px 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-header-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 44px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.1rem, 4vw, 3.3rem);
+      font-weight: 800;
+      line-height: 1.04;
+      color: var(--cream-paper);
+    }
+
+    .section-title em {
+      color: var(--warm-tan);
+      font-weight: 400;
+    }
+
+    .section-lead {
+      margin: 0;
+      font-size: 15px;
+      color: var(--warm-tan);
+      line-height: 1.65;
+      border-left: 2px solid var(--crimson-primary);
+      padding-left: 18px;
+    }
+
+    /* =========================================================
+       01. DYNAMIC HERO GENERATOR STAGE (INTEGRATED FROM USER FILE)
+       ========================================================= */
+    .hero-section {
+      padding: 36px 0 76px;
+      border-bottom: 1px solid var(--burgundy-border);
+    }
+
+    .hero-intro-bar {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ochre-accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 28px;
+      height: 2px;
+      background: var(--crimson-primary);
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 4.8vw, 4.1rem);
+      font-weight: 800;
+      line-height: 0.98;
+      margin: 0;
+      color: var(--cream-paper);
+    }
+
+    .hero-headline span {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--warm-tan);
+      font-size: 0.65em;
+      margin-top: 6px;
+    }
+
+    .hero-copy {
+      font-size: 15px;
+      color: var(--warm-tan);
+      margin: 0;
+      line-height: 1.65;
+      border-left: 2px solid var(--crimson-primary);
+      padding-left: 18px;
+    }
+
+    /* Embedded Hero Generator Shell */
+    .hero-gen-shell {
+      display: grid;
+      grid-template-columns: 330px 1fr;
+      border: 2px solid var(--crimson-primary);
+      background: var(--bg-panel);
+      box-shadow: 8px 8px 0px var(--burgundy-border);
+    }
+
+    .hero-gen-controls {
+      border-right: 1px solid var(--burgundy-border);
+      padding: 18px;
+      background: #120b0a;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-height: 670px;
+      overflow-y: auto;
+    }
+
+    .hg-header {
+      border-bottom: 1px solid var(--burgundy-border);
+      padding-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hg-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hg-wf-box {
+      width: 28px;
+      height: 28px;
+      background: var(--crimson-primary);
+      border: 1px solid var(--warm-tan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'UnifrakturMaguntia', serif;
+      font-size: 16px;
+      color: var(--cream-paper);
+    }
+
+    .hg-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .hg-btn {
+      font-family: 'Asap', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 9px 12px;
+      border: 1px solid var(--crimson-primary);
+      background: var(--bg-espresso);
+      color: var(--cream-paper);
+      cursor: pointer;
+      box-shadow: 2px 2px 0px var(--burgundy-border);
+      transition: background 0.15s ease;
+    }
+
+    .hg-btn:hover, .hg-btn.active {
+      background: var(--crimson-primary);
+    }
+
+    .hg-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ochre-accent);
+      margin-bottom: 6px;
+    }
+
+    .hg-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .hg-scene-btn {
+      padding: 8px 9px;
+      border: 1px solid var(--burgundy-border);
+      background: var(--bg-espresso);
+      color: var(--warm-tan);
+      text-align: left;
+      cursor: pointer;
+      font-family: 'Asap', sans-serif;
+    }
+
+    .hg-scene-btn strong {
+      display: block;
+      font-size: 11px;
+      color: var(--cream-paper);
+    }
+
+    .hg-scene-btn small {
+      display: block;
+      font-size: 9.5px;
+      color: var(--ochre-accent);
+    }
+
+    .hg-scene-btn.active {
+      border-color: var(--crimson-primary);
+      background: var(--cocoa-deep);
+    }
+
+    .hg-input, .hg-select {
+      width: 100%;
+      background: var(--bg-espresso);
+      border: 1px solid var(--burgundy-border);
+      color: var(--cream-paper);
+      padding: 7px 9px;
+      font-family: 'Asap', sans-serif;
+      font-size: 11.5px;
+    }
+
+    .hg-input:focus, .hg-select:focus {
+      outline: none;
+      border-color: var(--crimson-primary);
+    }
+
+    /* Dynamic Hero Stage Viewport */
+    .hero-gen-stage-wrap {
+      position: relative;
+      background: #0b0706;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      min-height: 620px;
+      overflow: hidden;
+    }
+
+    #liveHeroStage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 2px solid var(--burgundy-border);
+      background: #1a1412;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+      transition: all 0.4s ease;
+    }
+
+    #liveHeroStage.fmt-9-16 {
+      max-width: 340px;
+      aspect-ratio: 9 / 16;
+    }
+
+    #liveHeroStage.fmt-1-1 {
+      max-width: 520px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .glass-reflection {
+      background: linear-gradient(
+        118deg,
+        rgba(255, 250, 240, 0.14) 0%,
+        rgba(255, 250, 240, 0.04) 24%,
+        transparent 25%,
+        transparent 56%,
+        rgba(223, 210, 194, 0.09) 57%,
+        rgba(255, 250, 240, 0.02) 76%,
+        transparent 77%
+      );
+    }
+
+    .mahogany-wood {
+      background-color: #2A1710;
+      background-image:
+        repeating-linear-gradient(90deg, rgba(16,8,5,0.45) 0px, rgba(16,8,5,0.45) 2px, transparent 2px, transparent 11px),
+        linear-gradient(180deg, #3A2016 0%, #23120C 50%, #2F1911 100%);
+    }
+
+    .brushed-steel {
+      background: linear-gradient(180deg, #8B8E91 0%, #B8BCBF 18%, #7C8084 52%, #9EA2A6 84%, #686B6F 100%);
+    }
+
+    .sandstone-wall {
+      background-color: #5E493E;
+      background-image:
+        radial-gradient(rgba(26,20,18,0.22) 1px, transparent 0),
+        linear-gradient(180deg, #6B5347 0%, #4E3B31 100%);
+      background-size: 16px 16px, 100% 100%;
+    }
+
+    @keyframes plateReveal {
+      0% { opacity: 0; transform: translateY(20px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes subtleCameraDrift {
+      0%, 100% { transform: scale(1.01) translate(0px, 0px); }
+      50% { transform: scale(1.05) translate(-6px, -4px); }
+    }
+
+    .animate-plate-1 { animation: plateReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .animate-plate-2 { animation: plateReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both; }
+    .animate-plate-3 { animation: plateReveal 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both; }
+    .animate-camera-drift { animation: subtleCameraDrift 16s ease-in-out infinite; }
+
+    .hg-arch-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .hg-plates-row {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 68%;
+      margin: auto 28px auto auto;
+      align-items: center;
+    }
+
+    .hg-plate-card {
+      background: #1D120D;
+      padding: 8px;
+      border: 2px solid #593522;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    }
+
+    .hg-plate-card img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hg-plate-meta {
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      font-family: monospace;
+      color: var(--warm-tan);
+    }
+
+    .hg-editorial-overlay {
+      position: relative;
+      z-index: 30;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 26px 32px;
+      pointer-events: none;
+    }
+
+    .hg-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .hg-wordmark-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 14px;
+      background: rgba(26, 20, 18, 0.84);
+      border: 1px solid rgba(223, 210, 194, 0.28);
+    }
+
+    .hg-copy-block {
+      max-width: 470px;
+      pointer-events: auto;
+    }
+
+    .hg-copy-block h2 {
+      margin: 8px 0 8px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: clamp(1.9rem, 3.4vw, 3.1rem);
+      line-height: 0.98;
+      color: #F7F4EF;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    }
+
+    .hg-copy-block p {
+      margin: 0 0 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+      line-height: 1.3;
+      color: #DFD2C2;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+    }
+
+    .hg-cta-btn {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #DFD2C2;
+      color: #1A1412;
+      font-family: 'Asap', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       02. LOOKBOOK & MOODBOARD EDITORIAL ARCHIVE
+       ========================================================= */
+    .moodboard-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .editorial-card {
+      border: 1px solid var(--burgundy-border);
+      background: var(--bg-panel);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 5px 5px 0px #0d0808;
+    }
+
+    .editorial-card img {
+      width: 100%;
+      height: 410px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--burgundy-border);
+    }
+
+    .editorial-card-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .editorial-card-body h3 {
+      margin: 0 0 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--cream-paper);
+    }
+
+    .editorial-card-body p {
+      margin: 0 0 14px;
+      font-size: 13.5px;
+      color: var(--warm-tan);
+    }
+
+    .palette-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border: 1px solid var(--burgundy-border);
+      margin-top: 32px;
+    }
+
+    .swatch-chip {
+      padding: 16px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-right: 1px solid var(--burgundy-border);
+    }
+
+    .swatch-chip:last-child {
+      border-right: none;
+    }
+
+    /* =========================================================
+       03. PRINT & OUT-OF-HOME NYC CAMPAIGN
+       ========================================================= */
+    .ooh-showcase {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .ooh-main-frame {
+      border: 2px solid var(--burgundy-border);
+      background: var(--bg-panel);
+      box-shadow: 6px 6px 0px #0d0808;
+    }
+
+    .ooh-main-frame img {
+      width: 100%;
+      height: 580px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--burgundy-border);
+    }
+
+    .ooh-caption {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .ooh-sidebar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .print-spec-card {
+      border: 1px solid var(--burgundy-border);
+      background: var(--bg-panel);
+      padding: 24px;
+      box-shadow: 4px 4px 0px #0d0808;
+    }
+
+    .print-spec-card h3 {
+      margin: 0 0 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--cream-paper);
+    }
+
+    .print-spec-card p {
+      margin: 0 0 14px;
+      font-size: 14px;
+      color: var(--warm-tan);
+    }
+
+    .spec-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid var(--burgundy-border);
+    }
+
+    .spec-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--burgundy-border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .spec-list li span:first-child {
+      color: var(--ochre-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       04. DIGITAL, SOCIAL & MOTION CAMPAIGN MATRIX
+       ========================================================= */
+    .digital-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .dig-card {
+      border: 1px solid var(--burgundy-border);
+      background: var(--bg-panel);
+      box-shadow: 5px 5px 0px #0d0808;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dig-col-4 {
+      grid-column: span 4;
+    }
+
+    .dig-col-6 {
+      grid-column: span 6;
+    }
+
+    .dig-col-12 {
+      grid-column: span 12;
+    }
+
+    .dig-card img.vertical-ad {
+      width: 100%;
+      height: 490px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--burgundy-border);
+    }
+
+    .dig-card video.motion-ad {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--burgundy-border);
+    }
+
+    .dig-card img.banner-ad {
+      width: 100%;
+      max-height: 430px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--burgundy-border);
+    }
+
+    .dig-meta {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .dig-meta h4 {
+      margin: 0 0 5px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--cream-paper);
+    }
+
+    .dig-meta p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--warm-tan);
+    }
+
+    .format-pill {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 9px;
+      border: 1px solid var(--crimson-primary);
+      color: var(--cream-paper);
+      background: var(--bg-espresso);
+      white-space: nowrap;
+    }
+
+    /* =========================================================
+       05. EXPERIMENTAL PIECE: 16-BIT PIXEL STYLING STUDIO
+       ========================================================= */
+    .exp-wrapper {
+      border: 2px solid var(--crimson-primary);
+      background: var(--bg-panel);
+      box-shadow: 8px 8px 0px var(--burgundy-border);
+      padding: 24px;
+    }
+
+    .exp-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--burgundy-border);
+    }
+
+    .exp-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .exp-actions button,
+    .studio-grid button {
+      font-family: 'Asap', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      border: 2px solid var(--crimson-primary);
+      background: var(--bg-panel);
+      color: var(--cream-paper);
+      cursor: pointer;
+      box-shadow: 3px 3px 0px var(--burgundy-border);
+    }
+
+    .exp-actions button:hover,
+    .studio-grid button:hover {
+      background: var(--crimson-primary);
+    }
+
+    .exp-actions button.primary-btn {
+      background: var(--crimson-primary);
+    }
+
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 375px 1fr 305px;
+      border-left: 1px solid var(--burgundy-border);
+      border-bottom: 1px solid var(--burgundy-border);
+      background: rgba(19, 12, 11, 0.96);
+    }
+
+    .panel {
+      border-right: 1px solid var(--burgundy-border);
+      border-top: 1px solid var(--burgundy-border);
+      padding: 18px;
+      max-height: 820px;
+      overflow-y: auto;
+    }
+
+    .panel-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--crimson-primary);
+      border-bottom: 2px solid var(--burgundy-border);
+      padding-bottom: 11px;
+      margin: 0 0 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mode-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .mode-btn {
+      padding: 10px 8px;
+      font-family: 'Press Start 2P', monospace !important;
+      font-size: 8px !important;
+      border: 2px solid var(--burgundy-border) !important;
+      background: var(--bg-espresso) !important;
+      color: var(--warm-tan) !important;
+      text-align: center;
+    }
+
+    .mode-btn.active {
+      border-color: var(--crimson-primary) !important;
+      background: var(--crimson-primary) !important;
+      color: var(--cream-paper) !important;
+    }
+
+    .custom-section {
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--burgundy-border);
+      padding-bottom: 13px;
+    }
+
+    .custom-label {
+      display: block;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7.5px;
+      color: var(--warm-tan);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .hair-sublabel {
+      display: block;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: var(--ochre-accent);
+      margin: 11px 0 6px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .swatch-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tone-swatch {
+      width: 32px !important;
+      height: 32px !important;
+      padding: 0 !important;
+      border: 2px solid var(--burgundy-border) !important;
+    }
+
+    .tone-swatch.active {
+      border: 2px solid var(--cream-paper) !important;
+      outline: 2px solid var(--crimson-primary);
+    }
+
+    .option-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    .option-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .mini-opt {
+      padding: 8px 7px !important;
+      font-size: 10.5px !important;
+      font-weight: 700;
+      letter-spacing: 0.03em !important;
+      border: 2px solid var(--burgundy-border) !important;
+      background: var(--bg-espresso) !important;
+      color: var(--warm-tan) !important;
+      text-align: left;
+    }
+
+    .mini-opt.active {
+      border-color: var(--crimson-primary) !important;
+      background: var(--cocoa-deep) !important;
+      color: var(--cream-paper) !important;
+    }
+
+    .cat-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .cat-tab {
+      padding: 9px 4px !important;
+      font-family: 'Press Start 2P', monospace !important;
+      font-size: 7.5px !important;
+      border: 2px solid var(--burgundy-border) !important;
+      background: var(--bg-espresso) !important;
+      color: var(--warm-tan) !important;
+      text-align: center;
+    }
+
+    .cat-tab.active {
+      border-color: var(--crimson-primary) !important;
+      background: var(--crimson-primary) !important;
+      color: var(--cream-paper) !important;
+    }
+
+    .garment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .garment-card {
+      border: 2px solid var(--burgundy-border) !important;
+      background: var(--bg-espresso) !important;
+      padding: 9px 10px !important;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-align: left;
+    }
+
+    .garment-card.selected {
+      border-color: var(--crimson-primary) !important;
+      background: var(--cocoa-deep) !important;
+    }
+
+    .swatch-box {
+      width: 30px;
+      height: 30px;
+      border: 2px solid rgba(244, 237, 228, 0.45);
+      flex-shrink: 0;
+    }
+
+    .garment-info {
+      flex: 1;
+    }
+
+    .garment-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--cream-paper);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .garment-meta {
+      font-size: 10.5px;
+      color: var(--warm-tan);
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .stage-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0d0808;
+      padding: 22px 14px;
+    }
+
+    .arcade-bezel {
+      border: 3px solid var(--burgundy-border);
+      background: var(--bg-espresso);
+      padding: 12px;
+      box-shadow: 6px 6px 0px #080505;
+    }
+
+    .arcade-hud-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0d0808;
+      border: 1px solid var(--burgundy-border);
+      padding: 8px 11px;
+      margin-bottom: 10px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--warm-tan);
+    }
+
+    @keyframes blinkRec {
+      to { opacity: 0.2; }
+    }
+
+    .arcade-hud-top span.blink {
+      color: var(--crimson-primary);
+      animation: blinkRec 1.4s steps(2, start) infinite;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      border: 2px solid #2b1914;
+      background: #1a1110;
+      width: 410px;
+      max-width: 100%;
+      aspect-ratio: 176 / 224;
+      overflow: hidden;
+    }
+
+    canvas#pixelCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .crisp-wordmark-overlay {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      background: rgba(26, 17, 16, 0.85);
+      border: 2px solid var(--crimson-primary);
+      padding: 9px 10px 10px;
+      text-align: center;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .crisp-wordmark-overlay .brand-main {
+      display: block;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 29px;
+      line-height: 0.98;
+      color: var(--cream-paper);
+    }
+
+    .crisp-wordmark-overlay .brand-sub {
+      display: block;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 14px;
+      margin-top: 2px;
+      color: var(--warm-tan);
+    }
+
+    .crt-scanlines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%);
+      background-size: 100% 4px;
+    }
+
+    .dialogue-box {
+      margin-top: 10px;
+      background: #0d0808;
+      border: 2px solid var(--crimson-primary);
+      padding: 10px 12px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      line-height: 1.65;
+      color: var(--cream-paper);
+      max-width: 410px;
+    }
+
+    .dialogue-box span.speaker {
+      color: var(--ochre-accent);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stage-controls {
+      margin-top: 12px;
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .scene-pill {
+      padding: 7px 9px !important;
+      font-family: 'Press Start 2P', monospace !important;
+      font-size: 7.5px !important;
+      border: 2px solid var(--burgundy-border) !important;
+      background: var(--bg-panel) !important;
+      color: var(--warm-tan) !important;
+    }
+
+    .scene-pill.active {
+      border-color: var(--crimson-primary) !important;
+      color: var(--cream-paper) !important;
+      background: var(--cocoa-deep) !important;
+    }
+
+    .library-slip {
+      background: #f4ede4;
+      color: #1a1110;
+      padding: 15px;
+      border: 2px solid var(--burgundy-border);
+      font-family: 'Courier New', Courier, monospace;
+      margin-bottom: 16px;
+    }
+
+    .slip-header {
+      border-bottom: 2px solid #1a1110;
+      padding-bottom: 7px;
+      margin-bottom: 9px;
+      text-align: center;
+    }
+
+    .slip-header strong {
+      display: block;
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+    }
+
+    .slip-header small {
+      font-size: 9.5px;
+      text-transform: uppercase;
+    }
+
+    .slip-items {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 10px;
+      font-size: 10.5px;
+    }
+
+    .slip-items li {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px dotted rgba(26, 17, 16, 0.35);
+      gap: 8px;
+    }
+
+    .slip-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 11.5px;
+      border-top: 2px solid #1a1110;
+      padding-top: 7px;
+    }
+
+    .quest-card {
+      border: 2px solid var(--crimson-primary);
+      background: var(--bg-espresso);
+      padding: 13px;
+      margin-bottom: 14px;
+    }
+
+    .quest-card h3 {
+      margin: 0 0 7px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      line-height: 1.5;
+      color: var(--cream-paper);
+    }
+
+    .quest-card p {
+      margin: 0 0 9px;
+      font-size: 11px;
+      color: var(--warm-tan);
+    }
+
+    .stat-row {
+      margin-top: 8px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      color: var(--warm-tan);
+    }
+
+    .stat-bar {
+      height: 10px;
+      background: #0d0808;
+      border: 1px solid var(--burgundy-border);
+      margin-top: 5px;
+      padding: 1px;
+    }
+
+    .stat-fill {
+      height: 100%;
+      background: repeating-linear-gradient(90deg, var(--crimson-primary), var(--crimson-primary) 6px, #a50216 6px, #a50216 8px);
+      width: 12%;
+      transition: width 0.2s steps(6);
+    }
+
+    footer {
+      padding: 44px 0 64px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--warm-tan);
+      font-size: 12px;
+      border-top: 1px solid var(--burgundy-border);
+    }
+
+    @media (max-width: 1120px) {
+      .hero-intro-bar,
+      .hero-gen-shell,
+      .section-header-grid,
+      .moodboard-grid,
+      .ooh-showcase,
+      .studio-grid {
+        grid-template-columns: 1fr;
+      }
+      .dig-col-4, .dig-col-6 {
+        grid-column: span 12;
+      }
+      .panel, .hero-gen-controls {
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+
+  <!-- STICKY NAVIGATION -->
+  <nav class="nav-bar">
+    <a href="#top" class="nav-logo">
+      <span class="wf">wild fable</span>
+      <span class="sub">Autumn on Madison</span>
+    </a>
+    <div class="nav-links">
+      <a href="#hero">01 // Dynamic Hero</a>
+      <a href="#lookbook">02 // Lookbook &amp; Moodboard</a>
+      <a href="#print-ooh">03 // Print &amp; OOH</a>
+      <a href="#digital">04 // Digital &amp; Motion</a>
+      <a href="#studio" class="nav-cta">05 // 16-Bit Styling Lab</a>
+    </div>
+  </nav>
+
+  <main class="container" id="top">
+    <!-- =====================================================
+         01. DYNAMIC HERO GENERATOR STAGE (USER'S TOOL INTEGRATED)
+         ===================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-intro-bar">
+        <div>
+          <div class="hero-eyebrow">FALL / WINTER 2026 CAPSULE LAUNCH</div>
+          <h1 class="hero-headline">
+            Autumn on Madison
+            <span>Tailored for brownstone stoops &amp; late library hours.</span>
+          </h1>
+        </div>
+        <p class="hero-copy">
+          Where Upper East Side collegiate heritage meets lived-in downtown ease. Interact directly with the <strong>Dynamic Hero Generator</strong> below—switch between Madison Café windows, Prince St. subway doors, UES brownstone stoops, and the archival reading room, adjust color grades, or randomize deterministic seeds.
+        </p>
+      </div>
+
+      <!-- Integrated Dynamic Hero Generator -->
+      <div class="hero-gen-shell">
+        <!-- Left Studio Controls -->
+        <div class="hero-gen-controls">
+          <div class="hg-header">
+            <div class="hg-badge">
+              <div class="hg-wf-box">Wf</div>
+              <div>
+                <strong style="font-size:12px; display:block; color:var(--cream-paper);">Dynamic Hero Engine</strong>
+                <small style="font-size:10px; color:var(--warm-tan);">Seed #<span id="hgSeedLabel">10482</span></small>
+              </div>
+            </div>
+            <button type="button" class="hg-btn" onclick="hgGenerateRandom()">Generate ↻</button>
+          </div>
+
+          <div>
+            <div class="hg-label">
+              <span>01 // Architectural Scene</span>
+              <button type="button" id="hgLockSceneBtn" onclick="hgToggleLock('scene')" style="background:none; border:1px solid var(--burgundy-border); color:var(--warm-tan); font-size:9px; padding:2px 6px; cursor:pointer;">🔓 Lock</button>
+            </div>
+            <div class="hg-grid-2">
+              <button type="button" class="hg-scene-btn active" data-hg-scene="cafe-window" onclick="hgSelectScene('cafe-window')">
+                <strong>Madison Café</strong>
+                <small>Rainy glass &amp; oak</small>
+              </button>
+              <button type="button" class="hg-scene-btn" data-hg-scene="subway-doors" onclick="hgSelectScene('subway-doors')">
+                <strong>Prince St. Subway</strong>
+                <small>R160 doors &amp; cards</small>
+              </button>
+              <button type="button" class="hg-scene-btn" data-hg-scene="brownstone-stoop" onclick="hgSelectScene('brownstone-stoop')">
+                <strong>UES Brownstone</strong>
+                <small>Limestone &amp; maple</small>
+              </button>
+              <button type="button" class="hg-scene-btn" data-hg-scene="library-archive" onclick="hgSelectScene('library-archive')">
+                <strong>Reading Room</strong>
+                <small>Brass &amp; walnut</small>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="hg-label"><span>02 // Viewport Aspect Ratio</span></div>
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px;">
+              <button type="button" class="hg-btn active" data-hg-fmt="16:9" onclick="hgSelectFormat('16:9')">16:9 Hero</button>
+              <button type="button" class="hg-btn" data-hg-fmt="9:16" onclick="hgSelectFormat('9:16')">9:16 Story</button>
+              <button type="button" class="hg-btn" data-hg-fmt="1:1" onclick="hgSelectFormat('1:1')">1:1 Feed</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="hg-label">
+              <span>03 // Color Grade &amp; Patch</span>
+              <button type="button" id="hgLockPaletteBtn" onclick="hgToggleLock('palette')" style="background:none; border:1px solid var(--burgundy-border); color:var(--warm-tan); font-size:9px; padding:2px 6px; cursor:pointer;">🔓 Lock</button>
+            </div>
+            <div class="hg-grid-2" style="margin-bottom:8px;">
+              <button type="button" class="hg-btn active" data-hg-pal="oxblood-espresso" onclick="hgSelectPalette('oxblood-espresso')">Oxblood</button>
+              <button type="button" class="hg-btn" data-hg-pal="madison-mist" onclick="hgSelectPalette('madison-mist')">Rainy Mist</button>
+              <button type="button" class="hg-btn" data-hg-pal="golden-brownstone" onclick="hgSelectPalette('golden-brownstone')">Brownstone</button>
+              <button type="button" class="hg-btn" data-hg-pal="sepia-archival" onclick="hgSelectPalette('sepia-archival')">35mm Sepia</button>
+            </div>
+            <select id="hgEmblemSelect" class="hg-select" onchange="hgChangeEmblem(this.value)">
+              <option value="star-patch">Embroidered Star Patch</option>
+              <option value="wf-shield">WF Heraldic Shield</option>
+              <option value="madison-stamp">Madison Ink Stamp</option>
+              <option value="none">Minimal Wordmark Only</option>
+            </select>
+          </div>
+
+          <div>
+            <div class="hg-label">
+              <span>04 // Hero Headline &amp; Copy</span>
+              <button type="button" id="hgLockCopyBtn" onclick="hgToggleLock('copy')" style="background:none; border:1px solid var(--burgundy-border); color:var(--warm-tan); font-size:9px; padding:2px 6px; cursor:pointer;">🔓 Lock</button>
+            </div>
+            <input id="hgHeadlineInput" class="hg-input" type="text" value="Autumn on Madison." oninput="hgSyncCopy()" style="margin-bottom:6px;" />
+            <input id="hgSubheadInput" class="hg-input" type="text" value="Wild Fable Dark Academia Capsule. Tailored wool, argyle knits, and rainy avenue layers." oninput="hgSyncCopy()" />
+          </div>
+
+          <div class="hg-row">
+            <button type="button" class="hg-btn" style="flex:1;" onclick="hgReplayIntro()">Replay Entrance</button>
+            <button type="button" class="hg-btn" style="flex:1; background:var(--crimson-primary);" onclick="hgExportPNG()">Export PNG</button>
+          </div>
+        </div>
+
+        <!-- Live Interactive Architectural Stage -->
+        <div class="hero-gen-stage-wrap">
+          <div id="liveHeroStage" onmousemove="hgParallax(event)" onmouseleave="hgResetParallax()">
+            <div id="hgArchLayer" class="hg-arch-layer"></div>
+            <canvas id="hgAtmosphereCanvas" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:20;"></canvas>
+            <div id="hgGradeWash" style="position:absolute; inset:0; pointer-events:none; z-index:20; transition:all 0.4s ease;"></div>
+            <div class="glass-reflection" style="position:absolute; inset:0; pointer-events:none; z-index:20; opacity:0.65;"></div>
+
+            <!-- Subway Sliding Doors Overlay -->
+            <div id="hgSubwayDoors" style="display:none; position:absolute; inset:0; pointer-events:none; z-index:30; overflow:hidden;">
+              <div id="hgDoorLeft" class="brushed-steel" style="position:absolute; top:0; bottom:0; left:0; width:50%; border-right:4px solid #18181A; padding:18px; display:flex; flex-direction:column; justify-content:space-between;">
+                <div style="height:54%; background:rgba(20,23,26,0.85); border:3px solid #323538; padding:8px; position:relative;">
+                  <div class="glass-reflection" style="position:absolute; inset:0;"></div>
+                  <span style="background:#F2C94C; color:#111; font-size:9px; font-weight:700; padding:2px 6px; text-transform:uppercase;">Do not lean on door</span>
+                </div>
+                <div style="font-family:monospace; font-size:9px; color:#222;">MTA NYCT · R160A // CAR 8742</div>
+              </div>
+              <div id="hgDoorRight" class="brushed-steel" style="position:absolute; top:0; bottom:0; right:0; width:50%; border-left:4px solid #18181A; padding:18px; display:flex; flex-direction:column; justify-content:space-between;">
+                <div style="height:54%; background:rgba(20,23,26,0.85); border:3px solid #323538; padding:8px; position:relative;">
+                  <div class="glass-reflection" style="position:absolute; inset:0;"></div>
+                  <span style="background:#D93829; color:#fff; font-size:9px; font-weight:700; padding:2px 6px; text-transform:uppercase;">Stand clear of closing doors</span>
+                </div>
+                <div style="font-family:monospace; font-size:9px; color:#222; text-align:right;">MADISON / 63 ST // EXPRESS</div>
+              </div>
+            </div>
+
+            <!-- Editorial Wordmark, Patch & Typography -->
+            <div class="hg-editorial-overlay">
+              <div class="hg-top-row">
+                <div class="hg-wordmark-pill">
+                  <span style="width:7px; height:7px; background:#B89B72; display:inline-block;"></span>
+                  <span style="font-family:'Playfair Display', serif; font-weight:800; font-size:18px; color:#DFD2C2; lowercase;">wild fable</span>
+                  <span style="font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:#B89B72;">· Autumn ’26</span>
+                </div>
+                <div id="hgEmblemSlot" style="pointer-events:auto; transition:transform 0.2s ease;"></div>
+              </div>
+
+              <div id="hgCopyBlock" class="hg-copy-block">
+                <span style="display:inline-block; padding:3px 9px; background:rgba(62,13,12,0.88); border:1px solid rgba(184,155,114,0.45); font-family:'Arvo', serif; font-size:9.5px; letter-spacing:0.18em; text-transform:uppercase; color:#DFD2C2;">
+                  Upper East Side · Dark Academia
+                </span>
+                <h2 id="hgStageHeadline">Autumn on Madison.</h2>
+                <p id="hgStageSubhead">Wild Fable Dark Academia Capsule. Tailored wool, argyle knits, and rainy avenue layers.</p>
+                <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+                  <a href="#studio" class="hg-cta-btn">Launch 16-Bit Styling Lab →</a>
+                  <span id="hgSceneLoc" style="font-family:monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#DFD2C2; background:rgba(26,20,18,0.75); padding:7px 10px; border:1px solid rgba(223,210,194,0.2);">
+                    LOC 01 · MADISON AVE CAFÉ WINDOW
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         02. MOODBOARD & TACTILE TEXTURE ARCHIVE
+         ===================================================== -->
+    <section class="section-block" id="lookbook">
+      <div class="section-header-grid">
+        <div>
+          <span class="section-kicker">02 // VISUAL DIRECTION &amp; MOODBOARD</span>
+          <h2 class="section-title">Tactile layers built for <em>overcast Manhattan afternoons.</em></h2>
+        </div>
+        <p class="section-lead">
+          Every silhouette in Autumn on Madison is anchored in touchable contrast: wide-wale cocoa corduroy against crisp Oxford cotton, double-breasted chestnut wool over pleated tartan, and silver 35mm rangefinders slung across worn leather satchels.
+        </p>
+      </div>
+
+      <div class="moodboard-grid">
+        <article class="editorial-card">
+          <img src="wild-fable-assets/large-ad.jpg" alt="Autumn on Madison Tactile Flatlay Moodboard" />
+          <div class="editorial-card-body">
+            <div>
+              <h3>The Tactile Flatlay</h3>
+              <p>Espresso cable-knit cardigans, double-breasted wool overcoats, ribbed toffee mock-necks, and knee-high equestrian boots arranged on rain-streaked oak floorboards.</p>
+            </div>
+            <small style="color:var(--ochre-accent); letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">HERO PRODUCT ARCHITECTURE</small>
+          </div>
+        </article>
+
+        <article class="editorial-card">
+          <img src="wild-fable-assets/train-ad.jpg" alt="Walnut Library Close-Up Portrait" />
+          <div class="editorial-card-body">
+            <div>
+              <h3>Quiet Study &amp; Grain</h3>
+              <p>An 8-panel corduroy newsboy cap, tortoiseshell frames, and a fringed tartan wool scarf photographed in warm tungsten light between oak library stacks.</p>
+            </div>
+            <small style="color:var(--ochre-accent); letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">ACCESSORY &amp; TEXTURE STUDY</small>
+          </div>
+        </article>
+
+        <article class="editorial-card">
+          <img src="wild-fable-assets/bus-ad.jpg" alt="Madison Brownstone Stoop Editorial" />
+          <div class="editorial-card-body">
+            <div>
+              <h3>Between Seminars</h3>
+              <p>Herringbone tweed sport coats, houndstooth A-line wool skirts, and open spiral notebooks on the brownstone steps outside Madison Avenue.</p>
+            </div>
+            <small style="color:var(--ochre-accent); letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">ALL-GENDER TAILORING</small>
+          </div>
+        </article>
+      </div>
+
+      <div class="palette-strip">
+        <div class="swatch-chip" style="background:#1A1110; color:#f4ede4;">#1A1110 // Espresso Ink</div>
+        <div class="swatch-chip" style="background:#3B2219; color:#f4ede4;">#3B2219 // Deep Cocoa</div>
+        <div class="swatch-chip" style="background:#480607; color:#f4ede4;">#480607 // Oxblood Border</div>
+        <div class="swatch-chip" style="background:#966847; color:#1a1110;">#966847 // Roasted Ochre</div>
+        <div class="swatch-chip" style="background:#B59E87; color:#1a1110;">#B59E87 // Warm Parchment</div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         03. PRINT & OUT-OF-HOME NYC STREET CAMPAIGN
+         ===================================================== -->
+    <section class="section-block" id="print-ooh">
+      <div class="section-header-grid">
+        <div>
+          <span class="section-kicker">03 // PRINT &amp; OUT-OF-HOME</span>
+          <h2 class="section-title">Wheatpaste posters from <em>SoHo scaffolding to E 68th.</em></h2>
+        </div>
+        <p class="section-lead">
+          Designed to live directly on Manhattan's architectural surfaces. Full-bleed 35mm vertical posters pair high-contrast Playfair Display serif wordmarks with street-level styling that stops commuters mid-stride.
+        </p>
+      </div>
+
+      <div class="ooh-showcase">
+        <div class="ooh-main-frame">
+          <img src="wild-fable-assets/ad-5-skyscraper.jpg" alt="Wild Fable Autumn on Madison NYC Street Wheatpaste Installation" />
+          <div class="ooh-caption">
+            <div>
+              <strong style="font-family:'Playfair Display', serif; font-size:1.25rem; color:var(--cream-paper);">Downtown Manhattan Wheatpaste Series // 48" × 72"</strong>
+              <span style="display:block; font-size:12.5px; color:var(--warm-tan);">Installed along weathered plywood construction barricades with sequential multi-panel rhythm.</span>
+            </div>
+            <span class="format-pill">OOH STREET PRINT</span>
+          </div>
+        </div>
+
+        <div class="ooh-sidebar">
+          <div class="print-spec-card">
+            <h3>Editorial &amp; Street Print System</h3>
+            <p>
+              Unlike glossy fast-fashion billboards, Autumn on Madison embraces uncoated matte poster stock that weathers naturally alongside fallen sycamore leaves and wet concrete sidewalks.
+            </p>
+            <ul class="spec-list">
+              <li><span>Primary Type</span><span>Playfair Display ExtraBold</span></li>
+              <li><span>Subhead Voice</span><span>Playfair Display Italic</span></li>
+              <li><span>Print Dimensions</span><span>24×36" &amp; 48×72" Bleed</span></li>
+              <li><span>Key Placements</span><span>Prince St, SoHo &amp; E 68th</span></li>
+              <li><span>Visual Hook</span><span>35mm Portra Halation</span></li>
+            </ul>
+          </div>
+
+          <div class="print-spec-card" style="border-color:var(--crimson-primary); background:var(--bg-espresso);">
+            <small style="color:var(--crimson-primary); font-weight:700; letter-spacing:0.16em; text-transform:uppercase;">CAMPAIGN COPY MANIFESTO</small>
+            <p style="font-family:'Playfair Display', serif; font-style:italic; font-size:1.25rem; color:var(--cream-paper); margin-top:10px; line-height:1.45;">
+              “Dressed for the walk between the 6 train and the reading room—heavy wool, crisp collars, and zero pretension.”
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         04. DIGITAL, SOCIAL & MOTION CAMPAIGN MATRIX
+         ===================================================== -->
+    <section class="section-block" id="digital">
+      <div class="section-header-grid">
+        <div>
+          <span class="section-kicker">04 // DIGITAL, SOCIAL &amp; MOTION</span>
+          <h2 class="section-title">Multi-format storytelling across <em>motion loops &amp; social feeds.</em></h2>
+        </div>
+        <p class="section-lead">
+          Each digital placement adapts the 35mm visual grammar to native screen ratios—combining looping 35mm motion films with 9:16 mobile stories, 4:5 carousel cards, and widescreen desktop takeovers.
+        </p>
+      </div>
+
+      <div class="digital-grid">
+        <!-- Motion Film 01 -->
+        <div class="dig-card dig-col-6">
+          <video class="motion-ad" src="wild-fable-assets/motion-ad-1.mp4" autoplay loop muted playsinline></video>
+          <div class="dig-meta">
+            <div>
+              <h4>Motion Film 01 // E 68th Brownstone Stoop</h4>
+              <p>Ambient 35mm motion reel capturing soft overcast afternoon light and drifting leaves.</p>
+            </div>
+            <span class="format-pill">16:9 MOTION LOOP</span>
+          </div>
+        </div>
+
+        <!-- Motion Film 02 -->
+        <div class="dig-card dig-col-6">
+          <video class="motion-ad" src="wild-fable-assets/motion-ad-2.mp4" autoplay loop muted playsinline></video>
+          <div class="dig-meta">
+            <div>
+              <h4>Motion Film 02 // Walnut Library Reading Room</h4>
+              <p>Warm tungsten study atmosphere with subtle camera drift across wool and corduroy textures.</p>
+            </div>
+            <span class="format-pill">16:9 MOTION LOOP</span>
+          </div>
+        </div>
+
+        <!-- Vertical Social 1 -->
+        <div class="dig-card dig-col-4">
+          <img class="vertical-ad" src="wild-fable-assets/ad-2-ig-story.jpg" alt="Instagram Story Ad - Madison Ave & E 68th" />
+          <div class="dig-meta">
+            <div>
+              <h4>Madison &amp; E 68th Street</h4>
+              <p>Argyle diamond vest, crisp white Oxford, wide-leg cocoa corduroys &amp; lug-sole penny loafers.</p>
+            </div>
+            <span class="format-pill">9:16 STORY</span>
+          </div>
+        </div>
+
+        <!-- Vertical Social 2 -->
+        <div class="dig-card dig-col-4">
+          <img class="vertical-ad" src="wild-fable-assets/ad-3-tiktok.jpg" alt="TikTok / Reels Sponsored Ad - Walnut Library" />
+          <div class="dig-meta">
+            <div>
+              <h4>The Reading Room Walk</h4>
+              <p>Double-breasted chestnut wool overcoat layered over argyle knitwear &amp; brogue oxfords.</p>
+            </div>
+            <span class="format-pill">9:16 REELS</span>
+          </div>
+        </div>
+
+        <!-- Vertical Social 3 -->
+        <div class="dig-card dig-col-4">
+          <img class="vertical-ad" src="wild-fable-assets/ad-1-feed-4x5.jpg" alt="Paid Social Carousel Hero" />
+          <div class="dig-meta">
+            <div>
+              <h4>Between Chapters</h4>
+              <p>Corduroy newsboy cap, burnt cocoa blazer &amp; tartan wool scarf in warm afternoon light.</p>
+            </div>
+            <span class="format-pill">4:5 FEED</span>
+          </div>
+        </div>
+
+        <!-- Widescreen Banner -->
+        <div class="dig-card dig-col-12">
+          <img class="banner-ad" src="wild-fable-assets/ad-4-leaderboard.jpg" alt="Widescreen Editorial Leaderboard Banner" />
+          <div class="dig-meta">
+            <div>
+              <h4>Widescreen Editorial Takeover // Rainy Afternoon on Madison</h4>
+              <p>Herringbone tweed overcoat, plaid fringed scarf, open notebook, and steaming kraft coffee cup overlooking rain-streaked Upper East Side brownstones.</p>
+            </div>
+            <span class="format-pill">21:9 DESKTOP TAKEOVER</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         05. EXPERIMENTAL PIECE: 16-BIT PIXEL STYLING STUDIO
+         ===================================================== -->
+    <section class="section-block" id="studio" style="border-bottom:none;">
+      <div class="section-header-grid">
+        <div>
+          <span class="section-kicker">05 // INTERACTIVE EXPERIMENTAL PIECE</span>
+          <h2 class="section-title">Madison Styling Room: <em>All-Gender 16-Bit Wardrobe Lab.</em></h2>
+        </div>
+        <p class="section-lead">
+          Instead of passively scrolling a lookbook, step inside the campaign. Customize your avatar’s silhouette, skin tone, hairstyle, and facial hair, mix and match all 30 Autumn on Madison pieces across four NYC scenes, spin the 78 BPM lo-fi tape deck, and export a crisp pixel lookbook card.
+        </p>
+      </div>
+
+      <div class="exp-wrapper">
+        <div class="exp-topbar">
+          <div>
+            <strong style="font-family:'Press Start 2P', monospace; font-size:10px; color:var(--cream-paper); display:block; margin-bottom:5px;">WILD FABLE × TARGET // INTERACTIVE STYLING ENGINE</strong>
+            <span style="font-size:12.5px; color:var(--warm-tan);">Native 176×224 pixel art canvas with live receipt tally, Web Audio lo-fi synthesizer &amp; tailored AI prompt generator.</span>
+          </div>
+          <div class="exp-actions">
+            <button id="toggleLofiBtn" type="button">♪ Lo-Fi Autumn Radio: OFF</button>
+            <button id="randomAllBtn" type="button">↻ Randomize Model + Look</button>
+            <button id="toggleScanlinesBtn" type="button">▤ CRT Scanlines: ON</button>
+            <button id="exportLookBtn" class="primary-btn" type="button">↓ Export Pixel Card PNG</button>
+          </div>
+        </div>
+
+        <div class="studio-grid">
+          <!-- Left Panel: Model Customizer + Wardrobe Rack -->
+          <div class="panel">
+            <div class="mode-switch">
+              <button type="button" class="mode-btn active" id="modeModelBtn">01 // MODEL</button>
+              <button type="button" class="mode-btn" id="modeWardrobeBtn">02 // WARDROBE</button>
+            </div>
+
+            <div id="modelCustomizerPane">
+              <h2 class="panel-title"><span>AVATAR CREATOR</span><span>ALL-GENDER</span></h2>
+
+              <div class="custom-section">
+                <span class="custom-label">SILHOUETTE / BUILD</span>
+                <div class="option-grid-3" id="bodyBuildGrid"></div>
+              </div>
+
+              <div class="custom-section">
+                <span class="custom-label">SKIN TONE &amp; UNDERTONE</span>
+                <div class="swatch-row" id="skinSwatches"></div>
+              </div>
+
+              <div class="custom-section">
+                <span class="custom-label">HAIRSTYLE CATALOG</span>
+                <span class="hair-sublabel">MEN'S HAIR</span>
+                <div class="option-grid-2" id="mensHairGrid"></div>
+                <span class="hair-sublabel">WOMEN'S HAIR</span>
+                <div class="option-grid-2" id="womensHairGrid"></div>
+                <span class="hair-sublabel">BOTH / UNISEX HAIR</span>
+                <div class="option-grid-2" id="bothHairGrid"></div>
+              </div>
+
+              <div class="custom-section">
+                <span class="custom-label">HAIR &amp; BEARD COLOR</span>
+                <div class="swatch-row" id="hairColorSwatches"></div>
+              </div>
+
+              <div class="custom-section">
+                <span class="custom-label">FACIAL HAIR</span>
+                <div class="option-grid-2" id="facialHairGrid"></div>
+              </div>
+
+              <div class="custom-section" style="border-bottom:none; padding-bottom:0;">
+                <span class="custom-label">EYEWEAR</span>
+                <div class="option-grid-2" id="glassesGrid"></div>
+              </div>
+            </div>
+
+            <div id="wardrobePane" style="display:none;">
+              <h2 class="panel-title"><span>AUTUMN RACK</span><span>30 PIECES</span></h2>
+              <div class="cat-tabs" id="catTabs">
+                <button type="button" class="cat-tab active" data-cat="outerwear">COATS</button>
+                <button type="button" class="cat-tab" data-cat="tops">KNITS</button>
+                <button type="button" class="cat-tab" data-cat="bottoms">BOTTOMS</button>
+                <button type="button" class="cat-tab" data-cat="shoes">SHOES</button>
+                <button type="button" class="cat-tab" data-cat="headwear">HAT/SCARF</button>
+                <button type="button" class="cat-tab" data-cat="props">PROPS</button>
+              </div>
+              <div class="garment-list" id="garmentList"></div>
+            </div>
+          </div>
+
+          <!-- Center Stage -->
+          <div class="stage-col">
+            <div class="arcade-bezel">
+              <div class="arcade-hud-top">
+                <span>LOC: <strong id="hudLoc">E 68TH &amp; MADISON</strong></span>
+                <span class="blink">● REC PORTRA-16</span>
+              </div>
+
+              <div class="canvas-wrap">
+                <canvas id="pixelCanvas" width="176" height="224"></canvas>
+                <div class="crt-scanlines" id="crtOverlay"></div>
+                <div class="crisp-wordmark-overlay">
+                  <span class="brand-main">wild fable</span>
+                  <span class="brand-sub">Autumn on Madison</span>
+                </div>
+              </div>
+
+              <div class="dialogue-box">
+                <span class="speaker" id="dialogueSpeaker">STYLING NOTES // MADISON AVE</span>
+                <div id="dialogueText">Customize build, hair &amp; facial hair in Tab 01, or layer menswear &amp; womenswear in Tab 02.</div>
+              </div>
+            </div>
+
+            <div class="stage-controls" id="sceneControls">
+              <button type="button" class="scene-pill active" data-bg="madison">MADISON &amp; E 68TH</button>
+              <button type="button" class="scene-pill" data-bg="library">WALNUT LIBRARY</button>
+              <button type="button" class="scene-pill" data-bg="cafe">RAINY CAFE</button>
+              <button type="button" class="scene-pill" data-bg="subway">PRINCE ST SUBWAY</button>
+            </div>
+          </div>
+
+          <!-- Right Panel: Receipt & Tape Deck -->
+          <div class="panel">
+            <h2 class="panel-title"><span>03 // INVENTORY</span><span>TARGET</span></h2>
+
+            <div class="library-slip">
+              <div class="slip-header">
+                <strong>MADISON AVE BRANCH</strong>
+                <small>STYLING ROOM ARCHIVE RECEIPT</small>
+              </div>
+              <ul class="slip-items" id="receiptList"></ul>
+              <div class="slip-total">
+                <span>CAMPUS PASS (15% OFF)</span>
+                <span id="receiptTotal">$0.00</span>
+              </div>
+            </div>
+
+            <div class="quest-card">
+              <h3>♪ MADISON AVE TAPE DECK</h3>
+              <p>Warm 35mm vinyl crackle &amp; mellow electric piano chords scored for rainy mornings on E 68th Street.</p>
+              <div style="display:flex; gap:8px; align-items:center; margin-top:10px;">
+                <button id="panelPlayLofiBtn" type="button" style="flex:1; padding:8px 10px; font-size:10px;">▶ Play Autumn Lo-Fi</button>
+              </div>
+              <div class="stat-row" style="margin-top:12px;">
+                <div style="display:flex; justify-content:space-between;">
+                  <span>TAPE WARMTH // 78 BPM</span>
+                  <span id="audioStatusLabel">STANDBY</span>
+                </div>
+                <div class="stat-bar">
+                  <div class="stat-fill" id="audioLevelBar" style="width: 12%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <button id="copyLookPromptBtn" type="button" style="width:100%;">
+              ⧉ Copy Tailored AI Image Prompt
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <strong style="font-family:'Playfair Display', serif; font-size:18px; color:var(--cream-paper);">wild fable</strong>
+        <span style="font-family:'Playfair Display', serif; font-style:italic; margin-left:8px;">Autumn on Madison</span>
+      </div>
+      <div>ART 3041 // A.I. FOR DESIGNERS — CAMPAIGN LAUNCH SHOWCASE (FALL 2026)</div>
+    </footer>
+  </main>
+
+  <!-- =========================================================
+       DYNAMIC HERO GENERATOR SCRIPT (NAMESPACED)
+       ========================================================= -->
+  <script>
+    const HG_PLATES = [{"id": "camp-1", "name": "Madison Caf\u00e9", "url": "wild-fable-assets/bus-ad.jpg", "isDefault": true}, {"id": "camp-2", "name": "E 68th Stoop", "url": "wild-fable-assets/large-ad.jpg", "isDefault": true}, {"id": "camp-3", "name": "Walnut Library", "url": "wild-fable-assets/train-ad.jpg", "isDefault": true}, {"id": "camp-4", "name": "Tactile Flatlay", "url": "wild-fable-assets/ad-1-feed-4x5.jpg", "isDefault": true}, {"id": "camp-5", "name": "Newsboy Study", "url": "wild-fable-assets/ad-2-ig-story.jpg", "isDefault": true}, {"id": "camp-6", "name": "Stoop Duo", "url": "wild-fable-assets/ad-3-tiktok.jpg", "isDefault": true}];
+    const HG_SCENES = ['cafe-window', 'subway-doors', 'brownstone-stoop', 'library-archive'];
+    const HG_PALETTES = ['oxblood-espresso', 'madison-mist', 'golden-brownstone', 'sepia-archival'];
+    const HG_EMBLEMS = ['star-patch', 'wf-shield', 'madison-stamp'];
+    const HG_COPY_PRESETS = [
+      {
+        headline: 'Autumn on Madison.',
+        subhead: 'Wild Fable Dark Academia Capsule. Tailored wool, argyle knits, and rainy avenue layers.'
+      },
+      {
+        headline: 'Study in Chestnut & Oxblood.',
+        subhead: 'Corduroy trousers, pleated wool skirts, and vintage leather satchels crafted for Upper East Side mornings.'
+      },
+      {
+        headline: 'Upper East Side, Fall ’26.',
+        subhead: 'Between brownstone stoops and corner espresso bars—discover Wild Fable’s collegiate tailoring.'
+      },
+      {
+        headline: 'Rain on E 68th & Madison.',
+        subhead: 'Heavyweight herringbone overcoats and brushed argyle vests built for crisp Manhattan afternoons.'
+      }
+    ];
+
+    const HG_EMBLEM_SVG = {
+      'star-patch': `<svg viewBox="0 0 340 245" style="width:140px; height:auto; filter:drop-shadow(0 10px 18px rgba(0,0,0,0.8));" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="170,12 206,86 288,98 228,155 242,235 170,197 98,235 112,155 52,98 134,86" fill="#2A1710" stroke="#140B08" stroke-width="8" stroke-linejoin="round"/>
+        <polygon points="170,24 201,90 274,101 221,152 233,223 170,189 107,223 119,152 66,101 139,90" fill="none" stroke="#DFD2C2" stroke-width="3" stroke-dasharray="7 5" stroke-linejoin="round"/>
+        <text x="170" y="146" text-anchor="middle" font-family="Arvo, Georgia, serif" font-weight="700" font-size="34" letter-spacing="2" fill="#3E0D0C" stroke="#DFD2C2" stroke-width="5" paint-order="stroke">WILD FABLE</text>
+      </svg>`,
+      'wf-shield': `<svg viewBox="0 0 210 240" style="width:98px; height:auto; filter:drop-shadow(0 10px 18px rgba(0,0,0,0.8));" xmlns="http://www.w3.org/2000/svg">
+        <defs><clipPath id="hgShieldClip"><path d="M105,14 L186,38 L186,126 C186,178 148,212 105,226 C62,212 24,178 24,126 L24,38 Z"/></clipPath></defs>
+        <path d="M105,14 L186,38 L186,126 C186,178 148,212 105,226 C62,212 24,178 24,126 L24,38 Z" fill="#1A1412" stroke="#DFD2C2" stroke-width="5"/>
+        <g clip-path="url(#hgShieldClip)">
+          <polygon points="105,14 192,14 192,230 105,230" fill="#3E0D0C"/>
+          <polygon points="105,14 188,38 105,126" fill="#DFD2C2" opacity="0.22"/>
+          <text x="64" y="130" text-anchor="middle" font-family="UnifrakturMaguntia, Georgia, serif" font-size="46" fill="#DFD2C2">Wf</text>
+          <polygon points="146,92 155,111 176,114 160,129 164,149 146,139 128,149 132,129 116,114 137,111" fill="#DFD2C2"/>
+        </g>
+        <path d="M105,20 L180,42 L180,125 C180,173 144,205 105,218 C66,205 30,173 30,125 L30,42 Z" fill="none" stroke="#DFD2C2" stroke-width="1.5" stroke-dasharray="4 3"/>
+      </svg>`,
+      'madison-stamp': `<svg viewBox="0 0 210 210" style="width:98px; height:auto; filter:drop-shadow(0 10px 18px rgba(0,0,0,0.8));" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="105" cy="105" r="92" fill="#3E0D0C" stroke="#DFD2C2" stroke-width="3.5"/>
+        <circle cx="105" cy="105" r="80" fill="none" stroke="#DFD2C2" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <circle cx="105" cy="105" r="52" fill="#1A1412" stroke="#B89B72" stroke-width="2"/>
+        <text x="105" y="44" text-anchor="middle" font-family="Arvo, serif" font-size="12" letter-spacing="3" fill="#DFD2C2">WILD FABLE</text>
+        <text x="105" y="176" text-anchor="middle" font-family="Arvo, serif" font-size="10.5" letter-spacing="2.2" fill="#DFD2C2">MADISON AVE · NYC</text>
+        <text x="105" y="117" text-anchor="middle" font-family="Playfair Display, serif" font-weight="800" font-size="32" fill="#DFD2C2">WF</text>
+      </svg>`
+    };
+
+    const hgState = {
+      seed: 10482,
+      scene: 'cafe-window',
+      format: '16:9',
+      palette: 'oxblood-espresso',
+      emblem: 'star-patch',
+      locks: { scene: false, palette: false, copy: false }
+    };
+
+    function hgMulberry32(seed) {
+      let a = seed >>> 0;
+      return function () {
+        a |= 0; a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function hgToggleLock(key) {
+      hgState.locks[key] = !hgState.locks[key];
+      const map = { scene: 'hgLockSceneBtn', palette: 'hgLockPaletteBtn', copy: 'hgLockCopyBtn' };
+      const btn = document.getElementById(map[key]);
+      btn.textContent = hgState.locks[key] ? '🔒 Locked' : '🔓 Lock';
+      btn.style.borderColor = hgState.locks[key] ? '#860111' : '#480607';
+    }
+
+    function hgGenerateRandom() {
+      hgState.seed = Math.floor(10000 + Math.random() * 89999);
+      document.getElementById('hgSeedLabel').textContent = hgState.seed;
+      const rng = hgMulberry32(hgState.seed);
+
+      if (!hgState.locks.scene) {
+        hgState.scene = HG_SCENES[Math.floor(rng() * HG_SCENES.length)];
+      }
+      if (!hgState.locks.palette) {
+        hgState.palette = HG_PALETTES[Math.floor(rng() * HG_PALETTES.length)];
+        hgState.emblem = HG_EMBLEMS[Math.floor(rng() * HG_EMBLEMS.length)];
+        document.getElementById('hgEmblemSelect').value = hgState.emblem;
+      }
+      if (!hgState.locks.copy) {
+        const c = HG_COPY_PRESETS[Math.floor(rng() * HG_COPY_PRESETS.length)];
+        document.getElementById('hgHeadlineInput').value = c.headline;
+        document.getElementById('hgSubheadInput').value = c.subhead;
+        hgSyncCopy();
+      }
+      if (rng() > 0.4) {
+        const first = HG_PLATES.shift();
+        HG_PLATES.push(first);
+      }
+      hgSyncButtons();
+      hgRenderStage();
+      hgReplayIntro();
+    }
+
+    function hgSelectScene(s) {
+      hgState.scene = s;
+      hgSyncButtons();
+      hgRenderStage();
+      hgReplayIntro();
+    }
+
+    function hgSelectFormat(fmt) {
+      hgState.format = fmt;
+      const stage = document.getElementById('liveHeroStage');
+      stage.classList.remove('fmt-9-16', 'fmt-1-1');
+      if (fmt === '9:16') stage.classList.add('fmt-9-16');
+      if (fmt === '1:1') stage.classList.add('fmt-1-1');
+      hgSyncButtons();
+      hgRenderStage();
+    }
+
+    function hgSelectPalette(pal) {
+      hgState.palette = pal;
+      hgSyncButtons();
+      hgApplyGrade();
+    }
+
+    function hgChangeEmblem(val) {
+      hgState.emblem = val;
+      document.getElementById('hgEmblemSlot').innerHTML = HG_EMBLEM_SVG[val] || '';
+    }
+
+    function hgSyncCopy() {
+      document.getElementById('hgStageHeadline').textContent = document.getElementById('hgHeadlineInput').value;
+      document.getElementById('hgStageSubhead').textContent = document.getElementById('hgSubheadInput').value;
+    }
+
+    function hgSyncButtons() {
+      document.querySelectorAll('[data-hg-scene]').forEach(b => {
+        b.classList.toggle('active', b.dataset.hgScene === hgState.scene);
+      });
+      document.querySelectorAll('[data-hg-fmt]').forEach(b => {
+        b.classList.toggle('active', b.dataset.hgFmt === hgState.format);
+      });
+      document.querySelectorAll('[data-hg-pal]').forEach(b => {
+        b.classList.toggle('active', b.dataset.hgPal === hgState.palette);
+      });
+    }
+
+    function hgApplyGrade() {
+      const wash = document.getElementById('hgGradeWash');
+      if (hgState.palette === 'oxblood-espresso') {
+        wash.style.background = 'radial-gradient(circle at 65% 45%, rgba(62,13,12,0.22) 0%, rgba(20,14,12,0.86) 100%)';
+      } else if (hgState.palette === 'madison-mist') {
+        wash.style.background = 'radial-gradient(circle at 65% 45%, rgba(122,114,107,0.16) 0%, rgba(24,22,21,0.82) 100%)';
+      } else if (hgState.palette === 'golden-brownstone') {
+        wash.style.background = 'radial-gradient(circle at 65% 40%, rgba(184,155,114,0.24) 0%, rgba(34,21,15,0.82) 100%)';
+      } else {
+        wash.style.background = 'radial-gradient(circle at 65% 45%, rgba(168,136,98,0.25) 0%, rgba(26,18,13,0.85) 100%)';
+      }
+    }
+
+    function hgRenderStage() {
+      const arch = document.getElementById('hgArchLayer');
+      const doors = document.getElementById('hgSubwayDoors');
+      const loc = document.getElementById('hgSceneLoc');
+      const isVertical = hgState.format === '9:16';
+
+      const p1 = HG_PLATES[0];
+      const p2 = HG_PLATES[1];
+      const p3 = HG_PLATES[2];
+
+      doors.style.display = 'none';
+
+      const platesHTML = `
+        <div class="hg-plates-row" style="${isVertical ? 'grid-template-columns:1fr; max-width:75%; margin:auto;' : ''}">
+          <div class="hg-plate-card animate-plate-1">
+            <img src="${p1.url}" alt="${p1.name}" />
+            <div class="hg-plate-meta"><span>PLATE I</span><span>${p1.name.toUpperCase()}</span></div>
+          </div>
+          <div class="hg-plate-card animate-plate-2" style="${isVertical ? 'display:none;' : ''}">
+            <img src="${p2.url}" alt="${p2.name}" />
+            <div class="hg-plate-meta"><span>PLATE II</span><span>${p2.name.toUpperCase()}</span></div>
+          </div>
+          <div class="hg-plate-card animate-plate-3" style="${isVertical ? 'display:none;' : ''}">
+            <img src="${p3.url}" alt="${p3.name}" />
+            <div class="hg-plate-meta"><span>PLATE III</span><span>${p3.name.toUpperCase()}</span></div>
+          </div>
+        </div>
+      `;
+
+      if (hgState.scene === 'cafe-window') {
+        loc.textContent = 'LOC 01 · MADISON AVE CAFÉ WINDOW';
+        arch.innerHTML = `
+          <div class="animate-camera-drift" style="width:100%; height:100%; display:flex;">
+            <div class="mahogany-wood" style="width:26%; height:100%; border-right:8px solid #160B07; padding:16px; display:flex; flex-direction:column; gap:14px;">
+              <div style="flex:1; border:2px solid rgba(74,43,29,0.55);"></div>
+              <div style="flex:1; border:2px solid rgba(74,43,29,0.55);"></div>
+            </div>
+            <div style="flex:1; height:100%; position:relative; background:linear-gradient(180deg, #6A5D54 0%, #4D4139 50%, #231914 100%); display:flex; align-items:center;">
+              ${platesHTML}
+            </div>
+          </div>
+        `;
+      } else if (hgState.scene === 'subway-doors') {
+        loc.textContent = 'LOC 02 · PRINCE ST / MADISON EXPRESS';
+        doors.style.display = 'block';
+        arch.innerHTML = `
+          <div style="width:100%; height:100%; background:#1E1A18; display:flex; flex-direction:column; justify-content:space-between; padding:18px;">
+            <div style="background:#F5F2EB; color:#141414; padding:7px 14px; border:2px solid #3A3532; display:flex; justify-content:space-between; align-items:center; font-size:11px; font-weight:700;">
+              <span>R / 4 LEXINGTON-MADISON AV · NEXT: 68 ST HUNTER COLLEGE</span>
+              <span style="font-family:monospace; font-size:10px;">WILD FABLE TRANSIT</span>
+            </div>
+            ${platesHTML}
+            <div style="height:16px; background:linear-gradient(90deg, #4A4B4D, #7A7C80, #4A4B4D);"></div>
+          </div>
+        `;
+      } else if (hgState.scene === 'brownstone-stoop') {
+        loc.textContent = 'LOC 03 · EAST 68TH BROWNSTONE STOOP';
+        arch.innerHTML = `
+          <div class="sandstone-wall animate-camera-drift" style="width:100%; height:100%; position:relative; display:flex; align-items:center;">
+            <div style="position:absolute; inset:auto 0 0 0; height:45%; display:flex; flex-direction:column; justify-content:end; opacity:0.75;">
+              <div style="height:26px; background:#685145; margin:0 48px;"></div>
+              <div style="height:30px; background:#5A453B; margin:0 32px;"></div>
+              <div style="height:34px; background:#4D3B32; margin:0 16px;"></div>
+              <div style="height:40px; background:#2C211C;"></div>
+            </div>
+            ${platesHTML}
+          </div>
+        `;
+      } else {
+        loc.textContent = 'LOC 04 · WALNUT ARCHIVAL READING ROOM';
+        arch.innerHTML = `
+          <div class="animate-camera-drift" style="width:100%; height:100%; position:relative; background:#19110E; display:flex; align-items:center;">
+            <div style="position:absolute; inset:0; opacity:0.45; background-image:repeating-linear-gradient(90deg, #3E0D0C 0px, #3E0D0C 24px, #1B110E 24px, #1B110E 28px, #593522 28px, #593522 50px, #1B110E 50px, #1B110E 54px), repeating-linear-gradient(180deg, transparent 0px, transparent 130px, #120B09 130px, #120B09 144px);"></div>
+            ${platesHTML}
+          </div>
+        `;
+      }
+
+      hgApplyGrade();
+      document.getElementById('hgEmblemSlot').innerHTML = HG_EMBLEM_SVG[hgState.emblem] || '';
+    }
+
+    function hgReplayIntro() {
+      document.querySelectorAll('.hg-plate-card').forEach((el, i) => {
+        const cls = `animate-plate-${i + 1}`;
+        el.classList.remove(cls);
+        void el.offsetWidth;
+        el.classList.add(cls);
+      });
+
+      if (hgState.scene === 'subway-doors') {
+        const ld = document.getElementById('hgDoorLeft');
+        const rd = document.getElementById('hgDoorRight');
+        ld.style.transition = 'none';
+        rd.style.transition = 'none';
+        ld.style.transform = 'translateX(0%)';
+        rd.style.transform = 'translateX(0%)';
+        void ld.offsetWidth;
+        setTimeout(() => {
+          ld.style.transition = 'transform 1.3s cubic-bezier(0.22, 1, 0.36, 1)';
+          rd.style.transition = 'transform 1.3s cubic-bezier(0.22, 1, 0.36, 1)';
+          ld.style.transform = 'translateX(-82%)';
+          rd.style.transform = 'translateX(82%)';
+        }, 120);
+      }
+    }
+
+    function hgParallax(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      document.getElementById('hgEmblemSlot').style.transform = `translate(${nx * 14}px, ${ny * 10}px)`;
+      document.getElementById('hgCopyBlock').style.transform = `translate(${nx * 7}px, ${ny * 5}px)`;
+    }
+
+    function hgResetParallax() {
+      document.getElementById('hgEmblemSlot').style.transform = 'translate(0,0)';
+      document.getElementById('hgCopyBlock').style.transform = 'translate(0,0)';
+    }
+
+    function hgStartAtmosphere() {
+      const canvas = document.getElementById('hgAtmosphereCanvas');
+      const ctx = canvas.getContext('2d');
+      const particles = Array.from({ length: 55 }, (_, i) => ({
+        x: Math.random(),
+        y: Math.random(),
+        len: 10 + Math.random() * 20,
+        speed: 0.002 + Math.random() * 0.004,
+        size: 3 + Math.random() * 4,
+        angle: Math.random() * Math.PI * 2,
+        hue: i % 2 === 0 ? '#8C3B2B' : '#B87A3D'
+      }));
+
+      function loop() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        if (canvas.width !== Math.floor(rect.width) || canvas.height !== Math.floor(rect.height)) {
+          canvas.width = Math.floor(rect.width);
+          canvas.height = Math.floor(rect.height);
+        }
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+
+        particles.forEach(p => {
+          p.y += p.speed;
+          if (p.y > 1.05) { p.y = -0.05; p.x = Math.random(); }
+          const px = p.x * w, py = p.y * h;
+
+          if (hgState.scene === 'cafe-window') {
+            ctx.strokeStyle = 'rgba(235, 226, 214, 0.25)';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(px, py);
+            ctx.lineTo(px - 1.5, py + p.len);
+            ctx.stroke();
+          } else if (hgState.scene === 'brownstone-stoop') {
+            p.x += Math.sin(p.y * 8 + p.angle) * 0.0008;
+            ctx.save();
+            ctx.translate(px, py);
+            ctx.rotate(p.angle);
+            ctx.fillStyle = p.hue;
+            ctx.globalAlpha = 0.75;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, p.size * 1.4, p.size * 0.7, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          } else {
+            ctx.fillStyle = 'rgba(223, 210, 194, 0.22)';
+            ctx.beginPath();
+            ctx.arc(px, py, 1.4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        });
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    }
+
+    function hgExportPNG() {
+      const c = document.createElement('canvas');
+      c.width = hgState.format === '9:16' ? 1080 : hgState.format === '1:1' ? 1200 : 1600;
+      c.height = hgState.format === '9:16' ? 1920 : hgState.format === '1:1' ? 1200 : 900;
+      const ctx = c.getContext('2d');
+
+      const bg = ctx.createLinearGradient(0, 0, c.width, c.height);
+      bg.addColorStop(0, '#2B1912');
+      bg.addColorStop(0.5, '#3E0D0C');
+      bg.addColorStop(1, '#1A1412');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, c.width, c.height);
+
+      const im = new Image();
+      im.onload = () => {
+        const fw = c.width * 0.34;
+        const fh = fw * 1.28;
+        const fx = c.width - fw - 72;
+        const fy = (c.height - fh) * 0.5;
+        ctx.fillStyle = '#1D120D';
+        ctx.fillRect(fx - 12, fy - 12, fw + 24, fh + 24);
+        ctx.strokeStyle = '#B89B72';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(fx - 12, fy - 12, fw + 24, fh + 24);
+        ctx.drawImage(im, fx, fy, fw, fh);
+
+        ctx.fillStyle = '#DFD2C2';
+        ctx.font = '800 32px "Playfair Display", Georgia, serif';
+        ctx.fillText('wild fable', 72, 86);
+
+        ctx.font = '800 64px "Playfair Display", Georgia, serif';
+        ctx.fillStyle = '#F7F4EF';
+        ctx.fillText(document.getElementById('hgHeadlineInput').value, 72, c.height * 0.52);
+
+        ctx.font = 'italic 600 30px "Cormorant Garamond", Georgia, serif';
+        ctx.fillStyle = '#DFD2C2';
+        ctx.fillText(document.getElementById('hgSubheadInput').value.slice(0, 58), 72, c.height * 0.52 + 52);
+
+        const a = document.createElement('a');
+        a.download = `wild-fable-hero-seed-${hgState.seed}.png`;
+        a.href = c.toDataURL('image/png');
+        a.click();
+      };
+      im.src = HG_PLATES[0].url;
+    }
+
+    hgRenderStage();
+    hgStartAtmosphere();
+  </script>
+
+  <!-- =========================================================
+       EXPERIMENTAL 16-BIT STYLING STUDIO SCRIPT
+       ========================================================= -->
+  <script>
+
+    // Shooting Star Background
+    const starCanvas = document.getElementById('starfield');
+    const sCtx = starCanvas.getContext('2d');
+    let sw, sh, stars = [];
+    function resizeStars() {
+      sw = starCanvas.width = window.innerWidth;
+      sh = starCanvas.height = window.innerHeight;
+    }
+    function makeStar() {
+      return {
+        x: Math.random() * sw,
+        y: Math.random() * sh * 0.65,
+        len: 45 + Math.random() * 80,
+        speed: 2.2 + Math.random() * 2.8,
+        alpha: 0.15 + Math.random() * 0.25
+      };
+    }
+    function initStars() {
+      resizeStars();
+      stars = Array.from({ length: 7 }, makeStar);
+    }
+    function animateStars() {
+      sCtx.clearRect(0, 0, sw, sh);
+      stars.forEach((s, idx) => {
+        const g = sCtx.createLinearGradient(s.x, s.y, s.x - s.len, s.y - s.len * 0.45);
+        g.addColorStop(0, `rgba(134, 1, 17, ${s.alpha})`);
+        g.addColorStop(1, 'rgba(134, 1, 17, 0)');
+        sCtx.strokeStyle = g;
+        sCtx.lineWidth = 1.2;
+        sCtx.beginPath();
+        sCtx.moveTo(s.x, s.y);
+        sCtx.lineTo(s.x - s.len, s.y - s.len * 0.45);
+        sCtx.stroke();
+        s.x += s.speed;
+        s.y += s.speed * 0.45;
+        if (s.x - s.len > sw || s.y - s.len > sh) {
+          stars[idx] = makeStar();
+          stars[idx].x = -30;
+        }
+      });
+      requestAnimationFrame(animateStars);
+    }
+    window.addEventListener('resize', resizeStars);
+    initStars();
+    animateStars();
+
+    // --- AVATAR APPEARANCE OPTIONS (ALL-GENDER) ---
+    const BODY_BUILDS = [
+      { id: "classic", name: "Classic", shoulderPad: 0, waistPinch: 0, jawWidth: 0, promptDesc: "collegiate student" },
+      { id: "broad", name: "Broad / Mens", shoulderPad: 3, waistPinch: -1, jawWidth: 1, promptDesc: "collegiate male student with broad shoulders" },
+      { id: "tailored", name: "Petite / Slim", shoulderPad: -1, waistPinch: 1, jawWidth: 0, promptDesc: "collegiate student" }
+    ];
+
+    const SKIN_TONES = [
+      { id: "porcelain", name: "Fair Ivory", base: "#f3cfb8", highlight: "#fae0cf", shadow: "#d4a68a", blush: "#e09486" },
+      { id: "warm_beige", name: "Warm Sand", base: "#e2b08e", highlight: "#efc2a3", shadow: "#c28b67", blush: "#d68270" },
+      { id: "golden_olive", name: "Golden Olive", base: "#c99268", highlight: "#d9a57e", shadow: "#a67049", blush: "#bd6b59" },
+      { id: "caramel", name: "Rich Caramel", base: "#a66b46", highlight: "#ba7e58", shadow: "#824d2d", blush: "#94483c" },
+      { id: "chestnut", name: "Warm Chestnut", base: "#7d492d", highlight: "#945b3c", shadow: "#5c321b", blush: "#6e302a" },
+      { id: "espresso", name: "Deep Espresso", base: "#522d1b", highlight: "#693c26", shadow: "#381c0f", blush: "#4d1f1c" }
+    ];
+
+    // Categorized Hairstyles: Men's Hair, Women's Hair, and Both / Unisex Hair
+    const HAIR_STYLES = [
+      // Men's Hair
+      { id: "short_textured", group: "mens", name: "Short Textured Crop", promptDesc: "short textured collegiate crop haircut" },
+      { id: "side_part", group: "mens", name: "Classic Side-Part", promptDesc: "classic Ivy League side-parted hair" },
+      { id: "taper_fade", group: "mens", name: "Taper Fade + Curls", promptDesc: "clean taper fade with textured curls on top" },
+      { id: "brushed_quiff", group: "mens", name: "Brushed-Back Quiff", promptDesc: "brushed-back collegiate quiff with tapered sides" },
+
+      // Women's Hair
+      { id: "wavy_long", group: "womens", name: "Relaxed Wavy Long", promptDesc: "relaxed wavy long hair" },
+      { id: "academic_bun", group: "womens", name: "Low Claw-Clip Bun", promptDesc: "effortless low academic claw-clip bun with face-framing tendrils" },
+      { id: "half_up_ribbon", group: "womens", name: "Half-Up Velvet Bow", promptDesc: "half-up wavy hair tied with a dark crimson velvet ribbon" },
+      { id: "layered_blowout", group: "womens", name: "90s Layered Blowout", promptDesc: "feathered 90s layered blowout with curtain bangs" },
+
+      // Both / Unisex Hair
+      { id: "tousled_shag", group: "both", name: "Tousled Curtain Shag", promptDesc: "tousled medium-length curtain shag haircut" },
+      { id: "micro_braids", group: "both", name: "Textured Micro-Braids", promptDesc: "textured shoulder-length micro-braids" },
+      { id: "sleek_parted", group: "both", name: "Sleek Center-Parted", promptDesc: "sleek center-parted hair" },
+      { id: "curly_puff", group: "both", name: "Voluminous Coils", promptDesc: "voluminous natural coils" }
+    ];
+
+    const HAIR_COLORS = [
+      { id: "jet_black", name: "Espresso Black", main: "#140c0b", hi: "#2b1c19" },
+      { id: "dark_cocoa", name: "Dark Cocoa", main: "#2e1810", hi: "#4a2a1d" },
+      { id: "chestnut_brown", name: "Roasted Chestnut", main: "#542a16", hi: "#784024" },
+      { id: "auburn", name: "Autumn Auburn", main: "#6e2414", hi: "#993822" },
+      { id: "honey_blonde", name: "Honey Brushed", main: "#9e7346", hi: "#bf9160" }
+    ];
+
+    const FACIAL_HAIR = [
+      { id: "clean", name: "Clean Shaven", promptDesc: "" },
+      { id: "stubble", name: "Light Stubble", promptDesc: "light neatly trimmed stubble" },
+      { id: "mustache", name: "Scholar Mustache", promptDesc: "neatly groomed mustache" },
+      { id: "full_beard", name: "Trimmed Full Beard", promptDesc: "short trimmed full beard" }
+    ];
+
+    const EYEWEAR_OPTIONS = [
+      { id: "tortoiseshell", name: "Tortoiseshell Frames", promptDesc: "tortoiseshell glasses" },
+      { id: "wire_gold", name: "Vintage Wire-Rim", promptDesc: "thin vintage brass wire-rim glasses" },
+      { id: "crimson_cat", name: "Crimson Acetate", promptDesc: "dark crimson scholarly frames" },
+      { id: "none", name: "No Glasses", promptDesc: "expressive features" }
+    ];
+
+    const avatar = {
+      build: "broad",
+      skin: "golden_olive",
+      hairStyle: "short_textured",
+      hairColor: "dark_cocoa",
+      facialHair: "stubble",
+      glasses: "tortoiseshell"
+    };
+
+    // --- EXPANDED ALL-GENDER AUTUMN ON MADISON WARDROBE (30 PIECES) ---
+    const WARDROBE = {
+      outerwear: [
+        { id: "tweed_sportcoat", name: "Herringbone Tweed Sport Coat", desc: "Menswear-tailored notched lapels", price: 48, swatch: "#5e4634" },
+        { id: "blazer", name: "Burnt Cocoa Corduroy Blazer", desc: "Ribbed wale & suede elbow patches", price: 38, swatch: "#592d1b" },
+        { id: "duffle", name: "Horn-Toggle Wool Duffle Coat", desc: "Roasted chestnut heavy wool + toggles", price: 54, swatch: "#753f22" },
+        { id: "trench", name: "Double-Breasted Wool Trench", desc: "Longline tailored overcoat & lapels", price: 58, swatch: "#4d2716" },
+        { id: "barn_jacket", name: "Waxed Barn Jacket + Cord Collar", desc: "Olive-espresso utility field coat", price: 46, swatch: "#363322" },
+        { id: "varsity_cardigan", name: "Crimson Letterman Wool Cardigan", desc: "Cream stripes & brass buttons", price: 44, swatch: "#860111" },
+        { id: "none_coat", name: "No Coat (Show Knitwear)", desc: "Display vest, oxford, or sweater", price: 0, swatch: "#1a1110" }
+      ],
+      tops: [
+        { id: "oxford_tie", name: "Crisp Oxford + Crimson Knit Tie", desc: "Button-down collar & striped tie", price: 32, swatch: "#f4ede4" },
+        { id: "argyle", name: "Argyle Vest + Crisp Oxford", desc: "Diamond knit over white collar", price: 28, swatch: "#7c5338" },
+        { id: "mockneck", name: "Toffee Ribbed Mock-Neck", desc: "Vertical knit rib shading", price: 22, swatch: "#9e6d49" },
+        { id: "fisherman", name: "Espresso Cable-Knit Sweater", desc: "Braided wool cable texture", price: 40, swatch: "#361e16" },
+        { id: "fair_isle", name: "Crimson Fair Isle Crewneck", desc: "Nordic yoke pattern in cream & red", price: 34, swatch: "#860111" },
+        { id: "striped_rugby", name: "Cocoa & Cream Collegiate Polo", desc: "Heavyweight cotton twill collar", price: 30, swatch: "#b59e87" }
+      ],
+      bottoms: [
+        { id: "corduroy_pants", name: "Wide-Leg Chocolate Corduroys", desc: "Tailored creases & cuffed hem", price: 36, swatch: "#3b2219", isPants: true },
+        { id: "pleated_trousers", name: "Tailored Oatmeal Wool Trousers", desc: "Double-pleat Madison Ave fit", price: 36, swatch: "#9e8870", isPants: true },
+        { id: "herringbone_slacks", name: "Charcoal-Espresso Wool Slacks", desc: "Cuffed straight-leg menswear cut", price: 40, swatch: "#29221f", isPants: true },
+        { id: "tartan_skirt", name: "Pleated Tartan Mini Skirt", desc: "Knife pleats in cocoa & crimson plaid", price: 28, swatch: "#860111", isPants: false },
+        { id: "houndstooth_skirt", name: "Houndstooth Wool A-Line Skirt", desc: "Structured heritage check weave", price: 30, swatch: "#b59e87", isPants: false },
+        { id: "midi_kilt", name: "Belted Wool Midi Kilt Skirt", desc: "Side leather buckle & fringe hem", price: 38, swatch: "#480607", isPants: false }
+      ],
+      shoes: [
+        { id: "loafers", name: "Chunky Lug-Sole Penny Loafers", desc: "Espresso leather with white socks", price: 38, swatch: "#29140e" },
+        { id: "oxfords", name: "Two-Tone Leather Oxford Brogues", desc: "Cognac & cream wingtip lace-ups", price: 42, swatch: "#874e28" },
+        { id: "chelsea_boots", name: "Burnished Chestnut Chelsea Boots", desc: "Elastic gusset & stacked heel", price: 46, swatch: "#5e2f19" },
+        { id: "maryjanes", name: "Chestnut Mary Janes + Slouch Socks", desc: "Glossy strap & ribbed cream socks", price: 36, swatch: "#732c17" },
+        { id: "equestrian", name: "Knee-High Equestrian Boots", desc: "Burnished leather shaft & buckle", price: 48, swatch: "#4f2513" }
+      ],
+      headwear: [
+        { id: "newsboy_scarf", name: "Corduroy Newsboy Cap + Plaid Scarf", desc: "8-panel cap & fringed tartan drape", price: 26, swatch: "#5c301c" },
+        { id: "scarf_only", name: "Plaid Fringed Wool Scarf Only", desc: "Layered neck wrap with tassels", price: 18, swatch: "#966847" },
+        { id: "knit_beanie", name: "Crimson Fisherman Ribbed Beanie", desc: "Cuffed merino knit + cocoa scarf", price: 22, swatch: "#860111" },
+        { id: "beret_scarf", name: "Crimson Wool Beret + Cream Scarf", desc: "Left Bank artist tilt + knit wrap", price: 24, swatch: "#a8071a" },
+        { id: "none_head", name: "Bare Hair (Showcase Hairstyle)", desc: "Show full custom hair silhouette", price: 0, swatch: "#1a1110" }
+      ],
+      props: [
+        { id: "camera_satchel", name: "35mm Rangefinder + Leather Satchel", desc: "Brass-buckle bag & silver camera", price: 34, swatch: "#874e28" },
+        { id: "coffee_book", name: "Madison Cafe Cup + Hardcover Book", desc: "Kraft sleeve cup & crimson book", price: 14, swatch: "#f4ede4" },
+        { id: "vinyl_tote", name: "Canvas Book Tote + Vinyl Record", desc: "Wild Fable star tote & LP sleeve", price: 20, swatch: "#b59e87" },
+        { id: "none_prop", name: "Hands Free", desc: "Clean editorial stance", price: 0, swatch: "#1a1110" }
+      ]
+    };
+
+    const selected = {
+      outerwear: "tweed_sportcoat",
+      tops: "oxford_tie",
+      bottoms: "corduroy_pants",
+      shoes: "chelsea_boots",
+      headwear: "scarf_only",
+      props: "camera_satchel"
+    };
+
+    let activeCategory = "outerwear";
+    let currentScene = "madison";
+    let animTick = 0;
+
+    // Native 176x224 Pixel Canvas Engine
+    const pCanvas = document.getElementById("pixelCanvas");
+    const ctx = pCanvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
+
+    function px(x, y, w, h, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+    }
+
+    function drawBackground() {
+      if (currentScene === "madison") {
+        px(0, 0, 176, 136, "#8c6a52");
+        px(0, 0, 176, 48, "#6e513e");
+        px(0, 48, 176, 36, "#7d5e48");
+
+        px(0, 18, 66, 125, "#4a2a1d");
+        for (let wy = 32; wy <= 88; wy += 44) {
+          px(10, wy, 20, 30, "#1f120e");
+          px(12, wy + 2, 16, 26, "#3b2319");
+          px(8, wy - 3, 24, 3, "#693f2c");
+          px(38, wy, 20, 30, "#1f120e");
+          px(40, wy + 2, 16, 26, "#3b2319");
+          px(36, wy - 3, 24, 3, "#693f2c");
+        }
+
+        for (let s = 0; s < 6; s++) {
+          const sy = 136 + s * 9;
+          px(0, sy, 176, 9, s % 2 === 0 ? "#3d2319" : "#331c14");
+          px(0, sy, 176, 1, "#6b4331");
+        }
+        px(0, 190, 176, 34, "#241916");
+        px(0, 190, 176, 1, "#543e36");
+
+        for (let i = 0; i < 12; i++) {
+          const rx = 8 + i * 4;
+          const ry = 108 + i * 3;
+          px(rx, ry, 1, 34, "#120a08");
+          px(rx, ry, 4, 2, "#120a08");
+        }
+
+        px(146, 52, 2, 138, "#141a16");
+        px(114, 58, 36, 9, "#1e3024");
+        px(115, 59, 34, 7, "#273d2e");
+        px(118, 62, 28, 1, "#f4ede4");
+        px(145, 69, 26, 8, "#1e3024");
+        px(146, 70, 24, 6, "#273d2e");
+        px(149, 73, 18, 1, "#f4ede4");
+
+      } else if (currentScene === "library") {
+        px(0, 0, 176, 190, "#1d110d");
+        px(48, 0, 1, 24, "#120a08");
+        px(43, 24, 11, 4, "#966847");
+        px(45, 28, 7, 3, "#f7c97e");
+        px(126, 0, 1, 24, "#120a08");
+        px(121, 24, 11, 4, "#966847");
+        px(123, 28, 7, 3, "#f7c97e");
+
+        px(0, 16, 38, 174, "#2e1810");
+        px(138, 16, 38, 174, "#2e1810");
+        const spineColors = ["#860111", "#480607", "#966847", "#3b2219", "#6e472b"];
+        for (let shelfY = 36; shelfY < 180; shelfY += 26) {
+          px(0, shelfY, 38, 3, "#170c08");
+          px(138, shelfY, 38, 3, "#170c08");
+          for (let bx = 2; bx < 34; bx += 4) {
+            const c = spineColors[(bx + shelfY) % spineColors.length];
+            px(bx, shelfY - 16, 3, 16, c);
+            px(138 + bx, shelfY - 16, 3, 16, c);
+          }
+        }
+        px(0, 190, 176, 34, "#29160f");
+        px(0, 190, 176, 1, "#5c3524");
+
+      } else if (currentScene === "cafe") {
+        px(0, 0, 176, 190, "#24140f");
+        px(16, 24, 144, 128, "#5c483c");
+        px(20, 28, 64, 120, "#6e584a");
+        px(92, 28, 64, 120, "#6e584a");
+        px(48, 42, 6, 8, "#f5be6c");
+        px(124, 48, 6, 8, "#f5be6c");
+        for (let r = 0; r < 14; r++) {
+          const rx = 24 + (r * 19) % 126;
+          const ry = 34 + ((r * 29 + animTick * 2) % 104);
+          px(rx, ry, 1, 5, "rgba(244,237,228,0.35)");
+        }
+        px(0, 152, 176, 38, "#361d13");
+        px(0, 190, 176, 34, "#1f110c");
+
+      } else {
+        px(0, 0, 176, 190, "#cfc6b8");
+        px(0, 42, 176, 12, "#243629");
+        px(0, 44, 176, 2, "#966847");
+        px(0, 50, 176, 2, "#860111");
+        for (let ty = 60; ty < 185; ty += 12) {
+          px(0, ty, 176, 1, "rgba(40,30,25,0.22)");
+        }
+        for (let tx = 0; tx < 176; tx += 18) {
+          px(tx, 54, 1, 134, "rgba(40,30,25,0.18)");
+        }
+        px(12, 0, 12, 190, "#1c2b21");
+        px(15, 0, 3, 190, "#2c4233");
+        px(0, 186, 176, 4, "#c9962c");
+        px(0, 190, 176, 34, "#292320");
+      }
+
+      // Scene-matched falling leaves & atmospheric particles
+      if (currentScene === "madison") {
+        // Falling autumn maple leaves & crisp breeze across Madison Ave & E 68th
+        const fallingLeaves = [
+          { baseX: 28, speedY: 1.3, sway: 5, phase: 0, c: "#860111" },
+          { baseX: 54, speedY: 1.0, sway: 7, phase: 14, c: "#b55c1d" },
+          { baseX: 118, speedY: 1.4, sway: 6, phase: 27, c: "#966847" },
+          { baseX: 142, speedY: 1.1, sway: 5, phase: 41, c: "#c26b27" },
+          { baseX: 158, speedY: 1.2, sway: 6, phase: 53, c: "#860111" },
+          { baseX: 16, speedY: 0.9, sway: 4, phase: 67, c: "#b55c1d" }
+        ];
+        fallingLeaves.forEach(lf => {
+          const ly = 36 + ((animTick * lf.speedY + lf.phase * 3) % 184);
+          const lx = lf.baseX + Math.sin((animTick + lf.phase) * 0.14) * lf.sway;
+          px(lx, ly, 3, 2, lf.c);
+          px(lx + 1, ly - 1, 2, 3, lf.c);
+        });
+        // Scattered fallen leaves resting on the brownstone steps & wet sidewalk
+        px(20, 182, 4, 2, "#860111");
+        px(44, 196, 4, 2, "#b55c1d");
+        px(130, 188, 4, 2, "#966847");
+        px(150, 206, 4, 2, "#860111");
+
+      } else if (currentScene === "library") {
+        // Warm floating golden dust motes & drifting book pages/leaves in tungsten light
+        const motes = [
+          { x: 48, y: 52, p: 0 },
+          { x: 64, y: 88, p: 12 },
+          { x: 114, y: 66, p: 25 },
+          { x: 128, y: 112, p: 38 },
+          { x: 56, y: 144, p: 51 }
+        ];
+        motes.forEach(m => {
+          const mx = m.x + Math.sin((animTick + m.p) * 0.08) * 3;
+          const my = m.y + Math.cos((animTick + m.p) * 0.06) * 2;
+          px(mx, my, 1, 1, "#f7c97e");
+        });
+
+      } else if (currentScene === "cafe") {
+        // Leaves drifting past the rainy windowpane outside + warm cafe cup steam
+        const windowLeaves = [
+          { baseX: 34, speedY: 1.2, phase: 5, c: "#b55c1d" },
+          { baseX: 68, speedY: 1.0, phase: 22, c: "#860111" },
+          { baseX: 112, speedY: 1.3, phase: 39, c: "#966847" },
+          { baseX: 140, speedY: 1.1, phase: 58, c: "#c26b27" }
+        ];
+        windowLeaves.forEach(lf => {
+          const ly = 30 + ((animTick * lf.speedY + lf.phase * 2) % 118);
+          const lx = lf.baseX + Math.sin((animTick + lf.phase) * 0.12) * 4;
+          px(lx, ly, 3, 2, lf.c);
+        });
+
+      } else {
+        // Prince St Subway: breezy platform air & stray autumn leaves blown down from the stairs
+        const subwayLeaves = [
+          { baseX: 30, speedY: 1.5, phase: 8, c: "#860111" },
+          { baseX: 138, speedY: 1.3, phase: 31, c: "#b55c1d" },
+          { baseX: 156, speedY: 1.4, phase: 49, c: "#966847" }
+        ];
+        subwayLeaves.forEach(lf => {
+          const ly = 58 + ((animTick * lf.speedY + lf.phase * 3) % 156);
+          const lx = lf.baseX + Math.sin((animTick + lf.phase) * 0.18) * 6;
+          px(lx, ly, 3, 2, lf.c);
+        });
+        px(24, 198, 4, 2, "#860111");
+        px(142, 204, 4, 2, "#b55c1d");
+      }
+    }
+
+    function drawShoesAndSocks(cx, wearingPants) {
+      const shoe = selected.shoes;
+      // Helper to draw a realistic 3/4-angled pair of pixel shoes with contoured toe box, heel, sole & highlights
+      if (shoe === "chelsea_boots") {
+        const shaftTop = wearingPants ? 182 : 168;
+        const shaftH = 190 - shaftTop;
+        // Upper ankle shafts
+        px(cx - 11, shaftTop, 9, shaftH, "#6b361d");
+        px(cx + 2, shaftTop, 9, shaftH, "#6b361d");
+        px(cx - 10, shaftTop, 2, shaftH, "#8c4a2b"); // leather highlight
+        px(cx + 3, shaftTop, 2, shaftH, "#8c4a2b");
+        if (!wearingPants) {
+          px(cx - 8, 171, 3, 15, "#26120a"); // dark elastic gusset
+          px(cx + 5, 171, 3, 15, "#26120a");
+          px(cx - 7, 166, 2, 3, "#3b1c0e"); // pull tab
+          px(cx + 5, 166, 2, 3, "#3b1c0e");
+        }
+        // Contoured vamp & rounded toe box (wider outward stance)
+        px(cx - 13, 189, 11, 8, "#5e2f19");
+        px(cx + 2, 189, 11, 8, "#5e2f19");
+        px(cx - 14, 192, 12, 5, "#6b361d");
+        px(cx + 2, 192, 12, 5, "#6b361d");
+        // Specular leather toe shine
+        px(cx - 12, 192, 5, 2, "#9e5634");
+        px(cx + 5, 192, 5, 2, "#9e5634");
+        // Stacked wooden heel & dark welt sole with arch gap
+        px(cx - 14, 197, 12, 2, "#1a1110");
+        px(cx + 2, 197, 12, 2, "#1a1110");
+        px(cx - 6, 198, 4, 3, "#2b160c"); // left stacked heel
+        px(cx + 2, 198, 4, 3, "#2b160c"); // right stacked heel
+        px(cx - 14, 198, 6, 2, "#140c09"); // left forefoot sole
+        px(cx + 8, 198, 6, 2, "#140c09"); // right forefoot sole
+
+      } else if (shoe === "loafers") {
+        // Ribbed cream socks peeking cleanly below cropped/cuffed pants or bare legs
+        const sockTop = wearingPants ? 182 : 178;
+        px(cx - 10, sockTop, 8, 190 - sockTop, "#f4ede4");
+        px(cx + 2, sockTop, 8, 190 - sockTop, "#f4ede4");
+        px(cx - 10, sockTop + 2, 8, 1, "#cfc2b0");
+        px(cx + 2, sockTop + 2, 8, 1, "#cfc2b0");
+
+        // Contoured espresso leather penny loafer body
+        px(cx - 13, 189, 11, 7, "#381b13");
+        px(cx + 2, 189, 11, 7, "#381b13");
+        px(cx - 14, 191, 12, 5, "#4a2419");
+        px(cx + 2, 191, 12, 5, "#4a2419");
+        // Moc-toe apron stitching & penny keeper strap
+        px(cx - 12, 190, 7, 2, "#6e392a");
+        px(cx + 5, 190, 7, 2, "#6e392a");
+        px(cx - 10, 190, 3, 1, "#f4ede4"); // subtle penny/stitch accent
+        px(cx + 7, 190, 3, 1, "#f4ede4");
+        // Chunky lug-sole tread + heel block
+        px(cx - 15, 196, 13, 3, "#120a09");
+        px(cx + 2, 196, 13, 3, "#120a09");
+        px(cx - 14, 199, 3, 2, "#080504");
+        px(cx - 9, 199, 3, 2, "#080504");
+        px(cx - 5, 199, 3, 2, "#080504");
+        px(cx + 2, 199, 3, 2, "#080504");
+        px(cx + 7, 199, 3, 2, "#080504");
+        px(cx + 12, 199, 3, 2, "#080504");
+
+      } else if (shoe === "oxfords") {
+        const sockTop = wearingPants ? 182 : 178;
+        px(cx - 10, sockTop, 8, 190 - sockTop, "#b59e87");
+        px(cx + 2, sockTop, 8, 190 - sockTop, "#b59e87");
+
+        // Cognac leather base + cream two-tone saddle & wingtip brogue detailing
+        px(cx - 13, 189, 11, 8, "#874e28");
+        px(cx + 2, 189, 11, 8, "#874e28");
+        px(cx - 14, 192, 12, 5, "#9c5c32");
+        px(cx + 2, 192, 12, 5, "#9c5c32");
+        // Cream saddle panel & laces
+        px(cx - 10, 190, 6, 5, "#f4ede4");
+        px(cx + 4, 190, 6, 5, "#f4ede4");
+        px(cx - 9, 189, 4, 1, "#2b160c"); // laces
+        px(cx + 5, 189, 4, 1, "#2b160c");
+        // Wingtip toe cap highlight
+        px(cx - 13, 193, 4, 2, "#ba7445");
+        px(cx + 9, 193, 4, 2, "#ba7445");
+        // Welted leather sole & heel
+        px(cx - 14, 197, 12, 2, "#24130b");
+        px(cx + 2, 197, 12, 2, "#24130b");
+        px(cx - 6, 199, 4, 2, "#140b07");
+        px(cx + 2, 199, 4, 2, "#140b07");
+        px(cx - 14, 199, 6, 1, "#140b07");
+        px(cx + 8, 199, 6, 1, "#140b07");
+
+      } else if (shoe === "maryjanes") {
+        // Cream slouch socks (cuffed under pants or scrunched on calf with skirts)
+        const sockTop = wearingPants ? 182 : 172;
+        px(cx - 10, sockTop, 8, 190 - sockTop, "#f4ede4");
+        px(cx + 2, sockTop, 8, 190 - sockTop, "#f4ede4");
+        if (!wearingPants) {
+          px(cx - 10, 176, 8, 1, "#cfc2b0");
+          px(cx + 2, 176, 8, 1, "#cfc2b0");
+          px(cx - 10, 181, 8, 1, "#cfc2b0");
+          px(cx + 2, 181, 8, 1, "#cfc2b0");
+        }
+
+        // Glossy roasted chestnut Mary Jane shoe with open instep + buckled strap
+        px(cx - 13, 190, 11, 7, "#7a2e18");
+        px(cx + 2, 190, 11, 7, "#7a2e18");
+        px(cx - 14, 192, 12, 5, "#8f371e");
+        px(cx + 2, 192, 12, 5, "#8f371e");
+        // Instep sock cutout + leather strap + brass buckle
+        px(cx - 10, 190, 5, 2, "#f4ede4");
+        px(cx + 5, 190, 5, 2, "#f4ede4");
+        px(cx - 11, 191, 8, 2, "#45180c");
+        px(cx + 3, 191, 8, 2, "#45180c");
+        px(cx - 11, 191, 2, 2, "#d4af37"); // buckle
+        px(cx + 9, 191, 2, 2, "#d4af37");
+        // Glossy patent leather toe shine
+        px(cx - 13, 193, 4, 2, "#d97b5b");
+        px(cx + 9, 193, 4, 2, "#d97b5b");
+        // Chunky block heel & sole
+        px(cx - 14, 197, 12, 2, "#1f0e09");
+        px(cx + 2, 197, 12, 2, "#1f0e09");
+        px(cx - 6, 199, 4, 2, "#140906");
+        px(cx + 2, 199, 4, 2, "#140906");
+
+      } else if (shoe === "equestrian") {
+        const bootTop = wearingPants ? 182 : 150;
+        const bootH = 191 - bootTop;
+        // Tall burnished brown leather boot shaft
+        px(cx - 11, bootTop, 9, bootH, "#592914");
+        px(cx + 2, bootTop, 9, bootH, "#592914");
+        px(cx - 9, bootTop + 1, 2, bootH - 2, "#854224"); // vertical sheen
+        px(cx + 4, bootTop + 1, 2, bootH - 2, "#854224");
+        if (!wearingPants) {
+          px(cx - 11, 152, 9, 2, "#966847"); // top collar cuff
+          px(cx + 2, 152, 9, 2, "#966847");
+        }
+        // Ankle harness strap + brass ring
+        px(cx - 11, 187, 9, 2, "#2e1409");
+        px(cx + 2, 187, 9, 2, "#2e1409");
+        px(cx - 10, 187, 2, 2, "#d4af37");
+        px(cx + 8, 187, 2, 2, "#d4af37");
+        // Contoured riding foot & toe box
+        px(cx - 14, 191, 12, 6, "#592914");
+        px(cx + 2, 191, 12, 6, "#592914");
+        px(cx - 12, 192, 5, 2, "#854224");
+        px(cx + 7, 192, 5, 2, "#854224");
+        // Riding heel & sole
+        px(cx - 14, 197, 12, 2, "#1a1110");
+        px(cx + 2, 197, 12, 2, "#1a1110");
+        px(cx - 6, 199, 4, 2, "#120a09");
+        px(cx + 2, 199, 4, 2, "#120a09");
+      }
+    }
+
+    function drawBottoms(cx, by, hipL, hipW) {
+      const bot = selected.bottoms;
+      if (bot === "corduroy_pants") {
+        px(hipL - 1, by - 1, hipW + 2, 73, "#1a1110");
+        px(hipL, by, hipW, 12, "#3b2219");
+        px(hipL, by + 12, hipW / 2 - 1, 59, "#3b2219");
+        px(cx + 1, by + 12, hipW / 2 - 1, 59, "#3b2219");
+        for (let wx = hipL + 2; wx <= hipL + hipW - 2; wx += 3) {
+          if (Math.abs(wx - cx) <= 1) continue;
+          px(wx, by + 4, 1, 67, "#26140e");
+        }
+        px(cx - 8, by + 14, 1, 55, "#593629");
+        px(cx + 7, by + 14, 1, 55, "#593629");
+        px(hipL, by + 69, hipW / 2 - 1, 3, "#1a1110");
+        px(cx + 1, by + 69, hipW / 2 - 1, 3, "#1a1110");
+      } else if (bot === "pleated_trousers") {
+        px(hipL - 1, by - 1, hipW + 2, 73, "#1a1110");
+        px(hipL, by, hipW, 12, "#9e8870");
+        px(hipL, by + 12, hipW / 2 - 1, 59, "#9e8870");
+        px(cx + 1, by + 12, hipW / 2 - 1, 59, "#9e8870");
+        px(cx - 8, by + 6, 1, 63, "#75614c");
+        px(cx + 7, by + 6, 1, 63, "#75614c");
+        px(hipL, by + 69, hipW / 2 - 1, 3, "#544333");
+        px(cx + 1, by + 69, hipW / 2 - 1, 3, "#544333");
+      } else if (bot === "herringbone_slacks") {
+        px(hipL - 1, by - 1, hipW + 2, 73, "#1a1110");
+        px(hipL, by, hipW, 12, "#29221f");
+        px(hipL, by + 12, hipW / 2 - 1, 59, "#29221f");
+        px(cx + 1, by + 12, hipW / 2 - 1, 59, "#29221f");
+        px(hipL, by + 68, hipW / 2 - 1, 4, "#171311");
+        px(cx + 1, by + 68, hipW / 2 - 1, 4, "#171311");
+      } else if (bot === "tartan_skirt") {
+        px(hipL - 1, by - 1, hipW + 2, 36, "#1a1110");
+        px(hipL, by, hipW, 34, "#4e2618");
+        for (let py = by + 4; py < by + 32; py += 7) {
+          px(hipL, py, hipW, 2, "#860111");
+          px(hipL, py + 3, hipW, 1, "#b59e87");
+        }
+        for (let pxX = hipL + 3; pxX <= hipL + hipW - 3; pxX += 6) {
+          px(pxX, by, 2, 34, "#860111");
+          px(pxX + 2, by, 1, 34, "#1a1110");
+        }
+        px(hipL, by, hipW, 3, "#2b140d");
+      } else if (bot === "houndstooth_skirt") {
+        px(hipL - 1, by - 1, hipW + 2, 42, "#1a1110");
+        px(hipL, by, hipW, 40, "#b59e87");
+        for (let hy = by + 2; hy < by + 39; hy += 3) {
+          for (let hx = hipL + 1; hx < hipL + hipW - 1; hx += 3) {
+            if ((hx + hy) % 2 === 0) px(hx, hy, 2, 2, "#3b2219");
+          }
+        }
+        px(hipL, by, hipW, 3, "#3b2219");
+      } else if (bot === "midi_kilt") {
+        px(hipL - 1, by - 1, hipW + 2, 54, "#1a1110");
+        px(hipL, by, hipW, 52, "#480607");
+        for (let ky = by + 6; ky < by + 50; ky += 9) {
+          px(hipL, ky, hipW, 1, "#966847");
+        }
+        for (let kx = hipL + 4; kx <= hipL + hipW - 4; kx += 5) {
+          px(kx, by + 4, 1, 48, "#1a1110");
+        }
+        px(hipL + hipW - 6, by + 5, 4, 2, "#d4af37");
+      }
+    }
+
+    function drawPixelCharacter() {
+      const cx = 88;
+      const breathe = Math.round(Math.sin(animTick * 0.15));
+      const skin = SKIN_TONES.find(s => s.id === avatar.skin) || SKIN_TONES[1];
+      const hCol = HAIR_COLORS.find(c => c.id === avatar.hairColor) || HAIR_COLORS[0];
+      const buildObj = BODY_BUILDS.find(b => b.id === avatar.build) || BODY_BUILDS[0];
+      const sp = buildObj.shoulderPad;
+      const jw = buildObj.jawWidth;
+
+      const botObj = WARDROBE.bottoms.find(b => b.id === selected.bottoms);
+      const wearingPants = botObj ? botObj.isPants : false;
+
+      // Clean stance without blocky rectangle ground shadow
+
+      // --- BACK HAIR LAYER ---
+      if (avatar.hairStyle === "wavy_long" || avatar.hairStyle === "layered_blowout") {
+        px(cx - 14, 52 + breathe, 28, 38, hCol.main);
+        px(cx - 16, 58 + breathe, 32, 26, hCol.hi);
+        px(cx - 15, 76 + breathe, 6, 16, hCol.main);
+        px(cx + 9, 76 + breathe, 6, 16, hCol.main);
+      } else if (avatar.hairStyle === "half_up_ribbon") {
+        px(cx - 14, 52 + breathe, 28, 38, hCol.main);
+        px(cx - 16, 58 + breathe, 32, 24, hCol.hi);
+        // Crimson velvet ribbon bow at back crown
+        px(cx - 5, 43 + breathe, 10, 4, "#860111");
+        px(cx - 4, 47 + breathe, 2, 6, "#860111");
+        px(cx + 2, 47 + breathe, 2, 6, "#860111");
+      } else if (avatar.hairStyle === "micro_braids") {
+        for (let bx = cx - 14; bx <= cx + 12; bx += 3) {
+          px(bx, 52 + breathe, 2, 42, bx % 2 === 0 ? hCol.main : hCol.hi);
+        }
+      } else if (avatar.hairStyle === "tousled_shag") {
+        px(cx - 14, 50 + breathe, 28, 26, hCol.main);
+        px(cx - 16, 56 + breathe, 32, 14, hCol.hi);
+        px(cx - 15, 68 + breathe, 4, 8, hCol.main);
+        px(cx + 11, 68 + breathe, 4, 8, hCol.main);
+      } else if (avatar.hairStyle === "sleek_parted") {
+        px(cx - 13, 52 + breathe, 26, 40, hCol.main);
+        px(cx - 12, 54 + breathe, 2, 36, hCol.hi);
+        px(cx + 10, 54 + breathe, 2, 36, hCol.hi);
+      } else if (avatar.hairStyle === "curly_puff") {
+        px(cx - 18, 44 + breathe, 36, 34, hCol.main);
+        px(cx - 20, 50 + breathe, 40, 22, hCol.hi);
+        px(cx - 16, 42 + breathe, 32, 6, hCol.hi);
+      } else if (avatar.hairStyle === "academic_bun") {
+        px(cx - 7, 39 + breathe, 14, 10, hCol.main);
+        px(cx - 5, 40 + breathe, 10, 7, hCol.hi);
+        px(cx - 11, 50 + breathe, 22, 20, hCol.main);
+      } else if (
+        avatar.hairStyle === "short_textured" ||
+        avatar.hairStyle === "side_part" ||
+        avatar.hairStyle === "taper_fade" ||
+        avatar.hairStyle === "brushed_quiff"
+      ) {
+        px(cx - 11, 47 + breathe, 22, 18, hCol.main);
+      }
+
+      // --- NECK & HEAD ---
+      px(cx - (3 + jw), 72 + breathe, 6 + jw * 2, 8, skin.shadow);
+      px(cx - (9 + jw), 50 + breathe, 18 + jw * 2, 22, skin.base);
+      px(cx - (8 + jw), 52 + breathe, 16 + jw * 2, 19, skin.highlight);
+      px(cx - (9 + jw), 64 + breathe, 2, 6, skin.shadow);
+      px(cx + (7 + jw), 64 + breathe, 2, 6, skin.shadow);
+      if (avatar.facialHair === "clean") {
+        px(cx - 6, 62 + breathe, 3, 2, skin.blush);
+        px(cx + 3, 62 + breathe, 3, 2, skin.blush);
+      }
+
+      // Eyes & Brows
+      px(cx - 7, 56 + breathe, 4, 1, hCol.main);
+      px(cx + 3, 56 + breathe, 4, 1, hCol.main);
+      px(cx - 6, 58 + breathe, 2, 3, "#1a1110");
+      px(cx + 4, 58 + breathe, 2, 3, "#1a1110");
+      px(cx - 5, 58 + breathe, 1, 1, "#ffffff");
+      px(cx + 5, 58 + breathe, 1, 1, "#ffffff");
+
+      // Eyewear
+      if (avatar.glasses !== "none") {
+        const gCol = avatar.glasses === "tortoiseshell" ? "#3b2219" :
+                     avatar.glasses === "wire_gold" ? "#c99e5b" : "#860111";
+        px(cx - 8, 56 + breathe, 6, 1, gCol);
+        px(cx - 8, 61 + breathe, 6, 1, gCol);
+        px(cx - 8, 56 + breathe, 1, 6, gCol);
+        px(cx - 3, 56 + breathe, 1, 6, gCol);
+        px(cx + 2, 56 + breathe, 6, 1, gCol);
+        px(cx + 2, 61 + breathe, 6, 1, gCol);
+        px(cx + 2, 56 + breathe, 1, 6, gCol);
+        px(cx + 7, 56 + breathe, 1, 6, gCol);
+        px(cx - 2, 58 + breathe, 4, 1, gCol);
+      }
+
+      // Mouth & Facial Hair
+      px(cx - 2, 66 + breathe, 4, 1, "#9e3b33");
+      if (avatar.facialHair === "stubble") {
+        for (let sx = cx - (8 + jw); sx <= cx + (7 + jw); sx += 2) {
+          px(sx, 65 + breathe, 1, 5, hCol.hi);
+        }
+        px(cx - 3, 64 + breathe, 6, 1, hCol.hi);
+      } else if (avatar.facialHair === "mustache") {
+        px(cx - 5, 64 + breathe, 10, 2, hCol.main);
+        px(cx - 6, 65 + breathe, 2, 1, hCol.main);
+        px(cx + 4, 65 + breathe, 2, 1, hCol.main);
+      } else if (avatar.facialHair === "full_beard") {
+        px(cx - (9 + jw), 62 + breathe, 2, 8, hCol.main);
+        px(cx + (7 + jw), 62 + breathe, 2, 8, hCol.main);
+        px(cx - (8 + jw), 68 + breathe, 16 + jw * 2, 4, hCol.main);
+        px(cx - 5, 64 + breathe, 10, 2, hCol.main);
+        px(cx - 2, 67 + breathe, 4, 4, hCol.main);
+      }
+
+      // Legs
+      px(cx - (9 + Math.max(0, sp - 1)), 144, 7 + Math.max(0, sp - 1), 46, skin.base);
+      px(cx + 2, 144, 7 + Math.max(0, sp - 1), 46, skin.base);
+      px(cx - (9 + Math.max(0, sp - 1)), 144, 2, 46, skin.shadow);
+      px(cx + 2, 144, 2, 46, skin.shadow);
+
+      // --- LAYER 1: TOPS / KNITS ---
+      const top = selected.tops;
+      const ty = 78 + breathe;
+      const torsoW = 26 + sp * 2;
+      const torsoL = cx - (13 + sp);
+      const sleeveW = 5 + Math.max(0, sp - 1);
+
+      if (top === "mockneck") {
+        // Outline + fill
+        px(cx - 5, ty - 5, 10, 6, "#1a1110");
+        px(cx - 4, ty - 4, 8, 5, "#9e6d49");
+        px(torsoL - 1, ty - 1, torsoW + 2, 38, "#1a1110");
+        px(torsoL, ty, torsoW, 36, "#9e6d49");
+        for (let rx = torsoL + 2; rx <= torsoL + torsoW - 2; rx += 3) {
+          px(rx, ty, 1, 36, "#7d5233");
+        }
+        px(torsoL - sleeveW - 1, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL - sleeveW, ty + 2, sleeveW, 34, "#9e6d49");
+        px(torsoL + torsoW, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL + torsoW, ty + 2, sleeveW, 34, "#9e6d49");
+      } else if (top === "oxford_tie") {
+        px(torsoL - 1, ty - 1, torsoW + 2, 38, "#1a1110");
+        px(torsoL, ty, torsoW, 36, "#fcf9f2");
+        px(cx - 1, ty, 1, 36, "#d9cfc1"); // center placket
+        px(torsoL - sleeveW - 1, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL - sleeveW, ty + 2, sleeveW, 34, "#ebe1d5");
+        px(torsoL + torsoW, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL + torsoW, ty + 2, sleeveW, 34, "#ebe1d5");
+        px(cx - 7, ty - 3, 6, 5, "#1a1110");
+        px(cx + 1, ty - 3, 6, 5, "#1a1110");
+        px(cx - 6, ty - 2, 5, 4, "#ffffff");
+        px(cx + 1, ty - 2, 5, 4, "#ffffff");
+        px(cx - 2, ty + 1, 4, 3, "#860111");
+        px(cx - 2, ty + 4, 4, 26, "#860111");
+        px(cx - 2, ty + 10, 4, 2, "#b59e87");
+        px(cx - 2, ty + 18, 4, 2, "#b59e87");
+      } else if (top === "argyle") {
+        px(torsoL - 1, ty - 1, torsoW + 2, 38, "#1a1110");
+        px(torsoL, ty, torsoW, 36, "#fcf9f2");
+        px(torsoL - sleeveW - 1, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL - sleeveW, ty + 2, sleeveW, 34, "#ebe1d5");
+        px(torsoL + torsoW, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL + torsoW, ty + 2, sleeveW, 34, "#ebe1d5");
+        px(cx - 6, ty - 3, 5, 4, "#1a1110");
+        px(cx + 1, ty - 3, 5, 4, "#1a1110");
+        px(cx - 5, ty - 2, 4, 3, "#ffffff");
+        px(cx + 1, ty - 2, 4, 3, "#ffffff");
+        // Vest outline
+        px(torsoL + 1, ty + 1, torsoW - 2, 34, "#1a1110");
+        px(torsoL + 2, ty + 2, torsoW - 4, 33, "#7c5338");
+        for (let dy = ty + 6; dy < ty + 30; dy += 10) {
+          for (let dx = torsoL + 5; dx <= torsoL + torsoW - 7; dx += 8) {
+            px(dx + 1, dy, 2, 6, "#480607");
+            px(dx, dy + 2, 4, 2, "#480607");
+            px(dx + 1, dy + 2, 2, 2, "#b59e87");
+          }
+        }
+      } else if (top === "fisherman") {
+        px(torsoL - 2, ty - 1, torsoW + 4, 39, "#1a1110");
+        px(torsoL - 1, ty, torsoW + 2, 37, "#361e16");
+        px(torsoL - sleeveW - 2, ty + 1, sleeveW + 2, 36, "#1a1110");
+        px(torsoL - sleeveW, ty + 2, sleeveW, 34, "#361e16");
+        px(torsoL + torsoW - 1, ty + 1, sleeveW + 2, 36, "#1a1110");
+        px(torsoL + torsoW, ty + 2, sleeveW, 34, "#361e16");
+        for (let cy = ty + 3; cy < ty + 35; cy += 4) {
+          px(cx - 7, cy, 2, 2, "#543226");
+          px(cx + 5, cy, 2, 2, "#543226");
+          px(cx - 1, cy, 2, 3, "#1c0e0a");
+        }
+      } else if (top === "fair_isle") {
+        px(torsoL - 1, ty - 1, torsoW + 2, 38, "#1a1110");
+        px(torsoL, ty, torsoW, 36, "#860111");
+        px(torsoL - sleeveW - 1, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL - sleeveW, ty + 2, sleeveW, 34, "#860111");
+        px(torsoL + torsoW, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL + torsoW, ty + 2, sleeveW, 34, "#860111");
+        px(torsoL, ty + 4, torsoW, 2, "#f4ede4");
+        px(torsoL, ty + 12, torsoW, 2, "#f4ede4");
+        for (let fx = torsoL + 2; fx <= torsoL + torsoW - 4; fx += 4) {
+          px(fx, ty + 7, 2, 4, "#b59e87");
+        }
+      } else if (top === "striped_rugby") {
+        px(torsoL - 1, ty - 1, torsoW + 2, 38, "#1a1110");
+        px(torsoL, ty, torsoW, 36, "#3b2219");
+        px(torsoL - sleeveW - 1, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL - sleeveW, ty + 2, sleeveW, 34, "#3b2219");
+        px(torsoL + torsoW, ty + 1, sleeveW + 1, 36, "#1a1110");
+        px(torsoL + torsoW, ty + 2, sleeveW, 34, "#3b2219");
+        px(torsoL, ty + 10, torsoW, 6, "#b59e87");
+        px(torsoL, ty + 22, torsoW, 6, "#b59e87");
+        px(cx - 5, ty - 2, 10, 4, "#f4ede4");
+      }
+
+      // Hands
+      px(torsoL - sleeveW, ty + 36, 4, 5, skin.highlight);
+      px(torsoL + torsoW + sleeveW - 4, ty + 36, 4, 5, skin.highlight);
+
+      // --- LAYER 2 & 3: BOTTOMS & FOOTWEAR ---
+      const by = 113 + breathe;
+      const hipW = 28 + Math.max(0, sp) * 2;
+      const hipL = cx - hipW / 2;
+
+      if (wearingPants) {
+        drawShoesAndSocks(cx, true);
+        drawBottoms(cx, by, hipL, hipW);
+      } else {
+        drawBottoms(cx, by, hipL, hipW);
+        drawShoesAndSocks(cx, false);
+      }
+
+      // --- LAYER 4: OUTERWEAR / COATS ---
+      const coat = selected.outerwear;
+      const coatW = 10 + sp;
+      if (coat === "tweed_sportcoat") {
+        px(torsoL - 2, ty, coatW, 48, "#5e4634");
+        px(torsoL + torsoW - coatW + 2, ty, coatW, 48, "#5e4634");
+        for (let hy = ty + 3; hy < ty + 46; hy += 4) {
+          px(torsoL, hy, 2, 1, "#8f7158");
+          px(torsoL + 4, hy + 2, 2, 1, "#3b2a1e");
+          px(torsoL + torsoW - 6, hy, 2, 1, "#8f7158");
+          px(torsoL + torsoW - 2, hy + 2, 2, 1, "#3b2a1e");
+        }
+        px(cx - 7, ty + 2, 3, 18, "#7d6049");
+        px(cx + 4, ty + 2, 3, 18, "#7d6049");
+        px(torsoL - sleeveW - 2, ty + 2, sleeveW + 1, 34, "#5e4634");
+        px(torsoL + torsoW + 1, ty + 2, sleeveW + 1, 34, "#5e4634");
+      } else if (coat === "blazer") {
+        px(torsoL - 2, ty, coatW, 46, "#592d1b");
+        px(torsoL + torsoW - coatW + 2, ty, coatW, 46, "#592d1b");
+        for (let bx = torsoL - 1; bx <= torsoL + torsoW + 1; bx += 3) {
+          if (bx > cx - 5 && bx < cx + 5) continue;
+          px(bx, ty + 2, 1, 44, "#3b1c10");
+        }
+        px(cx - 7, ty + 2, 3, 16, "#753f27");
+        px(cx + 4, ty + 2, 3, 16, "#753f27");
+        px(torsoL - sleeveW - 2, ty + 2, sleeveW + 1, 34, "#592d1b");
+        px(torsoL + torsoW + 1, ty + 2, sleeveW + 1, 34, "#592d1b");
+        px(torsoL - sleeveW - 2, ty + 16, 3, 7, "#966847");
+        px(torsoL + torsoW + sleeveW - 1, ty + 16, 3, 7, "#966847");
+      } else if (coat === "duffle") {
+        px(torsoL - 3, ty, coatW + 2, 72, "#753f22");
+        px(torsoL + torsoW - coatW + 1, ty, coatW + 2, 72, "#753f22");
+        px(torsoL - sleeveW - 3, ty + 2, sleeveW + 1, 35, "#753f22");
+        px(torsoL + torsoW + 2, ty + 2, sleeveW + 1, 35, "#753f22");
+        [ty + 12, ty + 24, ty + 36].forEach(tgY => {
+          px(cx - 6, tgY, 12, 2, "#2b140d");
+          px(cx - 2, tgY - 1, 5, 3, "#f4ede4");
+        });
+      } else if (coat === "trench") {
+        px(torsoL - 3, ty, coatW + 2, 92, "#4d2716");
+        px(torsoL + torsoW - coatW + 1, ty, coatW + 2, 92, "#4d2716");
+        px(torsoL - sleeveW - 3, ty + 2, sleeveW + 1, 35, "#4d2716");
+        px(torsoL + torsoW + 2, ty + 2, sleeveW + 1, 35, "#4d2716");
+        px(cx - 9, ty + 2, 4, 20, "#693822");
+        px(cx + 5, ty + 2, 4, 20, "#693822");
+        [ty + 16, ty + 28, ty + 40].forEach(btnY => {
+          px(cx - 8, btnY, 2, 2, "#1a1110");
+          px(cx + 6, btnY, 2, 2, "#1a1110");
+        });
+      } else if (coat === "barn_jacket") {
+        px(torsoL - 2, ty, coatW, 50, "#363322");
+        px(torsoL + torsoW - coatW + 2, ty, coatW, 50, "#363322");
+        px(torsoL - sleeveW - 2, ty + 2, sleeveW + 1, 34, "#363322");
+        px(torsoL + torsoW + 1, ty + 2, sleeveW + 1, 34, "#363322");
+        px(cx - 10, ty - 1, 20, 5, "#592d1b");
+        px(torsoL - 1, ty + 28, 7, 9, "#262417");
+        px(torsoL + torsoW - 6, ty + 28, 7, 9, "#262417");
+      } else if (coat === "varsity_cardigan") {
+        px(torsoL - 2, ty, coatW, 46, "#860111");
+        px(torsoL + torsoW - coatW + 2, ty, coatW, 46, "#860111");
+        px(torsoL - sleeveW - 2, ty + 2, sleeveW + 1, 34, "#860111");
+        px(torsoL + torsoW + 1, ty + 2, sleeveW + 1, 34, "#860111");
+        px(torsoL - sleeveW - 2, ty + 14, sleeveW + 1, 2, "#f4ede4");
+        px(torsoL - sleeveW - 2, ty + 18, sleeveW + 1, 2, "#f4ede4");
+        px(torsoL + torsoW + 1, ty + 14, sleeveW + 1, 2, "#f4ede4");
+        px(torsoL + torsoW + 1, ty + 18, sleeveW + 1, 2, "#f4ede4");
+      }
+
+      // --- LAYER 5: FRONT HAIR & HEADWEAR / SCARF ---
+      if (avatar.hairStyle === "short_textured") {
+        px(cx - 10, 46 + breathe, 20, 6, hCol.main);
+        px(cx - 8, 45 + breathe, 4, 2, hCol.hi);
+        px(cx - 2, 44 + breathe, 5, 3, hCol.hi);
+        px(cx + 5, 46 + breathe, 4, 2, hCol.hi);
+      } else if (avatar.hairStyle === "side_part") {
+        px(cx - 10, 46 + breathe, 14, 6, hCol.main);
+        px(cx + 5, 47 + breathe, 5, 5, hCol.main);
+        px(cx - 8, 46 + breathe, 10, 2, hCol.hi);
+      } else if (avatar.hairStyle === "taper_fade") {
+        px(cx - 9, 44 + breathe, 18, 7, hCol.main);
+        px(cx - 7, 43 + breathe, 14, 2, hCol.hi);
+      } else if (avatar.hairStyle === "brushed_quiff") {
+        px(cx - 10, 44 + breathe, 20, 8, hCol.main);
+        px(cx - 7, 42 + breathe, 14, 4, hCol.hi);
+        px(cx - 4, 41 + breathe, 8, 2, hCol.hi);
+      } else if (avatar.hairStyle === "sleek_parted") {
+        px(cx - 10, 48 + breathe, 9, 6, hCol.main);
+        px(cx + 1, 48 + breathe, 9, 6, hCol.main);
+        px(cx - 11, 52 + breathe, 2, 22, hCol.main);
+        px(cx + 9, 52 + breathe, 2, 22, hCol.main);
+      } else if (avatar.hairStyle === "layered_blowout") {
+        px(cx - 11, 47 + breathe, 9, 7, hCol.main);
+        px(cx + 2, 47 + breathe, 9, 7, hCol.main);
+        px(cx - 12, 52 + breathe, 3, 20, hCol.hi);
+        px(cx + 9, 52 + breathe, 3, 20, hCol.hi);
+      } else if (avatar.hairStyle === "curly_puff") {
+        px(cx - 11, 47 + breathe, 22, 6, hCol.hi);
+        px(cx - 12, 51 + breathe, 3, 14, hCol.main);
+        px(cx + 9, 51 + breathe, 3, 14, hCol.main);
+      } else {
+        px(cx - 10, 48 + breathe, 20, 6, hCol.main);
+        px(cx - 11, 52 + breathe, 3, 16, hCol.main);
+        px(cx + 8, 52 + breathe, 3, 16, hCol.main);
+      }
+
+      const hw = selected.headwear;
+      if (hw === "newsboy_scarf" || hw === "scarf_only") {
+        px(cx - 11, ty - 2, 22, 8, "#4e2618");
+        px(cx - 11, ty + 1, 22, 2, "#860111");
+        px(cx - 11, ty + 4, 22, 1, "#b59e87");
+        px(cx + 3, ty + 6, 8, 28, "#4e2618");
+        px(cx + 5, ty + 6, 2, 28, "#860111");
+        px(cx + 8, ty + 6, 1, 28, "#b59e87");
+        px(cx + 3, ty + 34, 1, 3, "#b59e87");
+        px(cx + 6, ty + 34, 1, 3, "#b59e87");
+        px(cx + 9, ty + 34, 1, 3, "#b59e87");
+      }
+      if (hw === "newsboy_scarf") {
+        px(cx - 12, 43 + breathe, 24, 7, "#5c301c");
+        px(cx - 9, 40 + breathe, 18, 4, "#753f27");
+        px(cx - 11, 49 + breathe, 22, 2, "#2b140d");
+      }
+      if (hw === "knit_beanie") {
+        px(cx - 11, 41 + breathe, 22, 8, "#860111");
+        px(cx - 11, 46 + breathe, 22, 4, "#5e0914");
+        px(cx - 11, ty - 2, 22, 7, "#3b2219");
+        px(cx + 3, ty + 5, 8, 24, "#3b2219");
+      }
+      if (hw === "beret_scarf") {
+        px(cx - 10, 42 + breathe, 23, 6, "#860111");
+        px(cx - 6, 40 + breathe, 17, 3, "#a8071a");
+        px(cx - 11, ty - 2, 22, 8, "#f4ede4");
+        px(cx + 3, ty + 6, 8, 26, "#f4ede4");
+        px(cx + 3, ty + 32, 1, 3, "#b59e87");
+        px(cx + 7, ty + 32, 1, 3, "#b59e87");
+      }
+
+      // --- LAYER 6: PROPS ---
+      const prop = selected.props;
+      if (prop === "camera_satchel") {
+        for (let s = 0; s < 16; s++) {
+          px(cx - 11 + s, ty + 2 + s * 2, 2, 3, "#6b381e");
+        }
+        px(torsoL + torsoW - 2, ty + 32, 14, 13, "#874e28");
+        px(torsoL + torsoW - 2, ty + 32, 14, 5, "#6b381e");
+        px(torsoL + torsoW + 1, ty + 36, 2, 3, "#d4af37");
+        px(torsoL + torsoW + 7, ty + 36, 2, 3, "#d4af37");
+
+        px(cx - 6, ty + 16, 12, 7, "#d9d4cc");
+        px(cx - 6, ty + 18, 12, 4, "#1a1110");
+        px(cx - 2, ty + 17, 5, 5, "#4a4a4a");
+        px(cx - 1, ty + 18, 3, 3, "#141414");
+        px(cx, ty + 18, 1, 1, "#8ab4f8");
+      } else if (prop === "coffee_book") {
+        px(torsoL - sleeveW - 4, ty + 30, 6, 8, "#f4ede4");
+        px(torsoL - sleeveW - 5, ty + 29, 8, 2, "#1a1110");
+        px(torsoL - sleeveW - 4, ty + 33, 6, 3, "#966847");
+        px(torsoL + torsoW + 1, ty + 26, 8, 13, "#860111");
+        px(torsoL + torsoW + 8, ty + 27, 2, 11, "#f4ede4");
+      } else if (prop === "vinyl_tote") {
+        px(torsoL + torsoW - 1, ty + 34, 15, 16, "#f4ede4");
+        px(torsoL + torsoW + 1, ty + 30, 2, 4, "#b59e87");
+        px(torsoL + torsoW + 9, ty + 30, 2, 4, "#b59e87");
+        px(torsoL + torsoW + 1, ty + 27, 10, 7, "#141414");
+        px(torsoL + torsoW + 5, ty + 29, 3, 3, "#860111");
+      }
+    }
+
+    function renderLoop() {
+      ctx.clearRect(0, 0, 176, 224);
+      drawBackground();
+      drawPixelCharacter();
+      animTick++;
+    }
+
+    setInterval(renderLoop, 140);
+
+    // --- BUILD AVATAR CUSTOMIZER UI ---
+    function renderHairGroup(containerId, groupKey) {
+      const wrap = document.getElementById(containerId);
+      wrap.innerHTML = "";
+      HAIR_STYLES.filter(h => h.group === groupKey).forEach(h => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "mini-opt" + (avatar.hairStyle === h.id ? " active" : "");
+        b.textContent = h.name;
+        b.addEventListener("click", () => {
+          avatar.hairStyle = h.id;
+      
+    buildAvatarUI();
+          renderLoop();
+        });
+        wrap.appendChild(b);
+      });
+    }
+
+    function buildAvatarUI() {
+      const buildWrap = document.getElementById("bodyBuildGrid");
+      buildWrap.innerHTML = "";
+      BODY_BUILDS.forEach(b => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "mini-opt" + (avatar.build === b.id ? " active" : "");
+        btn.textContent = b.name;
+        btn.addEventListener("click", () => {
+          avatar.build = b.id;
+      
+    buildAvatarUI();
+          renderLoop();
+        });
+        buildWrap.appendChild(btn);
+      });
+
+      const skinWrap = document.getElementById("skinSwatches");
+      skinWrap.innerHTML = "";
+      SKIN_TONES.forEach(s => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.title = s.name;
+        b.className = "tone-swatch" + (avatar.skin === s.id ? " active" : "");
+        b.style.background = s.base;
+        b.addEventListener("click", () => {
+          avatar.skin = s.id;
+      
+    buildAvatarUI();
+          renderLoop();
+        });
+        skinWrap.appendChild(b);
+      });
+
+      // Render Men's Hair, Women's Hair, and Both / Unisex Hair sections
+      renderHairGroup("mensHairGrid", "mens");
+      renderHairGroup("womensHairGrid", "womens");
+      renderHairGroup("bothHairGrid", "both");
+
+      const hcWrap = document.getElementById("hairColorSwatches");
+      hcWrap.innerHTML = "";
+      HAIR_COLORS.forEach(c => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.title = c.name;
+        b.className = "tone-swatch" + (avatar.hairColor === c.id ? " active" : "");
+        b.style.background = c.main;
+        b.addEventListener("click", () => {
+          avatar.hairColor = c.id;
+      
+    buildAvatarUI();
+          renderLoop();
+        });
+        hcWrap.appendChild(b);
+      });
+
+      const fhWrap = document.getElementById("facialHairGrid");
+      fhWrap.innerHTML = "";
+      FACIAL_HAIR.forEach(f => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "mini-opt" + (avatar.facialHair === f.id ? " active" : "");
+        b.textContent = f.name;
+        b.addEventListener("click", () => {
+          avatar.facialHair = f.id;
+      
+    buildAvatarUI();
+          renderLoop();
+        });
+        fhWrap.appendChild(b);
+      });
+
+      const glWrap = document.getElementById("glassesGrid");
+      glWrap.innerHTML = "";
+      EYEWEAR_OPTIONS.forEach(g => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "mini-opt" + (avatar.glasses === g.id ? " active" : "");
+        b.textContent = g.name;
+        b.addEventListener("click", () => {
+          avatar.glasses = g.id;
+      
+    buildAvatarUI();
+          renderLoop();
+        });
+        glWrap.appendChild(b);
+      });
+    }
+
+    // --- BUILD WARDROBE UI ---
+    function renderCategoryList() {
+      const list = document.getElementById("garmentList");
+      list.innerHTML = "";
+      WARDROBE[activeCategory].forEach(item => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "garment-card" + (selected[activeCategory] === item.id ? " selected" : "");
+        btn.innerHTML = `
+          <div class="swatch-box" style="background:${item.swatch}"></div>
+          <div class="garment-info">
+            <span class="garment-name">${item.name}</span>
+            <div class="garment-meta">
+              <span>${item.desc}</span>
+              <strong>${item.price > 0 ? "$" + item.price : "FREE"}</strong>
+            </div>
+          </div>
+        `;
+        btn.addEventListener("click", () => {
+          selected[activeCategory] = item.id;
+          renderCategoryList();
+          updateInventory();
+          renderLoop();
+        });
+        list.appendChild(btn);
+      });
+    }
+
+    function updateInventory() {
+      const receiptList = document.getElementById("receiptList");
+      receiptList.innerHTML = "";
+      let total = 0;
+      let count = 0;
+      const activeNames = [];
+
+      Object.keys(selected).forEach(cat => {
+        const obj = WARDROBE[cat].find(i => i.id === selected[cat]);
+        if (obj && obj.price > 0) {
+          total += obj.price;
+          count++;
+          activeNames.push(obj.name);
+          const li = document.createElement("li");
+          li.innerHTML = `<span>${obj.name}</span><span>$${obj.price}.00</span>`;
+          receiptList.appendChild(li);
+        }
+      });
+
+      const discounted = (total * 0.85).toFixed(2);
+      document.getElementById("receiptTotal").textContent = `$${discounted}`;
+
+
+
+      document.getElementById("dialogueText").textContent =
+        activeNames.length > 0
+          ? `Equipped: ${activeNames.slice(0, 3).join(" + ")}.`
+          : "Minimal base silhouette equipped.";
+    }
+
+    // Left Panel Mode Switcher
+    const modeModelBtn = document.getElementById("modeModelBtn");
+    const modeWardrobeBtn = document.getElementById("modeWardrobeBtn");
+    const modelPane = document.getElementById("modelCustomizerPane");
+    const wardrobePane = document.getElementById("wardrobePane");
+
+    modeModelBtn.addEventListener("click", () => {
+      modeModelBtn.classList.add("active");
+      modeWardrobeBtn.classList.remove("active");
+      modelPane.style.display = "block";
+      wardrobePane.style.display = "none";
+    });
+
+    modeWardrobeBtn.addEventListener("click", () => {
+      modeWardrobeBtn.classList.add("active");
+      modeModelBtn.classList.remove("active");
+      wardrobePane.style.display = "block";
+      modelPane.style.display = "none";
+    });
+
+    // Category Tabs
+    document.querySelectorAll(".cat-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".cat-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        activeCategory = tab.dataset.cat;
+        renderCategoryList();
+      });
+    });
+
+    // Scene Pills
+    document.querySelectorAll(".scene-pill").forEach(pill => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll(".scene-pill").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        currentScene = pill.dataset.bg;
+        const labels = {
+          madison: "E 68TH & MADISON",
+          library: "WALNUT LIBRARY",
+          cafe: "MADISON CAFE",
+          subway: "PRINCE ST N/R/W"
+        };
+        document.getElementById("hudLoc").textContent = labels[currentScene];
+        renderLoop();
+      });
+    });
+
+    // Randomize Model + Outfit
+    document.getElementById("randomAllBtn").addEventListener("click", () => {
+      avatar.build = BODY_BUILDS[Math.floor(Math.random() * BODY_BUILDS.length)].id;
+      avatar.skin = SKIN_TONES[Math.floor(Math.random() * SKIN_TONES.length)].id;
+      avatar.hairStyle = HAIR_STYLES[Math.floor(Math.random() * HAIR_STYLES.length)].id;
+      avatar.hairColor = HAIR_COLORS[Math.floor(Math.random() * HAIR_COLORS.length)].id;
+      avatar.facialHair = FACIAL_HAIR[Math.floor(Math.random() * FACIAL_HAIR.length)].id;
+      avatar.glasses = EYEWEAR_OPTIONS[Math.floor(Math.random() * EYEWEAR_OPTIONS.length)].id;
+
+      Object.keys(WARDROBE).forEach(cat => {
+        const opts = WARDROBE[cat];
+        selected[cat] = opts[Math.floor(Math.random() * opts.length)].id;
+      });
+
+  
+    buildAvatarUI();
+      renderCategoryList();
+      updateInventory();
+      renderLoop();
+    });
+
+    // CRT Scanlines Toggle
+    let scanlinesOn = true;
+    document.getElementById("toggleScanlinesBtn").addEventListener("click", () => {
+      scanlinesOn = !scanlinesOn;
+      document.getElementById("crtOverlay").style.display = scanlinesOn ? "block" : "none";
+      document.getElementById("toggleScanlinesBtn").textContent = `▤ CRT Scanlines: ${scanlinesOn ? "ON" : "OFF"}`;
+    });
+
+    // Copy Tailored AI Prompt
+    document.getElementById("copyLookPromptBtn").addEventListener("click", () => {
+      const bObj = BODY_BUILDS.find(b => b.id === avatar.build);
+      const sObj = SKIN_TONES.find(s => s.id === avatar.skin);
+      const hStyle = HAIR_STYLES.find(h => h.id === avatar.hairStyle);
+      const hCol = HAIR_COLORS.find(c => c.id === avatar.hairColor);
+      const fhObj = FACIAL_HAIR.find(f => f.id === avatar.facialHair);
+      const glObj = EYEWEAR_OPTIONS.find(g => g.id === avatar.glasses);
+
+      const fhPhrase = fhObj.promptDesc ? `, ${fhObj.promptDesc}` : "";
+      const pieces = Object.keys(selected)
+        .map(cat => WARDROBE[cat].find(i => i.id === selected[cat]))
+        .filter(i => i && i.price > 0)
+        .map(i => i.name.toLowerCase())
+        .join(", ");
+
+      const prompt = `Wild Fable campaign 'Autumn on Madison'. Model: ${bObj.promptDesc} with ${sObj.name.toLowerCase()} skin tone, ${hCol.name.toLowerCase()} ${hStyle.promptDesc}${fhPhrase}, and ${glObj.promptDesc}. Wardrobe: ${pieces}. Setting: Madison Avenue & E 68th Street brownstone stoop. Light: Soft overcast autumn afternoon light, diffused shadows. Shot on 35mm Kodak Portra 400 film, natural halation, soft grain, warm brown palette (#1A1110, #3B2219, #480607, #966847, #B59E87). --ar 4:5 --seed 1968 --style raw --v 6.0`;
+      const btn = document.getElementById("copyLookPromptBtn");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(prompt).catch(() => {});
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = prompt;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      btn.textContent = "✓ Tailored Prompt Copied!";
+      setTimeout(() => { btn.textContent = "⧉ Copy Tailored AI Image Prompt"; }, 1800);
+    });
+
+    // Export Crisp Upscaled Pixel PNG (704x896) WITH Razor-Sharp Vector Wordmark
+    document.getElementById("exportLookBtn").addEventListener("click", () => {
+      const exportCanvas = document.createElement("canvas");
+      exportCanvas.width = 704;
+      exportCanvas.height = 896;
+      const eCtx = exportCanvas.getContext("2d");
+
+      eCtx.imageSmoothingEnabled = false;
+      eCtx.drawImage(pCanvas, 0, 0, 704, 896);
+
+      eCtx.imageSmoothingEnabled = true;
+      eCtx.fillStyle = "rgba(26, 17, 16, 0.86)";
+      eCtx.fillRect(24, 24, 656, 108);
+      eCtx.strokeStyle = "#860111";
+      eCtx.lineWidth = 4;
+      eCtx.strokeRect(24, 24, 656, 108);
+
+      eCtx.fillStyle = "#f4ede4";
+      eCtx.font = "800 54px 'Playfair Display', Georgia, serif";
+      eCtx.textAlign = "center";
+      eCtx.fillText("wild fable", 352, 78);
+
+      eCtx.fillStyle = "#b59e87";
+      eCtx.font = "italic 400 25px 'Playfair Display', Georgia, serif";
+      eCtx.fillText("Autumn on Madison", 352, 112);
+
+      const a = document.createElement("a");
+      a.download = "wild-fable-autumn-on-madison-all-gender-look.png";
+      a.href = exportCanvas.toDataURL("image/png");
+      a.click();
+    });
+
+
+
+    // --- WEB AUDIO API: AUTUMN ON MADISON LO-FI SYNTH ENGINE ---
+    let audioCtx = null;
+    let lofiPlaying = false;
+    let chordTimer = null;
+    let vinylNode = null;
+    let masterGain = null;
+    let chordStep = 0;
+
+    // Warm autumn jazz progression: Fmaj9 -> Em7 -> Dm9 -> Cmaj9 (78 BPM)
+    const AUTUMN_CHORDS = [
+      [174.61, 220.00, 261.63, 329.63, 392.00], // Fmaj9
+      [164.81, 196.00, 246.94, 293.66, 392.00], // Em7
+      [146.83, 174.61, 220.00, 261.63, 329.63], // Dm9
+      [130.81, 196.00, 246.94, 293.66, 329.63]  // Cmaj9
+    ];
+
+    function startLofiAudio() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.22, audioCtx.currentTime);
+      masterGain.connect(audioCtx.destination);
+
+      // Warm Vinyl Crackle Noise Buffer
+      const bufferSize = audioCtx.sampleRate * 3;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        const r = Math.random();
+        output[i] = r > 0.996 ? (Math.random() * 2 - 1) * 0.28 : (Math.random() * 2 - 1) * 0.012;
+      }
+
+      vinylNode = audioCtx.createBufferSource();
+      vinylNode.buffer = noiseBuffer;
+      vinylNode.loop = true;
+
+      const bandpass = audioCtx.createBiquadFilter();
+      bandpass.type = "bandpass";
+      bandpass.frequency.value = 1800;
+      bandpass.Q.value = 0.9;
+
+      const vinylGain = audioCtx.createGain();
+      vinylGain.gain.value = 0.35;
+
+      vinylNode.connect(bandpass);
+      bandpass.connect(vinylGain);
+      vinylGain.connect(masterGain);
+      vinylNode.start();
+
+      // Play mellow electric piano chord loop
+      function triggerChord() {
+        if (!lofiPlaying || !audioCtx) return;
+        const now = audioCtx.currentTime;
+        const chord = AUTUMN_CHORDS[chordStep % AUTUMN_CHORDS.length];
+        chordStep++;
+
+        // Animate tape meter bar
+        const bar = document.getElementById("audioLevelBar");
+        if (bar) {
+          bar.style.width = `${65 + Math.floor(Math.random() * 30)}%`;
+        }
+
+        chord.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const subOsc = audioCtx.createOscillator();
+          const filter = audioCtx.createBiquadFilter();
+          const noteGain = audioCtx.createGain();
+
+          // Slight tape wow/detune for nostalgic Kodak/cassette feel
+          const detuneCents = (Math.random() - 0.5) * 9;
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(freq, now + idx * 0.045);
+          osc.detune.setValueAtTime(detuneCents, now + idx * 0.045);
+
+          subOsc.type = "sine";
+          subOsc.frequency.setValueAtTime(freq * 0.5, now + idx * 0.045);
+
+          filter.type = "lowpass";
+          filter.frequency.setValueAtTime(820, now + idx * 0.045);
+          filter.frequency.exponentialRampToValueAtTime(340, now + 2.8);
+
+          const peak = idx === 0 ? 0.14 : 0.075;
+          noteGain.gain.setValueAtTime(0.0001, now + idx * 0.045);
+          noteGain.gain.linearRampToValueAtTime(peak, now + idx * 0.045 + 0.12);
+          noteGain.gain.exponentialRampToValueAtTime(0.0008, now + 3.0);
+
+          osc.connect(filter);
+          subOsc.connect(filter);
+          filter.connect(noteGain);
+          noteGain.connect(masterGain);
+
+          osc.start(now + idx * 0.045);
+          subOsc.start(now + idx * 0.045);
+          osc.stop(now + 3.1);
+          subOsc.stop(now + 3.1);
+        });
+      }
+
+      lofiPlaying = true;
+      triggerChord();
+      chordTimer = setInterval(triggerChord, 3076); // ~78 BPM 1-bar loop
+      updateLofiButtons();
+    }
+
+    function stopLofiAudio() {
+      lofiPlaying = false;
+      if (chordTimer) {
+        clearInterval(chordTimer);
+        chordTimer = null;
+      }
+      if (vinylNode) {
+        try { vinylNode.stop(); } catch (e) {}
+        vinylNode = null;
+      }
+      const bar = document.getElementById("audioLevelBar");
+      if (bar) bar.style.width = "12%";
+      updateLofiButtons();
+    }
+
+    function toggleLofiAudio() {
+      if (lofiPlaying) {
+        stopLofiAudio();
+      } else {
+        startLofiAudio();
+      }
+    }
+
+    function updateLofiButtons() {
+      const topBtn = document.getElementById("toggleLofiBtn");
+      const panelBtn = document.getElementById("panelPlayLofiBtn");
+      const statusLbl = document.getElementById("audioStatusLabel");
+      if (topBtn) {
+        topBtn.textContent = lofiPlaying ? "♪ Lo-Fi Autumn Radio: ON" : "♪ Lo-Fi Autumn Radio: OFF";
+        topBtn.style.background = lofiPlaying ? "var(--crimson-primary)" : "var(--bg-panel)";
+      }
+      if (panelBtn) {
+        panelBtn.textContent = lofiPlaying ? "■ Pause Autumn Lo-Fi" : "▶ Play Autumn Lo-Fi";
+      }
+      if (statusLbl) {
+        statusLbl.textContent = lofiPlaying ? "SPINNING" : "STANDBY";
+      }
+    }
+
+    document.getElementById("toggleLofiBtn").addEventListener("click", toggleLofiAudio);
+    document.getElementById("panelPlayLofiBtn").addEventListener("click", toggleLofiAudio);
+
+    buildAvatarUI();
+    renderCategoryList();
+    updateInventory();
+    renderLoop();
+  
+  </script>
+</body>
+</html>
