@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autumn on Madison · Hero — Wild Fable Dynamic Hero Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,400;1,600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            espresso: '#1A1412',
+            espressoDeep: '#120D0C',
+            espressoCard: '#221A17',
+            oxblood: '#3E0D0C',
+            oxbloodBright: '#5C1513',
+            chestnut: '#593522',
+            parchment: '#DFD2C2',
+            brass: '#B89B72',
+            paper: '#F7F4EF'
+          },
+          fontFamily: {
+            editorial: ['"Playfair Display"', 'Georgia', 'serif'],
+            garamond: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            varsity: ['"Arvo"', 'serif'],
+            gothic: ['"UnifrakturMaguntia"', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --espresso: #1A1412;
+      --oxblood: #3E0D0C;
+      --chestnut: #593522;
+      --parchment: #DFD2C2;
+      --brass: #B89B72;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background-color: #110C0B;
+      color: var(--parchment);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #140F0E; }
+    ::-webkit-scrollbar-thumb { background: #3D2F2A; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #5C4740; }
+
+    /* Custom Range Input */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 999px;
+      background: #362A25;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      margin-top: -5px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #DFD2C2;
+      border: 2px solid #3E0D0C;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      transition: transform 0.15s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    /* Realistic Glass Specular Reflection Overlay */
+    .glass-reflection {
+      background: linear-gradient(
+        118deg,
+        rgba(255, 250, 240, 0.14) 0%,
+        rgba(255, 250, 240, 0.04) 24%,
+        transparent 25%,
+        transparent 56%,
+        rgba(223, 210, 194, 0.09) 57%,
+        rgba(255, 250, 240, 0.02) 76%,
+        transparent 77%
+      );
+    }
+
+    /* Wood Grain Procedural Texture */
+    .mahogany-wood {
+      background-color: #2A1710;
+      background-image:
+        repeating-linear-gradient(90deg, rgba(16,8,5,0.45) 0px, rgba(16,8,5,0.45) 2px, transparent 2px, transparent 11px),
+        linear-gradient(180deg, #3A2016 0%, #23120C 50%, #2F1911 100%);
+    }
+
+    /* Brushed Stainless Steel Subway Texture */
+    .brushed-steel {
+      background: linear-gradient(180deg, #8B8E91 0%, #B8BCBF 18%, #7C8084 52%, #9EA2A6 84%, #686B6F 100%);
+    }
+
+    /* Carved Limestone / Sandstone Brownstone Texture */
+    .sandstone-wall {
+      background-color: #5E493E;
+      background-image:
+        radial-gradient(rgba(26,20,18,0.22) 1px, transparent 0),
+        linear-gradient(180deg, #6B5347 0%, #4E3B31 100%);
+      background-size: 16px 16px, 100% 100%;
+    }
+
+    /* Choreographed Entrance & Kinetic Animations */
+    @keyframes plateReveal {
+      0% { opacity: 0; transform: translateY(22px) scale(0.96); filter: blur(4px); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    @keyframes copyReveal {
+      0% { opacity: 0; transform: translateY(16px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes doorLeftPart {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-82%); }
+    }
+
+    @keyframes doorRightPart {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(82%); }
+    }
+
+    @keyframes subtleCameraDrift {
+      0%, 100% { transform: scale(1.02) translate(0px, 0px); }
+      50% { transform: scale(1.06) translate(-8px, -5px); }
+    }
+
+    .animate-plate-1 { animation: plateReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .animate-plate-2 { animation: plateReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both; }
+    .animate-plate-3 { animation: plateReveal 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both; }
+    .animate-copy { animation: copyReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+    .animate-camera-drift { animation: subtleCameraDrift 16s ease-in-out infinite; }
+
+    /* Present Mode Fullscreen Stage */
+    body.present-mode #controlSidebar {
+      display: none !important;
+    }
+    body.present-mode #stageViewportShell {
+      padding: 0 !important;
+      background: #090706 !important;
+    }
+    body.present-mode #exitPresentBtn {
+      display: flex !important;
+    }
+
+    /* Dropzone highlight */
+    .drop-highlight {
+      border-color: #DFD2C2 !important;
+      background-color: rgba(62, 13, 12, 0.45) !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row selection:bg-oxblood selection:text-parchment">
+
+  <!-- ===================================================================== -->
+  <!-- LEFT CONTROL SIDEBAR (340px Clean Editorial Studio UI with Locks)       -->
+  <!-- ===================================================================== -->
+  <aside id="controlSidebar" class="w-full lg:w-[348px] xl:w-[360px] bg-espresso border-b lg:border-b-0 lg:border-r border-[#2D231F] flex flex-col lg:h-screen shrink-0 z-30 select-none">
+
+    <!-- 1. HEADER & DETERMINISTIC SEED ENGINE -->
+    <div class="p-4 border-b border-[#2D231F] bg-espressoDeep">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-oxblood border border-brass/50 flex items-center justify-center shadow-inner shrink-0">
+            <span class="font-gothic text-parchment text-lg leading-none">Wf</span>
+          </div>
+          <div>
+            <h1 class="text-[15px] font-bold tracking-tight text-paper leading-tight">Autumn on Madison · Hero</h1>
+            <p class="text-[11px] text-parchment/60 leading-tight mt-0.5">Dynamic hero generator · Wild Fable</p>
+          </div>
+        </div>
+        <!-- Brand Swatch Dots -->
+        <div class="flex items-center gap-1" title="Wild Fable Autumn Palette">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#1A1412] border border-parchment/40"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#3E0D0C] border border-parchment/40"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#593522] border border-parchment/40"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#DFD2C2]"></span>
+        </div>
+      </div>
+
+      <!-- Generate + Seed Bar -->
+      <div class="mt-3.5 flex items-center gap-1.5">
+        <button onclick="generateRandomHero()" class="flex-1 py-2 px-3 rounded-xl bg-oxblood hover:bg-oxbloodBright active:scale-[0.99] text-paper font-semibold text-xs border border-brass/40 shadow-md transition flex items-center justify-center gap-1.5">
+          <span>Generate</span>
+          <span class="text-sm leading-none">↻</span>
+        </button>
+
+        <div class="flex items-center bg-espressoCard border border-[#382C27] rounded-xl px-2 py-1">
+          <span class="text-[10px] uppercase tracking-wider text-parchment/50 mr-1.5">Seed</span>
+          <input id="seedInput" type="number" value="10482" class="w-16 bg-transparent text-xs font-mono text-paper focus:outline-none" />
+          <button onclick="applyManualSeed()" class="ml-1 px-2 py-0.5 rounded-lg bg-[#322622] hover:bg-[#44342F] text-[11px] font-medium text-parchment transition">
+            Use
+          </button>
+        </div>
+      </div>
+      <p class="text-[10px] text-parchment/50 mt-2">
+        Same seed = same hero. Keys: <kbd class="px-1 py-0.5 rounded bg-espressoCard text-parchment/80 font-mono">G</kbd> generate,
+        <kbd class="px-1 py-0.5 rounded bg-espressoCard text-parchment/80 font-mono">P</kbd> present,
+        <kbd class="px-1 py-0.5 rounded bg-espressoCard text-parchment/80 font-mono">R</kbd> replay.
+      </p>
+    </div>
+
+    <!-- SCROLLABLE CONTROL SECTIONS -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-5">
+
+      <!-- 2. SCENE (WITH LOCK TOGGLE) -->
+      <section class="space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-parchment/80">Scene</span>
+          <button onclick="toggleLock('scene')" id="lock-scene" class="text-[11px] px-2 py-0.5 rounded-md bg-espressoCard border border-[#362A25] text-parchment/65 hover:text-parchment transition flex items-center gap-1">
+            <span class="lock-icon">🔓</span> <span class="lock-text">Lock</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-1.5" id="sceneSelectorGrid">
+          <button onclick="selectScene('cafe-window')" data-scene="cafe-window" class="scene-btn p-2.5 rounded-xl border border-brass bg-oxblood/45 text-left transition">
+            <div class="text-xs font-semibold text-paper leading-snug">Madison Café Window</div>
+            <div class="text-[10px] text-parchment/65 mt-0.5">Rainy glass &amp; mahogany</div>
+          </button>
+
+          <button onclick="selectScene('subway-doors')" data-scene="subway-doors" class="scene-btn p-2.5 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-left transition">
+            <div class="text-xs font-semibold text-paper leading-snug">Prince St. Subway Express</div>
+            <div class="text-[10px] text-parchment/65 mt-0.5">R160 steel doors &amp; ad cards</div>
+          </button>
+
+          <button onclick="selectScene('brownstone-stoop')" data-scene="brownstone-stoop" class="scene-btn p-2.5 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-left transition">
+            <div class="text-xs font-semibold text-paper leading-snug">UES Brownstone Stoop</div>
+            <div class="text-[10px] text-parchment/65 mt-0.5">Sandstone steps &amp; maple</div>
+          </button>
+
+          <button onclick="selectScene('library-archive')" data-scene="library-archive" class="scene-btn p-2.5 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-left transition">
+            <div class="text-xs font-semibold text-paper leading-snug">Archival Reading Room</div>
+            <div class="text-[10px] text-parchment/65 mt-0.5">Brass lamp &amp; walnut shelves</div>
+          </button>
+        </div>
+      </section>
+
+      <!-- 3. FORMAT (ASPECT RATIO SWITCHER) -->
+      <section class="space-y-2 pt-3 border-t border-[#29201C]">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-parchment/80">Format</span>
+          <span id="formatDimBadge" class="text-[10px] font-mono text-brass">16:9</span>
+        </div>
+        <div class="grid grid-cols-3 gap-1.5">
+          <button onclick="selectFormat('16:9')" data-format="16:9" class="format-btn py-2 px-2 rounded-xl border border-brass bg-oxblood/45 text-[11px] font-medium text-paper text-center leading-tight transition">
+            16:9<br><span class="text-[9px] text-parchment/70">website hero</span>
+          </button>
+          <button onclick="selectFormat('9:16')" data-format="9:16" class="format-btn py-2 px-2 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-[11px] font-medium text-parchment/80 text-center leading-tight transition">
+            9:16<br><span class="text-[9px] text-parchment/60">reels &amp; stories</span>
+          </button>
+          <button onclick="selectFormat('1:1')" data-format="1:1" class="format-btn py-2 px-2 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-[11px] font-medium text-parchment/80 text-center leading-tight transition">
+            1:1<br><span class="text-[9px] text-parchment/60">feed post</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. PALETTE / TINT & ATMOSPHERE (WITH LOCK TOGGLE) -->
+      <section class="space-y-3 pt-3 border-t border-[#29201C]">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-parchment/80">Palette · Tint &amp; Emblem</span>
+          <button onclick="toggleLock('palette')" id="lock-palette" class="text-[11px] px-2 py-0.5 rounded-md bg-espressoCard border border-[#362A25] text-parchment/65 hover:text-parchment transition flex items-center gap-1">
+            <span class="lock-icon">🔓</span> <span class="lock-text">Lock</span>
+          </button>
+        </div>
+
+        <!-- 4 Color Grade Presets -->
+        <div class="grid grid-cols-2 gap-1.5">
+          <button onclick="selectPalette('oxblood-espresso')" data-palette="oxblood-espresso" class="palette-btn p-2 rounded-xl border border-brass bg-oxblood/40 text-left flex items-center gap-2 transition">
+            <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-[#3E0D0C] to-[#1A1412] border border-parchment/50 shrink-0"></span>
+            <span class="text-[11px] font-medium text-paper truncate">Oxblood &amp; Espresso</span>
+          </button>
+          <button onclick="selectPalette('madison-mist')" data-palette="madison-mist" class="palette-btn p-2 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-left flex items-center gap-2 transition">
+            <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-[#7A726B] to-[#26201D] border border-parchment/50 shrink-0"></span>
+            <span class="text-[11px] font-medium text-paper truncate">Rainy Madison Mist</span>
+          </button>
+          <button onclick="selectPalette('golden-brownstone')" data-palette="golden-brownstone" class="palette-btn p-2 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-left flex items-center gap-2 transition">
+            <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-[#B89B72] to-[#593522] border border-parchment/50 shrink-0"></span>
+            <span class="text-[11px] font-medium text-paper truncate">Golden Brownstone</span>
+          </button>
+          <button onclick="selectPalette('sepia-archival')" data-palette="sepia-archival" class="palette-btn p-2 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-left flex items-center gap-2 transition">
+            <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-[#DFD2C2] to-[#4A3525] border border-parchment/50 shrink-0"></span>
+            <span class="text-[11px] font-medium text-paper truncate">Sepia Archival Film</span>
+          </button>
+        </div>
+
+        <!-- Wild Fable Tactile Emblem Selector -->
+        <div class="flex items-center justify-between bg-espressoCard px-2.5 py-2 rounded-xl border border-[#2F2420]">
+          <span class="text-[11px] text-parchment/80">Brand Patch / Crest</span>
+          <select id="emblemSelect" onchange="changeEmblem(this.value)" class="bg-espresso text-paper text-[11px] rounded-lg px-2 py-1 border border-[#3B2E29] focus:outline-none">
+            <option value="star-patch">Embroidered Star Patch</option>
+            <option value="wf-shield">WF Heraldic Shield</option>
+            <option value="madison-stamp">Madison Ink Stamp</option>
+            <option value="none">Minimal Wordmark Only</option>
+          </select>
+        </div>
+
+        <!-- Interactive Behavior Checkboxes -->
+        <div class="space-y-1.5 pt-0.5">
+          <label class="flex items-center gap-2 text-xs text-parchment/85 cursor-pointer">
+            <input id="chkAutoCycle" type="checkbox" onchange="toggleAutoCycle(this.checked)" class="rounded accent-[#5C1513] w-3.5 h-3.5" />
+            <span>Auto-cycle scenes (Every 5 s)</span>
+          </label>
+          <div class="flex items-center justify-between">
+            <label class="flex items-center gap-2 text-xs text-parchment/85 cursor-pointer">
+              <input id="chkAudio" type="checkbox" onchange="toggleAmbientAudio(this.checked)" class="rounded accent-[#5C1513] w-3.5 h-3.5" />
+              <span>Ambient café &amp; brass bell chime</span>
+            </label>
+            <button onclick="replayIntro()" class="text-[11px] text-brass hover:text-paper underline underline-offset-2 font-medium">
+              Replay intro
+            </button>
+          </div>
+        </div>
+
+        <!-- Kinetic & Atmospheric Sliders -->
+        <div class="space-y-2.5 pt-1">
+          <div>
+            <div class="flex justify-between text-[11px] text-parchment/70 mb-1">
+              <span>Motion / Rain / Transit speed</span>
+              <span id="speedVal" class="font-mono text-parchment">1.0×</span>
+            </div>
+            <input id="speedSlider" type="range" min="0" max="200" value="100" oninput="updateAtmosphere()" class="w-full" />
+          </div>
+          <div>
+            <div class="flex justify-between text-[11px] text-parchment/70 mb-1">
+              <span>Glass reflection &amp; 35mm grain</span>
+              <span id="reflectionVal" class="font-mono text-parchment">65%</span>
+            </div>
+            <input id="reflectionSlider" type="range" min="0" max="100" value="65" oninput="updateAtmosphere()" class="w-full" />
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. COPY (WITH LOCK TOGGLE) -->
+      <section class="space-y-2.5 pt-3 border-t border-[#29201C]">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-parchment/80">Copy</span>
+          <button onclick="toggleLock('copy')" id="lock-copy" class="text-[11px] px-2 py-0.5 rounded-md bg-espressoCard border border-[#362A25] text-parchment/65 hover:text-parchment transition flex items-center gap-1">
+            <span class="lock-icon">🔓</span> <span class="lock-text">Lock</span>
+          </button>
+        </div>
+
+        <div class="space-y-2">
+          <div>
+            <label class="block text-[10px] text-parchment/55 mb-0.5">Headline</label>
+            <input id="copyHeadline" type="text" value="Autumn on Madison." oninput="syncCopyFromInputs()" class="w-full bg-espressoCard border border-[#362A25] focus:border-brass rounded-xl px-2.5 py-1.5 text-xs font-editorial text-paper focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-[10px] text-parchment/55 mb-0.5">Subhead</label>
+            <input id="copySubhead" type="text" value="Wild Fable Dark Academia Capsule. Tailored wool, argyle knits, and rainy avenue layers." oninput="syncCopyFromInputs()" class="w-full bg-espressoCard border border-[#362A25] focus:border-brass rounded-xl px-2.5 py-1.5 text-xs text-parchment focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-[10px] text-parchment/55 mb-0.5">Button</label>
+            <input id="copyCta" type="text" value="Explore the Lookbook →" oninput="syncCopyFromInputs()" class="w-full bg-espressoCard border border-[#362A25] focus:border-brass rounded-xl px-2.5 py-1.5 text-xs font-medium text-paper focus:outline-none" />
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. IMAGES (MULTI-IMAGE DROP & MOODBOARD) -->
+      <section class="space-y-2.5 pt-3 border-t border-[#29201C]">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-parchment/80">Images</span>
+          <div class="flex items-center gap-2 text-[10px]">
+            <button onclick="resetMoodboard()" class="text-brass hover:text-paper transition">Reset to moodboard</button>
+            <span class="text-parchment/25">·</span>
+            <button onclick="clearUploadedImages()" class="text-parchment/60 hover:text-red-300 transition">Clear</button>
+          </div>
+        </div>
+
+        <div id="sidebarDropZone"
+             ondragover="handleDragOver(event)"
+             ondragleave="handleDragLeave(event)"
+             ondrop="handleDrop(event)"
+             onclick="document.getElementById('imageUploadInput').click()"
+             class="border border-dashed border-[#4A3B34] hover:border-brass rounded-xl p-3 text-center cursor-pointer bg-espressoCard/70 transition">
+          <input id="imageUploadInput" type="file" accept="image/*" multiple class="hidden" onchange="handleFileSelect(event)" />
+          <p class="text-[11px] font-medium text-paper">Drop images or click to upload</p>
+          <p class="text-[10px] text-parchment/55 mt-0.5">Multiple allowed · used in café gallery frames, transit car cards, and lookbook plates</p>
+        </div>
+
+        <!-- Thumbnail Strip -->
+        <div id="moodboardThumbs" class="grid grid-cols-3 gap-1.5">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- 7. RECORD & PRESENT -->
+      <section class="space-y-2.5 pt-3 border-t border-[#29201C] pb-4">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-parchment/80">Record &amp; Present</span>
+          <div class="flex items-center gap-1 bg-espressoCard p-0.5 rounded-lg border border-[#362A25]">
+            <button onclick="selectRecordLength(8)" data-len="8" class="len-btn px-2 py-0.5 rounded text-[10px] font-mono bg-oxblood text-paper">8 s</button>
+            <button onclick="selectRecordLength(12)" data-len="12" class="len-btn px-2 py-0.5 rounded text-[10px] font-mono text-parchment/65 hover:text-paper">12 s</button>
+            <button onclick="selectRecordLength(20)" data-len="20" class="len-btn px-2 py-0.5 rounded text-[10px] font-mono text-parchment/65 hover:text-paper">20 s</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <button id="recordVideoBtn" onclick="startScreenRecording()" class="py-2 px-3 rounded-xl bg-oxblood hover:bg-oxbloodBright text-paper font-semibold text-xs border border-brass/40 shadow transition flex items-center justify-center gap-1.5">
+            <span id="recDot" class="w-2 h-2 rounded-full bg-red-400"></span>
+            <span id="recText">Record video</span>
+          </button>
+
+          <button onclick="enterPresentMode()" class="py-2 px-3 rounded-xl bg-espressoCard hover:bg-[#2E231F] text-parchment font-medium text-xs border border-[#3B2E29] transition flex items-center justify-center gap-1.5">
+            <span>Present mode</span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <button onclick="exportSnapshotPNG()" class="text-[11px] text-brass hover:text-paper underline underline-offset-2">
+            Export PNG Snapshot
+          </button>
+          <span class="text-[10px] text-parchment/50">Captures stage tab as WebM</span>
+        </div>
+      </section>
+
+    </div>
+  </aside>
+
+  <!-- ===================================================================== -->
+  <!-- MAIN LIVE STAGE (RIGHT PANEL: PHOTOREALISTIC ARCHITECTURAL VIEWPORT)  -->
+  <!-- ===================================================================== -->
+  <main id="stageViewportShell"
+        ondragover="handleDragOver(event)"
+        ondragleave="handleDragLeave(event)"
+        ondrop="handleDrop(event)"
+        class="flex-1 bg-[#0D0908] p-3 sm:p-6 lg:p-8 flex flex-col items-center justify-center relative min-h-[75vh] lg:h-screen overflow-hidden">
+
+    <!-- Floating Exit Present Mode Button -->
+    <button id="exitPresentBtn" onclick="exitPresentMode()" class="hidden fixed top-4 right-4 z-50 w-10 h-10 rounded-full bg-espresso/90 hover:bg-oxblood text-paper border border-parchment/40 items-center justify-center text-lg shadow-2xl transition" title="Exit Present Mode (Esc / P)">
+      ×
+    </button>
+
+    <!-- Recording Countdown Pill (Visible during capture) -->
+    <div id="recordingStatusPill" class="hidden fixed top-4 left-1/2 -translate-x-1/2 z-50 px-4 py-1.5 rounded-full bg-oxblood text-paper border border-brass shadow-2xl text-xs font-mono flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-red-400 animate-ping"></span>
+      <span id="recordingTimerText">REC 00:08</span>
+    </div>
+
+    <!-- HERO STAGE FRAME (Dynamically switches between 16:9, 9:16, and 1:1) -->
+    <div id="liveHeroStage"
+         onmousemove="handleStageParallax(event)"
+         onmouseleave="resetStageParallax()"
+         class="relative w-full max-w-[1220px] aspect-[16/9] rounded-2xl overflow-hidden shadow-[0_30px_90px_rgba(0,0,0,0.92)] border border-[#342823] bg-espresso transition-all duration-500 select-none">
+
+      <!-- LAYER 1: ARCHITECTURAL SCENE RENDERER (Rebuilt per Scene) -->
+      <div id="sceneArchitectureLayer" class="absolute inset-0 w-full h-full overflow-hidden">
+        <!-- Populated dynamically by renderSceneArchitecture() -->
+      </div>
+
+      <!-- LAYER 2: KINETIC ATMOSPHERE CANVAS (Rain streaks on glass, drifting autumn leaves, dust motes) -->
+      <canvas id="atmosphereCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-20"></canvas>
+
+      <!-- LAYER 3: COLOR GRADE & VIGNETTE ATMOSPHERIC WASH -->
+      <div id="gradeWashOverlay" class="absolute inset-0 pointer-events-none z-20 transition-all duration-500"
+           style="background: radial-gradient(circle at 38% 45%, rgba(62,13,12,0.18) 0%, rgba(20,14,12,0.82) 100%);">
+      </div>
+
+      <!-- LAYER 4: SPECULAR WINDOW GLASS REFLECTION -->
+      <div id="glassSheenOverlay" class="absolute inset-0 pointer-events-none z-20 glass-reflection opacity-65"></div>
+
+      <!-- LAYER 5: SUBWAY STAINLESS STEEL DOORS (Only visible in 'subway-doors' scene, slides open on replay!) -->
+      <div id="subwayDoorsOverlay" class="hidden absolute inset-0 pointer-events-none z-30 overflow-hidden">
+        <!-- Left Sliding Door -->
+        <div id="subwayDoorLeft" class="absolute top-0 bottom-0 left-0 w-1/2 brushed-steel border-r-4 border-[#18181A] flex flex-col justify-between p-4 sm:p-6 shadow-2xl transition-transform duration-[1350ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
+          <div class="w-full h-[54%] bg-[#14171A]/85 rounded-xl border-4 border-[#323538] p-2 relative overflow-hidden shadow-inner">
+            <div class="glass-reflection absolute inset-0"></div>
+            <div class="mt-2 mx-auto w-fit px-2 py-0.5 bg-[#F2C94C] text-[#111] font-sans font-bold text-[8px] sm:text-[10px] uppercase tracking-wider rounded-sm">
+              Do not lean on door
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-[9px] font-mono text-[#232528] uppercase tracking-widest px-1">
+            <span>MTA NYCT · R160A</span>
+            <span>CAR 8742</span>
+          </div>
+        </div>
+        <!-- Right Sliding Door -->
+        <div id="subwayDoorRight" class="absolute top-0 bottom-0 right-0 w-1/2 brushed-steel border-l-4 border-[#18181A] flex flex-col justify-between p-4 sm:p-6 shadow-2xl transition-transform duration-[1350ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
+          <div class="w-full h-[54%] bg-[#14171A]/85 rounded-xl border-4 border-[#323538] p-2 relative overflow-hidden shadow-inner">
+            <div class="glass-reflection absolute inset-0"></div>
+            <div class="mt-2 mx-auto w-fit px-2 py-0.5 bg-[#D93829] text-white font-sans font-bold text-[8px] sm:text-[10px] uppercase tracking-wider rounded-sm">
+              Stand clear of closing doors
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-[9px] font-mono text-[#232528] uppercase tracking-widest px-1">
+            <span>MADISON / 63 ST</span>
+            <span>EXPRESS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LAYER 6: EDITORIAL BRAND OVERLAY, EMBLEM & PRE-SCROLL HERO TYPOGRAPHY -->
+      <div id="heroEditorialOverlay" class="relative z-30 w-full h-full flex flex-col justify-between p-5 sm:p-8 lg:p-10 pointer-events-none">
+
+        <!-- Top Bar: Lowercase 'wild fable' wordmark + Tactile Embroidered Patch/Crest -->
+        <div class="flex items-start justify-between gap-4">
+          <div class="pointer-events-auto">
+            <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-espresso/75 backdrop-blur-md border border-parchment/20 shadow-lg">
+              <span class="w-2 h-2 rounded-full bg-brass"></span>
+              <span class="font-editorial font-extrabold text-base sm:text-xl tracking-tight text-parchment lowercase leading-none">wild fable</span>
+              <span class="text-[10px] uppercase tracking-[0.18em] text-brass hidden sm:inline">· Autumn ’26</span>
+            </div>
+          </div>
+
+          <!-- Tactile Embroidered Patch / Crest Slot -->
+          <div id="stageEmblemContainer" class="pointer-events-auto transition-transform duration-300 hover:scale-105">
+            <!-- Rendered SVG Patch/Crest -->
+          </div>
+        </div>
+
+        <!-- Bottom / Center Editorial Copy Block (Left-weighted on 16:9, Balanced on 9:16 & 1:1) -->
+        <div id="heroCopyBlock" class="max-w-xl animate-copy pointer-events-auto">
+          <div class="inline-block px-2.5 py-0.5 rounded bg-oxblood/85 border border-brass/35 text-[9px] sm:text-[10px] font-varsity tracking-[0.2em] uppercase text-parchment mb-2.5 shadow">
+            Upper East Side · Dark Academia
+          </div>
+
+          <h2 id="stageHeadline" class="font-editorial font-extrabold text-paper leading-[0.98] tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]" style="font-size: clamp(2rem, 4.4vw, 3.85rem);">
+            Autumn on Madison.
+          </h2>
+
+          <p id="stageSubhead" class="font-garamond italic text-parchment/95 mt-2 sm:mt-2.5 leading-snug drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]" style="font-size: clamp(1.05rem, 1.85vw, 1.5rem);">
+            Wild Fable Dark Academia Capsule. Tailored wool, argyle knits, and rainy avenue layers.
+          </p>
+
+          <div class="mt-4 sm:mt-5 flex flex-wrap items-center gap-3">
+            <button id="stageCtaBtn"
+                    onclick="showToast('Navigating to Wild Fable: Autumn on Madison Lookbook')"
+                    class="px-5 py-2.5 rounded-full bg-parchment hover:bg-paper text-espresso font-sans font-semibold text-xs sm:text-sm tracking-wide shadow-[0_10px_25px_rgba(0,0,0,0.5)] transition transform hover:-translate-y-0.5">
+              Explore the Lookbook →
+            </button>
+            <span id="stageSceneCaption" class="text-[10px] font-mono uppercase tracking-widest text-parchment/70 bg-espresso/65 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-parchment/15">
+              LOC 01 · MADISON AVE CAFÉ
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- NON-INTRUSIVE TOAST NOTIFICATION -->
+  <div id="toastNotification" class="fixed bottom-4 right-4 z-50 pointer-events-none opacity-0 translate-y-2 transition-all duration-300">
+    <div class="px-4 py-2 rounded-xl bg-espressoDeep text-paper border border-brass/50 shadow-2xl text-xs font-medium flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-brass"></span>
+      <span id="toastText">Updated</span>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. DETERMINISTIC SEEDED PRNG & BRAND DATA
+       ========================================================================== */
+    function mulberry32(seed) {
+      let a = seed >>> 0;
+      return function () {
+        a |= 0;
+        a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    const SCENES = ['cafe-window', 'subway-doors', 'brownstone-stoop', 'library-archive'];
+    const PALETTES = ['oxblood-espresso', 'madison-mist', 'golden-brownstone', 'sepia-archival'];
+    const EMBLEMS = ['star-patch', 'wf-shield', 'madison-stamp'];
+
+    const COPY_PRESETS = [
+      {
+        headline: 'Autumn on Madison.',
+        subhead: 'Wild Fable Dark Academia Capsule. Tailored wool, argyle knits, and rainy avenue layers.',
+        cta: 'Explore the Lookbook →'
+      },
+      {
+        headline: 'Study in Chestnut & Oxblood.',
+        subhead: 'Corduroy trousers, pleated wool skirts, and vintage leather satchels crafted for Upper East Side mornings.',
+        cta: 'Shop the Capsule →'
+      },
+      {
+        headline: 'Upper East Side, Fall ’26.',
+        subhead: 'Between brownstone stoops and corner espresso bars—discover Wild Fable’s collegiate tailoring.',
+        cta: 'View Campaign Film →'
+      },
+      {
+        headline: 'Rain on Fifth & 64th.',
+        subhead: 'Heavyweight herringbone overcoats and brushed cashmere-touch vests built for crisp Manhattan afternoons.',
+        cta: 'Discover Outerwear →'
+      }
+    ];
+
+    /* ==========================================================================
+       2. PROCEDURAL PHOTOREALISTIC EDITORIAL LOOKBOOK PLATES (HIGH-DETAIL CANVAS)
+       ========================================================================== */
+    function createEditorialPlate(variant) {
+      const c = document.createElement('canvas');
+      c.width = 720;
+      c.height = 960;
+      const ctx = c.getContext('2d');
+
+      if (variant === 0) {
+        // PLATE 01: Madison Café Window Portrait Silhouette (Chestnut Coat, Argyle Vest, Newsboy Cap, Vintage Camera)
+        const bg = ctx.createLinearGradient(0, 0, 720, 960);
+        bg.addColorStop(0, '#3C271E');
+        bg.addColorStop(0.5, '#593A2B');
+        bg.addColorStop(1, '#1E1410');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, 720, 960);
+
+        // Soft Rainy Window Light on Right
+        const win = ctx.createLinearGradient(340, 40, 700, 720);
+        win.addColorStop(0, '#B9AEA3');
+        win.addColorStop(1, '#75685E');
+        ctx.fillStyle = win;
+        ctx.fillRect(360, 40, 330, 680);
+
+        // Mahogany Wainscoting on Left
+        ctx.fillStyle = '#2B1810';
+        ctx.fillRect(0, 0, 360, 960);
+        ctx.strokeStyle = '#170B07';
+        ctx.lineWidth = 4;
+        ctx.strokeRect(36, 30, 285, 900);
+
+        // Editorial Subject Silhouette in Chestnut Trench & Cable Knit
+        ctx.fillStyle = '#4B2817'; // Chestnut wool coat
+        ctx.beginPath();
+        ctx.moveTo(235, 340);
+        ctx.lineTo(445, 340);
+        ctx.lineTo(475, 840);
+        ctx.lineTo(205, 840);
+        ctx.closePath();
+        ctx.fill();
+
+        // Argyle V-Neck Sweater Vest Center
+        ctx.fillStyle = '#261812';
+        ctx.beginPath();
+        ctx.moveTo(295, 345);
+        ctx.lineTo(385, 345);
+        ctx.lineTo(375, 560);
+        ctx.lineTo(305, 560);
+        ctx.closePath();
+        ctx.fill();
+
+        // Argyle Diamonds
+        ctx.fillStyle = '#C9B39B';
+        for (let dy = 385; dy <= 505; dy += 58) {
+          ctx.beginPath();
+          ctx.moveTo(340, dy - 22);
+          ctx.lineTo(362, dy);
+          ctx.lineTo(340, dy + 22);
+          ctx.lineTo(318, dy);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        // Plaid Scarf & Corduroy Newsboy Cap
+        ctx.fillStyle = '#3E0D0C';
+        ctx.fillRect(290, 315, 102, 34);
+        ctx.fillStyle = '#1A1412';
+        ctx.beginPath();
+        ctx.ellipse(340, 232, 64, 34, -0.08, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Face Profile Warm Highlight
+        ctx.fillStyle = '#C89E82';
+        ctx.beginPath();
+        ctx.ellipse(344, 272, 34, 42, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Vintage Rangefinder Camera in Hands
+        ctx.fillStyle = '#22201E';
+        ctx.fillRect(308, 495, 68, 38);
+        ctx.fillStyle = '#DFD2C2';
+        ctx.beginPath();
+        ctx.arc(345, 514, 14, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Editorial Plate Caption
+        ctx.fillStyle = 'rgba(223, 210, 194, 0.85)';
+        ctx.font = 'italic 600 28px "Cormorant Garamond", Georgia, serif';
+        ctx.fillText('Look 01 · Madison Window', 44, 905);
+      } else if (variant === 1) {
+        // PLATE 02: Argyle Knit, Oxblood Pleats & Leather Satchel Still Life
+        ctx.fillStyle = '#231612';
+        ctx.fillRect(0, 0, 720, 960);
+
+        // Woven Argyle Backdrop
+        const cols = 4, rows = 5;
+        const cw = 720 / cols, ch = 960 / rows;
+        for (let r = 0; r <= rows; r++) {
+          for (let col = 0; col <= cols; col++) {
+            const cx = col * cw + (r % 2 === 0 ? cw / 2 : 0);
+            const cy = r * ch;
+            ctx.fillStyle = (r + col) % 2 === 0 ? '#593522' : '#3E0D0C';
+            ctx.beginPath();
+            ctx.moveTo(cx, cy - ch * 0.46);
+            ctx.lineTo(cx + cw * 0.46, cy);
+            ctx.lineTo(cx, cy + ch * 0.46);
+            ctx.lineTo(cx - cw * 0.46, cy);
+            ctx.closePath();
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(223, 210, 194, 0.45)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([7, 5]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+          }
+        }
+
+        // Framed Parchment Lookbook Card Overlay
+        ctx.fillStyle = 'rgba(26, 20, 18, 0.72)';
+        ctx.fillRect(70, 620, 580, 260);
+        ctx.strokeStyle = '#B89B72';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(70, 620, 580, 260);
+
+        ctx.fillStyle = '#DFD2C2';
+        ctx.font = '800 54px "Playfair Display", Georgia, serif';
+        ctx.fillText('wild fable', 110, 720);
+        ctx.font = 'italic 600 34px "Cormorant Garamond", Georgia, serif';
+        ctx.fillText('Look 02 · Argyle & Chestnut Wool', 110, 780);
+        ctx.font = '700 18px "Arvo", serif';
+        ctx.fillStyle = '#B89B72';
+        ctx.fillText('ARCHIVE NO. 26-MADISON', 110, 835);
+      } else {
+        // PLATE 03: Upper East Side Brownstone Stoop & Espresso Table
+        const sky = ctx.createLinearGradient(0, 0, 0, 960);
+        sky.addColorStop(0, '#8A7668');
+        sky.addColorStop(0.5, '#5E493E');
+        sky.addColorStop(1, '#1F1612');
+        ctx.fillStyle = sky;
+        ctx.fillRect(0, 0, 720, 960);
+
+        // Carved Brownstone Stoop Steps
+        for (let s = 0; s < 10; s++) {
+          ctx.fillStyle = s % 2 === 0 ? '#695246' : '#534036';
+          ctx.fillRect(90 - s * 8, 360 + s * 42, 540 + s * 16, 36);
+        }
+
+        // Warm Brass Lantern Glow at Top of Stoop
+        const lantern = ctx.createRadialGradient(360, 210, 10, 360, 210, 190);
+        lantern.addColorStop(0, 'rgba(255, 224, 166, 0.85)');
+        lantern.addColorStop(1, 'rgba(255, 224, 166, 0)');
+        ctx.fillStyle = lantern;
+        ctx.fillRect(160, 20, 400, 380);
+
+        // Wrought Iron Balusters
+        ctx.strokeStyle = '#181311';
+        ctx.lineWidth = 6;
+        for (let bx = 110; bx <= 610; bx += 42) {
+          ctx.beginPath();
+          ctx.moveTo(bx, 340);
+          ctx.lineTo(bx, 760);
+          ctx.stroke();
+        }
+
+        ctx.fillStyle = '#DFD2C2';
+        ctx.font = 'italic 600 32px "Cormorant Garamond", Georgia, serif';
+        ctx.fillText('Look 03 · East 64th Stoop', 54, 905);
+      }
+
+      return c.toDataURL('image/jpeg', 0.92);
+    }
+
+    /* ==========================================================================
+       3. WILD FABLE TACTILE EMBROIDERED PATCH & CREST SVG ASSETS
+       ========================================================================== */
+    const EMBLEM_LIBRARY = {
+      'star-patch': `
+        <svg viewBox="0 0 340 245" class="w-32 sm:w-44 h-auto drop-shadow-[0_12px_22px_rgba(0,0,0,0.75)]" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="170,12 206,86 288,98 228,155 242,235 170,197 98,235 112,155 52,98 134,86"
+                   fill="#2A1710" stroke="#140B08" stroke-width="8" stroke-linejoin="round"/>
+          <polygon points="170,24 201,90 274,101 221,152 233,223 170,189 107,223 119,152 66,101 139,90"
+                   fill="none" stroke="#DFD2C2" stroke-width="3" stroke-dasharray="7 5" stroke-linejoin="round"/>
+          <text x="170" y="146" text-anchor="middle" font-family="Arvo, Georgia, serif" font-weight="700" font-size="34" letter-spacing="2"
+                fill="#3E0D0C" stroke="#DFD2C2" stroke-width="5" paint-order="stroke">WILD FABLE</text>
+        </svg>`,
+      'wf-shield': `
+        <svg viewBox="0 0 210 240" class="w-24 sm:w-32 h-auto drop-shadow-[0_12px_22px_rgba(0,0,0,0.75)]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="wfShieldClip">
+              <path d="M105,14 L186,38 L186,126 C186,178 148,212 105,226 C62,212 24,178 24,126 L24,38 Z"/>
+            </clipPath>
+          </defs>
+          <path d="M105,14 L186,38 L186,126 C186,178 148,212 105,226 C62,212 24,178 24,126 L24,38 Z"
+                fill="#1A1412" stroke="#DFD2C2" stroke-width="5"/>
+          <g clip-path="url(#wfShieldClip)">
+            <polygon points="105,14 192,14 192,230 105,230" fill="#3E0D0C"/>
+            <polygon points="105,14 188,38 105,126" fill="#DFD2C2" opacity="0.22"/>
+            <text x="64" y="130" text-anchor="middle" font-family="UnifrakturMaguntia, Georgia, serif" font-size="46" fill="#DFD2C2">Wf</text>
+            <polygon points="146,92 155,111 176,114 160,129 164,149 146,139 128,149 132,129 116,114 137,111" fill="#DFD2C2"/>
+          </g>
+          <path d="M105,20 L180,42 L180,125 C180,173 144,205 105,218 C66,205 30,173 30,125 L30,42 Z"
+                fill="none" stroke="#DFD2C2" stroke-width="1.5" stroke-dasharray="4 3"/>
+        </svg>`,
+      'madison-stamp': `
+        <svg viewBox="0 0 210 210" class="w-24 sm:w-32 h-auto drop-shadow-[0_12px_22px_rgba(0,0,0,0.75)]" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="105" cy="105" r="92" fill="#3E0D0C" stroke="#DFD2C2" stroke-width="3.5"/>
+          <circle cx="105" cy="105" r="80" fill="none" stroke="#DFD2C2" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <circle cx="105" cy="105" r="52" fill="#1A1412" stroke="#B89B72" stroke-width="2"/>
+          <text x="105" y="44" text-anchor="middle" font-family="Arvo, serif" font-size="12" letter-spacing="3" fill="#DFD2C2">WILD FABLE</text>
+          <text x="105" y="176" text-anchor="middle" font-family="Arvo, serif" font-size="10.5" letter-spacing="2.2" fill="#DFD2C2">MADISON AVE · NYC</text>
+          <text x="105" y="117" text-anchor="middle" font-family="Playfair Display, serif" font-weight="800" font-size="32" fill="#DFD2C2">WF</text>
+        </svg>`
+    };
+
+    /* ==========================================================================
+       4. APPLICATION STATE & LOCK MANAGEMENT
+       ========================================================================== */
+    const state = {
+      seed: 10482,
+      scene: 'cafe-window',
+      format: '16:9',
+      palette: 'oxblood-espresso',
+      emblem: 'star-patch',
+      speed: 1.0,
+      reflection: 0.65,
+      autoCycle: false,
+      audioEnabled: false,
+      recordLength: 8,
+      locks: {
+        scene: false,
+        palette: false,
+        copy: false
+      },
+      copy: {
+        headline: 'Autumn on Madison.',
+        subhead: 'Wild Fable Dark Academia Capsule. Tailored wool, argyle knits, and rainy avenue layers.',
+        cta: 'Explore the Lookbook →'
+      },
+      defaultPlates: [],
+      userImages: []
+    };
+
+    let autoCycleInterval = null;
+    let audioCtx = null;
+    let ambientNoiseNode = null;
+    let ambientGainNode = null;
+
+    /* ==========================================================================
+       5. INITIALIZATION & KEYBOARD SHORTCUTS (G, P, R, Esc)
+       ========================================================================== */
+    window.onload = function () {
+      state.defaultPlates = [
+        { id: 'plate-1', name: 'Madison Window', url: createEditorialPlate(0), isDefault: true },
+        { id: 'plate-2', name: 'Argyle & Wool', url: createEditorialPlate(1), isDefault: true },
+        { id: 'plate-3', name: 'East 64th Stoop', url: createEditorialPlate(2), isDefault: true }
+      ];
+
+      renderThumbnails();
+      renderStage();
+      startAtmosphereLoop();
+
+      document.addEventListener('keydown', (e) => {
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+        const key = e.key.toLowerCase();
+        if (key === 'g') {
+          e.preventDefault();
+          generateRandomHero();
+        } else if (key === 'p') {
+          e.preventDefault();
+          document.body.classList.contains('present-mode') ? exitPresentMode() : enterPresentMode();
+        } else if (key === 'r') {
+          e.preventDefault();
+          replayIntro();
+        } else if (key === 'escape' && document.body.classList.contains('present-mode')) {
+          exitPresentMode();
+        }
+      });
+    };
+
+    function getActiveImages() {
+      return state.userImages.length > 0 ? state.userImages : state.defaultPlates;
+    }
+
+    /* ==========================================================================
+       6. SEED GENERATION & LOCK LOGIC
+       ========================================================================== */
+    function generateRandomHero() {
+      const nextSeed = Math.floor(10000 + Math.random() * 89999);
+      document.getElementById('seedInput').value = nextSeed;
+      applySeed(nextSeed);
+    }
+
+    function applyManualSeed() {
+      const val = parseInt(document.getElementById('seedInput').value, 10);
+      if (isNaN(val)) {
+        showToast('Enter a valid numeric seed.');
+        return;
+      }
+      applySeed(val);
+    }
+
+    function applySeed(seedNum) {
+      state.seed = seedNum;
+      const rng = mulberry32(seedNum);
+
+      if (!state.locks.scene) {
+        state.scene = SCENES[Math.floor(rng() * SCENES.length)];
+      }
+      if (!state.locks.palette) {
+        state.palette = PALETTES[Math.floor(rng() * PALETTES.length)];
+        state.emblem = EMBLEMS[Math.floor(rng() * EMBLEMS.length)];
+        document.getElementById('emblemSelect').value = state.emblem;
+      }
+      if (!state.locks.copy) {
+        const chosen = COPY_PRESETS[Math.floor(rng() * COPY_PRESETS.length)];
+        state.copy = { ...chosen };
+        document.getElementById('copyHeadline').value = state.copy.headline;
+        document.getElementById('copySubhead').value = state.copy.subhead;
+        document.getElementById('copyCta').value = state.copy.cta;
+      }
+
+      // Shuffle image order deterministically if multiple exist
+      const imgs = getActiveImages();
+      if (imgs.length > 1 && rng() > 0.45) {
+        const first = imgs.shift();
+        imgs.push(first);
+        renderThumbnails();
+      }
+
+      syncControlButtons();
+      renderStage();
+      replayIntro();
+      showToast(`Generated Seed #${seedNum}`);
+    }
+
+    function toggleLock(section) {
+      state.locks[section] = !state.locks[section];
+      const btn = document.getElementById(`lock-${section}`);
+      const icon = btn.querySelector('.lock-icon');
+      const text = btn.querySelector('.lock-text');
+
+      if (state.locks[section]) {
+        icon.textContent = '🔒';
+        text.textContent = 'Locked';
+        btn.classList.add('border-brass', 'text-paper', 'bg-oxblood/50');
+        btn.classList.remove('text-parchment/65', 'bg-espressoCard');
+      } else {
+        icon.textContent = '🔓';
+        text.textContent = 'Lock';
+        btn.classList.remove('border-brass', 'text-paper', 'bg-oxblood/50');
+        btn.classList.add('text-parchment/65', 'bg-espressoCard');
+      }
+    }
+
+    /* ==========================================================================
+       7. CONTROL PANEL UPDATERS
+       ========================================================================== */
+    function selectScene(sceneId) {
+      state.scene = sceneId;
+      syncControlButtons();
+      renderStage();
+      replayIntro();
+    }
+
+    function selectFormat(fmt) {
+      state.format = fmt;
+      document.getElementById('formatDimBadge').textContent = fmt;
+      syncControlButtons();
+
+      const stage = document.getElementById('liveHeroStage');
+      stage.classList.remove('max-w-[1220px]', 'aspect-[16/9]', 'max-w-[440px]', 'aspect-[9/16]', 'max-w-[680px]', 'aspect-square');
+
+      if (fmt === '16:9') {
+        stage.classList.add('max-w-[1220px]', 'aspect-[16/9]');
+      } else if (fmt === '9:16') {
+        stage.classList.add('max-w-[440px]', 'aspect-[9/16]');
+      } else if (fmt === '1:1') {
+        stage.classList.add('max-w-[680px]', 'aspect-square');
+      }
+      renderStage();
+    }
+
+    function selectPalette(pal) {
+      state.palette = pal;
+      syncControlButtons();
+      applyGradeWash();
+    }
+
+    function changeEmblem(val) {
+      state.emblem = val;
+      renderEmblem();
+    }
+
+    function updateAtmosphere() {
+      const sp = parseInt(document.getElementById('speedSlider').value, 10);
+      const ref = parseInt(document.getElementById('reflectionSlider').value, 10);
+      state.speed = sp / 100;
+      state.reflection = ref / 100;
+
+      document.getElementById('speedVal').textContent = `${state.speed.toFixed(1)}×`;
+      document.getElementById('reflectionVal').textContent = `${ref}%`;
+      document.getElementById('glassSheenOverlay').style.opacity = state.reflection;
+    }
+
+    function syncCopyFromInputs() {
+      state.copy.headline = document.getElementById('copyHeadline').value;
+      state.copy.subhead = document.getElementById('copySubhead').value;
+      state.copy.cta = document.getElementById('copyCta').value;
+
+      document.getElementById('stageHeadline').textContent = state.copy.headline;
+      document.getElementById('stageSubhead').textContent = state.copy.subhead;
+      document.getElementById('stageCtaBtn').textContent = state.copy.cta;
+    }
+
+    function syncControlButtons() {
+      document.querySelectorAll('.scene-btn').forEach(btn => {
+        const active = btn.dataset.scene === state.scene;
+        btn.className = active
+          ? 'scene-btn p-2.5 rounded-xl border border-brass bg-oxblood/45 text-left transition'
+          : 'scene-btn p-2.5 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-left transition';
+      });
+
+      document.querySelectorAll('.format-btn').forEach(btn => {
+        const active = btn.dataset.format === state.format;
+        btn.className = active
+          ? 'format-btn py-2 px-2 rounded-xl border border-brass bg-oxblood/45 text-[11px] font-medium text-paper text-center leading-tight transition'
+          : 'format-btn py-2 px-2 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-[11px] font-medium text-parchment/80 text-center leading-tight transition';
+      });
+
+      document.querySelectorAll('.palette-btn').forEach(btn => {
+        const active = btn.dataset.palette === state.palette;
+        btn.className = active
+          ? 'palette-btn p-2 rounded-xl border border-brass bg-oxblood/40 text-left flex items-center gap-2 transition'
+          : 'palette-btn p-2 rounded-xl border border-[#2F2420] bg-espressoCard hover:border-parchment/40 text-left flex items-center gap-2 transition';
+      });
+    }
+
+    function toggleAutoCycle(enabled) {
+      state.autoCycle = enabled;
+      if (autoCycleInterval) clearInterval(autoCycleInterval);
+      if (enabled) {
+        autoCycleInterval = setInterval(() => {
+          const idx = SCENES.indexOf(state.scene);
+          const next = SCENES[(idx + 1) % SCENES.length];
+          selectScene(next);
+        }, 5000);
+        showToast('Auto-cycling scenes every 5 seconds');
+      }
+    }
+
+    /* ==========================================================================
+       8. MULTI-IMAGE DROPZONE & THUMBNAIL STRIP
+       ========================================================================== */
+    function handleDragOver(e) {
+      e.preventDefault();
+      document.getElementById('sidebarDropZone').classList.add('drop-highlight');
+    }
+
+    function handleDragLeave(e) {
+      e.preventDefault();
+      document.getElementById('sidebarDropZone').classList.remove('drop-highlight');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      document.getElementById('sidebarDropZone').classList.remove('drop-highlight');
+      if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+        ingestImageFiles(e.dataTransfer.files);
+      }
+    }
+
+    function handleFileSelect(e) {
+      if (e.target.files && e.target.files.length > 0) {
+        ingestImageFiles(e.target.files);
+      }
+    }
+
+    function ingestImageFiles(fileList) {
+      const files = Array.from(fileList).filter(f => f.type.startsWith('image/'));
+      if (!files.length) {
+        showToast('Please upload valid JPG, PNG, or WebP images.');
+        return;
+      }
+
+      let loadedCount = 0;
+      files.forEach((file, i) => {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          state.userImages.push({
+            id: 'usr-' + Date.now() + '-' + i,
+            name: file.name.replace(/\.[^/.]+$/, ''),
+            url: ev.target.result,
+            isDefault: false
+          });
+          loadedCount++;
+          if (loadedCount === files.length) {
+            renderThumbnails();
+            renderStage();
+            replayIntro();
+            showToast(`Loaded ${files.length} lookbook image${files.length > 1 ? 's' : ''} into scene frames`);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function removeImage(id) {
+      if (state.userImages.length > 0) {
+        state.userImages = state.userImages.filter(img => img.id !== id);
+      } else {
+        state.defaultPlates = state.defaultPlates.filter(img => img.id !== id);
+        if (state.defaultPlates.length === 0) resetMoodboard();
+      }
+      renderThumbnails();
+      renderStage();
+    }
+
+    function resetMoodboard() {
+      state.userImages = [];
+      state.defaultPlates = [
+        { id: 'plate-1', name: 'Madison Window', url: createEditorialPlate(0), isDefault: true },
+        { id: 'plate-2', name: 'Argyle & Wool', url: createEditorialPlate(1), isDefault: true },
+        { id: 'plate-3', name: 'East 64th Stoop', url: createEditorialPlate(2), isDefault: true }
+      ];
+      renderThumbnails();
+      renderStage();
+      showToast('Restored Wild Fable Autumn moodboard');
+    }
+
+    function clearUploadedImages() {
+      state.userImages = [];
+      renderThumbnails();
+      renderStage();
+      showToast('Cleared custom uploads (showing curated moodboard)');
+    }
+
+    function renderThumbnails() {
+      const container = document.getElementById('moodboardThumbs');
+      const imgs = getActiveImages();
+      container.innerHTML = '';
+
+      imgs.forEach((img, idx) => {
+        const div = document.createElement('div');
+        div.className = 'relative aspect-[4/5] rounded-lg overflow-hidden border border-[#382C27] bg-espressoDeep group';
+        div.innerHTML = `
+          <img src="${img.url}" alt="${img.name}" class="w-full h-full object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-1">
+            <div class="text-[9px] text-paper truncate">Frame 0${idx + 1}</div>
+          </div>
+          <button onclick="removeImage('${img.id}')" title="Remove image" class="opacity-0 group-hover:opacity-100 absolute top-1 right-1 w-4 h-4 rounded-full bg-black/80 text-paper text-[10px] flex items-center justify-center hover:bg-oxblood transition">×</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    /* ==========================================================================
+       9. PHOTOREALISTIC ARCHITECTURAL STAGE RENDERER
+       ========================================================================== */
+    function renderStage() {
+      const archLayer = document.getElementById('sceneArchitectureLayer');
+      const subwayOverlay = document.getElementById('subwayDoorsOverlay');
+      const sceneCaption = document.getElementById('stageSceneCaption');
+      const imgs = getActiveImages();
+
+      const img1 = imgs[0 % imgs.length].url;
+      const img2 = imgs[1 % imgs.length].url;
+      const img3 = imgs[2 % imgs.length].url;
+
+      const isVertical = state.format === '9:16';
+
+      subwayOverlay.classList.add('hidden');
+
+      if (state.scene === 'cafe-window') {
+        sceneCaption.textContent = 'LOC 01 · MADISON AVE CAFÉ WINDOW';
+        archLayer.innerHTML = `
+          <div class="w-full h-full relative flex animate-camera-drift">
+            <!-- Left Mahogany Wood Paneling -->
+            <div class="w-[26%] sm:w-[28%] h-full mahogany-wood border-r-[10px] border-[#160B07] p-4 hidden sm:flex flex-col justify-between shadow-2xl">
+              <div class="w-full h-[46%] border-2 border-[#4A2B1D]/50 rounded-sm shadow-inner"></div>
+              <div class="w-full h-[46%] border-2 border-[#4A2B1D]/50 rounded-sm shadow-inner"></div>
+            </div>
+
+            <!-- Rainy Café Window & Upper East Side Brownstone Exterior -->
+            <div class="flex-1 h-full relative bg-gradient-to-b from-[#6A5D54] via-[#4D4139] to-[#231914] p-4 sm:p-7 flex flex-col justify-between">
+              <!-- Out-of-Focus Brownstone Stoop Architecture in Window Background -->
+              <div class="absolute inset-0 opacity-45 pointer-events-none"
+                   style="background-image: radial-gradient(circle at 78% 26%, rgba(255,214,148,0.55) 0%, transparent 28%), repeating-linear-gradient(0deg, rgba(28,20,16,0.35) 0px, rgba(28,20,16,0.35) 14px, transparent 14px, transparent 36px);">
+              </div>
+
+              <!-- Window Mullions & Framed Lookbook Window Plates -->
+              <div class="relative z-10 grid ${isVertical ? 'grid-cols-1 gap-3 my-auto' : 'grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5'} items-center my-auto max-w-3xl ml-auto mr-2 sm:mr-6">
+                <!-- Framed Plate 1 -->
+                <div class="animate-plate-1 bg-[#1D120D] p-2 sm:p-2.5 rounded-lg border-2 border-[#593522] shadow-[0_20px_45px_rgba(0,0,0,0.85)] relative overflow-hidden group">
+                  <div class="aspect-[3/4] rounded overflow-hidden relative">
+                    <img src="${img1}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Lookbook 1" />
+                    <div class="glass-reflection absolute inset-0"></div>
+                  </div>
+                  <div class="mt-1.5 flex justify-between items-center text-[9px] font-mono text-brass">
+                    <span>PLATE I</span>
+                    <span>MADISON AVE</span>
+                  </div>
+                </div>
+
+                <!-- Framed Plate 2 -->
+                <div class="animate-plate-2 bg-[#1D120D] p-2 sm:p-2.5 rounded-lg border-2 border-[#593522] shadow-[0_20px_45px_rgba(0,0,0,0.85)] relative overflow-hidden group ${isVertical ? 'hidden' : ''}">
+                  <div class="aspect-[3/4] rounded overflow-hidden relative">
+                    <img src="${img2}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Lookbook 2" />
+                    <div class="glass-reflection absolute inset-0"></div>
+                  </div>
+                  <div class="mt-1.5 flex justify-between items-center text-[9px] font-mono text-brass">
+                    <span>PLATE II</span>
+                    <span>ARGYLE &amp; WOOL</span>
+                  </div>
+                </div>
+
+                <!-- Framed Plate 3 -->
+                <div class="animate-plate-3 hidden sm:block bg-[#1D120D] p-2.5 rounded-lg border-2 border-[#593522] shadow-[0_20px_45px_rgba(0,0,0,0.85)] relative overflow-hidden group">
+                  <div class="aspect-[3/4] rounded overflow-hidden relative">
+                    <img src="${img3}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Lookbook 3" />
+                    <div class="glass-reflection absolute inset-0"></div>
+                  </div>
+                  <div class="mt-1.5 flex justify-between items-center text-[9px] font-mono text-brass">
+                    <span>PLATE III</span>
+                    <span>STOOP STUDY</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Foreground Mahogany Window Sill & Porcelain Espresso Cup -->
+              <div class="relative z-10 w-full h-6 mahogany-wood border-t-2 border-brass/30 rounded-sm shadow-2xl flex items-end justify-end pr-12">
+                <div class="mb-2 flex items-end gap-3 opacity-90">
+                  <div class="w-10 h-6 rounded-b-full bg-paper border-b-2 border-parchment shadow-lg relative">
+                    <div class="w-12 h-1.5 bg-parchment rounded-full -ml-1 mt-5"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (state.scene === 'subway-doors') {
+        sceneCaption.textContent = 'LOC 02 · PRINCE ST / MADISON EXPRESS';
+        subwayOverlay.classList.remove('hidden');
+        archLayer.innerHTML = `
+          <div class="w-full h-full relative bg-[#1E1A18] flex flex-col justify-between p-4 sm:p-6">
+            <!-- Overhead Illuminated NYC Transit Strip Map -->
+            <div class="w-full bg-[#F5F2EB] text-[#141414] rounded-lg px-4 py-2 border-2 border-[#3A3532] shadow-lg flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-[#FCCC0A] text-black font-bold text-xs flex items-center justify-center">R</span>
+                <span class="w-5 h-5 rounded-full bg-[#EE352E] text-white font-bold text-xs flex items-center justify-center">4</span>
+                <span class="font-sans font-bold text-[10px] sm:text-xs tracking-tight uppercase">Lexington / Madison Av Local · Next: 68 St Hunter College</span>
+              </div>
+              <span class="text-[10px] font-mono text-neutral-600 hidden sm:inline">WILD FABLE TRANSIT EDITION</span>
+            </div>
+
+            <!-- Illuminated Subway Car-Card Advertising Lightboxes -->
+            <div class="grid ${isVertical ? 'grid-cols-1 gap-3' : 'grid-cols-2 sm:grid-cols-3 gap-4'} items-center my-auto max-w-4xl ml-auto mr-4">
+              <div class="animate-plate-1 bg-[#2B2623] p-2 rounded-lg border-4 border-[#6B6E72] shadow-[0_0_35px_rgba(223,210,194,0.18)]">
+                <div class="aspect-[3/4] rounded overflow-hidden relative">
+                  <img src="${img1}" class="w-full h-full object-cover" alt="Transit Card 1" />
+                  <div class="glass-reflection absolute inset-0"></div>
+                </div>
+              </div>
+              <div class="animate-plate-2 bg-[#2B2623] p-2 rounded-lg border-4 border-[#6B6E72] shadow-[0_0_35px_rgba(223,210,194,0.18)] ${isVertical ? 'hidden' : ''}">
+                <div class="aspect-[3/4] rounded overflow-hidden relative">
+                  <img src="${img2}" class="w-full h-full object-cover" alt="Transit Card 2" />
+                  <div class="glass-reflection absolute inset-0"></div>
+                </div>
+              </div>
+              <div class="animate-plate-3 hidden sm:block bg-[#2B2623] p-2 rounded-lg border-4 border-[#6B6E72] shadow-[0_0_35px_rgba(223,210,194,0.18)]">
+                <div class="aspect-[3/4] rounded overflow-hidden relative">
+                  <img src="${img3}" class="w-full h-full object-cover" alt="Transit Card 3" />
+                  <div class="glass-reflection absolute inset-0"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Brushed Stainless Steel Seat Bench & Rubber Floor -->
+            <div class="w-full h-5 bg-gradient-to-r from-[#4A4B4D] via-[#7A7C80] to-[#4A4B4D] rounded-t-md border-t border-white/25"></div>
+          </div>
+        `;
+      } else if (state.scene === 'brownstone-stoop') {
+        sceneCaption.textContent = 'LOC 03 · EAST 64TH BROWNSTONE STOOP';
+        archLayer.innerHTML = `
+          <div class="w-full h-full relative sandstone-wall flex flex-col justify-between p-5 sm:p-8 animate-camera-drift">
+            <!-- Carved Limestone Steps in Perspective -->
+            <div class="absolute inset-x-0 bottom-0 h-[52%] pointer-events-none flex flex-col justify-end opacity-75">
+              <div class="h-8 bg-[#685145] border-t border-[#8B7062]/40 mx-16"></div>
+              <div class="h-9 bg-[#5A453B] border-t border-[#8B7062]/40 mx-12"></div>
+              <div class="h-10 bg-[#4D3B32] border-t border-[#8B7062]/40 mx-8"></div>
+              <div class="h-12 bg-[#3F3029] border-t border-[#8B7062]/40 mx-4"></div>
+              <div class="h-14 bg-[#2C211C] border-t border-[#8B7062]/40"></div>
+            </div>
+
+            <!-- Wrought-Iron Gallery Railings & Hanging Editorial Posters -->
+            <div class="relative z-10 grid ${isVertical ? 'grid-cols-1' : 'grid-cols-2 sm:grid-cols-3'} gap-4 items-center my-auto max-w-4xl ml-auto mr-4">
+              <div class="animate-plate-1 bg-paper p-2.5 rounded-sm shadow-[0_22px_50px_rgba(0,0,0,0.85)] border border-espresso/30 transform -rotate-1">
+                <div class="aspect-[3/4] overflow-hidden bg-espresso">
+                  <img src="${img1}" class="w-full h-full object-cover" alt="Stoop Plate 1" />
+                </div>
+                <div class="pt-1.5 text-[9px] font-varsity text-espresso tracking-wider uppercase">FIG. 01 — MADISON WOOL</div>
+              </div>
+              <div class="animate-plate-2 bg-paper p-2.5 rounded-sm shadow-[0_22px_50px_rgba(0,0,0,0.85)] border border-espresso/30 transform rotate-1 ${isVertical ? 'hidden' : ''}">
+                <div class="aspect-[3/4] overflow-hidden bg-espresso">
+                  <img src="${img2}" class="w-full h-full object-cover" alt="Stoop Plate 2" />
+                </div>
+                <div class="pt-1.5 text-[9px] font-varsity text-espresso tracking-wider uppercase">FIG. 02 — HERITAGE ARGYLE</div>
+              </div>
+              <div class="animate-plate-3 hidden sm:block bg-paper p-2.5 rounded-sm shadow-[0_22px_50px_rgba(0,0,0,0.85)] border border-espresso/30 transform -rotate-1">
+                <div class="aspect-[3/4] overflow-hidden bg-espresso">
+                  <img src="${img3}" class="w-full h-full object-cover" alt="Stoop Plate 3" />
+                </div>
+                <div class="pt-1.5 text-[9px] font-varsity text-espresso tracking-wider uppercase">FIG. 03 — UES ARCHIVE</div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (state.scene === 'library-archive') {
+        sceneCaption.textContent = 'LOC 04 · NEW YORK SOCIETY ARCHIVE';
+        archLayer.innerHTML = `
+          <div class="w-full h-full relative bg-[#19110E] flex flex-col justify-between p-5 sm:p-8 animate-camera-drift">
+            <!-- Walnut Bookshelf Grid Backdrop -->
+            <div class="absolute inset-0 opacity-45 pointer-events-none"
+                 style="background-image: repeating-linear-gradient(90deg, #3E0D0C 0px, #3E0D0C 24px, #1B110E 24px, #1B110E 28px, #593522 28px, #593522 50px, #1B110E 50px, #1B110E 54px), repeating-linear-gradient(180deg, transparent 0px, transparent 130px, #120B09 130px, #120B09 144px);">
+            </div>
+
+            <!-- Warm Emerald Banker's Lamp Ambient Halo -->
+            <div class="absolute top-0 right-1/4 w-96 h-96 rounded-full bg-emerald-800/20 blur-3xl pointer-events-none"></div>
+
+            <!-- Brass-Framed Archival Lookbook Plates -->
+            <div class="relative z-10 grid ${isVertical ? 'grid-cols-1' : 'grid-cols-2 sm:grid-cols-3'} gap-4 items-center my-auto max-w-4xl ml-auto mr-4">
+              <div class="animate-plate-1 bg-[#221612] p-2.5 rounded-xl border-2 border-brass/70 shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+                <div class="aspect-[3/4] rounded-lg overflow-hidden">
+                  <img src="${img1}" class="w-full h-full object-cover" alt="Archive 1" />
+                </div>
+              </div>
+              <div class="animate-plate-2 bg-[#221612] p-2.5 rounded-xl border-2 border-brass/70 shadow-[0_20px_50px_rgba(0,0,0,0.9)] ${isVertical ? 'hidden' : ''}">
+                <div class="aspect-[3/4] rounded-lg overflow-hidden">
+                  <img src="${img2}" class="w-full h-full object-cover" alt="Archive 2" />
+                </div>
+              </div>
+              <div class="animate-plate-3 hidden sm:block bg-[#221612] p-2.5 rounded-xl border-2 border-brass/70 shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+                <div class="aspect-[3/4] rounded-lg overflow-hidden">
+                  <img src="${img3}" class="w-full h-full object-cover" alt="Archive 3" />
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      applyGradeWash();
+      renderEmblem();
+    }
+
+    function applyGradeWash() {
+      const wash = document.getElementById('gradeWashOverlay');
+      if (state.palette === 'oxblood-espresso') {
+        wash.style.background = 'radial-gradient(circle at 65% 45%, rgba(62,13,12,0.22) 0%, rgba(20,14,12,0.86) 100%)';
+      } else if (state.palette === 'madison-mist') {
+        wash.style.background = 'radial-gradient(circle at 65% 45%, rgba(122,114,107,0.16) 0%, rgba(24,22,21,0.82) 100%)';
+      } else if (state.palette === 'golden-brownstone') {
+        wash.style.background = 'radial-gradient(circle at 65% 40%, rgba(184,155,114,0.24) 0%, rgba(34,21,15,0.82) 100%)';
+      } else if (state.palette === 'sepia-archival') {
+        wash.style.background = 'radial-gradient(circle at 65% 45%, rgba(168,136,98,0.25) 0%, rgba(26,18,13,0.85) 100%)';
+      }
+    }
+
+    function renderEmblem() {
+      const container = document.getElementById('stageEmblemContainer');
+      if (state.emblem === 'none' || !EMBLEM_LIBRARY[state.emblem]) {
+        container.innerHTML = '';
+      } else {
+        container.innerHTML = EMBLEM_LIBRARY[state.emblem];
+      }
+    }
+
+    /* ==========================================================================
+       10. CHOREOGRAPHED ENTRANCE REPLAY & SUBWAY DOOR MECHANICS
+       ========================================================================== */
+    function replayIntro() {
+      // Re-trigger plate & copy CSS animations
+      const copyBlock = document.getElementById('heroCopyBlock');
+      copyBlock.classList.remove('animate-copy');
+      void copyBlock.offsetWidth;
+      copyBlock.classList.add('animate-copy');
+
+      document.querySelectorAll('.animate-plate-1, .animate-plate-2, .animate-plate-3').forEach((el, i) => {
+        const cls = `animate-plate-${i + 1}`;
+        el.classList.remove(cls);
+        void el.offsetWidth;
+        el.classList.add(cls);
+      });
+
+      // If Subway Doors scene is active, close doors momentarily then glide them open!
+      if (state.scene === 'subway-doors') {
+        const leftDoor = document.getElementById('subwayDoorLeft');
+        const rightDoor = document.getElementById('subwayDoorRight');
+        leftDoor.style.transition = 'none';
+        rightDoor.style.transition = 'none';
+        leftDoor.style.transform = 'translateX(0%)';
+        rightDoor.style.transform = 'translateX(0%)';
+
+        void leftDoor.offsetWidth;
+
+        setTimeout(() => {
+          leftDoor.style.transition = 'transform 1.35s cubic-bezier(0.22, 1, 0.36, 1)';
+          rightDoor.style.transition = 'transform 1.35s cubic-bezier(0.22, 1, 0.36, 1)';
+          leftDoor.style.transform = 'translateX(-82%)';
+          rightDoor.style.transform = 'translateX(82%)';
+        }, 120);
+      }
+
+      if (state.audioEnabled) {
+        playBrassChime();
+      }
+    }
+
+    /* ==========================================================================
+       11. SUBTLE POINTER PARALLAX ON HERO STAGE
+       ========================================================================== */
+    function handleStageParallax(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+
+      const emblem = document.getElementById('stageEmblemContainer');
+      const copy = document.getElementById('heroCopyBlock');
+      emblem.style.transform = `translate(${nx * 14}px, ${ny * 10}px)`;
+      copy.style.transform = `translate(${nx * 8}px, ${ny * 6}px)`;
+    }
+
+    function resetStageParallax() {
+      document.getElementById('stageEmblemContainer').style.transform = 'translate(0, 0)';
+      document.getElementById('heroCopyBlock').style.transform = 'translate(0, 0)';
+    }
+
+    /* ==========================================================================
+       12. HTML5 CANVAS KINETIC ATMOSPHERE (RAIN ON GLASS, AUTUMN LEAVES, DUST)
+       ========================================================================== */
+    function startAtmosphereLoop() {
+      const canvas = document.getElementById('atmosphereCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const particles = Array.from({ length: 65 }, (_, i) => ({
+        x: Math.random(),
+        y: Math.random(),
+        len: 10 + Math.random() * 22,
+        speed: 0.002 + Math.random() * 0.005,
+        size: 3 + Math.random() * 5,
+        angle: Math.random() * Math.PI * 2,
+        spin: (Math.random() - 0.5) * 0.04,
+        hue: i % 2 === 0 ? '#8C3B2B' : '#B87A3D'
+      }));
+
+      function frame() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        if (canvas.width !== Math.floor(rect.width) || canvas.height !== Math.floor(rect.height)) {
+          canvas.width = Math.floor(rect.width);
+          canvas.height = Math.floor(rect.height);
+        }
+
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+
+        if (state.speed > 0.02) {
+          particles.forEach(p => {
+            p.y += p.speed * state.speed;
+            if (p.y > 1.05) {
+              p.y = -0.05;
+              p.x = Math.random();
+            }
+
+            const px = p.x * w;
+            const py = p.y * h;
+
+            if (state.scene === 'cafe-window') {
+              // Realistic Rain Droplets & Streaks Sliding Down Café Glass
+              ctx.strokeStyle = `rgba(235, 226, 214, ${0.16 + state.reflection * 0.18})`;
+              ctx.lineWidth = 1.3;
+              ctx.beginPath();
+              ctx.moveTo(px, py);
+              ctx.lineTo(px - 1.5, py + p.len);
+              ctx.stroke();
+            } else if (state.scene === 'brownstone-stoop') {
+              // Drifting Autumn Maple Leaves
+              p.x += Math.sin(p.y * 8 + p.angle) * 0.0008 * state.speed;
+              p.angle += p.spin * state.speed;
+              ctx.save();
+              ctx.translate(px, py);
+              ctx.rotate(p.angle);
+              ctx.fillStyle = p.hue;
+              ctx.globalAlpha = 0.72;
+              ctx.beginPath();
+              ctx.ellipse(0, 0, p.size * 1.4, p.size * 0.7, 0, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.restore();
+            } else {
+              // Warm Floating Archival Dust / Transit Light Motes
+              ctx.fillStyle = 'rgba(223, 210, 194, 0.22)';
+              ctx.beginPath();
+              ctx.arc(px, py, 1.4, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          });
+        }
+
+        requestAnimationFrame(frame);
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    /* ==========================================================================
+       13. WEB AUDIO API AMBIENT CAFÉ RAIN & BRASS CHIME (NO EXTERNAL AUDIO URLS)
+       ========================================================================== */
+    function toggleAmbientAudio(enabled) {
+      state.audioEnabled = enabled;
+      if (enabled) {
+        try {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+
+          // Soft Filtered Brown Noise (Gentle Rain on Café Window)
+          const bufferSize = 2 * audioCtx.sampleRate;
+          const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          let lastOut = 0.0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            output[i] = (lastOut + (0.02 * white)) / 1.02;
+            lastOut = output[i];
+            output[i] *= 0.6;
+          }
+
+          ambientNoiseNode = audioCtx.createBufferSource();
+          ambientNoiseNode.buffer = noiseBuffer;
+          ambientNoiseNode.loop = true;
+
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.value = 420;
+
+          ambientGainNode = audioCtx.createGain();
+          ambientGainNode.gain.value = 0.14;
+
+          ambientNoiseNode.connect(filter);
+          filter.connect(ambientGainNode);
+          ambientGainNode.connect(audioCtx.destination);
+          ambientNoiseNode.start();
+
+          playBrassChime();
+          showToast('Ambient café rain & brass chime active');
+        } catch (err) {
+          showToast('Audio context blocked by browser policy');
+        }
+      } else {
+        if (ambientNoiseNode) {
+          try { ambientNoiseNode.stop(); } catch (e) {}
+          ambientNoiseNode = null;
+        }
+      }
+    }
+
+    function playBrassChime() {
+      if (!audioCtx || !state.audioEnabled) return;
+      const now = audioCtx.currentTime;
+      [587.33, 880].forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.14);
+        gain.gain.setValueAtTime(0.001, now + idx * 0.14);
+        gain.gain.exponentialRampToValueAtTime(0.06, now + idx * 0.14 + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.14 + 1.4);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + idx * 0.14);
+        osc.stop(now + idx * 0.14 + 1.45);
+      });
+    }
+
+    /* ==========================================================================
+       14. RECORDING (getDisplayMedia) & PRESENT MODE & PNG SNAPSHOT
+       ========================================================================== */
+    function selectRecordLength(sec) {
+      state.recordLength = sec;
+      document.querySelectorAll('.len-btn').forEach(btn => {
+        const active = parseInt(btn.dataset.len, 10) === sec;
+        btn.className = active
+          ? 'len-btn px-2 py-0.5 rounded text-[10px] font-mono bg-oxblood text-paper'
+          : 'len-btn px-2 py-0.5 rounded text-[10px] font-mono text-parchment/65 hover:text-paper';
+      });
+    }
+
+    function enterPresentMode() {
+      document.body.classList.add('present-mode');
+      replayIntro();
+    }
+
+    function exitPresentMode() {
+      document.body.classList.remove('present-mode');
+    }
+
+    async function startScreenRecording() {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+        showToast('Screen recording unavailable here — exporting PNG snapshot instead.');
+        exportSnapshotPNG();
+        return;
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getDisplayMedia({
+          video: { frameRate: 30 },
+          audio: false
+        });
+
+        const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+        const chunks = [];
+        recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+
+        recorder.onstop = () => {
+          stream.getTracks().forEach(t => t.stop());
+          const blob = new Blob(chunks, { type: 'video/webm' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `wild-fable-autumn-madison-seed-${state.seed}.webm`;
+          a.click();
+          URL.revokeObjectURL(url);
+
+          document.getElementById('recordingStatusPill').classList.add('hidden');
+          document.getElementById('recText').textContent = 'Record video';
+          showToast('Saved WebM hero video!');
+        };
+
+        // Enter present mode & replay intro right as recording starts
+        enterPresentMode();
+        recorder.start();
+
+        let remaining = state.recordLength;
+        const pill = document.getElementById('recordingStatusPill');
+        const timerText = document.getElementById('recordingTimerText');
+        pill.classList.remove('hidden');
+        document.getElementById('recText').textContent = 'Recording...';
+        timerText.textContent = `REC 00:${String(remaining).padStart(2, '0')}`;
+
+        const countdown = setInterval(() => {
+          remaining--;
+          timerText.textContent = `REC 00:${String(Math.max(0, remaining)).padStart(2, '0')}`;
+          if (remaining <= 0) {
+            clearInterval(countdown);
+            if (recorder.state === 'recording') recorder.stop();
+          }
+        }, 1000);
+
+      } catch (err) {
+        showToast('Screen recording cancelled.');
+      }
+    }
+
+    function exportSnapshotPNG() {
+      const c = document.createElement('canvas');
+      c.width = state.format === '9:16' ? 1080 : state.format === '1:1' ? 1200 : 1600;
+      c.height = state.format === '9:16' ? 1920 : state.format === '1:1' ? 1200 : 900;
+      const ctx = c.getContext('2d');
+
+      // Rich Espresso & Oxblood Editorial Backdrop
+      const bg = ctx.createLinearGradient(0, 0, c.width, c.height);
+      bg.addColorStop(0, '#2B1912');
+      bg.addColorStop(0.5, '#3E0D0C');
+      bg.addColorStop(1, '#1A1412');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, c.width, c.height);
+
+      const imgs = getActiveImages();
+      const plateImg = new Image();
+      plateImg.onload = () => {
+        // Draw Primary Lookbook Frame on Right
+        const fw = c.width * 0.34;
+        const fh = fw * 1.28;
+        const fx = c.width - fw - 72;
+        const fy = (c.height - fh) * 0.5;
+
+        ctx.fillStyle = '#1D120D';
+        ctx.fillRect(fx - 12, fy - 12, fw + 24, fh + 24);
+        ctx.strokeStyle = '#B89B72';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(fx - 12, fy - 12, fw + 24, fh + 24);
+        ctx.drawImage(plateImg, fx, fy, fw, fh);
+
+        // Brand Wordmark & Copy on Left
+        ctx.fillStyle = '#DFD2C2';
+        ctx.font = '800 32px "Playfair Display", Georgia, serif';
+        ctx.fillText('wild fable', 72, 86);
+
+        ctx.font = '800 68px "Playfair Display", Georgia, serif';
+        ctx.fillStyle = '#F7F4EF';
+        ctx.fillText(state.copy.headline, 72, c.height * 0.52);
+
+        ctx.font = 'italic 600 32px "Cormorant Garamond", Georgia, serif';
+        ctx.fillStyle = '#DFD2C2';
+        ctx.fillText(state.copy.subhead.slice(0, 56), 72, c.height * 0.52 + 54);
+
+        // CTA Pill
+        ctx.fillStyle = '#DFD2C2';
+        ctx.beginPath();
+        ctx.roundRect(72, c.height * 0.52 + 95, 290, 52, 26);
+        ctx.fill();
+
+        ctx.fillStyle = '#1A1412';
+        ctx.font = '700 18px "DM Sans", sans-serif';
+        ctx.fillText(state.copy.cta, 102, c.height * 0.52 + 127);
+
+        const link = document.createElement('a');
+        link.download = `wild-fable-madison-seed-${state.seed}.png`;
+        link.href = c.toDataURL('image/png');
+        link.click();
+        showToast(`Exported PNG snapshot (Seed #${state.seed})`);
+      };
+      plateImg.src = imgs[0].url;
+    }
+
+    /* ==========================================================================
+       15. TOAST HELPER
+       ========================================================================== */
+    let toastTimeout = null;
+    function showToast(msg) {
+      const el = document.getElementById('toastNotification');
+      document.getElementById('toastText').textContent = msg;
+      el.classList.remove('opacity-0', 'translate-y-2');
+      el.classList.add('opacity-100', 'translate-y-0');
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        el.classList.add('opacity-0', 'translate-y-2');
+        el.classList.remove('opacity-100', 'translate-y-0');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
